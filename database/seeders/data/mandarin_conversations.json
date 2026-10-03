@@ -1,0 +1,24 @@
+{
+  "A": [
+    {"q_hanzi":"你好，你叫什么名字？","q_pinyin":"Nǐ hǎo, nǐ jiào shénme míngzi?","q_id":"Halo, siapa namamu?",
+     "a_hanzi":"我叫小明。你呢？","a_pinyin":"Wǒ jiào Xiǎomíng. Nǐ ne?","a_id":"Namaku Xiaoming. Kamu?"},
+    {"q_hanzi":"你是学生吗？","q_pinyin":"Nǐ shì xuésheng ma?","q_id":"Apakah kamu murid?",
+     "a_hanzi":"是，我是学生。","a_pinyin":"Shì, wǒ shì xuésheng.","a_id":"Ya, saya murid."}
+  ],
+  "B": [
+    {"q_hanzi":"你现在在哪儿？","q_pinyin":"Nǐ xiànzài zài nǎr?","q_id":"Kamu sekarang di mana?",
+     "a_hanzi":"我在家。","a_pinyin":"Wǒ zài jiā.","a_id":"Saya di rumah."},
+    {"q_hanzi":"你今天想做什么？","q_pinyin":"Nǐ jīntiān xiǎng zuò shénme?","q_id":"Hari ini kamu mau ngapain?",
+     "a_hanzi":"我想看电视。","a_pinyin":"Wǒ xiǎng kàn diànshì.","a_id":"Saya mau nonton TV."}
+  ],
+  "C": [
+    {"q_hanzi":"今天天气怎么样？","q_pinyin":"Jīntiān tiānqì zěnmeyàng?","q_id":"Gimana cuaca hari ini?",
+     "a_hanzi":"今天很热。","a_pinyin":"Jīntiān hěn rè.","a_id":"Hari ini panas banget."},
+    {"q_hanzi":"你为什么不去商店？","q_pinyin":"Nǐ wèishénme bú qù shāngdiàn?","q_id":"Kenapa kamu gak ke toko?",
+     "a_hanzi":"因为我没有钱，所以不去。","a_pinyin":"Yīnwèi wǒ méiyǒu qián, suǒyǐ bú qù.","a_id":"Karena gak punya uang, makanya gak pergi."}
+  ],
+  "D": [
+    {"q_hanzi":"你会说汉语吗？","q_pinyin":"Nǐ huì shuō Hànyǔ ma?","q_id":"Kamu bisa ngomong Mandarin?",
+     "a_hanzi":"我会说一点儿。","a_pinyin":"Wǒ huì shuō yìdiǎnr.","a_id":"Saya bisa sedikit."}
+  ]
+}

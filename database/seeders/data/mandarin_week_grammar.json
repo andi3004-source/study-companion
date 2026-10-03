@@ -1,0 +1,18 @@
+{
+  "A": {
+    "grammar": "Pola dasar: 是 (adalah), 吗 (partikel tanya ya/tidak), 呢 (partikel tanya lanjutan), 的 (kepemilikan: 我的/你的), kata bantu bilangan 个/块/本, angka 0-10.",
+    "listening": "Dialog perkenalan diri, salam, angka, dan satuan uang."
+  },
+  "B": {
+    "grammar": "了 menandai aksi selesai (我吃了 = saya sudah makan), 在 menunjukkan lokasi (我在家 = saya di rumah), kata kerja bantu 会/能/想 (bisa/mampu/ingin), kata waktu (今天/明天/星期/点).",
+    "listening": "Dialog soal waktu, jadwal, dan aktivitas harian."
+  },
+  "C": {
+    "grammar": "太...了 (terlalu), 一点儿 (sedikit), 因为...所以 (karena...maka), pola kata kerja+objek, kata sifat sebagai predikat (很+adjektif, tanpa perlu 是).",
+    "listening": "Dialog soal cuaca, makanan, dan belanja di toko."
+  },
+  "D": {
+    "grammar": "Review semua pola dari minggu-minggu sebelumnya, coba gabungkan dalam kalimat yang lebih panjang.",
+    "listening": "Dialog gabungan, simulasi mendengarkan seperti soal ujian HSK1."
+  }
+}

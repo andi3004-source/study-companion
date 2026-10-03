@@ -1,0 +1,15 @@
+{
+  "hskuni": {"name": "HSK University", "url": "https://hskuniversity.com/"},
+  "pleco": {"name": "Pleco", "url": "https://www.pleco.com/"},
+  "archchinese": {"name": "Arch Chinese (stroke order)", "url": "https://www.archchinese.com/"},
+  "hellochinese": {"name": "HelloChinese", "url": "https://hellochinese.cc/"},
+  "ieltsliz": {"name": "IELTS Liz", "url": "https://ieltsliz.com/"},
+  "ieltspodcast": {"name": "IELTS Podcast", "url": "https://www.ieltspodcast.com/"},
+  "cambridge": {"name": "Cambridge Official Practice Test", "url": "https://www.cambridgeenglish.org/exams-and-tests/ielts/preparation/"},
+  "testenglish": {"name": "Test-English.com", "url": "https://test-english.com/"},
+  "agendaweb": {"name": "Agenda Web", "url": "https://agendaweb.org/verbs/past-simple-affirmative-exercises.html"},
+  "usingenglish": {"name": "UsingEnglish.com", "url": "https://www.usingenglish.com/"},
+  "perfectenglish": {"name": "Perfect English Grammar", "url": "https://www.perfect-english-grammar.com/"},
+  "britishcouncil": {"name": "British Council LearnEnglish", "url": "https://learnenglish.britishcouncil.org/grammar"},
+  "keithspeaking": {"name": "Keith Speaking Academy", "url": "https://keithspeakingacademy.com/"}
+}

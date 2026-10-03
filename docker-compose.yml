@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    environment:
+      # Overrides .env's localhost default: inside the compose network the
+      # service is reachable by its service name, not localhost.
+      - PRONUNCIATION_SERVICE_URL=http://pronunciation-service:8001
+    depends_on:
+      - pronunciation-service
+
+  pronunciation-service:
+    build:
+      context: ./pronunciation-service
+    ports:
+      - "8001:8001"
+    volumes:
+      # Keeps the downloaded model checkpoints across container restarts —
+      # without this, every `docker-compose up` re-downloads ~1GB+ of weights.
+      - pronunciation_model_cache:/root/.cache/huggingface
+
+volumes:
+  pronunciation_model_cache:

@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+python-multipart
+
+# English: OpenPronounce (phoneme-level pronunciation assessment)
+openpronounce
+
+# Mandarin: tone-me's inference stack (facebook/wav2vec2-base fine-tuned for
+# tone classification, see cge7/wav2vec2-base-version3 on the Hub) — reused
+# directly in main.py, not run as tone-me's own Flask app.
+torch
+transformers
+librosa
+pydub
+pinyin-jyutping-sentence
+numpy
+soundfile

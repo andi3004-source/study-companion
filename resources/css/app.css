@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Caveat:wght@600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+.font-display {
+    font-family: 'Fredoka', sans-serif;
+}
+
+.font-hand {
+    font-family: 'Caveat', cursive;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d8cfb4;
+    border-radius: 999px;
+}
+
+.flip-card-inner {
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    backface-visibility: hidden;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
