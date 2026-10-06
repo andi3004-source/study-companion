@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Contracts\AiClient;
 use App\Services\GeminiMeaningTranslator;
+use InvalidArgumentException;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -93,5 +94,54 @@ class GeminiMeaningTranslatorTest extends TestCase
         };
 
         $this->assertSame([], (new GeminiMeaningTranslator($client))->translateBatch([]));
+    }
+
+    public function test_headwords_are_sent_as_hanzi_pinyin_en_objects(): void
+    {
+        $client = new class implements AiClient
+        {
+            public array $lastMessages = [];
+
+            public function isConfigured(): bool
+            {
+                return true;
+            }
+
+            public function sendMessage(string $model, string $system, array $messages, int $maxTokens = 200): array
+            {
+                $this->lastMessages = $messages;
+
+                return ['text' => json_encode(['semua; juga']), 'tokens_in' => 10, 'tokens_out' => 5];
+            }
+        };
+
+        $result = (new GeminiMeaningTranslator($client))
+            ->translateBatch(['surname Du'], [['hanzi' => '都', 'pinyin' => 'dōu']]);
+
+        $this->assertSame(['semua; juga'], $result);
+        $this->assertSame(
+            json_encode([['hanzi' => '都', 'pinyin' => 'dōu', 'en' => 'surname Du']], JSON_UNESCAPED_UNICODE),
+            $client->lastMessages[0]['content']
+        );
+    }
+
+    public function test_headwords_must_match_the_number_of_texts(): void
+    {
+        $client = new class implements AiClient
+        {
+            public function isConfigured(): bool
+            {
+                return true;
+            }
+
+            public function sendMessage(string $model, string $system, array $messages, int $maxTokens = 200): array
+            {
+                throw new RuntimeException('should not be called with mismatched headwords');
+            }
+        };
+
+        $this->expectException(InvalidArgumentException::class);
+
+        (new GeminiMeaningTranslator($client))->translateBatch(['cat', 'dog'], [['hanzi' => '猫', 'pinyin' => 'māo']]);
     }
 }

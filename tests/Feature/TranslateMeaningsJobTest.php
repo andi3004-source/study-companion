@@ -25,6 +25,8 @@ class TranslateMeaningsJobTest extends TestCase
 
             public ?string $system = null;
 
+            public array $payloads = [];
+
             public function __construct(private bool $configured) {}
 
             public function isConfigured(): bool
@@ -37,9 +39,11 @@ class TranslateMeaningsJobTest extends TestCase
                 $this->calls++;
                 $this->system = $system;
                 $words = json_decode($messages[0]['content'], true);
+                $this->payloads[] = $words;
 
+                // Mandarin items are {hanzi, pinyin, en} objects, English ones plain strings.
                 return [
-                    'text' => json_encode(array_map(fn ($w) => strtoupper($w).'_ID', $words)),
+                    'text' => json_encode(array_map(fn ($w) => strtoupper(is_array($w) ? $w['en'] : $w).'_ID', $words)),
                     'tokens_in' => 1,
                     'tokens_out' => 1,
                 ];
@@ -120,6 +124,33 @@ class TranslateMeaningsJobTest extends TestCase
         $this->assertNull($slang->fresh()->meaning_id);
         $this->assertSame('TO LISTEN_ID', $normal->fresh()->meaning_id);
         $this->assertSame('AIRPORT; (SLANG) SERVICE PROVIDER_ID', $airport->fresh()->meaning_id);
+    }
+
+    public function test_mandarin_job_sends_hanzi_and_pinyin_with_each_gloss(): void
+    {
+        $word = $this->mandarinWord(null, 'to listen');
+
+        $client = $this->fakeClient();
+        $this->app->instance(AiClient::class, $client);
+
+        TranslateMandarinMeaningsJob::dispatchSync();
+
+        $this->assertSame(
+            [['hanzi' => '测试', 'pinyin' => $word->pinyin, 'en' => 'to listen']],
+            $client->payloads[0]
+        );
+    }
+
+    public function test_english_job_still_sends_plain_strings(): void
+    {
+        $this->englishWord(['en' => 'cat']);
+
+        $client = $this->fakeClient();
+        $this->app->instance(AiClient::class, $client);
+
+        TranslateEnglishVocabJob::dispatchSync();
+
+        $this->assertSame(['cat'], $client->payloads[0]);
     }
 
     public function test_translation_prompt_warns_about_wrong_homograph_glosses(): void

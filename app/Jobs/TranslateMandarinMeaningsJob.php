@@ -64,7 +64,10 @@ class TranslateMandarinMeaningsJob implements ShouldQueue
             ->orderBy('id')
             ->chunkById(self::BATCH_SIZE, function ($words) use ($translator, $total, &$done) {
                 $words = $words->values();
-                $translated = $translator->translateBatch($words->pluck('meaning_en')->all());
+                $translated = $translator->translateBatch(
+                    $words->pluck('meaning_en')->all(),
+                    $words->map(fn (MandarinHskWord $w) => ['hanzi' => $w->hanzi, 'pinyin' => $w->pinyin])->all(),
+                );
 
                 foreach ($words as $i => $word) {
                     if (! empty($translated[$i])) {
