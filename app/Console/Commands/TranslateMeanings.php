@@ -34,8 +34,8 @@ class TranslateMeanings extends Command
         $both = ! $mandarin && ! $english;
 
         if ($both || $mandarin) {
-            $count = MandarinHskWord::whereNull('meaning_id')->count();
-            $this->info("Mandarin HSK: {$count} row(s) missing meaning_id.");
+            $count = MandarinHskWord::needsTranslation()->count();
+            $this->info("Mandarin HSK: {$count} row(s) to translate (missing meaning_id; corrected rows and surname/slang glosses excluded).");
 
             if ($count > 0) {
                 TranslateMandarinMeaningsJob::dispatch();

@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Log;
  * null, so re-running (whether re-dispatched after a failure/timeout, or
  * just later once more HSK words exist) resumes from wherever it left off
  * instead of re-spending quota on rows already done — the "meaning_id is
- * null" filter IS the checkpoint, no separate progress table needed.
+ * null" filter IS the checkpoint, no separate progress table needed. See
+ * MandarinHskWord::scopeNeedsTranslation: hand-corrected rows and
+ * wrong-homograph glosses ("surname ...", "(slang)") are never sent.
  */
 class TranslateMandarinMeaningsJob implements ShouldQueue
 {
@@ -46,10 +48,10 @@ class TranslateMandarinMeaningsJob implements ShouldQueue
             return;
         }
 
-        $total = MandarinHskWord::whereNull('meaning_id')->count();
+        $total = MandarinHskWord::needsTranslation()->count();
 
         if ($total === 0) {
-            Log::info('TranslateMandarinMeaningsJob: nothing to do, every row already has meaning_id.');
+            Log::info('TranslateMandarinMeaningsJob: nothing to do, no row needs meaning_id.');
 
             return;
         }
@@ -58,7 +60,7 @@ class TranslateMandarinMeaningsJob implements ShouldQueue
 
         $done = 0;
 
-        MandarinHskWord::whereNull('meaning_id')
+        MandarinHskWord::needsTranslation()
             ->orderBy('id')
             ->chunkById(self::BATCH_SIZE, function ($words) use ($translator, $total, &$done) {
                 $words = $words->values();

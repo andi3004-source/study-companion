@@ -19,6 +19,7 @@ class GeminiMeaningTranslator
 {
     private const SYSTEM_PROMPT = <<<'PROMPT'
         Kamu penerjemah kamus profesional Inggris ke Indonesia. Kamu menerima satu JSON array berisi kata atau frasa singkat berbahasa Inggris dari kamus. Balas HANYA dengan satu JSON array berisi terjemahan Bahasa Indonesia yang singkat dan natural untuk tiap item (istilah kamus, bukan kalimat penuh), PERSIS sepanjang array input dan dalam urutan yang sama. Jangan beri penjelasan, markdown, atau teks apapun di luar JSON array itu sendiri.
+        Peringatan: glos Inggris ini berasal dari kamus Mandarin yang kadang memilih homograf yang salah, misalnya nama marga ("surname Du") atau makna kuno/langka ("(archaic)"), padahal kata itu adalah kosakata HSK yang umum. Terjemahkan ke makna yang paling umum dipakai pembelajar HSK; jangan menerjemahkan nama marga atau makna kuno sebagai arti utama.
         PROMPT;
 
     /** Retried statuses: 429 (rate limit) and 5xx (transient server-side, incl. Gemini's own 503 "overloaded"). */
