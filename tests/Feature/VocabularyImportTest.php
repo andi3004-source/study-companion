@@ -7,6 +7,7 @@ use App\Models\IrregularVerb;
 use App\Models\IrregularVerbReference;
 use App\Models\MandarinHskWord;
 use App\Models\MandarinWord;
+use App\Services\AnswerChecker;
 use Database\Seeders\EnglishVocabSeeder;
 use Database\Seeders\IrregularVerbSeeder;
 use Database\Seeders\MandarinHskSeeder;
@@ -103,6 +104,35 @@ class VocabularyImportTest extends TestCase
         $after = MandarinWord::find($before->id);
         $this->assertNull($after->traditional);
         $this->assertSame($before->meaning_en, $after->meaning_en);
+    }
+
+    public function test_hsk_seeder_keeps_curated_pinyin_instead_of_the_datasets_wrong_homographs(): void
+    {
+        // mandarin_hsk1to6_complete.json picks the wrong reading for some
+        // common HSK1 words (个 "gě, used in 自个儿", 都 "Dū, surname Du", 听
+        // "yǐn, smile (archaic)", ...). The curated curriculum data is right,
+        // and must survive the HSK import.
+        $this->seed(ReferenceDataSeeder::class);
+        $this->seed(MandarinHskSeeder::class);
+
+        $expected = [
+            '个' => ['gè', 'ge'],
+            '看' => ['kàn', 'kan'],
+            '都' => ['dōu', 'dou'],
+            '吗' => ['ma', 'ma'],
+            '听' => ['tīng', 'ting'],
+            '读' => ['dú', 'du'],
+        ];
+
+        $checker = new AnswerChecker;
+
+        foreach ($expected as $hanzi => [$pinyin, $normalized]) {
+            $word = MandarinWord::where('hanzi', $hanzi)->first();
+            $this->assertSame($pinyin, $word->pinyin, "pinyin for {$hanzi}");
+            $this->assertSame($normalized, $word->pinyin_normalized, "pinyin_normalized for {$hanzi}");
+            // Latihan Isian checks against the stored pinyin: a correct answer must be accepted.
+            $this->assertTrue($checker->pinyinMatches($normalized, $word->pinyin), "Latihan Isian answer for {$hanzi}");
+        }
     }
 
     public function test_seeding_alone_never_triggers_translation(): void

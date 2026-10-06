@@ -12,6 +12,7 @@ use App\Models\MandarinWord;
 use App\Models\PastTenseStep;
 use App\Models\PlatformLink;
 use App\Models\WeekTopic;
+use App\Services\AnswerChecker;
 use Illuminate\Database\Seeder;
 
 class ReferenceDataSeeder extends Seeder
@@ -48,6 +49,8 @@ class ReferenceDataSeeder extends Seeder
         $english = $this->loadJson('mandarin_words_en.json');
         $batches = $this->loadJson('mandarin_batches.json');
 
+        $checker = new AnswerChecker;
+
         $rows = [];
         foreach ($batches as $batchIndex => [$start, $end]) {
             $batchNumber = $batchIndex + 1;
@@ -58,6 +61,7 @@ class ReferenceDataSeeder extends Seeder
                 $rows[] = [
                     'hanzi' => $hanzi,
                     'pinyin' => $pinyin,
+                    'pinyin_normalized' => $checker->normalizePinyin($pinyin),
                     'meaning_id' => $meaningId,
                     'meaning_en' => $english[$wordIndex],
                     'batch_number' => $batchNumber,
