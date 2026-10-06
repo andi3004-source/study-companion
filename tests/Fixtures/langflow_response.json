@@ -1,0 +1,42 @@
+{
+    "session_id": "00000000-0000-0000-0000-000000000000",
+    "outputs": [
+        {
+            "inputs": {
+                "input_value": "User: 我是高兴\nAI: 你为什么高兴？\nUser (suara): 我不有钱"
+            },
+            "outputs": [
+                {
+                    "results": {
+                        "message": {
+                            "text_key": "text",
+                            "data": {},
+                            "sender": "Machine",
+                            "sender_name": "AI",
+                            "text": "```json\n{\"items\":[{\"kategori\":\"shi_dengan_kata_sifat\",\"contoh\":\"我是高兴\",\"koreksi\":\"我很高兴\",\"penjelasan\":\"Kata sifat tidak memakai 是; pakai 很.\"},{\"kategori\":\"bu_atau_mei\",\"contoh\":\"我不有钱\",\"koreksi\":\"我没有钱\",\"penjelasan\":\"有 diingkari dengan 没, bukan 不.\"}],\"catatan\":\"Dua kesalahan tata bahasa dasar.\"}\n```",
+                            "session_id": "00000000-0000-0000-0000-000000000000"
+                        }
+                    },
+                    "artifacts": {
+                        "message": "(same text as results.message.text)",
+                        "sender": "Machine",
+                        "type": "object"
+                    },
+                    "outputs": {
+                        "message": {
+                            "message": "(same text as results.message.text)",
+                            "type": "object"
+                        }
+                    },
+                    "logs": {
+                        "message": []
+                    },
+                    "messages": [],
+                    "component_display_name": "Chat Output",
+                    "component_id": "ChatOutput-xxxxx",
+                    "used_frozen_result": false
+                }
+            ]
+        }
+    ]
+}

@@ -4,7 +4,11 @@ namespace App\Providers;
 
 use App\Contracts\AiClient;
 use App\Contracts\PronunciationChecker;
+use App\Contracts\SessionAnalyzer;
+use App\Services\FallbackSessionAnalyzer;
 use App\Services\GeminiClient;
+use App\Services\GeminiSessionAnalyzer;
+use App\Services\LangflowSessionAnalyzer;
 use App\Services\MlPronunciationChecker;
 use App\Services\SttMatchPronunciationChecker;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +27,15 @@ class AppServiceProvider extends ServiceProvider
         // — nothing in ConversationService needs to change.
         $this->app->bind(AiClient::class, GeminiClient::class);
         config(['services.active_ai_model' => config('services.gemini.model')]);
+
+        // End-of-session error analysis: the Langflow flow when it's configured
+        // (falling back to Gemini on any Langflow failure), otherwise Gemini.
+        $this->app->bind(SessionAnalyzer::class, function ($app) {
+            $gemini = $app->make(GeminiSessionAnalyzer::class);
+            $langflow = $app->make(LangflowSessionAnalyzer::class);
+
+            return $langflow->isConfigured() ? new FallbackSessionAnalyzer($langflow, $gemini) : $gemini;
+        });
 
         // PRONUNCIATION_CHECKER_DRIVER=stt_match turns off the ML microservice
         // entirely (no HTTP call attempted at all, not even one that fails) —

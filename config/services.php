@@ -50,6 +50,18 @@ return [
         'model' => env('GEMINI_MODEL', 'gemini-3.6-flash'),
     ],
 
+    // IBM Langflow flow for the end-of-session error analysis ("Kesalahan
+    // terbanyakmu"). Used only when url AND flow_id are set; otherwise, and
+    // whenever a Langflow call fails, the analysis goes through Gemini (see
+    // the SessionAnalyzer binding in AppServiceProvider).
+    'langflow' => [
+        'url' => env('LANGFLOW_URL'),
+        'flow_id' => env('LANGFLOW_FLOW_ID'),
+        'api_key' => env('LANGFLOW_API_KEY'),
+        // `?:` (not an env() default): an empty LANGFLOW_TIMEOUT= would cast to 0, which Guzzle reads as "no timeout".
+        'timeout' => (int) (env('LANGFLOW_TIMEOUT') ?: 60),
+    ],
+
     // Pronunciation checker: 'ml' calls pronunciation-service (OpenPronounce +
     // tone-me, see PronunciationChecker binding in AppServiceProvider) and
     // falls back to 'stt_match' automatically if that service is unreachable.
