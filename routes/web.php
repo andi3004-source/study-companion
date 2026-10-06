@@ -5,6 +5,7 @@ use App\Livewire\Cards\Deck;
 use App\Livewire\Conversation\Chat;
 use App\Livewire\Conversation\Picker as ConversationPicker;
 use App\Livewire\Dashboard;
+use App\Livewire\Games\ErrorHunter;
 use App\Livewire\Kamus\Search;
 use App\Livewire\LatihanIsian;
 use App\Livewire\Onboarding;
@@ -44,6 +45,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/ujian/{mode}', Runner::class)->name('ujian.run');
 
         Route::get('/latihan-isian', LatihanIsian::class)->name('latihan-isian');
+
+        Route::get('/game/pemburu-kesalahan', ErrorHunter::class)->name('game.error-hunter');
 
         Route::get('/conversation', ConversationPicker::class)->name('conversation');
         Route::get('/conversation/{session}', Chat::class)->name('conversation.chat');

@@ -25,6 +25,7 @@
                         ['route' => 'kamus', 'label' => 'Kamus', 'icon' => '🔎'],
                         ['route' => 'ujian', 'label' => 'Ujian', 'icon' => '📝'],
                         ['route' => 'latihan-isian', 'label' => 'Isian', 'icon' => '🧠'],
+                        ['route' => 'game.error-hunter', 'label' => 'Game', 'icon' => '🎯'],
                         ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => '💬'],
                         ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => '🎤'],
                         ['route' => 'progress', 'label' => 'Progress', 'icon' => '📈'],

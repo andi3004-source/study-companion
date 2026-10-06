@@ -51,6 +51,7 @@
         @if (! empty($topErrors))
             <p class="text-xs text-ink-faint mt-3">Dari sesi Ngobrol Mandarin 7 hari terakhir.</p>
         @endif
+        <a href="{{ route('game.error-hunter') }}" class="inline-block mt-3 text-sm font-700 text-mandarin hover:underline">Latih lewat game Pemburu Kesalahan →</a>
     </div>
 
     <h2 class="font-display font-600 text-sm text-ink-soft mb-2">Ringkasan Fase</h2>
