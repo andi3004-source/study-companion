@@ -1,0 +1,9 @@
+[
+    {"hanzi": "都", "pinyin": "dōu", "indonesian": "semua; juga", "hsk_level": 1, "pinyin_asli": "Dū", "meaning_en_asli": "surname Du", "sumber_asli_bermasalah": true, "status": "draft"},
+    {"hanzi": "也", "pinyin": "yě", "indonesian": "juga", "hsk_level": 2, "pinyin_asli": "Yě", "meaning_en_asli": "surname Ye", "sumber_asli_bermasalah": true, "status": "draft"},
+    {"hanzi": "高", "pinyin": "gāo", "indonesian": "tinggi", "hsk_level": 2, "pinyin_asli": "Gāo", "meaning_en_asli": "surname Gao", "sumber_asli_bermasalah": true, "status": "draft"},
+    {"hanzi": "张", "pinyin": "zhāng", "indonesian": "lembar (kata bantu)", "hsk_level": 3, "pinyin_asli": "Zhāng", "meaning_en_asli": "surname Zhang", "sumber_asli_bermasalah": true, "status": "draft"},
+    {"hanzi": "花", "pinyin": "huā", "indonesian": "bunga; menghabiskan", "hsk_level": 3, "pinyin_asli": "Huā", "meaning_en_asli": "surname Hua", "sumber_asli_bermasalah": true, "status": "draft"},
+    {"hanzi": "白", "pinyin": "bái", "indonesian": "putih", "hsk_level": 2, "pinyin_asli": "Bái", "meaning_en_asli": "surname Bai", "sumber_asli_bermasalah": true, "status": "draft"},
+    {"hanzi": "不存在", "pinyin": "bù cún zài", "indonesian": "tidak ada", "hsk_level": 3, "pinyin_asli": "Bù cún zài", "meaning_en_asli": "nonexistent", "sumber_asli_bermasalah": true, "status": "draft"}
+]

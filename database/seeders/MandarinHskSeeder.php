@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\MandarinWord;
 use App\Services\AnswerChecker;
+use App\Support\HskCorrections;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\LazyCollection;
@@ -72,24 +73,66 @@ class MandarinHskSeeder extends Seeder
         });
     }
 
+    /**
+     * Entries with a hand-checked correction (see HskCorrections) are inserted
+     * with the corrected pinyin, meaning_id and data_status instead of the
+     * dataset's wrong homograph, so a fresh seed matches seed +
+     * `hsk:apply-corrections`, and re-seeding never brings a wrong row back.
+     * meaning_id/data_status are insert-only (not in the upsert's update
+     * columns), so existing translations and corrections are never reset.
+     *
+     * A corrected entry is skipped entirely (never inserted with its wrong
+     * pinyin) when either its uncorrected row is still in the table — that
+     * row is hsk:apply-corrections' job, and inserting a second, corrected
+     * row next to it would make that command collide — or its corrected
+     * pinyin is already another dataset entry of the same hanzi.
+     */
     private function upsertReference(array $data): void
     {
         $now = now();
         $checker = new AnswerChecker;
+        $corrections = HskCorrections::byOriginalKey();
 
-        $rows = LazyCollection::make(function () use ($data, $now, $checker) {
+        $existingKeys = $corrections === [] ? [] : DB::table('mandarin_hsk_words')->get(['hanzi', 'pinyin'])
+            ->mapWithKeys(fn ($row) => [HskCorrections::key($row->hanzi, $row->pinyin) => true])
+            ->all();
+
+        $datasetKeys = [];
+        foreach ($data as $level => $words) {
+            foreach ((int) $level === 1 ? [] : $words as $w) {
+                $datasetKeys[HskCorrections::key($w['hanzi'], $w['pinyin'])] = true;
+            }
+        }
+
+        $skipped = 0;
+
+        $rows = LazyCollection::make(function () use ($data, $now, $checker, $corrections, $existingKeys, $datasetKeys, &$skipped) {
             foreach ($data as $level => $words) {
                 if ((int) $level === 1) {
                     continue;
                 }
 
                 foreach ($words as $w) {
+                    $key = HskCorrections::key($w['hanzi'], $w['pinyin']);
+                    $correction = $corrections[$key] ?? null;
+
+                    if ($correction !== null && $correction['pinyin'] !== $w['pinyin']
+                        && (isset($existingKeys[$key]) || isset($datasetKeys[HskCorrections::key($w['hanzi'], $correction['pinyin'])]))) {
+                        $skipped++;
+
+                        continue;
+                    }
+
+                    $pinyin = $correction['pinyin'] ?? $w['pinyin'];
+
                     yield [
                         'hanzi' => $w['hanzi'],
                         'traditional' => $w['traditional'],
-                        'pinyin' => $w['pinyin'],
-                        'pinyin_normalized' => $checker->normalizePinyin($w['pinyin']),
+                        'pinyin' => $pinyin,
+                        'pinyin_normalized' => $checker->normalizePinyin($pinyin),
                         'meaning_en' => $w['meaning_en'],
+                        'meaning_id' => $correction['indonesian'] ?? null,
+                        'data_status' => $correction !== null ? HskCorrections::STATUS : null,
                         'pos' => json_encode($w['pos']),
                         'radical' => $w['radical'],
                         'frequency' => $w['frequency'],
@@ -110,5 +153,9 @@ class MandarinHskSeeder extends Seeder
                 ['traditional', 'pinyin_normalized', 'meaning_en', 'pos', 'radical', 'frequency', 'hsk_level_old', 'hsk_level_new', 'classifiers', 'updated_at']
             );
         });
+
+        if ($skipped > 0) {
+            $this->command?->warn("MandarinHskSeeder: {$skipped} corrected HSK2-3 entr(y/ies) skipped — run `php artisan hsk:apply-corrections` to fix the existing rows.");
+        }
     }
 }
