@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Enums\ErrorCategory;
+use App\Models\ConversationSession;
 use App\Models\IeltsVocab;
 use App\Models\IrregularVerb;
 use App\Models\MandarinWord;
@@ -64,6 +66,53 @@ class ProgressStats
             'total' => $total,
             'percent' => $total > 0 ? (int) round($known / $total * 100) : 0,
         ];
+    }
+
+    /**
+     * "Kesalahan terbanyakmu": the user's most frequent error categories over
+     * their Mandarin sessions analyzed in the last $days days (failed analyses,
+     * stored as NULL, are skipped). Ties go to the category seen most
+     * recently. 'contoh'/'koreksi' come from that category's newest mistake.
+     *
+     * @return array<int, array{kategori: string, label: string, jumlah: int, contoh: string, koreksi: string}>
+     */
+    public function topErrorCategories(User $user, int $days = 7, int $limit = 3): array
+    {
+        $sessions = ConversationSession::where('user_id', $user->id)
+            ->where('lang', 'mandarin')
+            ->whereNotNull('error_analysis')
+            ->where('analyzed_at', '>=', now()->subDays($days))
+            ->orderByDesc('analyzed_at')
+            ->orderByDesc('id')
+            ->get(['id', 'error_analysis', 'analyzed_at']);
+
+        $categories = [];
+        $seen = 0; // position in newest-first order, for the recency tie-break
+
+        foreach ($sessions as $session) {
+            foreach ($session->error_analysis['items'] ?? [] as $item) {
+                $category = ErrorCategory::fromLoose($item['kategori'] ?? null);
+                $seen++;
+
+                // Newest-first, so the first item of a category is its latest example.
+                $categories[$category->value] ??= [
+                    'kategori' => $category->value,
+                    'label' => $category->label(),
+                    'jumlah' => 0,
+                    'contoh' => (string) ($item['contoh'] ?? ''),
+                    'koreksi' => (string) ($item['koreksi'] ?? ''),
+                    'first_seen' => $seen,
+                ];
+                $categories[$category->value]['jumlah']++;
+            }
+        }
+
+        usort($categories, fn ($a, $b) => [$b['jumlah'], $a['first_seen']] <=> [$a['jumlah'], $b['first_seen']]);
+
+        return array_map(
+            fn ($c) => array_diff_key($c, ['first_seen' => true]),
+            array_slice($categories, 0, $limit)
+        );
     }
 
     public function mandarinDaysRemaining(int $day): int

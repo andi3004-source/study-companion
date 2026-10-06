@@ -28,6 +28,31 @@
         @endforeach
     </div>
 
+    <h2 class="font-display font-600 text-sm text-ink-soft mb-2">Kesalahan terbanyakmu</h2>
+    <div class="bg-card rounded-xl p-4 mb-8">
+        @forelse ($topErrors as $error)
+            <div class="flex items-start justify-between gap-3 {{ $loop->first ? '' : 'mt-3 pt-3 border-t border-line-card' }}">
+                <div class="min-w-0 text-sm">
+                    <p class="font-700 text-ink">{{ $error['label'] }}</p>
+                    @if ($error['contoh'])
+                        <p class="text-ink-soft text-xs mt-0.5">
+                            Contoh: <span class="line-through text-ink-faint">{{ $error['contoh'] }}</span>
+                            @if ($error['koreksi'])
+                                → <span class="font-700 text-ink">{{ $error['koreksi'] }}</span>
+                            @endif
+                        </p>
+                    @endif
+                </div>
+                <span class="shrink-0 text-xs font-700 text-mandarin bg-mandarin-soft rounded-full px-2 py-0.5">{{ $error['jumlah'] }}×</span>
+            </div>
+        @empty
+            <p class="text-sm text-ink-soft">Belum ada data kesalahan dalam 7 hari terakhir. Selesaikan sesi Ngobrol Mandarin untuk melihat kesalahan yang paling sering kamu buat.</p>
+        @endforelse
+        @if (! empty($topErrors))
+            <p class="text-xs text-ink-faint mt-3">Dari sesi Ngobrol Mandarin 7 hari terakhir.</p>
+        @endif
+    </div>
+
     <h2 class="font-display font-600 text-sm text-ink-soft mb-2">Ringkasan Fase</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
         <div class="bg-mandarin-soft rounded-xl p-4">

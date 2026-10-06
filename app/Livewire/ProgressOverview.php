@@ -29,6 +29,7 @@ class ProgressOverview extends Component
             'mandarinStatus' => $scheduler->mandarinStatus($day),
             'englishStatus' => $scheduler->englishStatus($day),
             'platformLinks' => PlatformLink::orderBy('name')->get(),
+            'topErrors' => $stats->topErrorCategories($user),
         ]);
     }
 }
