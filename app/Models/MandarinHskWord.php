@@ -24,7 +24,8 @@ class MandarinHskWord extends Model
      * "surname" or containing "(slang)" is the dataset picking the wrong
      * homograph (都 "surname Du") or an obscure sense, so translating it would
      * only put a wrong Indonesian meaning in front of the learner — those
-     * stay NULL ("Arti belum tersedia") until corrected by hand.
+     * stay NULL ("Arti belum tersedia") until corrected by hand. Same rule
+     * as MeaningDisplay::isUnreliableGloss, in SQL.
      */
     public function scopeNeedsTranslation(Builder $query): void
     {

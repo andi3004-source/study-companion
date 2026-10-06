@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Livewire\Kamus\Search;
+use App\Models\MandarinHskWord;
 use App\Models\User;
 use Database\Seeders\EnglishVocabSeeder;
 use Database\Seeders\IrregularVerbSeeder;
@@ -246,5 +247,33 @@ class KamusSearchTest extends TestCase
             ->set('filterLevel', '3')
             ->set('filterLang', 'english')
             ->assertSet('filterLevel', 'all');
+    }
+
+    public function test_surname_gloss_is_only_a_secondary_detail_never_the_main_meaning(): void
+    {
+        MandarinHskWord::create([
+            'hanzi' => '测试姓', 'pinyin' => 'Cè', 'pinyin_normalized' => 'ce',
+            'meaning_en' => 'surname Ce', 'hsk_level_old' => 2,
+        ]);
+
+        Livewire::actingAs($this->onboardedUser())->test(Search::class)
+            ->set('query', '测试姓')
+            ->assertSeeHtmlInOrder(['Arti belum tersedia', '🇬🇧 surname Ce'])
+            ->assertDontSeeHtml('<p class="text-sm text-ink">🇬🇧 surname Ce</p>')
+            ->assertDontSee('Data dikoreksi (draf)');
+    }
+
+    public function test_corrected_entry_shows_indonesian_meaning_first_and_a_draft_badge(): void
+    {
+        MandarinHskWord::create([
+            'hanzi' => '测试正', 'pinyin' => 'zhèng', 'pinyin_normalized' => 'zheng',
+            'meaning_en' => 'surname Zheng', 'meaning_id' => 'benar; lurus',
+            'data_status' => 'corrected_draft', 'hsk_level_old' => 3,
+        ]);
+
+        Livewire::actingAs($this->onboardedUser())->test(Search::class)
+            ->set('query', '测试正')
+            ->assertSee('Data dikoreksi (draf)')
+            ->assertSeeHtmlInOrder(['🇮🇩 benar; lurus', '🇬🇧 surname Zheng']);
     }
 }

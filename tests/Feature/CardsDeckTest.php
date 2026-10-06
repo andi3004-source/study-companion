@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Livewire\Cards\Deck;
 use App\Models\IeltsVocab;
+use App\Models\MandarinHskWord;
 use App\Models\MandarinWord;
 use App\Models\User;
 use App\Models\UserWordProgress;
@@ -173,5 +174,51 @@ class CardsDeckTest extends TestCase
         foreach ($component->get('cards') as $card) {
             $this->assertFalse($known->contains($card->id));
         }
+    }
+
+    /** Opens the Mandarin deck at the given level, positioned on the card for $hanzi. */
+    private function deckAt(string $level, string $hanzi)
+    {
+        $component = Livewire::actingAs($this->onboardedUser())->test(Deck::class, ['deck' => 'mandarin'])
+            ->call('setMandarinLevel', $level);
+
+        $index = $component->get('cards')->search(fn ($card) => $card->hanzi === $hanzi);
+        $this->assertNotFalse($index);
+
+        return $component->set('index', $index);
+    }
+
+    public function test_corrected_card_shows_indonesian_meaning_and_a_draft_badge(): void
+    {
+        MandarinHskWord::create([
+            'hanzi' => '测试正', 'pinyin' => 'zhèng', 'meaning_en' => 'surname Zheng',
+            'meaning_id' => 'benar; lurus', 'data_status' => 'corrected_draft', 'hsk_level_old' => 3,
+        ]);
+
+        $this->deckAt('3', '测试正')
+            ->assertSee('Data dikoreksi (draf)')
+            ->assertSeeHtmlInOrder(['benar; lurus', 'surname Zheng']);
+    }
+
+    public function test_untranslated_surname_card_says_meaning_not_available_instead_of_the_surname(): void
+    {
+        MandarinHskWord::create([
+            'hanzi' => '测试姓', 'pinyin' => 'Cè', 'meaning_en' => 'surname Ce', 'hsk_level_old' => 2,
+        ]);
+
+        $this->deckAt('2', '测试姓')
+            ->assertSeeHtmlInOrder(['Arti belum tersedia', 'surname Ce'])
+            ->assertDontSee('Data dikoreksi (draf)');
+    }
+
+    public function test_untranslated_card_falls_back_to_a_plain_english_gloss_as_the_main_meaning(): void
+    {
+        MandarinHskWord::create([
+            'hanzi' => '测试听', 'pinyin' => 'tīng', 'meaning_en' => 'to hear test', 'hsk_level_old' => 2,
+        ]);
+
+        $this->deckAt('2', '测试听')
+            ->assertSeeHtml('<p class="text-white text-lg">to hear test</p>')
+            ->assertDontSee('Arti belum tersedia');
     }
 }

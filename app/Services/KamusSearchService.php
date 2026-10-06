@@ -24,7 +24,7 @@ class KamusSearchService
 
     public function __construct(private readonly AnswerChecker $checker) {}
 
-    /** @return Collection<int, object{lang: string, source: string, headword: string, sub: ?string, meaning_en: ?string, meaning_id: ?string, raw_level: mixed, lang_code: string, example_en: ?string, verb_past: ?string, verb_past_participle: ?string, is_verb: bool}> */
+    /** @return Collection<int, object{lang: string, source: string, headword: string, sub: ?string, meaning_en: ?string, meaning_id: ?string, raw_level: mixed, lang_code: string, example_en: ?string, verb_past: ?string, verb_past_participle: ?string, data_status: ?string, is_verb: bool}> */
     public function results(string $lang, string $level, string $search, int $limit): Collection
     {
         $rows = $this->buildUnion($lang, $level, $search)
@@ -91,6 +91,8 @@ class KamusSearchService
             DB::raw('NULL as example_en'),
             DB::raw('NULL as verb_past'),
             DB::raw('NULL as verb_past_participle'),
+            // only the HSK2-6 reference table has hand-corrected rows
+            $table === 'mandarin_hsk_words' ? 'data_status' : DB::raw('NULL as data_status'),
         ]);
 
         if ($level !== null) {
@@ -130,6 +132,7 @@ class KamusSearchService
                 DB::raw("json_extract(ev.examples, '\$[0].en') as example_en"),
                 'iv.past_form as verb_past',
                 'iv.past_participle as verb_past_participle',
+                DB::raw('NULL as data_status'),
             ]);
 
         if ($level !== null) {
@@ -175,6 +178,7 @@ class KamusSearchService
                 DB::raw('NULL as example_en'),
                 'iv.past_form as verb_past',
                 'iv.past_participle as verb_past_participle',
+                DB::raw('NULL as data_status'),
             ]);
 
         if ($rawSearch !== null) {

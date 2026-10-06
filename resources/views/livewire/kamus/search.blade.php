@@ -49,15 +49,24 @@
                         @elseif ($entry->source === 'verb')
                             <span class="text-[10px] font-700 text-ink-faint bg-card-alt rounded-full px-1.5 py-0.5">Kata Kerja</span>
                         @endif
+                        @if ($entry->data_status === \App\Support\HskCorrections::STATUS)
+                            <span class="text-[10px] font-700 text-navy bg-orange/20 rounded-full px-1.5 py-0.5">Data dikoreksi (draf)</span>
+                        @endif
                     </div>
                     @if ($entry->sub)
                         <p class="text-xs text-ink-soft">{{ $entry->sub }}</p>
                     @endif
-                    @if ($entry->meaning_id)
-                        <p class="text-xs text-ink-faint">🇮🇩 {{ $entry->meaning_id }}</p>
+                    @php
+                        $primaryMeaning = \App\Support\MeaningDisplay::primary($entry->meaning_id, $entry->meaning_en);
+                        $primaryIsEnglish = \App\Support\MeaningDisplay::primaryIsEnglish($entry->meaning_id, $entry->meaning_en);
+                    @endphp
+                    @if ($primaryMeaning !== null)
+                        <p class="text-sm text-ink">{{ $primaryIsEnglish ? '🇬🇧' : '🇮🇩' }} {{ $primaryMeaning }}</p>
+                    @else
+                        <p class="text-sm text-ink-faint italic">Arti belum tersedia</p>
                     @endif
-                    @if ($entry->meaning_en)
-                        <p class="text-xs text-ink-faint/70">🇬🇧 {{ $entry->meaning_en }}</p>
+                    @if ($entry->meaning_en && ! $primaryIsEnglish)
+                        <p class="text-[11px] text-ink-faint/70">🇬🇧 {{ $entry->meaning_en }}</p>
                     @endif
                     @if ($entry->example_en)
                         <p class="text-xs text-ink-faint italic mt-0.5">"{{ $entry->example_en }}"</p>

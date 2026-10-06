@@ -111,21 +111,21 @@ class Deck extends Component
         // skips the level filter and the reference-table union entirely.
         if ($this->batch !== null) {
             return DB::table('mandarin_words')
-                ->select(['id', 'hanzi', 'pinyin', 'meaning_id', 'meaning_en', 'hsk_level_old'])
+                ->select(['id', 'hanzi', 'pinyin', 'meaning_id', 'meaning_en', 'hsk_level_old', DB::raw('NULL as data_status')])
                 ->where('batch_number', $this->batch)
                 ->orderBy('order_in_batch')
                 ->get();
         }
 
         $curriculum = DB::table('mandarin_words')->select([
-            'id', 'hanzi', 'pinyin', 'meaning_id', 'meaning_en', 'hsk_level_old',
+            'id', 'hanzi', 'pinyin', 'meaning_id', 'meaning_en', 'hsk_level_old', DB::raw('NULL as data_status'),
         ]);
 
         $reference = DB::table('mandarin_hsk_words')->select([
             DB::raw('id + '.self::HSK_REFERENCE_ID_OFFSET.' as id'),
-            'hanzi', 'pinyin',
-            DB::raw('COALESCE(meaning_id, meaning_en) as meaning_id'),
-            'meaning_en', 'hsk_level_old',
+            // meaning_id stays NULL when untranslated: the view picks the
+            // main meaning (see MeaningDisplay), never a surname/slang gloss.
+            'hanzi', 'pinyin', 'meaning_id', 'meaning_en', 'hsk_level_old', 'data_status',
         ]);
 
         if ($this->mandarinLevel !== 'all') {

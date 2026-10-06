@@ -60,9 +60,22 @@
                 {{-- Back --}}
                 <div class="flip-card-back absolute inset-0 bg-navy rounded-3xl shadow-sm flex flex-col items-center justify-center p-6 text-center text-white">
                     @if ($deck === 'mandarin')
+                        @php
+                            $primaryMeaning = \App\Support\MeaningDisplay::primary($card->meaning_id, $card->meaning_en);
+                            $primaryIsEnglish = \App\Support\MeaningDisplay::primaryIsEnglish($card->meaning_id, $card->meaning_en);
+                        @endphp
+                        @if ($card->data_status === \App\Support\HskCorrections::STATUS)
+                            <span class="absolute top-4 text-[10px] font-700 text-navy bg-orange rounded-full px-2 py-0.5">Data dikoreksi (draf)</span>
+                        @endif
                         <p class="font-display text-2xl mb-1">{{ $card->hanzi }} · {{ $card->pinyin }}</p>
-                        <p class="text-white/80">{{ $card->meaning_id }}</p>
-                        <p class="text-white/50 text-xs mt-1">{{ $card->meaning_en }}</p>
+                        @if ($primaryMeaning !== null)
+                            <p class="text-white text-lg">{{ $primaryMeaning }}</p>
+                        @else
+                            <p class="text-white/60 italic">Arti belum tersedia</p>
+                        @endif
+                        @if ($card->meaning_en && ! $primaryIsEnglish)
+                            <p class="text-white/50 text-xs mt-1">{{ $card->meaning_en }}</p>
+                        @endif
                     @elseif ($deck === 'verb')
                         <p class="font-display text-xl mb-1">{{ $card->base_form }} → {{ $card->past_form }} → {{ $card->past_participle }}</p>
                         <p class="text-white/80">{{ $card->meaning_id }}</p>
