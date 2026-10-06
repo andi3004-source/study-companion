@@ -87,7 +87,7 @@ class Chat extends Component
         }
 
         try {
-            $assistantTurn = $service->sendMessage($this->session, $content);
+            $assistantTurn = $service->sendMessage($this->session, $content, $voiceText !== null ? 'voice' : 'text');
         } catch (RuntimeException $e) {
             report($e);
             $this->errorMessage = 'AI sedang tidak tersedia. Coba lagi nanti.';

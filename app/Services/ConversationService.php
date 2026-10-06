@@ -207,14 +207,16 @@ class ConversationService
      * Persists the user's turn, calls Claude with only the last 10 turns of
      * this session as context, persists the assistant's reply, and logs the
      * call's token usage. Caller is responsible for validation and the rate
-     * limit check — this method always calls the API if invoked.
+     * limit check — this method always calls the API if invoked. $inputMode
+     * ('text'|'voice') is recorded on the user turn only.
      */
-    public function sendMessage(ConversationSession $session, string $content): ConversationTurn
+    public function sendMessage(ConversationSession $session, string $content, string $inputMode = 'text'): ConversationTurn
     {
         ConversationTurn::create([
             'session_id' => $session->id,
             'role' => 'user',
             'content' => $content,
+            'input_mode' => $inputMode,
         ]);
 
         $result = $this->client->sendMessage(
@@ -231,6 +233,7 @@ class ConversationService
             'role' => 'assistant',
             'content' => $parsed['content'],
             'translation' => $parsed['translation'],
+            'input_mode' => 'text',
         ]);
 
         ConversationApiCall::create([

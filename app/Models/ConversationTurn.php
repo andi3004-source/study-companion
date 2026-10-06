@@ -9,7 +9,7 @@ class ConversationTurn extends Model
 {
     const UPDATED_AT = null;
 
-    protected $fillable = ['session_id', 'role', 'content', 'translation'];
+    protected $fillable = ['session_id', 'role', 'content', 'translation', 'input_mode'];
 
     public function session(): BelongsTo
     {

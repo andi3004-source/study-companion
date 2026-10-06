@@ -486,6 +486,33 @@ class ConversationTest extends TestCase
         $this->assertSame(1, $service->messagesSentToday($user));
     }
 
+    public function test_user_turns_record_whether_they_were_spoken_or_typed(): void
+    {
+        $this->fakeGeminiReply('Nice to meet you too.');
+        $user = $this->onboardedUser();
+        $session = ConversationSession::create([
+            'user_id' => $user->id, 'lang' => 'english', 'scenario_key' => 'job_interview', 'started_at' => now(),
+        ]);
+
+        // Voice: the Alpine voiceInput component calls $wire.sendMessage(transcript).
+        Livewire::actingAs($user)->test(Chat::class, ['session' => $session])
+            ->call('sendMessage', 'Spoken hello.');
+
+        // Text: the form submits sendMessage() with no argument.
+        Livewire::actingAs($user)->test(Chat::class, ['session' => $session])
+            ->set('newMessage', 'Typed hello.')
+            ->call('sendMessage');
+
+        $this->assertDatabaseHas('conversation_turns', [
+            'session_id' => $session->id, 'role' => 'user', 'content' => 'Spoken hello.', 'input_mode' => 'voice',
+        ]);
+        $this->assertDatabaseHas('conversation_turns', [
+            'session_id' => $session->id, 'role' => 'user', 'content' => 'Typed hello.', 'input_mode' => 'text',
+        ]);
+        $this->assertSame(0, ConversationTurn::where('role', 'assistant')->where('input_mode', '!=', 'text')->count());
+        $this->assertSame(2, ConversationTurn::where('role', 'assistant')->count());
+    }
+
     public function test_voice_path_respects_the_same_daily_quota_as_text(): void
     {
         $this->fakeGeminiReply();
