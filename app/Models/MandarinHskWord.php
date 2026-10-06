@@ -20,18 +20,28 @@ class MandarinHskWord extends Model
 
     /**
      * Rows TranslateMandarinMeaningsJob may fill: meaning_id still empty, not
-     * hand-corrected, and an English gloss worth translating. A gloss led by
-     * "surname" or containing "(slang)" is the dataset picking the wrong
-     * homograph (都 "surname Du") or an obscure sense, so translating it would
-     * only put a wrong Indonesian meaning in front of the learner — those
-     * stay NULL ("Arti belum tersedia") until corrected by hand. Same rule
-     * as MeaningDisplay::isUnreliableGloss, in SQL.
+     * hand-corrected, and an English gloss worth translating (see
+     * scopeUnreliableGloss) — translating a wrong-homograph gloss would only
+     * put a wrong Indonesian meaning in front of the learner, so those stay
+     * NULL ("Arti belum tersedia") until corrected by hand.
      */
     public function scopeNeedsTranslation(Builder $query): void
     {
         $query->whereNull('meaning_id')
             ->where(fn (Builder $q) => $q->whereNull('data_status')->orWhere('data_status', '!=', HskCorrections::STATUS))
-            ->where('meaning_en', 'not like', 'surname%')
-            ->where('meaning_en', 'not like', '%(slang)%');
+            ->whereNot(fn (Builder $q) => $q->unreliableGloss());
+    }
+
+    /**
+     * Rows whose FIRST English sense is "surname ..." or "(slang) ..." — the
+     * dataset picking the wrong homograph (都 "surname Du"). Same rule as
+     * MeaningDisplay::isUnreliableGloss, in SQL: the first sense always
+     * starts the string, so a prefix match is enough, and a slang sense
+     * listed later ("airport; airfield; (slang) ...") doesn't count.
+     */
+    public function scopeUnreliableGloss(Builder $query): void
+    {
+        $query->where(fn (Builder $q) => $q->whereRaw("LTRIM(meaning_en) LIKE 'surname%'")
+            ->orWhereRaw("LTRIM(meaning_en) LIKE '(slang)%'"));
     }
 }

@@ -8,7 +8,9 @@ namespace App\Support;
  * trustworthy. The HSK dataset's glosses sometimes describe the wrong
  * homograph — a surname (都 "surname Du") or a slang sense — and showing
  * that as "the meaning" teaches the learner something wrong, so such a
- * gloss is only ever shown as a secondary detail.
+ * gloss is only ever shown as a secondary detail. Only the FIRST sense
+ * (before the first ";") decides: "airport; airfield; (slang) ..." (机场)
+ * is a normal word whose dictionary entry merely lists a slang sense later.
  */
 class MeaningDisplay
 {
@@ -18,9 +20,9 @@ class MeaningDisplay
             return false;
         }
 
-        $gloss = strtolower(trim($meaningEn));
+        $firstSense = strtolower(trim(explode(';', $meaningEn, 2)[0]));
 
-        return str_starts_with($gloss, 'surname') || str_contains($gloss, '(slang)');
+        return str_starts_with($firstSense, 'surname') || str_starts_with($firstSense, '(slang)');
     }
 
     /** @return ?string null = "Arti belum tersedia" */

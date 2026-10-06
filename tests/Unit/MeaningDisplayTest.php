@@ -24,8 +24,20 @@ class MeaningDisplayTest extends TestCase
     {
         $this->assertNull(MeaningDisplay::primary(null, 'surname Du'));
         $this->assertNull(MeaningDisplay::primary(null, 'Surname Huang or Hwang'));
-        $this->assertNull(MeaningDisplay::primary(null, 'airport; airfield; (slang) service provider'));
+        $this->assertNull(MeaningDisplay::primary(null, 'surname Ma; abbr. for Malaysia'));
+        $this->assertNull(MeaningDisplay::primary(null, '(slang) to cheat; green'));
         $this->assertFalse(MeaningDisplay::primaryIsEnglish(null, 'surname Du'));
+    }
+
+    public function test_a_slang_sense_after_the_first_one_does_not_hide_the_gloss(): void
+    {
+        // 机场 and 绿: normal words whose dictionary entry lists a slang sense later on.
+        $airport = 'airport; airfield; (slang) service provider for Shadowsocks';
+        $green = "green; (slang) (derived from 绿帽子) to cheat on (one's spouse)";
+
+        $this->assertFalse(MeaningDisplay::isUnreliableGloss($airport));
+        $this->assertFalse(MeaningDisplay::isUnreliableGloss($green));
+        $this->assertSame($airport, MeaningDisplay::primary(null, $airport));
     }
 
     public function test_surname_only_counts_at_the_start_of_the_gloss(): void

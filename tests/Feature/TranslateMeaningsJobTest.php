@@ -100,14 +100,16 @@ class TranslateMeaningsJobTest extends TestCase
         $this->assertSame('TEST_ID', $normal->fresh()->meaning_id);
     }
 
-    public function test_mandarin_job_leaves_surname_and_slang_glosses_untranslated(): void
+    public function test_mandarin_job_leaves_glosses_whose_first_sense_is_surname_or_slang_untranslated(): void
     {
         // Wrong-homograph glosses from the dataset (都 "surname Du"): a
         // translation would just be a wrong meaning, so they stay NULL and
         // the UI shows "Arti belum tersedia" until corrected by hand.
         $surname = $this->mandarinWord(null, 'surname Du');
-        $slang = $this->mandarinWord(null, 'airport; airfield; (slang) service provider');
+        $slang = $this->mandarinWord(null, '(slang) to cheat');
         $normal = $this->mandarinWord(null, 'to listen');
+        // 机场: a slang sense listed AFTER the first one is not a reason to skip.
+        $airport = $this->mandarinWord(null, 'airport; (slang) service provider');
 
         $client = $this->fakeClient();
         $this->app->instance(AiClient::class, $client);
@@ -117,6 +119,7 @@ class TranslateMeaningsJobTest extends TestCase
         $this->assertNull($surname->fresh()->meaning_id);
         $this->assertNull($slang->fresh()->meaning_id);
         $this->assertSame('TO LISTEN_ID', $normal->fresh()->meaning_id);
+        $this->assertSame('AIRPORT; (SLANG) SERVICE PROVIDER_ID', $airport->fresh()->meaning_id);
     }
 
     public function test_translation_prompt_warns_about_wrong_homograph_glosses(): void
