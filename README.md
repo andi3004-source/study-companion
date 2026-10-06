@@ -55,8 +55,26 @@ Lihat `.env.example` untuk keterangan dan nilai bawaan. Variabel utama:
 | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` | Provider AI alternatif (tidak aktif) |
 | `PRONUNCIATION_SERVICE_URL`, `PRONUNCIATION_CHECKER_DRIVER` | Layanan cek pelafalan (`ml` atau `stt_match`) |
 | `HSK_CORRECTIONS_PATH` | Opsional: path file koreksi HSK2-3 |
+| `HSK_LEVEL_LOCK` | `true`/`false`: kunci percakapan Mandarin ke kosakata HSK 1 |
 
 Jangan commit `.env`.
+
+## Partner percakapan (Ngobrol)
+
+- **Suara**: input suara (mic) memakai Web Speech API bawaan browser, jadi hanya
+  berjalan di **Chrome atau Edge**. Di browser lain, tetap bisa mengetik. Setiap
+  pesan user dicatat asalnya di `conversation_turns.input_mode` (`text` atau `voice`).
+- **Kunci level HSK 1** (`HSK_LEVEL_LOCK=true`, bawaan): sesi Mandarin mendapat
+  daftar 150 hanzi HSK 1 beserta instruksi untuk hanya memakai kata dari daftar
+  itu, dan menulis kalimat Mandarin tanpa pinyin, kurung, atau terjemahan (karena
+  dibacakan text-to-speech). Halaman chat menampilkan lencana "Level: HSK 1 (terkunci)".
+  - **Biaya**: tiap pesan Mandarin menambah sekitar **1.074 karakter atau ±440 token
+    input** (daftarnya sendiri 378 karakter, ±270 token). Ini perkiraan kasar, bukan
+    hitungan tokenizer; cek ulang dengan `php artisan hsk:prompt-stats`. Token input
+    yang sebenarnya per panggilan tercatat di `conversation_api_calls.tokens_in`.
+  - `HSK_LEVEL_LOCK=false` mematikan fitur ini, dan biaya tambahan itu ikut hilang.
+  - **Keterbatasan**: kunci ini bekerja lewat instruksi di prompt. Sifatnya imbauan
+    kuat, **bukan jaminan**; model tetap bisa sesekali memakai kata di luar HSK 1.
 
 ## Data HSK dan koreksinya
 
@@ -73,9 +91,14 @@ Untuk sebagian kata, dataset ini memilih homograf yang keliru, misalnya 都
   `php artisan hsk:apply-corrections` (juga ada `--dry-run`). Baris yang dikoreksi
   ditandai `data_status = corrected_draft` dan tampil dengan lencana
   "Data dikoreksi (draf)" di Kamus dan Kartu.
-- Glos Inggris yang diawali "surname" atau mengandung "(slang)" tidak dipakai
-  sebagai arti utama dan tidak diterjemahkan otomatis. Jika arti Indonesia
-  belum ada, tampil "Arti belum tersedia".
+- Glos Inggris yang **arti pertamanya** (bagian sebelum `;` pertama) diawali
+  "surname" atau "(slang)" tidak dipakai sebagai arti utama dan tidak
+  diterjemahkan otomatis. Arti slang di urutan berikutnya tidak berpengaruh,
+  misalnya 机场 "airport; …(slang)…". Jika arti Indonesia belum ada, tampil
+  "Arti belum tersedia". Terjemahan lama dari glos seperti itu bisa dikosongkan
+  dengan `php artisan hsk:clear-unreliable-translations` (ada `--dry-run`).
+- `translate:meanings` mengirim hanzi dan pinyin bersama glos Inggris, supaya
+  model menerjemahkan makna HSK yang dimaksud.
 
 **Keterbatasan:**
 
