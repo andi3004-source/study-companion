@@ -3,7 +3,9 @@
 namespace App\Livewire\Games;
 
 use App\Enums\ErrorCategory;
+use App\Models\GameAttempt;
 use App\Support\ErrorGameItems;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -115,8 +117,16 @@ class ErrorHunter extends Component
         }
 
         $this->chosen = $kategori;
+        $correct = $kategori === $this->current['kategori'];
 
-        if ($kategori === $this->current['kategori']) {
+        GameAttempt::create([
+            'user_id' => Auth::id(),
+            'item_id' => (string) $question['id'],
+            'kategori' => $this->current['kategori'],
+            'benar' => $correct,
+        ]);
+
+        if ($correct) {
             $this->score++;
             $this->streak++;
             $this->bestStreak = max($this->bestStreak, $this->streak);

@@ -30,6 +30,7 @@ class ProgressOverview extends Component
             'englishStatus' => $scheduler->englishStatus($day),
             'platformLinks' => PlatformLink::orderBy('name')->get(),
             'topErrors' => $stats->topErrorCategories($user),
+            'gameWeak' => $stats->gameWeakCategories($user),
         ]);
     }
 }

@@ -54,6 +54,18 @@
         <a href="{{ route('game.error-hunter') }}" class="inline-block mt-3 text-sm font-700 text-mandarin hover:underline">Latih lewat game Pemburu Kesalahan →</a>
     </div>
 
+    <h2 class="font-display font-600 text-sm text-ink-soft mb-2">Kategori yang sering meleset di game</h2>
+    <div class="bg-card rounded-xl p-4 mb-8">
+        @forelse ($gameWeak as $weak)
+            <div class="flex items-center justify-between text-sm {{ $loop->first ? '' : 'mt-2' }}">
+                <span class="font-700 text-ink">{{ $weak['label'] }}</span>
+                <span class="text-xs text-ink-soft">{{ $weak['jumlah'] }}× salah</span>
+            </div>
+        @empty
+            <p class="text-sm text-ink-soft">Belum ada jawaban salah di game dalam 30 hari terakhir.</p>
+        @endforelse
+    </div>
+
     <h2 class="font-display font-600 text-sm text-ink-soft mb-2">Ringkasan Fase</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
         <div class="bg-mandarin-soft rounded-xl p-4">

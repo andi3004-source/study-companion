@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\ErrorCategory;
 use App\Models\ConversationSession;
+use App\Models\GameAttempt;
 use App\Models\IeltsVocab;
 use App\Models\IrregularVerb;
 use App\Models\MandarinWord;
@@ -113,6 +114,33 @@ class ProgressStats
             fn ($c) => array_diff_key($c, ['first_seen' => true]),
             array_slice($categories, 0, $limit)
         );
+    }
+
+    /**
+     * "Pemburu Kesalahan": the question categories the user most often failed
+     * to recognize in the last $days days (ties: most recently missed first).
+     * Reads game_attempts only — never mixed with the conversation-based
+     * topErrorCategories(), which counts mistakes the learner made.
+     *
+     * @return array<int, array{kategori: string, label: string, jumlah: int}>
+     */
+    public function gameWeakCategories(User $user, int $days = 30, int $limit = 3): array
+    {
+        return GameAttempt::where('user_id', $user->id)
+            ->where('benar', false)
+            ->where('created_at', '>=', now()->subDays($days))
+            ->selectRaw('kategori, COUNT(*) as jumlah, MAX(created_at) as last_missed_at')
+            ->groupBy('kategori')
+            ->orderByDesc('jumlah')
+            ->orderByDesc('last_missed_at')
+            ->limit($limit)
+            ->get()
+            ->map(fn ($row) => [
+                'kategori' => ErrorCategory::fromLoose($row->kategori)->value,
+                'label' => ErrorCategory::fromLoose($row->kategori)->label(),
+                'jumlah' => (int) $row->jumlah,
+            ])
+            ->all();
     }
 
     public function mandarinDaysRemaining(int $day): int
