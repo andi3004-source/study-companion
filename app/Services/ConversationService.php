@@ -3,14 +3,18 @@
 namespace App\Services;
 
 use App\Contracts\AiClient;
+use App\Contracts\SessionAnalyzer;
+use App\Jobs\AnalyzeSessionJob;
 use App\Models\ConversationApiCall;
 use App\Models\ConversationSession;
 use App\Models\ConversationTurn;
 use App\Models\User;
 use App\Models\WeekTopic;
 use App\Support\HskVocabularyPrompt;
+use Illuminate\Support\Facades\Bus;
 use InvalidArgumentException;
 use RuntimeException;
+use Throwable;
 
 /**
  * Orchestrates the AI Conversation Partner: scenario lookup, session
@@ -251,9 +255,10 @@ class ConversationService
     /**
      * Marks the session finished and, when the API is available, asks Claude
      * for 2-3 short feedback notes on the transcript. Feedback is best-effort:
-     * an API failure still ends the session, just without notes.
+     * an API failure still ends the session, just without notes. Mandarin
+     * sessions then get their error analysis queued (see queueErrorAnalysis).
      *
-     * @return array{exchange_count: int, notes: ?string}
+     * @return array{exchange_count: int, notes: ?string, analysis_queued: bool}
      */
     public function endSession(ConversationSession $session): array
     {
@@ -271,7 +276,43 @@ class ConversationService
 
         $session->update(['ended_at' => now(), 'summary' => $notes]);
 
-        return ['exchange_count' => $exchangeCount, 'notes' => $notes];
+        return [
+            'exchange_count' => $exchangeCount,
+            'notes' => $notes,
+            'analysis_queued' => $this->queueErrorAnalysis($session, $exchangeCount),
+        ];
+    }
+
+    /**
+     * Queues the "Kesalahan terbanyakmu" analysis (AnalyzeSessionJob) for a
+     * finished Mandarin session with at least one user turn — never run
+     * inline in this request. With QUEUE_CONNECTION=sync it's deferred until
+     * after the response is sent, so finishing a session never waits on the
+     * AI call. Skipped when no analyzer is configured at all (no Langflow and
+     * no AI key), so the UI doesn't promise an analysis that can't happen. A
+     * dispatch failure is reported and never stops the session from ending.
+     */
+    private function queueErrorAnalysis(ConversationSession $session, int $exchangeCount): bool
+    {
+        if ($session->lang !== 'mandarin' || $exchangeCount === 0) {
+            return false;
+        }
+
+        try {
+            if (! app(SessionAnalyzer::class)->isConfigured()) {
+                return false;
+            }
+
+            $job = new AnalyzeSessionJob($session->id);
+
+            config('queue.default') === 'sync' ? Bus::dispatchAfterResponse($job) : Bus::dispatch($job);
+
+            return true;
+        } catch (Throwable $e) {
+            report($e);
+
+            return false;
+        }
     }
 
     private function generateFeedback(ConversationSession $session): string

@@ -30,6 +30,39 @@
         </div>
     @endif
 
+    @if ($this->analysisState)
+        {{-- Polls only while an ended session's analysis is queued and unfinished (analyzed_at NULL), for at most 60s. --}}
+        <div class="bg-card rounded-2xl p-5 mb-4" @if ($this->analysisState === 'pending') wire:poll.3s="pollAnalysis" @endif>
+            <p class="font-display font-600 text-ink mb-2">Analisis kesalahan</p>
+
+            @if ($this->analysisState === 'pending')
+                <p class="text-sm text-ink-soft">Analisis kesalahan sedang diproses…</p>
+            @elseif ($this->analysisState === 'timeout')
+                <p class="text-sm text-ink-soft">Analisis belum selesai. Hasilnya akan muncul di halaman Progress setelah selesai diproses.</p>
+            @elseif ($this->analysisState === 'failed')
+                <p class="text-sm text-ink-soft">Analisis kesalahan gagal untuk sesi ini. Coba lagi nanti.</p>
+            @elseif (empty($session->error_analysis['items']))
+                <p class="text-sm text-ink">Tidak ada kesalahan yang terdeteksi di sesi ini. Mantap! 🎉</p>
+            @else
+                <ul class="space-y-3">
+                    @foreach ($session->error_analysis['items'] as $item)
+                        <li class="text-sm">
+                            <span class="inline-block text-[10px] font-700 text-mandarin bg-mandarin-soft rounded-full px-2 py-0.5 mb-1">{{ \App\Enums\ErrorCategory::fromLoose($item['kategori'])->label() }}</span>
+                            <p class="text-ink"><span class="line-through text-ink-faint">{{ $item['contoh'] }}</span> → <span class="font-700">{{ $item['koreksi'] }}</span></p>
+                            @if ($item['penjelasan'])
+                                <p class="text-xs text-ink-soft mt-0.5">{{ $item['penjelasan'] }}</p>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+
+            @if ($this->analysisState === 'done' && ! empty($session->error_analysis['catatan']))
+                <p class="text-xs text-ink-faint mt-3">{{ $session->error_analysis['catatan'] }}</p>
+            @endif
+        </div>
+    @endif
+
     <div class="flex-1 overflow-y-auto space-y-3 mb-4 pr-1" id="conversation-scroll" x-data
          x-init="$el.scrollTop = $el.scrollHeight"
          x-on:message-sent.window="$nextTick(() => $el.scrollTop = $el.scrollHeight)">

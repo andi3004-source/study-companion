@@ -13,6 +13,9 @@ use RuntimeException;
 #[Layout('layouts.study')]
 class Chat extends Component
 {
+    /** How long the summary keeps polling for the queued error analysis before giving up. */
+    public const ANALYSIS_POLL_SECONDS = 60;
+
     public ConversationSession $session;
 
     public string $newMessage = '';
@@ -22,6 +25,9 @@ class Chat extends Component
     public ?array $summary = null;
 
     public bool $autoPlay = true;
+
+    /** Unix time the error analysis was queued by finishSession(); drives the 60s polling window. */
+    public ?int $analysisQueuedAt = null;
 
     public function mount(ConversationSession $session): void
     {
@@ -112,7 +118,41 @@ class Chat extends Component
     public function finishSession(): void
     {
         $this->summary = app(ConversationService::class)->endSession($this->session);
+        $this->analysisQueuedAt = $this->summary['analysis_queued'] ? now()->timestamp : null;
         $this->session->refresh();
+        unset($this->analysisState);
+    }
+
+    /**
+     * "Kesalahan terbanyakmu" state for an ended Mandarin session: 'done' or
+     * 'failed' once AnalyzeSessionJob has run (analyzed_at set; NULL
+     * error_analysis = failed), 'pending' while it's queued and the 60s
+     * polling window is open, 'timeout' after that, null = show nothing
+     * (not Mandarin, not ended, or nothing was queued).
+     */
+    #[Computed]
+    public function analysisState(): ?string
+    {
+        if (! $this->session->ended_at || $this->session->lang !== 'mandarin') {
+            return null;
+        }
+
+        if ($this->session->analyzed_at !== null) {
+            return $this->session->error_analysis === null ? 'failed' : 'done';
+        }
+
+        if ($this->analysisQueuedAt === null) {
+            return null;
+        }
+
+        return now()->timestamp - $this->analysisQueuedAt >= self::ANALYSIS_POLL_SECONDS ? 'timeout' : 'pending';
+    }
+
+    /** wire:poll target while the analysis is pending — just re-reads the session. */
+    public function pollAnalysis(): void
+    {
+        $this->session->refresh();
+        unset($this->analysisState);
     }
 
     public function render()

@@ -76,6 +76,42 @@ Jangan commit `.env`.
   - **Keterbatasan**: kunci ini bekerja lewat instruksi di prompt. Sifatnya imbauan
     kuat, **bukan jaminan**; model tetap bisa sesekali memakai kata di luar HSK 1.
 
+## Analisis kesalahan ("Kesalahan terbanyakmu")
+
+Saat sesi percakapan **Mandarin** diselesaikan, transkripnya dianalisis AI di
+latar belakang (`AnalyzeSessionJob`). Tiap kesalahan diberi satu kategori tetap
+(urutan kata, 是 dengan kata sifat, 不 atau 没, kata penggolong, nada,
+pelafalan, pilihan kata, lainnya). Hasilnya tampil di ringkasan sesi, dan tiga
+kategori teratas 7 hari terakhir tampil di halaman Progress.
+
+- **Analyzer**: memakai flow IBM Langflow bila `LANGFLOW_URL` dan
+  `LANGFLOW_FLOW_ID` terisi. Kalau Langflow error, timeout, atau mengembalikan
+  JSON rusak, analisis otomatis jatuh ke Gemini. Tanpa Langflow, langsung Gemini.
+  Kalau keduanya tidak terkonfigurasi, analisis tidak dijalankan dan bagiannya
+  tidak ditampilkan. Setiap analisis memakai satu panggilan AI.
+- **Gagal**: sesi dengan analisis gagal bisa dijalankan ulang dengan
+  `php artisan analysis:retry-failed` (pakai `--dry-run` untuk melihat daftarnya dulu).
+
+### Menjalankan analisis saat demo
+
+Analisis berjalan sebagai job antrean. Ada dua cara:
+
+1. **Disarankan:** `QUEUE_CONNECTION=database` (bawaan) dengan worker di terminal terpisah:
+
+   ```bash
+   php artisan queue:work
+   ```
+
+   Tanpa worker, job hanya menumpuk di tabel `jobs`. Ringkasan sesi berhenti
+   menunggu setelah 60 detik, dan hasilnya baru muncul (di Progress) setelah
+   worker dijalankan. `composer run dev` sudah menjalankan worker (`queue:listen`).
+
+2. **`QUEUE_CONNECTION=sync`:** job dijalankan setelah respons dikirim
+   (`afterResponse`), tanpa worker. Catatan: `php artisan serve` hanya
+   memproses **satu permintaan sekaligus** kecuali `PHP_CLI_SERVER_WORKERS`
+   diatur (misalnya `PHP_CLI_SERVER_WORKERS=4`). Jadi selama analisis berjalan
+   (bisa sampai puluhan detik), polling dan halaman lain bisa tertahan.
+
 ## Data HSK dan koreksinya
 
 Kosakata HSK1-6 diimpor dari `storage/app/seed-data/mandarin_hsk1to6_complete.json`.
