@@ -27,3 +27,6 @@ Thumbs.db
 pronunciation-service/__pycache__
 pronunciation-service/**/__pycache__
 pronunciation-service/.venv
+
+# Claude Code (local agent settings/state)
+.claude/
