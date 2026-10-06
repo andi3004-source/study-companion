@@ -3,6 +3,9 @@
         <div>
             <h1 class="font-display font-600 text-xl text-ink">{{ $this->scenario['label'] }}</h1>
             <p class="text-xs text-ink-soft">{{ ucfirst($session->lang) }} · Sisa kuota hari ini: {{ $this->remainingToday }}/{{ $dailyLimit }}</p>
+            @if ($this->levelLocked)
+                <span class="inline-block mt-1 text-[10px] font-700 text-mandarin bg-mandarin-soft rounded-full px-2 py-0.5">Level: HSK 1 (terkunci)</span>
+            @endif
         </div>
         <div class="flex items-center gap-3">
             <label class="flex items-center gap-1.5 text-xs text-ink-soft">

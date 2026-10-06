@@ -42,6 +42,13 @@ class Chat extends Component
         return app(ConversationService::class)->scenarioDisplay($this->session);
     }
 
+    /** Same check that adds the HSK1 lock to the system prompt — see ConversationService::levelLocked(). */
+    #[Computed]
+    public function levelLocked(): bool
+    {
+        return app(ConversationService::class)->levelLocked($this->session);
+    }
+
     #[Computed]
     public function remainingToday(): int
     {

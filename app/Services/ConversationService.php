@@ -8,6 +8,7 @@ use App\Models\ConversationSession;
 use App\Models\ConversationTurn;
 use App\Models\User;
 use App\Models\WeekTopic;
+use App\Support\HskVocabularyPrompt;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -311,10 +312,44 @@ class ConversationService
         $prompt = $persona."\n\n".self::BAKU_INSTRUCTION;
 
         if ($session->lang === 'mandarin') {
+            // Before the translation instruction, so the marker format stays the last thing the model reads.
+            if ($this->levelLocked($session)) {
+                $prompt .= "\n\n".$this->levelLockInstruction();
+            }
+
             $prompt .= "\n\n".self::MANDARIN_TRANSLATION_INSTRUCTION;
         }
 
         return $prompt;
+    }
+
+    /**
+     * Mandarin sessions are locked to the HSK1 vocabulary when
+     * config('hsk.level_lock') is on — and only when there actually is an
+     * HSK1 list to lock to (an empty one would just be a confusing rule).
+     * Also drives the "Level: HSK 1 (terkunci)" badge, so the badge never
+     * claims a lock the prompt doesn't have.
+     */
+    public function levelLocked(ConversationSession $session): bool
+    {
+        return $session->lang === 'mandarin'
+            && config('hsk.level_lock')
+            && HskVocabularyPrompt::hsk1List() !== '';
+    }
+
+    /**
+     * A strong request, not a guarantee: the model can still drift outside
+     * the list. The no-pinyin rule applies to the Mandarin sentences only —
+     * BAKU_INSTRUCTION's Indonesian correction is still allowed before the
+     * translation marker.
+     */
+    public function levelLockInstruction(): string
+    {
+        $marker = self::MANDARIN_TRANSLATION_MARKER;
+
+        return "KUNCI LEVEL HSK 1: Kalimat Mandarin dalam balasanmu HANYA boleh memakai kata dari DAFTAR KOSAKATA HSK 1 di bawah. Kalau benar-benar terpaksa memakai kata di luar daftar, pakai seminimal mungkin. Kata atau kalimat user yang ada di luar daftar TIDAK dianggap salah — jangan koreksi user hanya karena kata itu tidak ada di daftar.\n"
+            ."FORMAT WAJIB (balasan ini dibacakan oleh text-to-speech): kalimat Mandarin ditulis HANYA dengan hanzi dan tanda baca Mandarin — tanpa pinyin, tanpa tanda kurung, tanpa terjemahan di sampingnya. Koreksi singkat berbahasa Indonesia sesuai aturan koreksi di atas tetap boleh. Terjemahan Indonesia hanya ditulis setelah penanda {$marker}.\n"
+            .'DAFTAR KOSAKATA HSK 1: '.HskVocabularyPrompt::hsk1List();
     }
 
     /** Mandarin replies carry an extra Indonesian translation, so they need more room. */
