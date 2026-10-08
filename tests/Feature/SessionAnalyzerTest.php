@@ -67,9 +67,14 @@ class SessionAnalyzerTest extends TestCase
         return $client;
     }
 
-    private function fixture(): array
+    /**
+     * A full run response with a fenced two-mistake analysis. Kept inline so
+     * tests/Fixtures/langflow_response.json can be swapped for a real
+     * response (see LangflowFixtureTest) without breaking these assertions.
+     */
+    private function twoMistakesResponse(): array
     {
-        return json_decode(file_get_contents(base_path('tests/Fixtures/langflow_response.json')), true);
+        return $this->runResponse("```json\n".'{"items":[{"kategori":"shi_dengan_kata_sifat","contoh":"我是高兴","koreksi":"我很高兴","penjelasan":"Kata sifat tidak memakai 是; pakai 很."},{"kategori":"bu_atau_mei","contoh":"我不有钱","koreksi":"我没有钱","penjelasan":"有 diingkari dengan 没, bukan 不."}],"catatan":"Dua kesalahan tata bahasa dasar."}'."\n```");
     }
 
     /** Langflow run response with $text at outputs[0].outputs[0].results.message.text. */
@@ -78,10 +83,10 @@ class SessionAnalyzerTest extends TestCase
         return ['outputs' => [['outputs' => [['results' => ['message' => ['text' => $text]]]]]]];
     }
 
-    public function test_langflow_parses_the_fixture_response_and_sends_the_expected_request(): void
+    public function test_langflow_parses_a_fenced_response_and_sends_the_expected_request(): void
     {
         $this->configureLangflow();
-        Http::fake([self::RUN_URL => Http::response($this->fixture())]);
+        Http::fake([self::RUN_URL => Http::response($this->twoMistakesResponse())]);
 
         $result = app(LangflowSessionAnalyzer::class)->analyze("User: 我是高兴\nUser (suara): 我不有钱");
 
@@ -249,7 +254,7 @@ class SessionAnalyzerTest extends TestCase
     {
         $this->configureLangflow();
         $gemini = $this->fakeGemini();
-        Http::fake([self::RUN_URL => Http::response($this->fixture())]);
+        Http::fake([self::RUN_URL => Http::response($this->twoMistakesResponse())]);
 
         $analyzer = app(SessionAnalyzer::class);
         $result = $analyzer->analyze('User: 我是高兴');
