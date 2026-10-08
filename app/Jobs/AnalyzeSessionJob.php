@@ -3,14 +3,17 @@
 namespace App\Jobs;
 
 use App\Contracts\SessionAnalyzer;
+use App\Exceptions\LangflowRequestException;
 use App\Models\ConversationApiCall;
 use App\Models\ConversationSession;
+use App\Services\FallbackSessionAnalyzer;
 use App\Support\ErrorAnalysis;
 use App\Support\SessionTranscript;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Jobs\SyncJob;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -28,6 +31,13 @@ use Throwable;
  * error_analysis NULL ("tried and failed"), which is what the chat summary
  * and the retry command look for. A success with no mistakes is stored as
  * {"items": [], ...}, never NULL.
+ *
+ * Retries: on a real queue worker, a transient Langflow failure (429/502/
+ * 503/504, "high demand", "overloaded") releases the job for another try
+ * after $backoff, up to $tries attempts; the last attempt falls back to
+ * Gemini as usual. On the sync queue (also used by dispatchAfterResponse)
+ * a release would never run again, so there the job goes straight to
+ * Langflow-then-Gemini and always finishes the session.
  */
 class AnalyzeSessionJob implements ShouldQueue
 {
@@ -38,8 +48,16 @@ class AnalyzeSessionJob implements ShouldQueue
     // The queue's retry_after must stay above this (DB_QUEUE_RETRY_AFTER=200).
     public int $timeout = 180;
 
-    // Failures are caught and recorded, not retried — see `analysis:retry-failed`.
-    public int $tries = 1;
+    // Only transient Langflow failures are retried (see handle()); every
+    // other failure is caught and recorded — see `analysis:retry-failed`.
+    public int $tries = 3;
+
+    /** Seconds before the 2nd and 3rd attempt. */
+    public array $backoff = [15, 45];
+
+    // A run killed by $timeout has already spent minutes of AI calls: mark
+    // it failed (see failed()) instead of re-running it.
+    public bool $failOnTimeout = true;
 
     public function __construct(public readonly int $sessionId) {}
 
@@ -55,10 +73,25 @@ class AnalyzeSessionJob implements ShouldQueue
             return;
         }
 
+        $canRetry = $this->canRetryLater();
+
+        if ($canRetry && $analyzer instanceof FallbackSessionAnalyzer) {
+            $analyzer = $analyzer->deferringTransientFailures();
+        }
+
         try {
             $result = $analyzer->analyze(SessionTranscript::build($session), $session->id);
         } catch (Throwable $e) {
             report($e);
+
+            if ($canRetry && $e instanceof LangflowRequestException && $e->transient) {
+                $delay = $this->backoff[min($this->attempts(), count($this->backoff)) - 1];
+                $this->release($delay);
+                Log::info("AnalyzeSessionJob: session {$session->id} Langflow busy (HTTP {$e->status}), retrying in {$delay}s.");
+
+                return;
+            }
+
             $session->update(['error_analysis' => null, 'analyzed_at' => now()]);
             Log::info("AnalyzeSessionJob: session {$session->id} analysis failed.");
 
@@ -77,5 +110,25 @@ class AnalyzeSessionJob implements ShouldQueue
                 'tokens_out' => $usage['tokens_out'] ?? null,
             ]);
         }
+    }
+
+    /**
+     * The worker gave up on the job (killed by $timeout, or attempts ran out
+     * without handle() finishing): record "tried and failed" so the summary
+     * stops waiting and `analysis:retry-failed` can pick the session up.
+     */
+    public function failed(?Throwable $e): void
+    {
+        ConversationSession::whereKey($this->sessionId)
+            ->whereNull('analyzed_at')
+            ->update(['error_analysis' => null, 'analyzed_at' => now()]);
+    }
+
+    /** Whether release() would actually run this job again: a real queue worker with attempts left. */
+    private function canRetryLater(): bool
+    {
+        return $this->job !== null
+            && ! $this->job instanceof SyncJob
+            && $this->attempts() < $this->tries;
     }
 }

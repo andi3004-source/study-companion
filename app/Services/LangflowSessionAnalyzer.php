@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Contracts\SessionAnalyzer;
+use App\Exceptions\LangflowRequestException;
 use App\Support\ErrorAnalysis;
+use App\Support\SecretRedactor;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -18,8 +20,11 @@ use RuntimeException;
  *
  * Langflow's run response nests the chat output several levels deep and its
  * exact shape depends on the flow's components and version, so extractText()
- * tries the known locations and then searches. Any failure throws;
- * FallbackSessionAnalyzer then falls back to Gemini.
+ * tries the known locations and then searches. Any failure throws (a non-2xx
+ * response as LangflowRequestException, with the body redacted);
+ * FallbackSessionAnalyzer then falls back to Gemini, or AnalyzeSessionJob
+ * retries later if the failure is transient. Headers and the key are never
+ * logged.
  */
 class LangflowSessionAnalyzer implements SessionAnalyzer
 {
@@ -83,12 +88,16 @@ class LangflowSessionAnalyzer implements SessionAnalyzer
             throw new RuntimeException('LANGFLOW_URL / LANGFLOW_FLOW_ID are not set; cannot call Langflow.');
         }
 
-        $response = $this->send($transcript, self::newSessionId($sessionId))->throw();
+        $response = $this->send($transcript, self::newSessionId($sessionId));
+
+        if (! $response->successful()) {
+            throw LangflowRequestException::fromResponse($response);
+        }
 
         $text = self::extractText((array) $response->json());
 
         if ($text === null) {
-            Log::debug('LangflowSessionAnalyzer: no text found in the run response.', ['body' => $response->body()]);
+            Log::debug('LangflowSessionAnalyzer: no text found in the run response.', ['body' => SecretRedactor::redact($response->body())]);
 
             throw new RuntimeException('Langflow response contains no output text.');
         }

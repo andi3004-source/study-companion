@@ -100,6 +100,17 @@ kategori teratas 7 hari terakhir tampil di halaman Progress.
 - **Timeout**: `LANGFLOW_TIMEOUT` (detik, bawaan 120). Satu analisis transkrip
   dengan banyak kesalahan pernah memakan sekitar 74 detik. Job punya batas
   waktu 180 detik: cukup untuk Langflow lalu cadangan Gemini.
+- **Error Langflow di log**: respons non-2xx dicatat sebagai
+  `Langflow HTTP {status}: {500 karakter pertama isi respons}`. Sebelum
+  dipotong, isi itu disamarkan (`[REDACTED]`): nilai `LANGFLOW_API_KEY` dan
+  `GEMINI_API_KEY`, serta apa pun yang mirip `sk-…`, `AIza…`, `AstraCS:…`.
+  Header dan key tidak pernah dicatat.
+- **Retry**: dengan worker antrean, kegagalan Langflow yang sementara (HTTP 429,
+  502, 503, 504, atau teks "high demand"/"overloaded") diulang sampai 3
+  percobaan dengan jeda 15 lalu 45 detik. Kegagalan permanen (401, 403, 422,
+  kuota habis, JSON rusak, timeout koneksi) tidak diulang dan langsung jatuh ke
+  Gemini. Percobaan terakhir juga jatuh ke Gemini. Dengan `QUEUE_CONNECTION=sync`
+  tidak ada retry: langsung Langflow lalu Gemini, sehingga sesi tidak menggantung.
 - **Gagal**: sesi dengan analisis gagal bisa dijalankan ulang dengan
   `php artisan analysis:retry-failed` (pakai `--dry-run` untuk melihat daftarnya dulu).
 
