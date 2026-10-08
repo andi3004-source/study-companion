@@ -114,6 +114,24 @@ kategori teratas 7 hari terakhir tampil di halaman Progress.
 - **Gagal**: sesi dengan analisis gagal bisa dijalankan ulang dengan
   `php artisan analysis:retry-failed` (pakai `--dry-run` untuk melihat daftarnya dulu).
 
+### Mendiagnosis Langflow (`langflow:ping`)
+
+```bash
+php artisan langflow:ping --config          # tanpa jaringan: apa yang terisi, timeout, URL akhir
+php artisan langflow:ping                   # SATU panggilan sungguhan: status, waktu, teks hasil
+php artisan langflow:ping --dump-structure  # + pohon kunci JSON respons, simpan respons tersamarkan
+```
+
+- `--config` tidak memanggil jaringan dan tidak pernah mencetak key (hanya
+  "terisi, panjang N" atau "kosong").
+- Tanpa `--config`, perintah ini mengirim transkrip pendek tetap ke Langflow dan
+  **memakai kuota model**. Error ditampilkan dengan status HTTP dan isi respons
+  yang sudah disamarkan, beserta jenisnya (sementara atau permanen).
+- `--dump-structure` mencetak nama kunci dan nilai string (dipotong 80 karakter,
+  disamarkan), lalu menyimpan seluruh respons yang sudah disamarkan ke
+  `storage/app/langflow-last-response.json` (tidak ikut git). Periksa isinya,
+  lalu salin ke `tests/Fixtures/langflow_response.json` sebagai fixture tes.
+
 ### Menjalankan analisis saat demo
 
 Analisis berjalan sebagai job antrean. Ada dua cara:
