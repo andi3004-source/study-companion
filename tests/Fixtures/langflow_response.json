@@ -1,40 +1,131 @@
 {
-    "session_id": "00000000-0000-0000-0000-000000000000",
+    "session_id": "sesi-contoh",
     "outputs": [
         {
             "inputs": {
-                "input_value": "User: 我是高兴\nAI: 你为什么高兴？\nUser (suara): 我不有钱"
+                "input_value": "AI: 你好！\nUser: 我是高兴。"
             },
             "outputs": [
                 {
                     "results": {
                         "message": {
                             "text_key": "text",
-                            "data": {},
+                            "data": {
+                                "timestamp": "2026-10-08 02:44:04.341189 UTC",
+                                "sender": "Machine",
+                                "sender_name": "AI",
+                                "session_id": "sesi-contoh",
+                                "context_id": "",
+                                "text": "{\"items\":[{\"kategori\":\"shi_dengan_kata_sifat\",\"contoh\":\"我是高兴。\",\"koreksi\":\"我很高兴。\",\"penjelasan\":\"Dalam bahasa Mandarin, kata sifat tidak dirangkai dengan 是. Gunakan kata keterangan derajat seperti 很 di depan kata sifat (我很高兴).\"}],\"catatan\":\"\"}",
+                                "files": [],
+                                "error": false,
+                                "edit": false,
+                                "properties": {
+                                    "text_color": null,
+                                    "background_color": null,
+                                    "edited": false,
+                                    "source": {
+                                        "id": "LanguageModelComponent-xxxxx",
+                                        "display_name": "Language Model",
+                                        "source": "gemini-3.7-flash"
+                                    },
+                                    "icon": null,
+                                    "allow_markdown": false,
+                                    "positive_feedback": null,
+                                    "state": "complete",
+                                    "targets": [],
+                                    "usage": {
+                                        "input_tokens": 1759,
+                                        "output_tokens": 336,
+                                        "total_tokens": 2095
+                                    },
+                                    "build_duration": null
+                                },
+                                "category": "message",
+                                "content_blocks": [],
+                                "session_metadata": {
+                                    "graph_run_id": "00000000-0000-0000-0000-000000000000"
+                                },
+                                "id": "00000000-0000-0000-0000-000000000000",
+                                "flow_id": "00000000-0000-0000-0000-000000000000",
+                                "run_id": "00000000-0000-0000-0000-000000000000",
+                                "duration": null
+                            },
+                            "default_value": "",
                             "sender": "Machine",
                             "sender_name": "AI",
-                            "text": "```json\n{\"items\":[{\"kategori\":\"shi_dengan_kata_sifat\",\"contoh\":\"我是高兴\",\"koreksi\":\"我很高兴\",\"penjelasan\":\"Kata sifat tidak memakai 是; pakai 很.\"},{\"kategori\":\"bu_atau_mei\",\"contoh\":\"我不有钱\",\"koreksi\":\"我没有钱\",\"penjelasan\":\"有 diingkari dengan 没, bukan 不.\"}],\"catatan\":\"Dua kesalahan tata bahasa dasar.\"}\n```",
-                            "session_id": "00000000-0000-0000-0000-000000000000"
+                            "files": [],
+                            "session_id": "sesi-contoh",
+                            "context_id": "",
+                            "run_id": "00000000-0000-0000-0000-000000000000",
+                            "timestamp": "2026-10-08 02:44:04.341189 UTC",
+                            "flow_id": "00000000-0000-0000-0000-000000000000",
+                            "error": false,
+                            "edit": false,
+                            "properties": {
+                                "text_color": null,
+                                "background_color": null,
+                                "edited": false,
+                                "source": {
+                                    "id": "LanguageModelComponent-xxxxx",
+                                    "display_name": "Language Model",
+                                    "source": "gemini-3.7-flash"
+                                },
+                                "icon": null,
+                                "allow_markdown": false,
+                                "positive_feedback": null,
+                                "state": "complete",
+                                "targets": [],
+                                "usage": {
+                                    "input_tokens": 1759,
+                                    "output_tokens": 336,
+                                    "total_tokens": 2095
+                                },
+                                "build_duration": null
+                            },
+                            "category": "message",
+                            "content_blocks": [],
+                            "duration": null,
+                            "session_metadata": {
+                                "graph_run_id": "00000000-0000-0000-0000-000000000000"
+                            },
+                            "text": "{\"items\":[{\"kategori\":\"shi_dengan_kata_sifat\",\"contoh\":\"我是高兴。\",\"koreksi\":\"我很高兴。\",\"penjelasan\":\"Dalam bahasa Mandarin, kata sifat tidak dirangkai dengan 是. Gunakan kata keterangan derajat seperti 很 di depan kata sifat (我很高兴).\"}],\"catatan\":\"\"}"
                         }
                     },
                     "artifacts": {
-                        "message": "(same text as results.message.text)",
+                        "message": "{\"items\":[{\"kategori\":\"shi_dengan_kata_sifat\",\"contoh\":\"我是高兴。\",\"koreksi\":\"我很高兴。\",\"penjelasan\":\"Dalam bahasa Mandarin, kata sifat tidak dirangkai dengan 是. Gunakan kata keterangan derajat seperti 很 di depan kata sifat (我很高兴).\"}],\"catatan\":\"\"}",
                         "sender": "Machine",
+                        "sender_name": "AI",
+                        "files": [],
                         "type": "object"
                     },
                     "outputs": {
                         "message": {
-                            "message": "(same text as results.message.text)",
-                            "type": "object"
+                            "message": "{\"items\":[{\"kategori\":\"shi_dengan_kata_sifat\",\"contoh\":\"我是高兴。\",\"koreksi\":\"我很高兴。\",\"penjelasan\":\"Dalam bahasa Mandarin, kata sifat tidak dirangkai dengan 是. Gunakan kata keterangan derajat seperti 很 di depan kata sifat (我很高兴).\"}],\"catatan\":\"\"}",
+                            "type": "text"
                         }
                     },
                     "logs": {
                         "message": []
                     },
-                    "messages": [],
+                    "messages": [
+                        {
+                            "message": "{\"items\":[{\"kategori\":\"shi_dengan_kata_sifat\",\"contoh\":\"我是高兴。\",\"koreksi\":\"我很高兴。\",\"penjelasan\":\"Dalam bahasa Mandarin, kata sifat tidak dirangkai dengan 是. Gunakan kata keterangan derajat seperti 很 di depan kata sifat (我很高兴).\"}],\"catatan\":\"\"}",
+                            "sender": "Machine",
+                            "sender_name": "AI",
+                            "session_id": "sesi-contoh",
+                            "stream_url": null,
+                            "component_id": "ChatOutput-xxxxx",
+                            "files": [],
+                            "type": "text"
+                        }
+                    ],
+                    "timedelta": null,
+                    "duration": null,
                     "component_display_name": "Chat Output",
                     "component_id": "ChatOutput-xxxxx",
-                    "used_frozen_result": false
+                    "used_frozen_result": false,
+                    "token_usage": null
                 }
             ]
         }

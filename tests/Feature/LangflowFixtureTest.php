@@ -6,6 +6,7 @@ use App\Enums\ErrorCategory;
 use App\Services\LangflowSessionAnalyzer;
 use App\Support\ErrorAnalysis;
 use App\Support\SecretRedactor;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 use Throwable;
@@ -66,6 +67,27 @@ class LangflowFixtureTest extends TestCase
         $raw = $this->raw();
 
         $this->assertSame($raw, SecretRedactor::redact($raw), self::FIXTURE.' contains something that looks like an API key. Use the redacted file written by `langflow:ping --dump-structure`.');
+    }
+
+    /**
+     * Independent of SecretRedactor: the raw key patterns, plus the value of
+     * every key/secret/token in config('services'). Failure messages name
+     * the pattern or config path, never the value.
+     */
+    public function test_fixture_matches_no_key_pattern_and_no_configured_key(): void
+    {
+        $raw = $this->raw();
+
+        foreach (['sk-' => '/sk-[A-Za-z0-9_\-]+/', 'AIza' => '/AIza[0-9A-Za-z_\-]+/', 'AstraCS' => '/AstraCS:/'] as $name => $pattern) {
+            $this->assertSame(0, preg_match($pattern, $raw), self::FIXTURE." contains a {$name}… key.");
+        }
+
+        $secrets = collect(Arr::dot(config('services')))
+            ->filter(fn ($value, $path) => preg_match('/(^|\.|_)(key|secret|token)$/', $path) && is_string($value) && strlen(trim($value)) >= 8);
+
+        foreach ($secrets as $path => $value) {
+            $this->assertFalse(str_contains($raw, trim($value)), self::FIXTURE." contains the value of services.{$path}.");
+        }
     }
 
     public function test_output_text_can_be_extracted_from_the_fixture(): void
