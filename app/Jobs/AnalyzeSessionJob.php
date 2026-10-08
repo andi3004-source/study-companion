@@ -100,7 +100,7 @@ class AnalyzeSessionJob implements ShouldQueue
 
         $usage = $result['usage'] ?? null;
 
-        // normalize() keeps only items/catatan, so 'usage' is never stored.
+        // normalize() keeps only items/catatan/sumber, so 'usage' is never stored.
         $session->update(['error_analysis' => ErrorAnalysis::normalize($result), 'analyzed_at' => now()]);
 
         if (is_array($usage) && (isset($usage['tokens_in']) || isset($usage['tokens_out']))) {

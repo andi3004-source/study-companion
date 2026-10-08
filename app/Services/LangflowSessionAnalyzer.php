@@ -102,7 +102,7 @@ class LangflowSessionAnalyzer implements SessionAnalyzer
             throw new RuntimeException('Langflow response contains no output text.');
         }
 
-        return ErrorAnalysis::parse($text);
+        return ErrorAnalysis::parse($text) + ['sumber' => 'langflow'];
     }
 
     /** One run request, exactly as Langflow's API panel shows it; the response is returned as-is (not thrown). */

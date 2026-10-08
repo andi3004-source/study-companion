@@ -186,7 +186,7 @@ class SessionAnalyzerTest extends TestCase
 
         $result = app(LangflowSessionAnalyzer::class)->analyze('User: 你好');
 
-        $this->assertSame(['items' => [], 'catatan' => 'Bagus.'], $result);
+        $this->assertSame(['items' => [], 'catatan' => 'Bagus.', 'sumber' => 'langflow'], $result);
         Http::assertSent(fn (Request $request) => ! $request->hasHeader('x-api-key'));
     }
 
@@ -290,6 +290,21 @@ class SessionAnalyzerTest extends TestCase
         $this->assertSame('Dari Gemini.', $result['catatan']);
         $this->assertSame(1, $gemini->calls);
         Exceptions::assertReportedCount(1);
+    }
+
+    public function test_the_result_is_labelled_with_the_analyzer_that_produced_it(): void
+    {
+        Exceptions::fake();
+        $this->configureLangflow();
+        $this->fakeGemini();
+        Http::fake([self::RUN_URL => Http::sequence()
+            ->push($this->twoMistakesResponse())
+            ->push('Internal Server Error', 500)]);
+
+        $this->assertSame('langflow', app(SessionAnalyzer::class)->analyze('User: 妈')['sumber']);
+        $this->assertSame('gemini', app(SessionAnalyzer::class)->analyze('User: 妈')['sumber']);
+
+        $this->assertSame('gemini', app(GeminiSessionAnalyzer::class)->analyze('User: 妈')['sumber']);
     }
 
     public function test_langflow_timeout_falls_back_to_gemini(): void

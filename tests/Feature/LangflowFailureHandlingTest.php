@@ -208,6 +208,7 @@ class LangflowFailureHandlingTest extends TestCase
 
         $second->shouldNotHaveReceived('release');
         $this->assertSame('Dari Langflow.', $session->fresh()->error_analysis['catatan']);
+        $this->assertSame('langflow', $session->fresh()->error_analysis['sumber']);
         $this->assertSame(0, $gemini->calls);
         Http::assertSentCount(2);
     }
@@ -229,6 +230,7 @@ class LangflowFailureHandlingTest extends TestCase
         $this->runOnWorker($session, attempt: 1)->shouldNotHaveReceived('release');
 
         $this->assertSame('Dari Gemini.', $session->fresh()->error_analysis['catatan']);
+        $this->assertSame('gemini', $session->fresh()->error_analysis['sumber']); // labelled by who answered, not who was tried first
         $this->assertSame(1, $gemini->calls);
         Http::assertSentCount(1);
         Exceptions::assertReported(fn (LangflowRequestException $e) => $e->status === 401 && ! $e->transient);

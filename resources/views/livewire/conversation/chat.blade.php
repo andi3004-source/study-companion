@@ -61,6 +61,13 @@
             @if ($this->analysisState === 'done' && ! empty($session->error_analysis['catatan']))
                 <p class="text-xs text-ink-faint mt-3">{{ $session->error_analysis['catatan'] }}</p>
             @endif
+
+            {{-- Sessions analyzed before 'sumber' existed show no label. --}}
+            @if ($this->analysisState === 'done' && ($session->error_analysis['sumber'] ?? null) === 'langflow')
+                <p class="text-[10px] text-ink-faint mt-2">Dianalisis oleh IBM Langflow</p>
+            @elseif ($this->analysisState === 'done' && ($session->error_analysis['sumber'] ?? null) === 'gemini')
+                <p class="text-[10px] text-ink-faint mt-2">Dianalisis oleh Gemini (cadangan)</p>
+            @endif
         </div>
     @endif
 

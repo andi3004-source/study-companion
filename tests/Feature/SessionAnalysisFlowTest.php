@@ -328,6 +328,46 @@ class SessionAnalysisFlowTest extends TestCase
             ->assertDontSeeHtml('wire:poll');
     }
 
+    public function test_summary_names_the_analyzer_and_old_sessions_show_nothing(): void
+    {
+        $this->fakeAnalyzer();
+
+        foreach (['langflow' => 'Dianalisis oleh IBM Langflow', 'gemini' => 'Dianalisis oleh Gemini (cadangan)'] as $sumber => $label) {
+            $session = $this->mandarinSession();
+            $session->update(['ended_at' => now(), 'analyzed_at' => now(), 'error_analysis' => self::ANALYSIS + ['sumber' => $sumber]]);
+
+            Livewire::actingAs($session->user)->test(Chat::class, ['session' => $session])
+                ->assertSee('我没有钱')
+                ->assertSee($label);
+        }
+
+        // Analyzed before 'sumber' existed: no label, no error.
+        $old = $this->mandarinSession();
+        $old->update(['ended_at' => now(), 'analyzed_at' => now(), 'error_analysis' => self::ANALYSIS]);
+
+        Livewire::actingAs($old->user)->test(Chat::class, ['session' => $old])
+            ->assertSee('我没有钱')
+            ->assertDontSee('Dianalisis oleh');
+
+        // A "no mistakes" result is labelled too.
+        $clean = $this->mandarinSession();
+        $clean->update(['ended_at' => now(), 'analyzed_at' => now(), 'error_analysis' => ['items' => [], 'catatan' => null, 'sumber' => 'langflow']]);
+
+        Livewire::actingAs($clean->user)->test(Chat::class, ['session' => $clean])
+            ->assertSee('Tidak ada kesalahan yang terdeteksi')
+            ->assertSee('Dianalisis oleh IBM Langflow');
+    }
+
+    public function test_the_job_stores_sumber_from_the_analyzer(): void
+    {
+        $this->fakeAnalyzer(self::ANALYSIS + ['sumber' => 'gemini']);
+        $session = $this->mandarinSession();
+
+        AnalyzeSessionJob::dispatchSync($session->id);
+
+        $this->assertSame(self::ANALYSIS + ['sumber' => 'gemini'], $session->fresh()->error_analysis);
+    }
+
     public function test_an_ongoing_session_never_polls(): void
     {
         $this->fakeAnalyzer();

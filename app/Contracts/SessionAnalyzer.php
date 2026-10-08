@@ -16,7 +16,10 @@ interface SessionAnalyzer
      * when given, lets a provider keep its own conversation memory per
      * analysis (Langflow's session_id); providers without one ignore it.
      *
-     * @return array{items: array<int, array{kategori: string, contoh: string, koreksi: string, penjelasan: string}>, catatan: ?string, usage?: array{tokens_in: ?int, tokens_out: ?int}}
+     * 'sumber' names the analyzer that produced the result ('langflow' or
+     * 'gemini'), so a fallback result is labelled as such; it is stored.
+     *
+     * @return array{items: array<int, array{kategori: string, contoh: string, koreksi: string, penjelasan: string}>, catatan: ?string, sumber?: string, usage?: array{tokens_in: ?int, tokens_out: ?int}}
      */
     public function analyze(string $transcript, ?int $sessionId = null): array;
 

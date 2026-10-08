@@ -60,6 +60,19 @@ class ErrorAnalysisTest extends TestCase
         $this->assertCount(5, ErrorAnalysis::normalize(['items' => $items])['items']);
     }
 
+    public function test_sumber_is_kept_only_when_valid_and_never_added(): void
+    {
+        $this->assertSame('langflow', ErrorAnalysis::normalize(['items' => [], 'sumber' => 'langflow'])['sumber']);
+        $this->assertSame('gemini', ErrorAnalysis::normalize(['items' => [], 'sumber' => 'gemini'])['sumber']);
+        $this->assertArrayNotHasKey('sumber', ErrorAnalysis::normalize(['items' => [], 'sumber' => 'chatgpt']));
+        $this->assertSame(['items' => [], 'catatan' => null], ErrorAnalysis::normalize(['items' => []]));
+    }
+
+    public function test_the_model_cannot_set_sumber(): void
+    {
+        $this->assertArrayNotHasKey('sumber', ErrorAnalysis::parse('{"items":[],"catatan":null,"sumber":"gemini"}'));
+    }
+
     public function test_broken_json_throws(): void
     {
         $this->expectException(RuntimeException::class);

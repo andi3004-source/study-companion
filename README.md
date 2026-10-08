@@ -89,6 +89,11 @@ kategori teratas 7 hari terakhir tampil di halaman Progress.
   JSON rusak, analisis otomatis jatuh ke Gemini. Tanpa Langflow, langsung Gemini.
   Kalau keduanya tidak terkonfigurasi, analisis tidak dijalankan dan bagiannya
   tidak ditampilkan. Setiap analisis memakai satu panggilan AI.
+- **Sumber**: `error_analysis.sumber` berisi `langflow` atau `gemini`, yaitu
+  analyzer yang benar-benar menghasilkan jawaban (jadi hasil cadangan tercatat
+  sebagai `gemini`). Ringkasan sesi menampilkan "Dianalisis oleh IBM Langflow"
+  atau "Dianalisis oleh Gemini (cadangan)". Sesi lama tanpa kunci ini tidak
+  menampilkan label.
 - **Permintaan Langflow**: sama dengan contoh di panel *API access* Langflow,
   yaitu `POST {LANGFLOW_URL}/api/v1/run/{LANGFLOW_FLOW_ID}?stream=false` dengan
   header `x-api-key` dan body `output_type`, `input_type`, `input_value`,

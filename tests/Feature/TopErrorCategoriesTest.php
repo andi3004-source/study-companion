@@ -36,6 +36,20 @@ class TopErrorCategoriesTest extends TestCase
         ]);
     }
 
+    public function test_sumber_does_not_change_the_counts(): void
+    {
+        $user = $this->user();
+        $this->analyzed($user, [$this->item('nada'), $this->item('bu_atau_mei')]);
+        $before = app(ProgressStats::class)->topErrorCategories($user);
+
+        ConversationSession::where('user_id', $user->id)->first()
+            ->update(['error_analysis' => ['items' => [$this->item('nada'), $this->item('bu_atau_mei')], 'catatan' => null, 'sumber' => 'langflow']]);
+        $this->analyzed($user, null); // a failed analysis still counts for nothing
+
+        $this->assertSame($before, app(ProgressStats::class)->topErrorCategories($user));
+        $this->assertSame([1, 1], array_column($before, 'jumlah'));
+    }
+
     public function test_orders_by_count_and_limits_to_three_with_labels_and_latest_example(): void
     {
         $user = $this->user();

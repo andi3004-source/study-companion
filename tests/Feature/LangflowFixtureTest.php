@@ -101,7 +101,8 @@ class LangflowFixtureTest extends TestCase
 
         $result = app(LangflowSessionAnalyzer::class)->analyze('User: 我是高兴。');
 
-        $this->assertSame(['items', 'catatan'], array_keys($result));
+        $this->assertSame(['items', 'catatan', 'sumber'], array_keys($result));
+        $this->assertSame('langflow', $result['sumber']);
         $this->assertIsList($result['items']);
     }
 }

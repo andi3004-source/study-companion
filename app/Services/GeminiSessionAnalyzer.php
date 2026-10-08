@@ -34,6 +34,7 @@ class GeminiSessionAnalyzer implements SessionAnalyzer
         );
 
         return ErrorAnalysis::parse($result['text']) + [
+            'sumber' => 'gemini',
             'usage' => ['tokens_in' => $result['tokens_in'] ?? null, 'tokens_out' => $result['tokens_out'] ?? null],
         ];
     }
