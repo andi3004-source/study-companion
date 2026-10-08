@@ -89,6 +89,17 @@ kategori teratas 7 hari terakhir tampil di halaman Progress.
   JSON rusak, analisis otomatis jatuh ke Gemini. Tanpa Langflow, langsung Gemini.
   Kalau keduanya tidak terkonfigurasi, analisis tidak dijalankan dan bagiannya
   tidak ditampilkan. Setiap analisis memakai satu panggilan AI.
+- **Permintaan Langflow**: sama dengan contoh di panel *API access* Langflow,
+  yaitu `POST {LANGFLOW_URL}/api/v1/run/{LANGFLOW_FLOW_ID}?stream=false` dengan
+  header `x-api-key` dan body `output_type`, `input_type`, `input_value`,
+  `session_id`. `LANGFLOW_URL` cukup URL dasar; garis miring di akhir atau
+  akhiran `/api` dibuang otomatis. Tiap analisis memakai `session_id` baru
+  (`analisis-{id sesi}-{waktu}-{acak}`) supaya riwayat chat Langflow tidak
+  tercampur antarsesi. `LANGFLOW_API_KEY` wajib untuk Langflow yang memakai
+  autentikasi; header `x-api-key` hanya dikirim bila key terisi.
+- **Timeout**: `LANGFLOW_TIMEOUT` (detik, bawaan 120). Satu analisis transkrip
+  dengan banyak kesalahan pernah memakan sekitar 74 detik. Job punya batas
+  waktu 180 detik: cukup untuk Langflow lalu cadangan Gemini.
 - **Gagal**: sesi dengan analisis gagal bisa dijalankan ulang dengan
   `php artisan analysis:retry-failed` (pakai `--dry-run` untuk melihat daftarnya dulu).
 
@@ -103,8 +114,15 @@ Analisis berjalan sebagai job antrean. Ada dua cara:
    ```
 
    Tanpa worker, job hanya menumpuk di tabel `jobs`. Ringkasan sesi berhenti
-   menunggu setelah 60 detik, dan hasilnya baru muncul (di Progress) setelah
-   worker dijalankan. `composer run dev` sudah menjalankan worker (`queue:listen`).
+   menunggu setelah 150 detik dan menampilkan tombol **Muat ulang**; hasilnya
+   juga muncul di Progress setelah worker selesai memprosesnya.
+   `composer run dev` sudah menjalankan worker (`queue:listen`).
+
+   **Anjuran: `DB_QUEUE_RETRY_AFTER=200`.** Nilai bawaannya 90 detik, padahal
+   job analisis boleh berjalan sampai 180 detik. Antrean menganggap job yang
+   belum selesai setelah `retry_after` detik sebagai macet dan menyerahkannya
+   lagi ke worker, sehingga analisis yang lambat bisa jalan dua kali (dua
+   panggilan AI). `retry_after` harus selalu lebih besar dari timeout job.
 
 2. **`QUEUE_CONNECTION=sync`:** job dijalankan setelah respons dikirim
    (`afterResponse`), tanpa worker. Catatan: `php artisan serve` hanya

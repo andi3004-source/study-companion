@@ -4,20 +4,27 @@ namespace App\Services;
 
 use App\Contracts\SessionAnalyzer;
 use App\Support\ErrorAnalysis;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use RuntimeException;
 
 /**
- * Error analysis through an IBM Langflow flow (POST /api/v1/run/{flow_id}),
- * whose prompt lives in Langflow itself. Langflow's run response nests the
- * chat output several levels deep and its exact shape depends on the flow's
- * components and version, so extractText() tries the known locations and
- * then searches. Any failure throws; FallbackSessionAnalyzer then falls back
- * to Gemini.
+ * Error analysis through an IBM Langflow flow, called the way Langflow's
+ * "API access" panel shows: POST {url}/api/v1/run/{flow_id}?stream=false
+ * with an x-api-key header and a JSON body of output_type, input_type,
+ * input_value and session_id. The prompt lives in Langflow itself.
+ *
+ * Langflow's run response nests the chat output several levels deep and its
+ * exact shape depends on the flow's components and version, so extractText()
+ * tries the known locations and then searches. Any failure throws;
+ * FallbackSessionAnalyzer then falls back to Gemini.
  */
 class LangflowSessionAnalyzer implements SessionAnalyzer
 {
+    public const DEFAULT_TIMEOUT = 120;
+
     private string $url;
 
     private ?string $flowId;
@@ -28,11 +35,22 @@ class LangflowSessionAnalyzer implements SessionAnalyzer
 
     public function __construct(?string $url = null, ?string $flowId = null, ?string $apiKey = null, ?int $timeout = null)
     {
-        $this->url = rtrim((string) ($url ?? config('services.langflow.url')), '/');
+        $this->url = self::normalizeBaseUrl((string) ($url ?? config('services.langflow.url')));
         $this->flowId = $flowId ?? config('services.langflow.flow_id');
         $this->apiKey = $apiKey ?? config('services.langflow.api_key');
-        $timeout ??= (int) config('services.langflow.timeout', 60);
-        $this->timeout = $timeout > 0 ? $timeout : 60; // 0 would mean "no timeout" to Guzzle
+        $timeout ??= (int) config('services.langflow.timeout', self::DEFAULT_TIMEOUT);
+        $this->timeout = $timeout > 0 ? $timeout : self::DEFAULT_TIMEOUT; // 0 would mean "no timeout" to Guzzle
+    }
+
+    /**
+     * LANGFLOW_URL is the server's base URL, but a copied "…/api" or a
+     * trailing slash would otherwise double up in the run path.
+     */
+    public static function normalizeBaseUrl(string $url): string
+    {
+        $url = rtrim(trim($url), '/');
+
+        return rtrim((string) preg_replace('#/api$#i', '', $url), '/');
     }
 
     public function isConfigured(): bool
@@ -40,21 +58,32 @@ class LangflowSessionAnalyzer implements SessionAnalyzer
         return filled($this->url) && filled($this->flowId);
     }
 
-    public function analyze(string $transcript): array
+    public function endpoint(): string
+    {
+        return "{$this->url}/api/v1/run/{$this->flowId}?stream=false";
+    }
+
+    public function timeout(): int
+    {
+        return $this->timeout;
+    }
+
+    /**
+     * A fresh Langflow session_id per analysis, so Langflow's chat memory
+     * never mixes one session's transcript (or a retry's) into another.
+     */
+    public static function newSessionId(?int $sessionId = null): string
+    {
+        return 'analisis-'.($sessionId ?? 'manual').'-'.now()->format('YmdHisv').'-'.Str::lower(Str::random(4));
+    }
+
+    public function analyze(string $transcript, ?int $sessionId = null): array
     {
         if (! $this->isConfigured()) {
             throw new RuntimeException('LANGFLOW_URL / LANGFLOW_FLOW_ID are not set; cannot call Langflow.');
         }
 
-        $response = Http::timeout($this->timeout)
-            ->acceptJson()
-            ->withHeaders(filled($this->apiKey) ? ['x-api-key' => $this->apiKey] : [])
-            ->post("{$this->url}/api/v1/run/{$this->flowId}", [
-                'input_value' => $transcript,
-                'input_type' => 'chat',
-                'output_type' => 'chat',
-            ])
-            ->throw();
+        $response = $this->send($transcript, self::newSessionId($sessionId))->throw();
 
         $text = self::extractText((array) $response->json());
 
@@ -65,6 +94,20 @@ class LangflowSessionAnalyzer implements SessionAnalyzer
         }
 
         return ErrorAnalysis::parse($text);
+    }
+
+    /** One run request, exactly as Langflow's API panel shows it; the response is returned as-is (not thrown). */
+    public function send(string $input, string $langflowSessionId): Response
+    {
+        return Http::timeout($this->timeout)
+            ->asJson()
+            ->withHeaders(filled($this->apiKey) ? ['x-api-key' => $this->apiKey] : [])
+            ->post($this->endpoint(), [
+                'output_type' => 'chat',
+                'input_type' => 'chat',
+                'input_value' => $input,
+                'session_id' => $langflowSessionId,
+            ]);
     }
 
     public static function extractText(array $data): ?string

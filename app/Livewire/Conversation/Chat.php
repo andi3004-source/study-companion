@@ -13,8 +13,11 @@ use RuntimeException;
 #[Layout('layouts.study')]
 class Chat extends Component
 {
-    /** How long the summary keeps polling for the queued error analysis before giving up. */
-    public const ANALYSIS_POLL_SECONDS = 60;
+    /**
+     * How long the summary keeps polling for the queued error analysis before
+     * giving up. Langflow alone has taken ~74s on a transcript with many mistakes.
+     */
+    public const ANALYSIS_POLL_SECONDS = 150;
 
     public ConversationSession $session;
 
@@ -26,7 +29,7 @@ class Chat extends Component
 
     public bool $autoPlay = true;
 
-    /** Unix time the error analysis was queued by finishSession(); drives the 60s polling window. */
+    /** Unix time the error analysis was queued by finishSession(); drives the polling window. */
     public ?int $analysisQueuedAt = null;
 
     public function mount(ConversationSession $session): void
@@ -126,8 +129,8 @@ class Chat extends Component
     /**
      * "Kesalahan terbanyakmu" state for an ended Mandarin session: 'done' or
      * 'failed' once AnalyzeSessionJob has run (analyzed_at set; NULL
-     * error_analysis = failed), 'pending' while it's queued and the 60s
-     * polling window is open, 'timeout' after that, null = show nothing
+     * error_analysis = failed), 'pending' while it's queued and the
+     * ANALYSIS_POLL_SECONDS polling window is open, 'timeout' after that, null = show nothing
      * (not Mandarin, not ended, or nothing was queued).
      */
     #[Computed]
@@ -148,7 +151,7 @@ class Chat extends Component
         return now()->timestamp - $this->analysisQueuedAt >= self::ANALYSIS_POLL_SECONDS ? 'timeout' : 'pending';
     }
 
-    /** wire:poll target while the analysis is pending — just re-reads the session. */
+    /** wire:poll target while the analysis is pending, and the "Muat ulang" button after the window — just re-reads the session. */
     public function pollAnalysis(): void
     {
         $this->session->refresh();

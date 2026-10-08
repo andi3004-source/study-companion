@@ -24,7 +24,7 @@ class GeminiSessionAnalyzer implements SessionAnalyzer
         return $this->client->isConfigured();
     }
 
-    public function analyze(string $transcript): array
+    public function analyze(string $transcript, ?int $sessionId = null): array
     {
         $result = $this->client->sendMessage(
             model: config('services.active_ai_model'),

@@ -22,14 +22,14 @@ class FallbackSessionAnalyzer implements SessionAnalyzer
         return $this->primary->isConfigured() || $this->fallback->isConfigured();
     }
 
-    public function analyze(string $transcript): array
+    public function analyze(string $transcript, ?int $sessionId = null): array
     {
         try {
-            return $this->primary->analyze($transcript);
+            return $this->primary->analyze($transcript, $sessionId);
         } catch (Throwable $e) {
             report($e);
 
-            return $this->fallback->analyze($transcript);
+            return $this->fallback->analyze($transcript, $sessionId);
         }
     }
 }

@@ -59,7 +59,7 @@ return [
         'flow_id' => env('LANGFLOW_FLOW_ID'),
         'api_key' => env('LANGFLOW_API_KEY'),
         // `?:` (not an env() default): an empty LANGFLOW_TIMEOUT= would cast to 0, which Guzzle reads as "no timeout".
-        'timeout' => (int) (env('LANGFLOW_TIMEOUT') ?: 60),
+        'timeout' => (int) (env('LANGFLOW_TIMEOUT') ?: 120),
     ],
 
     // Pronunciation checker: 'ml' calls pronunciation-service (OpenPronounce +

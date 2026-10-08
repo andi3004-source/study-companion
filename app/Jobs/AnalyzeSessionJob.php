@@ -33,8 +33,9 @@ class AnalyzeSessionJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    // Langflow alone may take up to services.langflow.timeout (60s by
-    // default) before the Gemini fallback even starts.
+    // Langflow alone may take up to services.langflow.timeout (120s by
+    // default) before the Gemini fallback (~30s HTTP timeout) even starts.
+    // The queue's retry_after must stay above this (DB_QUEUE_RETRY_AFTER=200).
     public int $timeout = 180;
 
     // Failures are caught and recorded, not retried — see `analysis:retry-failed`.
@@ -55,7 +56,7 @@ class AnalyzeSessionJob implements ShouldQueue
         }
 
         try {
-            $result = $analyzer->analyze(SessionTranscript::build($session));
+            $result = $analyzer->analyze(SessionTranscript::build($session), $session->id);
         } catch (Throwable $e) {
             report($e);
             $session->update(['error_analysis' => null, 'analyzed_at' => now()]);

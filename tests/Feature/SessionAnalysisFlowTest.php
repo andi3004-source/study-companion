@@ -35,7 +35,7 @@ class SessionAnalysisFlowTest extends TestCase
     {
         parent::setUp();
 
-        config(['services.langflow' => ['url' => null, 'flow_id' => null, 'api_key' => null, 'timeout' => 60]]);
+        config(['services.langflow' => ['url' => null, 'flow_id' => null, 'api_key' => null, 'timeout' => 120]]);
     }
 
     /** A fake SessionAnalyzer: returns $result, or throws when $result is null. */
@@ -52,7 +52,7 @@ class SessionAnalysisFlowTest extends TestCase
                 return $this->configured;
             }
 
-            public function analyze(string $transcript): array
+            public function analyze(string $transcript, ?int $sessionId = null): array
             {
                 $this->transcripts[] = $transcript;
 
@@ -273,7 +273,7 @@ class SessionAnalysisFlowTest extends TestCase
             ->assertSee('有 diingkari dengan 没.');
     }
 
-    public function test_polling_stops_after_sixty_seconds(): void
+    public function test_polling_stops_after_150_seconds_and_offers_a_reload_button(): void
     {
         Bus::fake();
         $this->fakeAiClient();
@@ -283,11 +283,31 @@ class SessionAnalysisFlowTest extends TestCase
         $component = Livewire::actingAs($session->user)->test(Chat::class, ['session' => $session])
             ->call('finishSession');
 
-        $this->travel(61)->seconds();
+        $this->travel(140)->seconds(); // a slow Langflow analysis (~74s seen) is still waited for
+
+        $component->call('pollAnalysis')
+            ->assertSee('sedang diproses')
+            ->assertSeeHtml('wire:poll');
+
+        $this->travel(11)->seconds();
 
         $component->call('pollAnalysis')
             ->assertSee('Analisis belum selesai')
+            ->assertSee('Muat ulang')
+            ->assertSeeHtml('wire:click="pollAnalysis"')
             ->assertDontSeeHtml('wire:poll');
+
+        // The job finishes later; "Muat ulang" picks the result up.
+        $session->update(['analyzed_at' => now(), 'error_analysis' => self::ANALYSIS]);
+
+        $component->call('pollAnalysis')
+            ->assertSee('我没有钱')
+            ->assertDontSee('Muat ulang');
+    }
+
+    public function test_the_job_timeout_leaves_room_for_langflow_and_the_gemini_fallback(): void
+    {
+        $this->assertGreaterThanOrEqual(180, (new AnalyzeSessionJob(1))->timeout);
     }
 
     public function test_summary_shows_no_mistakes_and_failure_clearly(): void

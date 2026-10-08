@@ -31,7 +31,7 @@
     @endif
 
     @if ($this->analysisState)
-        {{-- Polls only while an ended session's analysis is queued and unfinished (analyzed_at NULL), for at most 60s. --}}
+        {{-- Polls only while an ended session's analysis is queued and unfinished (analyzed_at NULL), for at most Chat::ANALYSIS_POLL_SECONDS. --}}
         <div class="bg-card rounded-2xl p-5 mb-4" @if ($this->analysisState === 'pending') wire:poll.3s="pollAnalysis" @endif>
             <p class="font-display font-600 text-ink mb-2">Analisis kesalahan</p>
 
@@ -39,6 +39,7 @@
                 <p class="text-sm text-ink-soft">Analisis kesalahan sedang diproses…</p>
             @elseif ($this->analysisState === 'timeout')
                 <p class="text-sm text-ink-soft">Analisis belum selesai. Hasilnya akan muncul di halaman Progress setelah selesai diproses.</p>
+                <button type="button" wire:click="pollAnalysis" class="mt-2 text-xs font-700 text-mandarin underline">Muat ulang</button>
             @elseif ($this->analysisState === 'failed')
                 <p class="text-sm text-ink-soft">Analisis kesalahan gagal untuk sesi ini. Coba lagi nanti.</p>
             @elseif (empty($session->error_analysis['items']))
