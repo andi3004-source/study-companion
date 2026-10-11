@@ -43,6 +43,7 @@
                         ['route' => 'game.error-hunter', 'label' => 'Game', 'icon' => '🎯'],
                         ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => '💬'],
                         ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => '🎤'],
+                        ['route' => 'kata-bicara', 'label' => 'Kata bicara', 'icon' => '🗣️'],
                         ['route' => 'progress', 'label' => 'Progress', 'icon' => '📈'],
                         ['route' => 'bantuan', 'label' => 'Bantuan', 'icon' => '❓'],
                     ];

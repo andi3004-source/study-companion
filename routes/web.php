@@ -8,6 +8,7 @@ use App\Livewire\Conversation\Picker as ConversationPicker;
 use App\Livewire\Dashboard;
 use App\Livewire\Games\ErrorHunter;
 use App\Livewire\Kamus\Search;
+use App\Livewire\KataBicara;
 use App\Livewire\LatihanIsian;
 use App\Livewire\Onboarding;
 use App\Livewire\ProgressOverview;
@@ -55,6 +56,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/progress', ProgressOverview::class)->name('progress');
 
         Route::get('/pronunciation-check', PronunciationCheck::class)->name('pronunciation-check');
+
+        Route::get('/kata-bicara', KataBicara::class)->name('kata-bicara');
 
         Route::get('/bantuan', Bantuan::class)->name('bantuan');
     });

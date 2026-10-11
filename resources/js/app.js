@@ -449,3 +449,55 @@ window.hanziCanvas = function (character) {
         },
     };
 };
+
+/**
+ * Alpine component: "Ucapkan kata" on the Kata bicara page. Listens once in
+ * id-ID (Web Speech API, Chrome/Edge), then shows and announces
+ * "Saya dengar: <kata>. Benar?" — the search only runs when the user presses
+ * Ya, never automatically on what was heard.
+ */
+window.wordListener = function () {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    return {
+        supported: !!SpeechRecognition,
+        state: 'idle', // idle | listening | confirm
+        heard: '',
+        message: '',
+        recognition: null,
+
+        start() {
+            if (!this.supported || this.state === 'listening') return;
+            this.message = '';
+            this.heard = '';
+            this.recognition = new SpeechRecognition();
+            this.recognition.lang = 'id-ID';
+            this.recognition.interimResults = false;
+            this.recognition.continuous = false;
+
+            this.recognition.onresult = (event) => {
+                this.heard = event.results[0][0].transcript.trim();
+                this.state = 'confirm';
+                this.$nextTick(() => this.$refs.ya.focus());
+            };
+            this.recognition.onerror = (event) => {
+                this.state = 'idle';
+                this.message = event.error === 'not-allowed'
+                    ? 'Izin mikrofon ditolak. Aktifkan izin mikrofon di pengaturan browser.'
+                    : 'Suara tidak terdengar. Coba lagi.';
+            };
+            this.recognition.onend = () => {
+                if (this.state === 'listening') this.state = 'idle';
+            };
+
+            this.state = 'listening';
+            this.recognition.start();
+        },
+
+        confirm() {
+            this.state = 'idle';
+            this.$wire.set('query', this.heard, false);
+            this.$wire.cari();
+        },
+    };
+};
