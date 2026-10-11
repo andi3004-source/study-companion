@@ -25,6 +25,32 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
+    {{-- Local demo account (config/demo.php). Rendered only when enabled, outside production, and a password is set. --}}
+    @if (config('demo.enabled') && ! app()->environment('production') && filled(config('demo.password')))
+        <section aria-labelledby="akun-demo-judul" class="mb-6 rounded-xl border-2 border-navy bg-card p-4 text-ink"
+                 x-data="{ terisi: false }">
+            <h2 id="akun-demo-judul" class="font-700 text-sm">Akun demo (hanya lingkungan lokal)</h2>
+            <dl class="mt-2 text-sm grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
+                <dt class="font-700">Email</dt>
+                <dd class="break-all">{{ config('demo.email') }}</dd>
+                <dt class="font-700">Kata sandi</dt>
+                <dd class="break-all">{{ config('demo.password') }}</dd>
+            </dl>
+            {{-- Only fills the fields (dispatching input so wire:model picks it up); never submits. --}}
+            <button type="button"
+                    x-on:click="
+                        for (const [id, value] of [['email', {{ \Illuminate\Support\Js::from(config('demo.email')) }}], ['password', {{ \Illuminate\Support\Js::from(config('demo.password')) }}]]) {
+                            const input = document.getElementById(id);
+                            input.value = value;
+                            input.dispatchEvent(new Event('input', { bubbles: true }));
+                        }
+                        terisi = true;
+                    "
+                    class="mt-3 px-4 rounded-lg bg-navy text-white text-sm font-700 hover:bg-navy-soft">Isi otomatis</button>
+            <p role="status" class="mt-2 text-sm"><span x-show="terisi" x-cloak>Email dan kata sandi demo sudah diisi. Tekan Log in untuk masuk.</span></p>
+        </section>
+    @endif
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

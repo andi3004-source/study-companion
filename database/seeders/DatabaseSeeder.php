@@ -27,5 +27,9 @@ class DatabaseSeeder extends Seeder
             'track' => 'both',
             'onboarded' => true,
         ]);
+
+        if (config('demo.enabled')) {
+            $this->call(DemoUserSeeder::class);
+        }
     }
 }
