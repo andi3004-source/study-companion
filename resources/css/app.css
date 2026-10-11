@@ -8,6 +8,27 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+[x-cloak] {
+    display: none !important;
+}
+
+/* Skip links: off-screen until focused, then shown top-left above everything. */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0.5rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    background: #1b2a44;
+    color: #fff;
+    font-weight: 700;
+}
+
+.skip-link:focus {
+    left: 0.5rem;
+}
+
 .font-display {
     font-family: 'Fredoka', sans-serif;
 }

@@ -9,6 +9,10 @@
     @livewireStyles
 </head>
 <body class="bg-cream text-ink font-sans antialiased min-h-screen">
+    {{-- Skip links: first focusable elements on every page, visible only on focus. Pages add more via @push('skip-links'). --}}
+    <a href="#konten" class="skip-link">Lewati ke konten</a>
+    @stack('skip-links')
+
     <div class="sidebar:flex min-h-screen">
         {{-- Desktop sidebar --}}
         <aside class="hidden sidebar:flex sidebar:flex-col w-[252px] shrink-0 bg-navy text-white px-5 py-6">
@@ -17,7 +21,7 @@
                 <span class="font-display font-600 text-lg">Study Companion</span>
             </div>
 
-            <nav class="flex flex-col gap-1">
+            <nav class="flex flex-col gap-1" aria-label="Navigasi utama">
                 @php
                     $navItems = [
                         ['route' => 'dashboard', 'label' => 'Hari Ini', 'icon' => '🏠'],
@@ -33,9 +37,10 @@
                 @endphp
                 @foreach ($navItems as $item)
                     <a href="{{ route($item['route']) }}"
+                       @if (request()->routeIs($item['route'].'*')) aria-current="page" @endif
                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl font-600 text-sm transition
                               {{ request()->routeIs($item['route'].'*') ? 'bg-navy-soft text-white' : 'text-white/70 hover:bg-navy-soft/60 hover:text-white' }}">
-                        <span>{{ $item['icon'] }}</span>
+                        <span aria-hidden="true">{{ $item['icon'] }}</span>
                         <span>{{ $item['label'] }}</span>
                     </a>
                 @endforeach
@@ -55,14 +60,19 @@
 
         {{-- Main content --}}
         <div class="flex-1 min-w-0">
-            <header class="sidebar:hidden flex items-center justify-between px-4 py-3 bg-navy text-white sticky top-0 z-30">
-                <span class="font-display font-600">Study Companion</span>
-                <span class="text-xs text-white/70">Hari {{ auth()->user()->dayNumber() ?? '-' }}</span>
+            {{-- Always rendered (the brand only shows on mobile, where the sidebar is hidden) so every page has a header landmark. --}}
+            <header class="flex items-center justify-between gap-3 px-4 py-3 bg-navy text-white sticky top-0 z-30 sidebar:static sidebar:bg-transparent sidebar:text-ink sidebar:px-8">
+                <span class="font-display font-600 sidebar:hidden">Study Companion</span>
+                <span class="text-xs text-white/80 sidebar:text-ink-soft">Hari {{ auth()->user()->dayNumber() ?? '-' }}</span>
             </header>
 
-            <main class="pb-24 sidebar:pb-8">
+            <main id="konten" tabindex="-1" class="pb-8 focus:outline-none">
                 {{ $slot }}
             </main>
+
+            <footer class="px-4 sidebar:px-8 pb-28 sidebar:pb-8 text-sm text-ink-soft">
+                <p>Belajar bahasa dengan keyboard dan suara. Dirancang agar mudah diakses.</p>
+            </footer>
         </div>
     </div>
 
@@ -85,12 +95,12 @@
             ->values();
         $mobileMoreActive = $mobileMoreItems->contains(fn ($item) => request()->routeIs($item['route'].'*'));
     @endphp
-    <nav class="sidebar:hidden fixed bottom-0 inset-x-0 bg-card border-t border-line-card flex justify-around py-2 z-40" x-data="{ moreOpen: false }">
+    <nav aria-label="Navigasi bawah" class="sidebar:hidden fixed bottom-0 inset-x-0 bg-card border-t border-line-card flex justify-around py-2 z-40" x-data="{ moreOpen: false }">
         @foreach ($mobileMainItems as $item)
             <a href="{{ route($item['route']) }}"
                class="flex flex-col items-center gap-0.5 px-2 py-1 text-xs font-600
                       {{ request()->routeIs($item['route'].'*') ? 'text-mandarin' : 'text-ink-faint' }}">
-                <span class="text-lg leading-none">{{ $item['icon'] }}</span>
+                <span class="text-lg leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
                 <span>{{ $item['label'] }}</span>
             </a>
         @endforeach
@@ -98,7 +108,7 @@
         <button type="button" x-on:click="moreOpen = true"
                 class="flex flex-col items-center gap-0.5 px-2 py-1 text-xs font-600
                        {{ $mobileMoreActive ? 'text-mandarin' : 'text-ink-faint' }}">
-            <span class="text-lg leading-none">⋯</span>
+            <span class="text-lg leading-none" aria-hidden="true">⋯</span>
             <span>Lainnya</span>
         </button>
 
@@ -106,15 +116,15 @@
             <div class="fixed inset-0 bg-black/40 z-50 flex items-end" x-on:click.self="moreOpen = false">
                 <div class="bg-card rounded-t-3xl w-full p-4 pb-6">
                     <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-display font-600 text-base text-ink">Lainnya</h3>
-                        <button type="button" x-on:click="moreOpen = false" class="text-ink-faint text-xl leading-none">✕</button>
+                        <h2 class="font-display font-600 text-base text-ink">Lainnya</h2>
+                        <button type="button" x-on:click="moreOpen = false" aria-label="Tutup" class="text-ink-faint text-xl leading-none">✕</button>
                     </div>
                     <div class="grid grid-cols-4 gap-2">
                         @foreach ($mobileMoreItems as $item)
                             <a href="{{ route($item['route']) }}"
                                class="flex flex-col items-center gap-1 px-2 py-3 rounded-xl text-xs font-600
                                       {{ request()->routeIs($item['route'].'*') ? 'bg-mandarin-soft text-mandarin' : 'text-ink-soft hover:bg-card-alt' }}">
-                                <span class="text-xl leading-none">{{ $item['icon'] }}</span>
+                                <span class="text-xl leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
                                 <span>{{ $item['label'] }}</span>
                             </a>
                         @endforeach

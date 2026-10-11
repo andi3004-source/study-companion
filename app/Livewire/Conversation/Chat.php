@@ -25,6 +25,9 @@ class Chat extends Component
 
     public ?string $errorMessage = null;
 
+    /** Short text for the chat's role="status" region (screen-reader announcement only). */
+    public ?string $statusMessage = null;
+
     public ?array $summary = null;
 
     public bool $autoPlay = true;
@@ -75,6 +78,7 @@ class Chat extends Component
     public function sendMessage(?string $voiceText = null): void
     {
         $this->errorMessage = null;
+        $this->statusMessage = null;
 
         if ($this->session->ended_at) {
             return;
@@ -112,6 +116,7 @@ class Chat extends Component
         }
 
         $this->newMessage = '';
+        $this->statusMessage = 'Terkirim';
         $this->session->refresh();
         unset($this->turns, $this->remainingToday);
         $this->dispatch('message-sent');
