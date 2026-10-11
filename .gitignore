@@ -30,3 +30,11 @@ pronunciation-service/.venv
 
 # Claude Code (local agent settings/state)
 .claude/
+
+# Basis data lokal, hasil tes, dan hasil benchmark
+*.sqlite
+*.sqlite-journal
+hasil-tes.txt
+hasil-benchmark*
+benchmark-*.txt
+benchmark-*.json
