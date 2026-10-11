@@ -1,0 +1,8139 @@
+[
+  {
+    "hanzi": "的",
+    "pinyin": "de",
+    "indonesian": "partikel penanda milik atau keterangan (…nya, milik)",
+    "hsk_level": 1,
+    "pos": [
+      "u",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "de",
+    "meaning_en_asli": "of; ~'s (possessive particle); (used after an attribute); (used to form a nominal expression); (used at the end of a declarative sentence for emphasis); also pr"
+  },
+  {
+    "hanzi": "了",
+    "pinyin": "le",
+    "indonesian": "partikel penanda perbuatan selesai atau perubahan keadaan",
+    "hsk_level": 1,
+    "pos": [
+      "y",
+      "u",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "le",
+    "meaning_en_asli": "(completed action marker); (modal particle indicating change of state, situation now); (modal particle intensifying preceding clause)"
+  },
+  {
+    "hanzi": "我",
+    "pinyin": "wǒ",
+    "indonesian": "saya",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wǒ",
+    "meaning_en_asli": "I; me; my"
+  },
+  {
+    "hanzi": "是",
+    "pinyin": "shì",
+    "indonesian": "adalah",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shì",
+    "meaning_en_asli": "to be (followed by substantives only); correct; right; true; (respectful acknowledgement of a command) very well; (adverb for emphatic assertion)"
+  },
+  {
+    "hanzi": "你",
+    "pinyin": "nǐ",
+    "indonesian": "kamu",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nǐ",
+    "meaning_en_asli": "you (informal, as opposed to courteous 您)"
+  },
+  {
+    "hanzi": "在",
+    "pinyin": "zài",
+    "indonesian": "di; sedang",
+    "hsk_level": 1,
+    "pos": [
+      "p",
+      "v",
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zài",
+    "meaning_en_asli": "to exist; to be alive; (of sb or sth) to be (located) at; (used before a verb to indicate an action in progress)"
+  },
+  {
+    "hanzi": "不",
+    "pinyin": "bù",
+    "indonesian": "tidak",
+    "hsk_level": 1,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bù",
+    "meaning_en_asli": "no; not so; (bound form) not; un-"
+  },
+  {
+    "hanzi": "有",
+    "pinyin": "yǒu",
+    "indonesian": "punya; ada",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǒu",
+    "meaning_en_asli": "to have; there is; (bound form) having; with; -ful; -ed; -al (as in 意 intentional)"
+  },
+  {
+    "hanzi": "他",
+    "pinyin": "tā",
+    "indonesian": "dia (laki-laki)",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tā",
+    "meaning_en_asli": "he; him (used for either sex when the sex is unknown or unimportant); (used before sb's name for emphasis); (used as a meaningless mock object); (literary) othe"
+  },
+  {
+    "hanzi": "这",
+    "pinyin": "zhè",
+    "indonesian": "ini",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhè",
+    "meaning_en_asli": "(pronoun) this; these; (bound form) this; the (followed by a noun); (bound form) this; these (followed by a classifier) (in this sense, commonly pr. [zhèi], esp"
+  },
+  {
+    "hanzi": "个",
+    "pinyin": "gè",
+    "indonesian": "kata penggolong umum",
+    "hsk_level": 1,
+    "pos": [
+      "q",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "gě",
+    "meaning_en_asli": "used in 自个儿"
+  },
+  {
+    "hanzi": "和",
+    "pinyin": "hé",
+    "indonesian": "dan; dengan",
+    "hsk_level": 1,
+    "pos": [
+      "cc",
+      "p",
+      "v",
+      "qv",
+      "g",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "hé",
+    "meaning_en_asli": "old variant of 和"
+  },
+  {
+    "hanzi": "人",
+    "pinyin": "rén",
+    "indonesian": "orang",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "rén",
+    "meaning_en_asli": "person; people"
+  },
+  {
+    "hanzi": "我们",
+    "pinyin": "wǒmen",
+    "indonesian": "kami; kita",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wǒ men",
+    "meaning_en_asli": "we; us; ourselves; our"
+  },
+  {
+    "hanzi": "好",
+    "pinyin": "hǎo",
+    "indonesian": "baik; bagus",
+    "hsk_level": 1,
+    "pos": [
+      "a",
+      "d",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hǎo",
+    "meaning_en_asli": "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indic"
+  },
+  {
+    "hanzi": "一",
+    "pinyin": "yī",
+    "indonesian": "satu",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "d",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī",
+    "meaning_en_asli": "one; single; a (article); as soon as; entire; whole; all; throughout; \"one\" radical in Chinese characters (Kangxi radical 1); also pr. [yāo] for greater clarity"
+  },
+  {
+    "hanzi": "会",
+    "pinyin": "huì",
+    "indonesian": "bisa (karena dipelajari); akan",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huì",
+    "meaning_en_asli": "can; to have the skill; to know how to; to be likely to; to be sure to; to meet; to get together; meeting; gathering; (suffix) union; group; association; (bound"
+  },
+  {
+    "hanzi": "都",
+    "pinyin": "dōu",
+    "indonesian": "semua",
+    "hsk_level": 1,
+    "pos": [
+      "d",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Dū",
+    "meaning_en_asli": "surname Du"
+  },
+  {
+    "hanzi": "上",
+    "pinyin": "shàng",
+    "indonesian": "atas; naik",
+    "hsk_level": 1,
+    "pos": [
+      "f",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "shǎng",
+    "meaning_en_asli": "used in 上声"
+  },
+  {
+    "hanzi": "来",
+    "pinyin": "lái",
+    "indonesian": "datang",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "f",
+      "m",
+      "u",
+      "y"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lái",
+    "meaning_en_asli": "to come; (used as a substitute for a more specific verb); hither (directional complement for motion toward the speaker, as in 回来); ever since (as in 自古以来); for "
+  },
+  {
+    "hanzi": "很",
+    "pinyin": "hěn",
+    "indonesian": "sangat (penguat kata sifat)",
+    "hsk_level": 1,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hěn",
+    "meaning_en_asli": "(adverb of degree); quite; very; awfully"
+  },
+  {
+    "hanzi": "去",
+    "pinyin": "qù",
+    "indonesian": "pergi",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qù",
+    "meaning_en_asli": "to go; to go to (a place); (of a time etc) last; just passed; to send; to remove; to get rid of; to reduce; to be apart from in space or time; to die (euphemism"
+  },
+  {
+    "hanzi": "她",
+    "pinyin": "tā",
+    "indonesian": "dia (perempuan)",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tā",
+    "meaning_en_asli": "she"
+  },
+  {
+    "hanzi": "想",
+    "pinyin": "xiǎng",
+    "indonesian": "ingin; berpikir; merindukan",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiǎng",
+    "meaning_en_asli": "to think (about); to think of; to devise; to think (that); to believe (that); to desire; to want (to); to miss (feel wistful about the absence of)"
+  },
+  {
+    "hanzi": "能",
+    "pinyin": "néng",
+    "indonesian": "dapat; mampu",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Néng",
+    "meaning_en_asli": "surname Neng"
+  },
+  {
+    "hanzi": "那",
+    "pinyin": "nà",
+    "indonesian": "itu",
+    "hsk_level": 1,
+    "pos": [
+      "r",
+      "c"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Nā",
+    "meaning_en_asli": "surname Na"
+  },
+  {
+    "hanzi": "看",
+    "pinyin": "kàn",
+    "indonesian": "melihat; menonton; membaca",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "u"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "kān",
+    "meaning_en_asli": "to look after; to take care of; to watch; to guard"
+  },
+  {
+    "hanzi": "做",
+    "pinyin": "zuò",
+    "indonesian": "melakukan; membuat",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zuò",
+    "meaning_en_asli": "to make; to produce; to write; to compose; to do; to engage in; to hold (a party etc); (of a person) to be (an intermediary, a good student etc); to become (hus"
+  },
+  {
+    "hanzi": "什么",
+    "pinyin": "shénme",
+    "indonesian": "apa",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shén me",
+    "meaning_en_asli": "what?; something; anything"
+  },
+  {
+    "hanzi": "点",
+    "pinyin": "diǎn",
+    "indonesian": "pukul (jam); titik",
+    "hsk_level": 1,
+    "pos": [
+      "qt",
+      "n",
+      "t",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "diǎn",
+    "meaning_en_asli": "point; dot; drop; speck; o'clock; point (in space or time); to draw a dot; to check on a list; to choose; to order (food in a restaurant); to touch briefly; to "
+  },
+  {
+    "hanzi": "没",
+    "pinyin": "méi",
+    "indonesian": "tidak (untuk 'punya' dan perbuatan lampau)",
+    "hsk_level": 1,
+    "pos": [
+      "d",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "méi",
+    "meaning_en_asli": "(negative prefix for verbs) have not; not"
+  },
+  {
+    "hanzi": "大",
+    "pinyin": "dà",
+    "indonesian": "besar",
+    "hsk_level": 1,
+    "pos": [
+      "a",
+      "d",
+      "n",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dà",
+    "meaning_en_asli": "big; large; great; older (than another person); eldest (as in 姐); greatly; freely; fully; (dialect) father; (dialect) uncle (father's brother)"
+  },
+  {
+    "hanzi": "下",
+    "pinyin": "xià",
+    "indonesian": "bawah; turun",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "f",
+      "qt",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xià",
+    "meaning_en_asli": "down; downwards; below; lower; later; next (week etc); second (of two parts); to decline; to go down; to arrive at (a decision, conclusion etc); measure word to"
+  },
+  {
+    "hanzi": "里",
+    "pinyin": "lǐ",
+    "indonesian": "dalam",
+    "hsk_level": 1,
+    "pos": [
+      "f",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "lǐ",
+    "meaning_en_asli": "variant of 里"
+  },
+  {
+    "hanzi": "现在",
+    "pinyin": "xiànzài",
+    "indonesian": "sekarang",
+    "hsk_level": 1,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiàn zài",
+    "meaning_en_asli": "now; at present; at the moment; modern; current; nowadays"
+  },
+  {
+    "hanzi": "年",
+    "pinyin": "nián",
+    "indonesian": "tahun",
+    "hsk_level": 1,
+    "pos": [
+      "qt",
+      "t",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Nián",
+    "meaning_en_asli": "surname Nian"
+  },
+  {
+    "hanzi": "多",
+    "pinyin": "duō",
+    "indonesian": "banyak",
+    "hsk_level": 1,
+    "pos": [
+      "a",
+      "m",
+      "ad",
+      "d",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "duō",
+    "meaning_en_asli": "many; much; too many; in excess; (after a numeral) ... odd; how (to what extent) (Taiwan pr. [duó]); (bound form) multi-; poly-"
+  },
+  {
+    "hanzi": "吗",
+    "pinyin": "ma",
+    "indonesian": "partikel tanya (ya/tidak)",
+    "hsk_level": 1,
+    "pos": [
+      "y"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "má",
+    "meaning_en_asli": "(coll.) what?"
+  },
+  {
+    "hanzi": "太",
+    "pinyin": "tài",
+    "indonesian": "terlalu; sangat",
+    "hsk_level": 1,
+    "pos": [
+      "d",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tài",
+    "meaning_en_asli": "highest; greatest; too (much); very; extremely"
+  },
+  {
+    "hanzi": "呢",
+    "pinyin": "ne",
+    "indonesian": "partikel tanya lanjutan (bagaimana dengan…?)",
+    "hsk_level": 1,
+    "pos": [
+      "y"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ne",
+    "meaning_en_asli": "particle indicating that a previously asked question is to be applied to the preceding word (\"What about ...?\", \"And ...?\"); particle for inquiring about locati"
+  },
+  {
+    "hanzi": "小",
+    "pinyin": "xiǎo",
+    "indonesian": "kecil",
+    "hsk_level": 1,
+    "pos": [
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiǎo",
+    "meaning_en_asli": "small; tiny; few; young"
+  },
+  {
+    "hanzi": "时候",
+    "pinyin": "shíhou",
+    "indonesian": "waktu",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shí hou",
+    "meaning_en_asli": "time; length of time; moment; period"
+  },
+  {
+    "hanzi": "工作",
+    "pinyin": "gōngzuò",
+    "indonesian": "bekerja; pekerjaan",
+    "hsk_level": 1,
+    "pos": [
+      "vn",
+      "v",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gōng zuò",
+    "meaning_en_asli": "to work; (of a machine) to operate; job; work; task"
+  },
+  {
+    "hanzi": "家",
+    "pinyin": "jiā",
+    "indonesian": "rumah; keluarga",
+    "hsk_level": 1,
+    "pos": [
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "jiā",
+    "meaning_en_asli": "used in 家伙 and 家俱"
+  },
+  {
+    "hanzi": "怎么",
+    "pinyin": "zěnme",
+    "indonesian": "bagaimana",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zěn me",
+    "meaning_en_asli": "how?; what?; why?"
+  },
+  {
+    "hanzi": "爱",
+    "pinyin": "ài",
+    "indonesian": "cinta; mencintai",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "vn",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ài",
+    "meaning_en_asli": "to love; to be fond of; to like; affection; to be inclined (to do sth); to tend to (happen)"
+  },
+  {
+    "hanzi": "喜欢",
+    "pinyin": "xǐhuan",
+    "indonesian": "suka",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xǐ huan",
+    "meaning_en_asli": "to like; to be fond of"
+  },
+  {
+    "hanzi": "吃",
+    "pinyin": "chī",
+    "indonesian": "makan",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chī",
+    "meaning_en_asli": "to eat; to consume; to eat at (a cafeteria etc); to eradicate; to destroy; to absorb; to suffer (shock, injury, defeat etc)"
+  },
+  {
+    "hanzi": "谁",
+    "pinyin": "shéi",
+    "indonesian": "siapa",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shéi",
+    "meaning_en_asli": "who; also pr. [shuí]"
+  },
+  {
+    "hanzi": "今天",
+    "pinyin": "jīntiān",
+    "indonesian": "hari ini",
+    "hsk_level": 1,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jīn tiān",
+    "meaning_en_asli": "today; at the present; now"
+  },
+  {
+    "hanzi": "月",
+    "pinyin": "yuè",
+    "indonesian": "bulan",
+    "hsk_level": 1,
+    "pos": [
+      "n",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yuè",
+    "meaning_en_asli": "moon; month; monthly"
+  },
+  {
+    "hanzi": "几",
+    "pinyin": "jǐ",
+    "indonesian": "berapa (jumlah kecil)",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "jī",
+    "meaning_en_asli": "small table"
+  },
+  {
+    "hanzi": "听",
+    "pinyin": "tīng",
+    "indonesian": "mendengar",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "yǐn",
+    "meaning_en_asli": "smile (archaic)"
+  },
+  {
+    "hanzi": "开",
+    "pinyin": "kāi",
+    "indonesian": "membuka; menyalakan; mengemudi",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kāi",
+    "meaning_en_asli": "to open (transitive or intransitive); (of ships, vehicles, troops etc) to start; to turn on; to put in operation; to operate; to run; to boil; to write out (a p"
+  },
+  {
+    "hanzi": "叫",
+    "pinyin": "jiào",
+    "indonesian": "dipanggil; bernama; memanggil",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "p",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiào",
+    "meaning_en_asli": "to shout; to call; to order; to ask; to be called; by (indicates agent in the passive mood)"
+  },
+  {
+    "hanzi": "请",
+    "pinyin": "qǐng",
+    "indonesian": "silakan; tolong; mengundang",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qǐng",
+    "meaning_en_asli": "to ask; to invite; please (do sth); to treat (to a meal etc); to request"
+  },
+  {
+    "hanzi": "钱",
+    "pinyin": "qián",
+    "indonesian": "uang",
+    "hsk_level": 1,
+    "pos": [
+      "n",
+      "nr"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Qián",
+    "meaning_en_asli": "surname Qian"
+  },
+  {
+    "hanzi": "本",
+    "pinyin": "běn",
+    "indonesian": "kata penggolong buku",
+    "hsk_level": 1,
+    "pos": [
+      "r",
+      "q",
+      "d",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "běn",
+    "meaning_en_asli": "root; stem; origin; source; this; the current; original; inherent; originally; classifier for books, periodicals, files etc"
+  },
+  {
+    "hanzi": "回",
+    "pinyin": "huí",
+    "indonesian": "kembali; pulang",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "qv"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huí",
+    "meaning_en_asli": "to circle; to go back; to turn around; to answer; to return; to revolve; Hui ethnic group (Chinese Muslims); time; classifier for acts of a play; section or cha"
+  },
+  {
+    "hanzi": "东西",
+    "pinyin": "dōngxi",
+    "indonesian": "barang",
+    "hsk_level": 1,
+    "pos": [
+      "n",
+      "f",
+      "nr"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "dōng xī",
+    "meaning_en_asli": "east and west"
+  },
+  {
+    "hanzi": "三",
+    "pinyin": "sān",
+    "indonesian": "tiga",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Sān",
+    "meaning_en_asli": "surname San"
+  },
+  {
+    "hanzi": "买",
+    "pinyin": "mǎi",
+    "indonesian": "membeli",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "mǎi",
+    "meaning_en_asli": "to buy; to purchase"
+  },
+  {
+    "hanzi": "岁",
+    "pinyin": "suì",
+    "indonesian": "tahun (umur)",
+    "hsk_level": 1,
+    "pos": [
+      "qt"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "suì",
+    "meaning_en_asli": "variant of 岁, year; years old"
+  },
+  {
+    "hanzi": "朋友",
+    "pinyin": "péngyou",
+    "indonesian": "teman",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "péng you",
+    "meaning_en_asli": "friend"
+  },
+  {
+    "hanzi": "住",
+    "pinyin": "zhù",
+    "indonesian": "tinggal",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhù",
+    "meaning_en_asli": "to live; to dwell; to stay; to reside; to stop; (suffix indicating firmness, steadiness, or coming to a halt)"
+  },
+  {
+    "hanzi": "水",
+    "pinyin": "shuǐ",
+    "indonesian": "air",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Shuǐ",
+    "meaning_en_asli": "surname Shui"
+  },
+  {
+    "hanzi": "写",
+    "pinyin": "xiě",
+    "indonesian": "menulis",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiě",
+    "meaning_en_asli": "to write"
+  },
+  {
+    "hanzi": "日",
+    "pinyin": "rì",
+    "indonesian": "hari; matahari",
+    "hsk_level": 1,
+    "pos": [
+      "t",
+      "g",
+      "b",
+      "qt"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Rì",
+    "meaning_en_asli": "abbr. for 本, Japan"
+  },
+  {
+    "hanzi": "喝",
+    "pinyin": "hē",
+    "indonesian": "minum",
+    "hsk_level": 1,
+    "pos": [
+      "g",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hē",
+    "meaning_en_asli": "to drink; variant of 嗬"
+  },
+  {
+    "hanzi": "学校",
+    "pinyin": "xuéxiào",
+    "indonesian": "sekolah",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xué xiào",
+    "meaning_en_asli": "school"
+  },
+  {
+    "hanzi": "坐",
+    "pinyin": "zuò",
+    "indonesian": "duduk; naik (kendaraan)",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Zuò",
+    "meaning_en_asli": "surname Zuo"
+  },
+  {
+    "hanzi": "认识",
+    "pinyin": "rènshi",
+    "indonesian": "kenal",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "n",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "rèn shi",
+    "meaning_en_asli": "to know; to recognize; to be familiar with; to get acquainted with sb; knowledge; understanding; awareness; cognition"
+  },
+  {
+    "hanzi": "分钟",
+    "pinyin": "fēnzhōng",
+    "indonesian": "menit",
+    "hsk_level": 1,
+    "pos": [
+      "qt"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fēn zhōng",
+    "meaning_en_asli": "minute"
+  },
+  {
+    "hanzi": "明天",
+    "pinyin": "míngtiān",
+    "indonesian": "besok",
+    "hsk_level": 1,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "míng tiān",
+    "meaning_en_asli": "tomorrow"
+  },
+  {
+    "hanzi": "四",
+    "pinyin": "sì",
+    "indonesian": "empat",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "sì",
+    "meaning_en_asli": "four; 4"
+  },
+  {
+    "hanzi": "块",
+    "pinyin": "kuài",
+    "indonesian": "kepingan; yuan (ucapan sehari-hari)",
+    "hsk_level": 1,
+    "pos": [
+      "q",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kuài",
+    "meaning_en_asli": "lump; chunk; piece; classifier for pieces of cloth, cake, soap etc; (coll.) classifier for money and currency units"
+  },
+  {
+    "hanzi": "谢谢",
+    "pinyin": "xièxie",
+    "indonesian": "terima kasih",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiè xie",
+    "meaning_en_asli": "to thank; thanks; thank you"
+  },
+  {
+    "hanzi": "多少",
+    "pinyin": "duōshao",
+    "indonesian": "berapa banyak",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "duō shǎo",
+    "meaning_en_asli": "number; amount; somewhat"
+  },
+  {
+    "hanzi": "妈妈",
+    "pinyin": "māma",
+    "indonesian": "ibu",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "mā ma",
+    "meaning_en_asli": "mama; mommy; mother"
+  },
+  {
+    "hanzi": "少",
+    "pinyin": "shǎo",
+    "indonesian": "sedikit",
+    "hsk_level": 1,
+    "pos": [
+      "a",
+      "ad",
+      "v",
+      "d",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shǎo",
+    "meaning_en_asli": "few; less; to lack; to be missing; to stop (doing sth); seldom"
+  },
+  {
+    "hanzi": "电影",
+    "pinyin": "diànyǐng",
+    "indonesian": "film",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "diàn yǐng",
+    "meaning_en_asli": "movie; film"
+  },
+  {
+    "hanzi": "哪",
+    "pinyin": "nǎ",
+    "indonesian": "yang mana",
+    "hsk_level": 1,
+    "pos": [
+      "r",
+      "y"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nǎ",
+    "meaning_en_asli": "how; which"
+  },
+  {
+    "hanzi": "昨天",
+    "pinyin": "zuótiān",
+    "indonesian": "kemarin",
+    "hsk_level": 1,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zuó tiān",
+    "meaning_en_asli": "yesterday"
+  },
+  {
+    "hanzi": "书",
+    "pinyin": "shū",
+    "indonesian": "buku",
+    "hsk_level": 1,
+    "pos": [
+      "n",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Shū",
+    "meaning_en_asli": "abbr. for 书经"
+  },
+  {
+    "hanzi": "五",
+    "pinyin": "wǔ",
+    "indonesian": "lima",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wǔ",
+    "meaning_en_asli": "five; 5"
+  },
+  {
+    "hanzi": "先生",
+    "pinyin": "xiānsheng",
+    "indonesian": "tuan; bapak; suami",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiān sheng",
+    "meaning_en_asli": "teacher; gentleman; sir; mister (Mr.); husband; (dialect) doctor"
+  },
+  {
+    "hanzi": "医院",
+    "pinyin": "yīyuàn",
+    "indonesian": "rumah sakit",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī yuàn",
+    "meaning_en_asli": "hospital"
+  },
+  {
+    "hanzi": "些",
+    "pinyin": "xiē",
+    "indonesian": "beberapa",
+    "hsk_level": 1,
+    "pos": [
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiē",
+    "meaning_en_asli": "classifier indicating a small amount or small number greater than 1: some, a few, several"
+  },
+  {
+    "hanzi": "狗",
+    "pinyin": "gǒu",
+    "indonesian": "anjing",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gǒu",
+    "meaning_en_asli": "dog"
+  },
+  {
+    "hanzi": "学生",
+    "pinyin": "xuésheng",
+    "indonesian": "pelajar",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xué sheng",
+    "meaning_en_asli": "student; schoolchild"
+  },
+  {
+    "hanzi": "二",
+    "pinyin": "èr",
+    "indonesian": "dua",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "èr",
+    "meaning_en_asli": "two; 2; (Beijing dialect) stupid"
+  },
+  {
+    "hanzi": "儿子",
+    "pinyin": "érzi",
+    "indonesian": "anak laki-laki",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ér zi",
+    "meaning_en_asli": "son"
+  },
+  {
+    "hanzi": "中国",
+    "pinyin": "Zhōngguó",
+    "indonesian": "Tiongkok",
+    "hsk_level": 1,
+    "pos": [
+      "ns"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "Zhōng guó",
+    "meaning_en_asli": "China"
+  },
+  {
+    "hanzi": "电视",
+    "pinyin": "diànshì",
+    "indonesian": "televisi",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "diàn shì",
+    "meaning_en_asli": "television; TV"
+  },
+  {
+    "hanzi": "下午",
+    "pinyin": "xiàwǔ",
+    "indonesian": "sore (setelah tengah hari)",
+    "hsk_level": 1,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xià wǔ",
+    "meaning_en_asli": "afternoon; p.m."
+  },
+  {
+    "hanzi": "学习",
+    "pinyin": "xuéxí",
+    "indonesian": "belajar",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xué xí",
+    "meaning_en_asli": "to learn; to study"
+  },
+  {
+    "hanzi": "老师",
+    "pinyin": "lǎoshī",
+    "indonesian": "guru",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lǎo shī",
+    "meaning_en_asli": "teacher"
+  },
+  {
+    "hanzi": "六",
+    "pinyin": "liù",
+    "indonesian": "enam",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "liù",
+    "meaning_en_asli": "six; 6"
+  },
+  {
+    "hanzi": "医生",
+    "pinyin": "yīshēng",
+    "indonesian": "dokter",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī shēng",
+    "meaning_en_asli": "doctor"
+  },
+  {
+    "hanzi": "名字",
+    "pinyin": "míngzi",
+    "indonesian": "nama",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "míng zi",
+    "meaning_en_asli": "name (of a person or thing)"
+  },
+  {
+    "hanzi": "十",
+    "pinyin": "shí",
+    "indonesian": "sepuluh",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shí",
+    "meaning_en_asli": "ten; 10"
+  },
+  {
+    "hanzi": "看见",
+    "pinyin": "kànjiàn",
+    "indonesian": "melihat (sudah terlihat)",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kàn jiàn",
+    "meaning_en_asli": "to see; to catch sight of"
+  },
+  {
+    "hanzi": "女儿",
+    "pinyin": "nǚ'ér",
+    "indonesian": "anak perempuan",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nǚ ér",
+    "meaning_en_asli": "daughter"
+  },
+  {
+    "hanzi": "说话",
+    "pinyin": "shuōhuà",
+    "indonesian": "berbicara",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shuō huà",
+    "meaning_en_asli": "to speak; to say; to talk; to gossip; to tell stories; talk; word"
+  },
+  {
+    "hanzi": "爸爸",
+    "pinyin": "bàba",
+    "indonesian": "ayah",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bà ba",
+    "meaning_en_asli": "(coll.) father; dad"
+  },
+  {
+    "hanzi": "字",
+    "pinyin": "zì",
+    "indonesian": "huruf; karakter",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zì",
+    "meaning_en_asli": "letter; symbol; character; word; courtesy or style name traditionally given to males aged 20 in dynastic China"
+  },
+  {
+    "hanzi": "漂亮",
+    "pinyin": "piàoliang",
+    "indonesian": "cantik; bagus",
+    "hsk_level": 1,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "piào liang",
+    "meaning_en_asli": "pretty; beautiful"
+  },
+  {
+    "hanzi": "高兴",
+    "pinyin": "gāoxìng",
+    "indonesian": "senang",
+    "hsk_level": 1,
+    "pos": [
+      "a",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gāo xìng",
+    "meaning_en_asli": "happy; glad; willing (to do sth); in a cheerful mood"
+  },
+  {
+    "hanzi": "热",
+    "pinyin": "rè",
+    "indonesian": "panas",
+    "hsk_level": 1,
+    "pos": [
+      "a",
+      "n",
+      "k",
+      "v",
+      "ad",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "rè",
+    "meaning_en_asli": "to warm up; to heat up; hot (of weather); heat; fervent"
+  },
+  {
+    "hanzi": "睡觉",
+    "pinyin": "shuìjiào",
+    "indonesian": "tidur",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shuì jiào",
+    "meaning_en_asli": "to go to bed; to sleep"
+  },
+  {
+    "hanzi": "电脑",
+    "pinyin": "diànnǎo",
+    "indonesian": "komputer",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "diàn nǎo",
+    "meaning_en_asli": "computer"
+  },
+  {
+    "hanzi": "读",
+    "pinyin": "dú",
+    "indonesian": "membaca; belajar",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "dòu",
+    "meaning_en_asli": "comma; phrase marked by pause"
+  },
+  {
+    "hanzi": "冷",
+    "pinyin": "lěng",
+    "indonesian": "dingin",
+    "hsk_level": 1,
+    "pos": [
+      "a",
+      "ad",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Lěng",
+    "meaning_en_asli": "surname Leng"
+  },
+  {
+    "hanzi": "飞机",
+    "pinyin": "fēijī",
+    "indonesian": "pesawat terbang",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fēi jī",
+    "meaning_en_asli": "airplane"
+  },
+  {
+    "hanzi": "猫",
+    "pinyin": "māo",
+    "indonesian": "kucing",
+    "hsk_level": 1,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "māo",
+    "meaning_en_asli": "cat; (dialect) to hide oneself; (coll.) modem"
+  },
+  {
+    "hanzi": "打电话",
+    "pinyin": "dǎ diànhuà",
+    "indonesian": "menelepon",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dǎ diàn huà",
+    "meaning_en_asli": "to make a telephone call"
+  },
+  {
+    "hanzi": "后面",
+    "pinyin": "hòumian",
+    "indonesian": "belakang",
+    "hsk_level": 1,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hòu mian",
+    "meaning_en_asli": "the back; the rear; the last bit; behind; near the end; at the back; later; afterwards"
+  },
+  {
+    "hanzi": "喂",
+    "pinyin": "wèi",
+    "indonesian": "halo (saat menelepon)",
+    "hsk_level": 1,
+    "pos": [
+      "v",
+      "e"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "wéi",
+    "meaning_en_asli": "hello (when answering the phone)"
+  },
+  {
+    "hanzi": "八",
+    "pinyin": "bā",
+    "indonesian": "delapan",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bā",
+    "meaning_en_asli": "eight; 8"
+  },
+  {
+    "hanzi": "怎么样",
+    "pinyin": "zěnmeyàng",
+    "indonesian": "bagaimana; bagaimana kalau",
+    "hsk_level": 1,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zěn me yàng",
+    "meaning_en_asli": "how?; how about?; how was it?; how are things?"
+  },
+  {
+    "hanzi": "七",
+    "pinyin": "qī",
+    "indonesian": "tujuh",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qī",
+    "meaning_en_asli": "seven; 7"
+  },
+  {
+    "hanzi": "菜",
+    "pinyin": "cài",
+    "indonesian": "sayur; hidangan",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "cài",
+    "meaning_en_asli": "dish (type of food); vegetable; cuisine; (coll.) (one's) type; (of one's skills etc) weak; poor"
+  },
+  {
+    "hanzi": "衣服",
+    "pinyin": "yīfu",
+    "indonesian": "pakaian",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī fu",
+    "meaning_en_asli": "clothes"
+  },
+  {
+    "hanzi": "小姐",
+    "pinyin": "xiǎojiě",
+    "indonesian": "nona",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "xiǎo jie",
+    "meaning_en_asli": "young lady; miss; (slang) prostitute"
+  },
+  {
+    "hanzi": "对不起",
+    "pinyin": "duìbuqǐ",
+    "indonesian": "maaf",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "duì bu qǐ",
+    "meaning_en_asli": "I'm sorry; excuse me; I beg your pardon; to let (sb) down; to disappoint"
+  },
+  {
+    "hanzi": "天气",
+    "pinyin": "tiānqì",
+    "indonesian": "cuaca",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tiān qì",
+    "meaning_en_asli": "weather"
+  },
+  {
+    "hanzi": "前面",
+    "pinyin": "qiánmian",
+    "indonesian": "depan",
+    "hsk_level": 1,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "qián miàn",
+    "meaning_en_asli": "ahead; in front; preceding; above; also pr. [qián mian]"
+  },
+  {
+    "hanzi": "同学",
+    "pinyin": "tóngxué",
+    "indonesian": "teman sekelas",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tóng xué",
+    "meaning_en_asli": "to study at the same school; fellow student; classmate"
+  },
+  {
+    "hanzi": "茶",
+    "pinyin": "chá",
+    "indonesian": "teh",
+    "hsk_level": 1,
+    "pos": [
+      "n",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chá",
+    "meaning_en_asli": "tea; tea plant"
+  },
+  {
+    "hanzi": "星期",
+    "pinyin": "xīngqī",
+    "indonesian": "minggu; hari dalam seminggu",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xīng qī",
+    "meaning_en_asli": "week; day of the week; Sunday"
+  },
+  {
+    "hanzi": "九",
+    "pinyin": "jiǔ",
+    "indonesian": "sembilan",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiǔ",
+    "meaning_en_asli": "nine; 9"
+  },
+  {
+    "hanzi": "上午",
+    "pinyin": "shàngwǔ",
+    "indonesian": "pagi (sebelum tengah hari)",
+    "hsk_level": 1,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shàng wǔ",
+    "meaning_en_asli": "morning"
+  },
+  {
+    "hanzi": "再见",
+    "pinyin": "zàijiàn",
+    "indonesian": "sampai jumpa",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zài jiàn",
+    "meaning_en_asli": "goodbye; see you again later"
+  },
+  {
+    "hanzi": "苹果",
+    "pinyin": "píngguǒ",
+    "indonesian": "apel",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "píng guǒ",
+    "meaning_en_asli": "apple"
+  },
+  {
+    "hanzi": "中午",
+    "pinyin": "zhōngwǔ",
+    "indonesian": "tengah hari",
+    "hsk_level": 1,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhōng wǔ",
+    "meaning_en_asli": "noon; midday"
+  },
+  {
+    "hanzi": "出租车",
+    "pinyin": "chūzūchē",
+    "indonesian": "taksi",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chū zū chē",
+    "meaning_en_asli": "taxi; (Tw) rental car"
+  },
+  {
+    "hanzi": "水果",
+    "pinyin": "shuǐguǒ",
+    "indonesian": "buah",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shuǐ guǒ",
+    "meaning_en_asli": "fruit"
+  },
+  {
+    "hanzi": "商店",
+    "pinyin": "shāngdiàn",
+    "indonesian": "toko",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shāng diàn",
+    "meaning_en_asli": "store; shop"
+  },
+  {
+    "hanzi": "没关系",
+    "pinyin": "méi guānxi",
+    "indonesian": "tidak apa-apa",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "méi guān xi",
+    "meaning_en_asli": "it doesn't matter"
+  },
+  {
+    "hanzi": "零",
+    "pinyin": "líng",
+    "indonesian": "nol",
+    "hsk_level": 1,
+    "pos": [
+      "m",
+      "t",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "líng",
+    "meaning_en_asli": "zero; nought; zero sign; fractional; fragmentary; odd (of numbers); (placed between two numbers to indicate a smaller quantity followed by a larger one); fracti"
+  },
+  {
+    "hanzi": "桌子",
+    "pinyin": "zhuōzi",
+    "indonesian": "meja",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhuō zi",
+    "meaning_en_asli": "table; desk"
+  },
+  {
+    "hanzi": "椅子",
+    "pinyin": "yǐzi",
+    "indonesian": "kursi",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǐ zi",
+    "meaning_en_asli": "chair"
+  },
+  {
+    "hanzi": "北京",
+    "pinyin": "Běijīng",
+    "indonesian": "Beijing",
+    "hsk_level": 1,
+    "pos": [
+      "ns"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "Běi jīng",
+    "meaning_en_asli": "Beijing, capital of the People's Republic of China"
+  },
+  {
+    "hanzi": "下雨",
+    "pinyin": "xiàyǔ",
+    "indonesian": "hujan (turun hujan)",
+    "hsk_level": 1,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xià yǔ",
+    "meaning_en_asli": "to rain"
+  },
+  {
+    "hanzi": "杯子",
+    "pinyin": "bēizi",
+    "indonesian": "gelas; cangkir",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bēi zi",
+    "meaning_en_asli": "cup; glass"
+  },
+  {
+    "hanzi": "火车站",
+    "pinyin": "huǒchēzhàn",
+    "indonesian": "stasiun kereta",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huǒ chē zhàn",
+    "meaning_en_asli": "train station"
+  },
+  {
+    "hanzi": "米饭",
+    "pinyin": "mǐfàn",
+    "indonesian": "nasi",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "mǐ fàn",
+    "meaning_en_asli": "(cooked) rice"
+  },
+  {
+    "hanzi": "汉语",
+    "pinyin": "Hànyǔ",
+    "indonesian": "bahasa Mandarin",
+    "hsk_level": 1,
+    "pos": [
+      "nz"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "Hàn yǔ",
+    "meaning_en_asli": "Chinese language"
+  },
+  {
+    "hanzi": "饭馆",
+    "pinyin": "fànguǎn",
+    "indonesian": "restoran",
+    "hsk_level": 1,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fàn guǎn",
+    "meaning_en_asli": "restaurant"
+  },
+  {
+    "hanzi": "不客气",
+    "pinyin": "bú kèqi",
+    "indonesian": "sama-sama",
+    "hsk_level": 1,
+    "pos": [],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "bù kè qi",
+    "meaning_en_asli": "you're welcome; don't mention it; impolite; rude; blunt"
+  },
+  {
+    "hanzi": "就",
+    "pinyin": "jiù",
+    "indonesian": "langsung; segera; maka",
+    "hsk_level": 2,
+    "pos": [
+      "d",
+      "p",
+      "c",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiù",
+    "meaning_en_asli": "(after a suppositional clause) in that case; then; (after a clause of action) as soon as; immediately after; (same as 是) merely; nothing else but; simply; just;"
+  },
+  {
+    "hanzi": "要",
+    "pinyin": "yào",
+    "indonesian": "ingin; perlu; akan",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "yāo",
+    "meaning_en_asli": "(bound form) to demand; to coerce"
+  },
+  {
+    "hanzi": "也",
+    "pinyin": "yě",
+    "indonesian": "juga",
+    "hsk_level": 2,
+    "pos": [
+      "d",
+      "y",
+      "u",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Yě",
+    "meaning_en_asli": "surname Ye"
+  },
+  {
+    "hanzi": "到",
+    "pinyin": "dào",
+    "indonesian": "tiba; sampai",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "p"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dào",
+    "meaning_en_asli": "to reach; to arrive; to leave for; to go to; to (a place); until (a time); up to (a point); (verb complement indicating arriving at a place or reaching a point)"
+  },
+  {
+    "hanzi": "还",
+    "pinyin": "hái",
+    "indonesian": "masih; juga",
+    "hsk_level": 2,
+    "pos": [
+      "d",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Huán",
+    "meaning_en_asli": "surname Huan"
+  },
+  {
+    "hanzi": "着",
+    "pinyin": "zhe",
+    "indonesian": "partikel keadaan berlangsung (sambil…)",
+    "hsk_level": 2,
+    "pos": [
+      "u",
+      "v",
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "zhāo",
+    "meaning_en_asli": "(chess) move; trick; all right!; (dialect) to add"
+  },
+  {
+    "hanzi": "给",
+    "pinyin": "gěi",
+    "indonesian": "memberi; untuk",
+    "hsk_level": 2,
+    "pos": [
+      "p",
+      "v",
+      "u"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gěi",
+    "meaning_en_asli": "to; for; for the benefit of; to give; to allow; to do sth (for sb); (grammatical equivalent of 被); (grammatical equivalent of 把); (sentence intensifier)"
+  },
+  {
+    "hanzi": "让",
+    "pinyin": "ràng",
+    "indonesian": "membiarkan; menyuruh",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ràng",
+    "meaning_en_asli": "to yield; to permit; to let sb do sth; to have sb do sth; to make sb (feel sad etc); by (indicates the agent in a passive clause, like 被)"
+  },
+  {
+    "hanzi": "吧",
+    "pinyin": "ba",
+    "indonesian": "partikel ajakan atau saran",
+    "hsk_level": 2,
+    "pos": [
+      "y"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "bā",
+    "meaning_en_asli": "bar (loanword) (serving drinks, or providing Internet access etc); to puff (on a pipe etc); (onom.) bang; abbr. for 贴吧"
+  },
+  {
+    "hanzi": "得",
+    "pinyin": "de",
+    "indonesian": "partikel penghubung hasil/tingkat; děi = harus",
+    "hsk_level": 2,
+    "pos": [
+      "u",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "dé",
+    "meaning_en_asli": "to obtain; to get; to gain; to catch (a disease); proper; suitable; proud; contented; to allow; to permit; ready; finished"
+  },
+  {
+    "hanzi": "可以",
+    "pinyin": "kěyǐ",
+    "indonesian": "boleh; bisa",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kě yǐ",
+    "meaning_en_asli": "can; may; possible; able to; not bad; pretty good"
+  },
+  {
+    "hanzi": "为",
+    "pinyin": "wèi",
+    "indonesian": "untuk; demi",
+    "hsk_level": 2,
+    "pos": [
+      "p",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "wéi",
+    "meaning_en_asli": "as (in the capacity of); to take sth as; to act as; to serve as; to behave as; to become; to be; to do; by (in the passive voice)"
+  },
+  {
+    "hanzi": "从",
+    "pinyin": "cóng",
+    "indonesian": "dari",
+    "hsk_level": 2,
+    "pos": [
+      "p",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "cóng",
+    "meaning_en_asli": "variant of 从"
+  },
+  {
+    "hanzi": "真",
+    "pinyin": "zhēn",
+    "indonesian": "sungguh; benar-benar",
+    "hsk_level": 2,
+    "pos": [
+      "d",
+      "a",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhēn",
+    "meaning_en_asli": "really; truly; indeed; real; true; genuine"
+  },
+  {
+    "hanzi": "两",
+    "pinyin": "liǎng",
+    "indonesian": "dua",
+    "hsk_level": 2,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "liǎng",
+    "meaning_en_asli": "two; both; some; a few; tael, unit of weight equal to 50 grams (modern) or 1⁄16 of a catty 斤 (old)"
+  },
+  {
+    "hanzi": "出",
+    "pinyin": "chū",
+    "indonesian": "keluar",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chū",
+    "meaning_en_asli": "to go out; to come out; to occur; to produce; to go beyond; to rise; to put forth; to happen; (used after a verb to indicate an outward direction or a positive "
+  },
+  {
+    "hanzi": "已经",
+    "pinyin": "yǐjīng",
+    "indonesian": "sudah",
+    "hsk_level": 2,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǐ jīng",
+    "meaning_en_asli": "already"
+  },
+  {
+    "hanzi": "最",
+    "pinyin": "zuì",
+    "indonesian": "paling",
+    "hsk_level": 2,
+    "pos": [
+      "d",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "zuì",
+    "meaning_en_asli": "variant of 最"
+  },
+  {
+    "hanzi": "因为",
+    "pinyin": "yīnwèi",
+    "indonesian": "karena",
+    "hsk_level": 2,
+    "pos": [
+      "p",
+      "c"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yīn wèi",
+    "meaning_en_asli": "because; owing to; on account of"
+  },
+  {
+    "hanzi": "再",
+    "pinyin": "zài",
+    "indonesian": "lagi; kemudian",
+    "hsk_level": 2,
+    "pos": [
+      "d",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zài",
+    "meaning_en_asli": "again; once more; re-; second; another; then (after sth, and not until then); no matter how ... (followed by an adjective or verb, and then (usually) 也 or 都 for"
+  },
+  {
+    "hanzi": "次",
+    "pinyin": "cì",
+    "indonesian": "kali (penggolong frekuensi)",
+    "hsk_level": 2,
+    "pos": [
+      "qv",
+      "a",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "cì",
+    "meaning_en_asli": "next in sequence; second; the second (day, time etc); secondary; vice-; sub-; infra-; inferior quality; substandard; order; sequence; hypo- (chemistry); classif"
+  },
+  {
+    "hanzi": "知道",
+    "pinyin": "zhīdào",
+    "indonesian": "tahu",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhī dào",
+    "meaning_en_asli": "to know; to become aware of; also pr. [zhī dao]"
+  },
+  {
+    "hanzi": "问题",
+    "pinyin": "wèntí",
+    "indonesian": "pertanyaan; masalah",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wèn tí",
+    "meaning_en_asli": "question; problem; issue; topic"
+  },
+  {
+    "hanzi": "走",
+    "pinyin": "zǒu",
+    "indonesian": "berjalan; pergi",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zǒu",
+    "meaning_en_asli": "to walk; to go; to run; to move (of vehicle); to visit; to leave; to go away; to die (euph.); from; through; away (in compound verbs, such as 走); to change (sha"
+  },
+  {
+    "hanzi": "它",
+    "pinyin": "tā",
+    "indonesian": "dia/itu (benda atau hewan)",
+    "hsk_level": 2,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tā",
+    "meaning_en_asli": "it"
+  },
+  {
+    "hanzi": "但是",
+    "pinyin": "dànshì",
+    "indonesian": "tetapi",
+    "hsk_level": 2,
+    "pos": [
+      "c"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dàn shì",
+    "meaning_en_asli": "but; however"
+  },
+  {
+    "hanzi": "可能",
+    "pinyin": "kěnéng",
+    "indonesian": "mungkin",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kě néng",
+    "meaning_en_asli": "might (happen); possible; probable; possibility; probability; maybe; perhaps"
+  },
+  {
+    "hanzi": "时间",
+    "pinyin": "shíjiān",
+    "indonesian": "waktu",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shí jiān",
+    "meaning_en_asli": "time; period"
+  },
+  {
+    "hanzi": "开始",
+    "pinyin": "kāishǐ",
+    "indonesian": "mulai",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kāi shǐ",
+    "meaning_en_asli": "to begin; beginning; to start; initial"
+  },
+  {
+    "hanzi": "新",
+    "pinyin": "xīn",
+    "indonesian": "baru",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "d",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Xīn",
+    "meaning_en_asli": "abbr. for Xinjiang 疆 or Singapore 坡; surname Xin"
+  },
+  {
+    "hanzi": "找",
+    "pinyin": "zhǎo",
+    "indonesian": "mencari",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhǎo",
+    "meaning_en_asli": "to try to find; to look for; to call on sb; to find; to seek; to return; to give change"
+  },
+  {
+    "hanzi": "快",
+    "pinyin": "kuài",
+    "indonesian": "cepat",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "d",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kuài",
+    "meaning_en_asli": "rapid; quick; speed; rate; soon; almost; to make haste; clever; sharp (of knives or wits); forthright; plainspoken; gratified; pleased; pleasant"
+  },
+  {
+    "hanzi": "比",
+    "pinyin": "bǐ",
+    "indonesian": "dibandingkan; lebih daripada",
+    "hsk_level": 2,
+    "pos": [
+      "p",
+      "v",
+      "n",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "Bǐ",
+    "meaning_en_asli": "Belgium; Belgian; abbr. for 比利时"
+  },
+  {
+    "hanzi": "所以",
+    "pinyin": "suǒyǐ",
+    "indonesian": "jadi; oleh karena itu",
+    "hsk_level": 2,
+    "pos": [
+      "c"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "suǒ yǐ",
+    "meaning_en_asli": "therefore; as a result; so; the reason why"
+  },
+  {
+    "hanzi": "觉得",
+    "pinyin": "juéde",
+    "indonesian": "merasa; menganggap",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jué de",
+    "meaning_en_asli": "to think that ...; to feel that ...; to feel (uncomfortable etc)"
+  },
+  {
+    "hanzi": "向",
+    "pinyin": "xiàng",
+    "indonesian": "ke arah; kepada",
+    "hsk_level": 2,
+    "pos": [
+      "p",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Xiàng",
+    "meaning_en_asli": "surname Xiang"
+  },
+  {
+    "hanzi": "一起",
+    "pinyin": "yìqǐ",
+    "indonesian": "bersama",
+    "hsk_level": 2,
+    "pos": [
+      "s",
+      "d",
+      "nr"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī qǐ",
+    "meaning_en_asli": "in the same place; together; with; altogether (in total)"
+  },
+  {
+    "hanzi": "希望",
+    "pinyin": "xīwàng",
+    "indonesian": "berharap; harapan",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "n",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xī wàng",
+    "meaning_en_asli": "to hope; a hope; a wish"
+  },
+  {
+    "hanzi": "大家",
+    "pinyin": "dàjiā",
+    "indonesian": "semuanya; semua orang",
+    "hsk_level": 2,
+    "pos": [
+      "r",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dà jiā",
+    "meaning_en_asli": "everyone; influential family; great expert"
+  },
+  {
+    "hanzi": "非常",
+    "pinyin": "fēicháng",
+    "indonesian": "sangat",
+    "hsk_level": 2,
+    "pos": [
+      "d",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fēi cháng",
+    "meaning_en_asli": "very; really; unusual; extraordinary"
+  },
+  {
+    "hanzi": "孩子",
+    "pinyin": "háizi",
+    "indonesian": "anak",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hái zi",
+    "meaning_en_asli": "child"
+  },
+  {
+    "hanzi": "别",
+    "pinyin": "bié",
+    "indonesian": "jangan; lain",
+    "hsk_level": 2,
+    "pos": [
+      "d",
+      "v",
+      "r",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Bié",
+    "meaning_en_asli": "surname Bie"
+  },
+  {
+    "hanzi": "公司",
+    "pinyin": "gōngsī",
+    "indonesian": "perusahaan",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gōng sī",
+    "meaning_en_asli": "company; firm; corporation"
+  },
+  {
+    "hanzi": "第一",
+    "pinyin": "dì-yī",
+    "indonesian": "pertama",
+    "hsk_level": 2,
+    "pos": [
+      "m"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dì yī",
+    "meaning_en_asli": "first; number one; primary"
+  },
+  {
+    "hanzi": "问",
+    "pinyin": "wèn",
+    "indonesian": "bertanya",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "g",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wèn",
+    "meaning_en_asli": "to ask; to inquire"
+  },
+  {
+    "hanzi": "长",
+    "pinyin": "cháng",
+    "indonesian": "panjang; zhǎng = tumbuh; kepala",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "v",
+      "ad",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "cháng",
+    "meaning_en_asli": "length; long; forever; always; constantly"
+  },
+  {
+    "hanzi": "告诉",
+    "pinyin": "gàosu",
+    "indonesian": "memberi tahu",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "gào sù",
+    "meaning_en_asli": "to press charges; to file a complaint"
+  },
+  {
+    "hanzi": "事情",
+    "pinyin": "shìqing",
+    "indonesian": "urusan; hal",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shì qing",
+    "meaning_en_asli": "affair; matter; thing; business"
+  },
+  {
+    "hanzi": "号",
+    "pinyin": "hào",
+    "indonesian": "nomor; tanggal",
+    "hsk_level": 2,
+    "pos": [
+      "q",
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "háo",
+    "meaning_en_asli": "roar; cry"
+  },
+  {
+    "hanzi": "高",
+    "pinyin": "gāo",
+    "indonesian": "tinggi",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "ad",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Gāo",
+    "meaning_en_asli": "surname Gao"
+  },
+  {
+    "hanzi": "件",
+    "pinyin": "jiàn",
+    "indonesian": "kata penggolong pakaian atau urusan",
+    "hsk_level": 2,
+    "pos": [
+      "q",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiàn",
+    "meaning_en_asli": "item; component; classifier for events, things, clothes etc"
+  },
+  {
+    "hanzi": "张",
+    "pinyin": "zhāng",
+    "indonesian": "kata penggolong benda datar (kertas, tiket)",
+    "hsk_level": 2,
+    "pos": [
+      "q",
+      "nr",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Zhāng",
+    "meaning_en_asli": "surname Zhang"
+  },
+  {
+    "hanzi": "准备",
+    "pinyin": "zhǔnbèi",
+    "indonesian": "bersiap; menyiapkan",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhǔn bèi",
+    "meaning_en_asli": "preparation; to prepare; to intend; to be about to; reserve (fund)"
+  },
+  {
+    "hanzi": "进",
+    "pinyin": "jìn",
+    "indonesian": "masuk",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jìn",
+    "meaning_en_asli": "to go forward; to advance; to go in; to enter; to put in; to submit; to take in; to admit; (math.) base of a number system; classifier for sections in a buildin"
+  },
+  {
+    "hanzi": "每",
+    "pinyin": "měi",
+    "indonesian": "setiap",
+    "hsk_level": 2,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "měi",
+    "meaning_en_asli": "each; every"
+  },
+  {
+    "hanzi": "您",
+    "pinyin": "nín",
+    "indonesian": "Anda (sopan)",
+    "hsk_level": 2,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nín",
+    "meaning_en_asli": "you (courteous, as opposed to informal 你)"
+  },
+  {
+    "hanzi": "送",
+    "pinyin": "sòng",
+    "indonesian": "mengantar; memberi (hadiah)",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "sòng",
+    "meaning_en_asli": "to send; to deliver; to transmit; to give (as a present); to see (sb) off; to accompany; to go along with"
+  },
+  {
+    "hanzi": "笑",
+    "pinyin": "xiào",
+    "indonesian": "tertawa; tersenyum",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "xiào",
+    "meaning_en_asli": "old variant of 笑"
+  },
+  {
+    "hanzi": "女人",
+    "pinyin": "nǚrén",
+    "indonesian": "perempuan",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nǚ rén",
+    "meaning_en_asli": "woman"
+  },
+  {
+    "hanzi": "小时",
+    "pinyin": "xiǎoshí",
+    "indonesian": "jam (durasi)",
+    "hsk_level": 2,
+    "pos": [
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiǎo shí",
+    "meaning_en_asli": "hour"
+  },
+  {
+    "hanzi": "完",
+    "pinyin": "wán",
+    "indonesian": "selesai",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wán",
+    "meaning_en_asli": "to finish; to be over; whole; complete; entire"
+  },
+  {
+    "hanzi": "路",
+    "pinyin": "lù",
+    "indonesian": "jalan",
+    "hsk_level": 2,
+    "pos": [
+      "n",
+      "qv"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Lù",
+    "meaning_en_asli": "surname Lu"
+  },
+  {
+    "hanzi": "男人",
+    "pinyin": "nánrén",
+    "indonesian": "laki-laki",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nán rén",
+    "meaning_en_asli": "a man; a male; men"
+  },
+  {
+    "hanzi": "玩",
+    "pinyin": "wán",
+    "indonesian": "bermain",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wán",
+    "meaning_en_asli": "to play; to have fun; to trifle with; toy; sth used for amusement; curio or antique (Taiwan pr. [wàn]); to keep sth for entertainment"
+  },
+  {
+    "hanzi": "正在",
+    "pinyin": "zhèngzài",
+    "indonesian": "sedang",
+    "hsk_level": 2,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhèng zài",
+    "meaning_en_asli": "just at (that time); right in (that place); right in the middle of (doing sth)"
+  },
+  {
+    "hanzi": "门",
+    "pinyin": "mén",
+    "indonesian": "pintu",
+    "hsk_level": 2,
+    "pos": [
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Mén",
+    "meaning_en_asli": "surname Men"
+  },
+  {
+    "hanzi": "穿",
+    "pinyin": "chuān",
+    "indonesian": "memakai (pakaian)",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chuān",
+    "meaning_en_asli": "to wear; to put on; to dress; to bore through; to pierce; to perforate; to penetrate; to pass through; to thread"
+  },
+  {
+    "hanzi": "外",
+    "pinyin": "wài",
+    "indonesian": "luar",
+    "hsk_level": 2,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wài",
+    "meaning_en_asli": "outside; in addition; foreign; external"
+  },
+  {
+    "hanzi": "帮助",
+    "pinyin": "bāngzhù",
+    "indonesian": "membantu; bantuan",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bāng zhù",
+    "meaning_en_asli": "assistance; aid; to help; to assist"
+  },
+  {
+    "hanzi": "晚上",
+    "pinyin": "wǎnshang",
+    "indonesian": "malam",
+    "hsk_level": 2,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wǎn shang",
+    "meaning_en_asli": "evening; night; in the evening"
+  },
+  {
+    "hanzi": "错",
+    "pinyin": "cuò",
+    "indonesian": "salah",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Cuò",
+    "meaning_en_asli": "surname Cuo"
+  },
+  {
+    "hanzi": "卖",
+    "pinyin": "mài",
+    "indonesian": "menjual",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "mài",
+    "meaning_en_asli": "to sell; to betray; to spare no effort; to show off or flaunt"
+  },
+  {
+    "hanzi": "远",
+    "pinyin": "yuǎn",
+    "indonesian": "jauh",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yuǎn",
+    "meaning_en_asli": "far; distant; remote; (intensifier in a comparison) by far; much (lower etc)"
+  },
+  {
+    "hanzi": "快乐",
+    "pinyin": "kuàilè",
+    "indonesian": "bahagia; gembira",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kuài lè",
+    "meaning_en_asli": "happy; joyful"
+  },
+  {
+    "hanzi": "懂",
+    "pinyin": "dǒng",
+    "indonesian": "mengerti",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dǒng",
+    "meaning_en_asli": "to understand; to comprehend"
+  },
+  {
+    "hanzi": "药",
+    "pinyin": "yào",
+    "indonesian": "obat",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yào",
+    "meaning_en_asli": "leaf of the iris; variant of 药"
+  },
+  {
+    "hanzi": "黑",
+    "pinyin": "hēi",
+    "indonesian": "hitam; gelap",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "g",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Hēi",
+    "meaning_en_asli": "abbr. for Heilongjiang province 黑龙江"
+  },
+  {
+    "hanzi": "身体",
+    "pinyin": "shēntǐ",
+    "indonesian": "tubuh; kesehatan",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shēn tǐ",
+    "meaning_en_asli": "the body; one's health; in person"
+  },
+  {
+    "hanzi": "元",
+    "pinyin": "yuán",
+    "indonesian": "yuan (mata uang)",
+    "hsk_level": 2,
+    "pos": [
+      "q",
+      "tg"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Yuán",
+    "meaning_en_asli": "surname Yuan; the Yuan or Mongol dynasty (1279-1368)"
+  },
+  {
+    "hanzi": "介绍",
+    "pinyin": "jièshào",
+    "indonesian": "memperkenalkan",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiè shào",
+    "meaning_en_asli": "to introduce (sb to sb); to give a presentation; to present (sb for a job etc); introduction"
+  },
+  {
+    "hanzi": "红",
+    "pinyin": "hóng",
+    "indonesian": "merah",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Hóng",
+    "meaning_en_asli": "surname Hong"
+  },
+  {
+    "hanzi": "欢迎",
+    "pinyin": "huānyíng",
+    "indonesian": "selamat datang; menyambut",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huān yíng",
+    "meaning_en_asli": "to welcome; welcome"
+  },
+  {
+    "hanzi": "眼睛",
+    "pinyin": "yǎnjing",
+    "indonesian": "mata",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǎn jing",
+    "meaning_en_asli": "eye"
+  },
+  {
+    "hanzi": "近",
+    "pinyin": "jìn",
+    "indonesian": "dekat",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jìn",
+    "meaning_en_asli": "near; close to; approximately"
+  },
+  {
+    "hanzi": "手机",
+    "pinyin": "shǒujī",
+    "indonesian": "ponsel",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shǒu jī",
+    "meaning_en_asli": "cell phone; mobile phone"
+  },
+  {
+    "hanzi": "忙",
+    "pinyin": "máng",
+    "indonesian": "sibuk",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "a",
+      "ad",
+      "g",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "máng",
+    "meaning_en_asli": "busy; hurriedly; to hurry; to rush"
+  },
+  {
+    "hanzi": "离",
+    "pinyin": "lí",
+    "indonesian": "dari (jarak); berpisah",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "p"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "chī",
+    "meaning_en_asli": "mythical beast (archaic)"
+  },
+  {
+    "hanzi": "白",
+    "pinyin": "bái",
+    "indonesian": "putih",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "nr",
+      "d",
+      "b",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Bái",
+    "meaning_en_asli": "surname Bai"
+  },
+  {
+    "hanzi": "去年",
+    "pinyin": "qùnián",
+    "indonesian": "tahun lalu",
+    "hsk_level": 2,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qù nián",
+    "meaning_en_asli": "last year"
+  },
+  {
+    "hanzi": "票",
+    "pinyin": "piào",
+    "indonesian": "tiket",
+    "hsk_level": 2,
+    "pos": [
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "piào",
+    "meaning_en_asli": "ticket; ballot; banknote; person held for ransom; amateur performance of Chinese opera; classifier for groups, batches, business transactions"
+  },
+  {
+    "hanzi": "意思",
+    "pinyin": "yìsi",
+    "indonesian": "arti; maksud",
+    "hsk_level": 2,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yì si",
+    "meaning_en_asli": "idea; opinion; meaning; wish; desire; interest; fun; token of appreciation, affection etc; to give as a small token; to do sth as a gesture of goodwill etc"
+  },
+  {
+    "hanzi": "早上",
+    "pinyin": "zǎoshang",
+    "indonesian": "pagi",
+    "hsk_level": 2,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zǎo shang",
+    "meaning_en_asli": "early morning"
+  },
+  {
+    "hanzi": "回答",
+    "pinyin": "huídá",
+    "indonesian": "menjawab",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huí dá",
+    "meaning_en_asli": "to reply; to answer; reply; answer"
+  },
+  {
+    "hanzi": "运动",
+    "pinyin": "yùndòng",
+    "indonesian": "olahraga",
+    "hsk_level": 2,
+    "pos": [
+      "vn",
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yùn dòng",
+    "meaning_en_asli": "to move; to exercise; sports; exercise; motion; movement; campaign"
+  },
+  {
+    "hanzi": "妻子",
+    "pinyin": "qīzi",
+    "indonesian": "istri",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "qī zǐ",
+    "meaning_en_asli": "wife and children"
+  },
+  {
+    "hanzi": "鱼",
+    "pinyin": "yú",
+    "indonesian": "ikan",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Yú",
+    "meaning_en_asli": "surname Yu"
+  },
+  {
+    "hanzi": "累",
+    "pinyin": "lèi",
+    "indonesian": "lelah",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "v",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "lěi",
+    "meaning_en_asli": "to accumulate; to involve or implicate (Taiwan pr. [lèi]); continuous; repeated"
+  },
+  {
+    "hanzi": "休息",
+    "pinyin": "xiūxi",
+    "indonesian": "istirahat",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiū xi",
+    "meaning_en_asli": "rest; to rest"
+  },
+  {
+    "hanzi": "洗",
+    "pinyin": "xǐ",
+    "indonesian": "mencuci",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xǐ",
+    "meaning_en_asli": "to wash; to bathe; to develop (photographs); to shuffle (cards etc); to erase (a recording)"
+  },
+  {
+    "hanzi": "船",
+    "pinyin": "chuán",
+    "indonesian": "kapal; perahu",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "chuán",
+    "meaning_en_asli": "variant of 船"
+  },
+  {
+    "hanzi": "房间",
+    "pinyin": "fángjiān",
+    "indonesian": "kamar",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fáng jiān",
+    "meaning_en_asli": "room"
+  },
+  {
+    "hanzi": "丈夫",
+    "pinyin": "zhàngfu",
+    "indonesian": "suami",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhàng fu",
+    "meaning_en_asli": "husband"
+  },
+  {
+    "hanzi": "上班",
+    "pinyin": "shàngbān",
+    "indonesian": "masuk kerja",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shàng bān",
+    "meaning_en_asli": "to go to work; to be on duty; to start work; to go to the office"
+  },
+  {
+    "hanzi": "生日",
+    "pinyin": "shēngrì",
+    "indonesian": "ulang tahun",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shēng rì",
+    "meaning_en_asli": "birthday"
+  },
+  {
+    "hanzi": "姐姐",
+    "pinyin": "jiějie",
+    "indonesian": "kakak perempuan",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiě jie",
+    "meaning_en_asli": "older sister"
+  },
+  {
+    "hanzi": "课",
+    "pinyin": "kè",
+    "indonesian": "pelajaran; kelas",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kè",
+    "meaning_en_asli": "subject; course; class; lesson; to levy; tax; form of divination"
+  },
+  {
+    "hanzi": "哥哥",
+    "pinyin": "gēge",
+    "indonesian": "kakak laki-laki",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gē ge",
+    "meaning_en_asli": "older brother"
+  },
+  {
+    "hanzi": "咖啡",
+    "pinyin": "kāfēi",
+    "indonesian": "kopi",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kā fēi",
+    "meaning_en_asli": "coffee (loanword)"
+  },
+  {
+    "hanzi": "考试",
+    "pinyin": "kǎoshì",
+    "indonesian": "ujian",
+    "hsk_level": 2,
+    "pos": [
+      "vn",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kǎo shì",
+    "meaning_en_asli": "to take an exam; exam"
+  },
+  {
+    "hanzi": "千",
+    "pinyin": "qiān",
+    "indonesian": "seribu",
+    "hsk_level": 2,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qiān",
+    "meaning_en_asli": "thousand"
+  },
+  {
+    "hanzi": "慢",
+    "pinyin": "màn",
+    "indonesian": "lambat",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "màn",
+    "meaning_en_asli": "slow"
+  },
+  {
+    "hanzi": "旁边",
+    "pinyin": "pángbiān",
+    "indonesian": "samping",
+    "hsk_level": 2,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "páng biān",
+    "meaning_en_asli": "side; adjacent place"
+  },
+  {
+    "hanzi": "颜色",
+    "pinyin": "yánsè",
+    "indonesian": "warna",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yán sè",
+    "meaning_en_asli": "color; countenance; appearance; facial expression; pigment; dyestuff"
+  },
+  {
+    "hanzi": "雪",
+    "pinyin": "xuě",
+    "indonesian": "salju",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Xuě",
+    "meaning_en_asli": "surname Xue"
+  },
+  {
+    "hanzi": "妹妹",
+    "pinyin": "mèimei",
+    "indonesian": "adik perempuan",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "mèi mei",
+    "meaning_en_asli": "younger sister; young woman"
+  },
+  {
+    "hanzi": "报纸",
+    "pinyin": "bàozhǐ",
+    "indonesian": "koran",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bào zhǐ",
+    "meaning_en_asli": "newspaper; newsprint"
+  },
+  {
+    "hanzi": "贵",
+    "pinyin": "guì",
+    "indonesian": "mahal",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "r",
+      "b",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "guì",
+    "meaning_en_asli": "expensive; noble; precious; (honorific) your"
+  },
+  {
+    "hanzi": "机场",
+    "pinyin": "jīchǎng",
+    "indonesian": "bandara",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jī chǎng",
+    "meaning_en_asli": "airport; airfield; (slang) service provider for Shadowsocks or similar software for circumventing Internet censorship"
+  },
+  {
+    "hanzi": "踢",
+    "pinyin": "tī",
+    "indonesian": "menendang; bermain (sepak bola)",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tī",
+    "meaning_en_asli": "to kick; to play (e.g. soccer); (slang) butch (in a lesbian relationship)"
+  },
+  {
+    "hanzi": "弟弟",
+    "pinyin": "dìdi",
+    "indonesian": "adik laki-laki",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dì di",
+    "meaning_en_asli": "younger brother"
+  },
+  {
+    "hanzi": "百",
+    "pinyin": "bǎi",
+    "indonesian": "seratus",
+    "hsk_level": 2,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Bǎi",
+    "meaning_en_asli": "surname Bai"
+  },
+  {
+    "hanzi": "好吃",
+    "pinyin": "hǎochī",
+    "indonesian": "enak (dimakan)",
+    "hsk_level": 2,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hǎo chī",
+    "meaning_en_asli": "tasty; delicious"
+  },
+  {
+    "hanzi": "旅游",
+    "pinyin": "lǚyóu",
+    "indonesian": "bepergian; wisata",
+    "hsk_level": 2,
+    "pos": [
+      "vn",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lǚ yóu",
+    "meaning_en_asli": "trip; journey; tourism; travel; tour; to travel"
+  },
+  {
+    "hanzi": "起床",
+    "pinyin": "qǐchuáng",
+    "indonesian": "bangun tidur",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qǐ chuáng",
+    "meaning_en_asli": "to get out of bed; to get up"
+  },
+  {
+    "hanzi": "题",
+    "pinyin": "tí",
+    "indonesian": "soal; topik",
+    "hsk_level": 2,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Tí",
+    "meaning_en_asli": "surname Ti"
+  },
+  {
+    "hanzi": "便宜",
+    "pinyin": "piányi",
+    "indonesian": "murah",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "v",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "biàn yí",
+    "meaning_en_asli": "convenient"
+  },
+  {
+    "hanzi": "唱歌",
+    "pinyin": "chànggē",
+    "indonesian": "bernyanyi",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chàng gē",
+    "meaning_en_asli": "to sing a song"
+  },
+  {
+    "hanzi": "右边",
+    "pinyin": "yòubian",
+    "indonesian": "sebelah kanan",
+    "hsk_level": 2,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yòu bian",
+    "meaning_en_asli": "right side; right, to the right"
+  },
+  {
+    "hanzi": "牛奶",
+    "pinyin": "niúnǎi",
+    "indonesian": "susu sapi",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "niú nǎi",
+    "meaning_en_asli": "cow's milk"
+  },
+  {
+    "hanzi": "自行车",
+    "pinyin": "zìxíngchē",
+    "indonesian": "sepeda",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zì xíng chē",
+    "meaning_en_asli": "bicycle; bike"
+  },
+  {
+    "hanzi": "鸡蛋",
+    "pinyin": "jīdàn",
+    "indonesian": "telur ayam",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jī dàn",
+    "meaning_en_asli": "(chicken) egg; hen's egg"
+  },
+  {
+    "hanzi": "姓",
+    "pinyin": "xìng",
+    "indonesian": "bermarga; nama keluarga",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xìng",
+    "meaning_en_asli": "family name; surname; to be surnamed"
+  },
+  {
+    "hanzi": "游泳",
+    "pinyin": "yóuyǒng",
+    "indonesian": "berenang",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yóu yǒng",
+    "meaning_en_asli": "swimming; to swim"
+  },
+  {
+    "hanzi": "跳舞",
+    "pinyin": "tiàowǔ",
+    "indonesian": "menari",
+    "hsk_level": 2,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tiào wǔ",
+    "meaning_en_asli": "to dance"
+  },
+  {
+    "hanzi": "阴",
+    "pinyin": "yīn",
+    "indonesian": "mendung",
+    "hsk_level": 2,
+    "pos": [
+      "a",
+      "g",
+      "ad",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Yīn",
+    "meaning_en_asli": "surname Yin"
+  },
+  {
+    "hanzi": "生病",
+    "pinyin": "shēngbìng",
+    "indonesian": "sakit",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shēng bìng",
+    "meaning_en_asli": "to fall ill"
+  },
+  {
+    "hanzi": "左边",
+    "pinyin": "zuǒbian",
+    "indonesian": "sebelah kiri",
+    "hsk_level": 2,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zuǒ bian",
+    "meaning_en_asli": "left; the left side; to the left of"
+  },
+  {
+    "hanzi": "公斤",
+    "pinyin": "gōngjīn",
+    "indonesian": "kilogram",
+    "hsk_level": 2,
+    "pos": [
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gōng jīn",
+    "meaning_en_asli": "kilogram (kg)"
+  },
+  {
+    "hanzi": "教室",
+    "pinyin": "jiàoshì",
+    "indonesian": "ruang kelas",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiào shì",
+    "meaning_en_asli": "classroom"
+  },
+  {
+    "hanzi": "服务员",
+    "pinyin": "fúwùyuán",
+    "indonesian": "pelayan",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fú wù yuán",
+    "meaning_en_asli": "waiter; waitress; attendant; customer service personnel"
+  },
+  {
+    "hanzi": "手表",
+    "pinyin": "shǒubiǎo",
+    "indonesian": "jam tangan",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shǒu biǎo",
+    "meaning_en_asli": "wristwatch"
+  },
+  {
+    "hanzi": "跑步",
+    "pinyin": "pǎobù",
+    "indonesian": "berlari",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "pǎo bù",
+    "meaning_en_asli": "to run; to jog; (military) to march at the double"
+  },
+  {
+    "hanzi": "西瓜",
+    "pinyin": "xīguā",
+    "indonesian": "semangka",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xī guā",
+    "meaning_en_asli": "watermelon"
+  },
+  {
+    "hanzi": "晴",
+    "pinyin": "qíng",
+    "indonesian": "cerah",
+    "hsk_level": 2,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qíng",
+    "meaning_en_asli": "clear; fine (weather)"
+  },
+  {
+    "hanzi": "羊肉",
+    "pinyin": "yángròu",
+    "indonesian": "daging kambing",
+    "hsk_level": 2,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yáng ròu",
+    "meaning_en_asli": "mutton; goat meat"
+  },
+  {
+    "hanzi": "公共汽车",
+    "pinyin": "gōnggòng qìchē",
+    "indonesian": "bus",
+    "hsk_level": 2,
+    "pos": [],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gōng gòng qì chē",
+    "meaning_en_asli": "bus"
+  },
+  {
+    "hanzi": "打篮球",
+    "pinyin": "dǎ lánqiú",
+    "indonesian": "bermain basket",
+    "hsk_level": 2,
+    "pos": [],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dǎ lán qiú",
+    "meaning_en_asli": "to play basketball"
+  },
+  {
+    "hanzi": "啊",
+    "pinyin": "a",
+    "indonesian": "partikel seru atau penegas",
+    "hsk_level": 3,
+    "pos": [
+      "y",
+      "e"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "ā",
+    "meaning_en_asli": "interjection of surprise; Ah!; Oh!"
+  },
+  {
+    "hanzi": "把",
+    "pinyin": "bǎ",
+    "indonesian": "partikel penempatan objek sebelum kata kerja; penggolong benda bergagang",
+    "hsk_level": 3,
+    "pos": [
+      "p",
+      "qv",
+      "v",
+      "m"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bǎ",
+    "meaning_en_asli": "to hold; to grasp; to hold a baby in position to help it urinate or defecate; handlebar; classifier: handful, bundle, bunch; classifier for things with handles;"
+  },
+  {
+    "hanzi": "被",
+    "pinyin": "bèi",
+    "indonesian": "partikel kalimat pasif (di-)",
+    "hsk_level": 3,
+    "pos": [
+      "p",
+      "g",
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bèi",
+    "meaning_en_asli": "quilt; to cover (with); (literary) to suffer (a misfortune); used to indicate passive voice (placed before the doer of the action like \"by\" in English passive-v"
+  },
+  {
+    "hanzi": "自己",
+    "pinyin": "zìjǐ",
+    "indonesian": "diri sendiri",
+    "hsk_level": 3,
+    "pos": [
+      "r",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zì jǐ",
+    "meaning_en_asli": "oneself; one's own"
+  },
+  {
+    "hanzi": "用",
+    "pinyin": "yòng",
+    "indonesian": "menggunakan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "p",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yòng",
+    "meaning_en_asli": "to use; to employ; to have to; to eat or drink; expense or outlay; usefulness; hence; therefore"
+  },
+  {
+    "hanzi": "如果",
+    "pinyin": "rúguǒ",
+    "indonesian": "jika",
+    "hsk_level": 3,
+    "pos": [
+      "c",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "rú guǒ",
+    "meaning_en_asli": "if; in case; in the event that"
+  },
+  {
+    "hanzi": "又",
+    "pinyin": "yòu",
+    "indonesian": "lagi; juga (terjadi kembali)",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "c"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yòu",
+    "meaning_en_asli": "(once) again; also; both... and...; and yet; (used for emphasis) anyway"
+  },
+  {
+    "hanzi": "只",
+    "pinyin": "zhǐ",
+    "indonesian": "hanya",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhǐ",
+    "meaning_en_asli": "only; merely; just; but"
+  },
+  {
+    "hanzi": "更",
+    "pinyin": "gèng",
+    "indonesian": "lebih (lagi)",
+    "hsk_level": 3,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "gēng",
+    "meaning_en_asli": "to change or replace; to experience; one of the five two-hour periods into which the night was formerly divided; watch (e.g. of a sentry or guard)"
+  },
+  {
+    "hanzi": "需要",
+    "pinyin": "xūyào",
+    "indonesian": "membutuhkan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "n",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xū yào",
+    "meaning_en_asli": "to need; to want; to demand; to require; needs"
+  },
+  {
+    "hanzi": "地",
+    "pinyin": "de",
+    "indonesian": "partikel penghubung keterangan kata kerja (secara…)",
+    "hsk_level": 3,
+    "pos": [
+      "u",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "de",
+    "meaning_en_asli": "-ly; structural particle: used before a verb or adjective, linking it to preceding modifying adverbial adjunct"
+  },
+  {
+    "hanzi": "才",
+    "pinyin": "cái",
+    "indonesian": "baru; barulah",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "c",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "cái",
+    "meaning_en_asli": "ability; talent; sb of a certain type; a capable individual; then and only then; just now; (before an expression of quantity) only"
+  },
+  {
+    "hanzi": "跟",
+    "pinyin": "gēn",
+    "indonesian": "dengan; mengikuti",
+    "hsk_level": 3,
+    "pos": [
+      "p",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gēn",
+    "meaning_en_asli": "heel; to follow closely; to go with; (of a woman) to marry sb; with; compared with; to; towards; and (joining two nouns)"
+  },
+  {
+    "hanzi": "像",
+    "pinyin": "xiàng",
+    "indonesian": "seperti; mirip",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "p",
+      "n",
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiàng",
+    "meaning_en_asli": "to resemble; to be like; to look as if; such as; appearance; image; portrait; image under a mapping (math.)"
+  },
+  {
+    "hanzi": "还是",
+    "pinyin": "háishi",
+    "indonesian": "atau (dalam pertanyaan); masih; sebaiknya",
+    "hsk_level": 3,
+    "pos": [
+      "c",
+      "d",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hái shi",
+    "meaning_en_asli": "still (as before); had better; unexpectedly; or"
+  },
+  {
+    "hanzi": "认为",
+    "pinyin": "rènwéi",
+    "indonesian": "berpendapat; menganggap",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "rèn wéi",
+    "meaning_en_asli": "to believe; to think; to consider; to feel"
+  },
+  {
+    "hanzi": "应该",
+    "pinyin": "yīnggāi",
+    "indonesian": "seharusnya",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yīng gāi",
+    "meaning_en_asli": "ought to; should; must"
+  },
+  {
+    "hanzi": "带",
+    "pinyin": "dài",
+    "indonesian": "membawa",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dài",
+    "meaning_en_asli": "band; belt; girdle; ribbon; tire; area; zone; region; to wear; to carry; to take along; to bear (i.e. to have); to lead; to bring; to look after; to raise"
+  },
+  {
+    "hanzi": "位",
+    "pinyin": "wèi",
+    "indonesian": "kata penggolong orang (sopan)",
+    "hsk_level": 3,
+    "pos": [
+      "q",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wèi",
+    "meaning_en_asli": "position; location; place; seat; classifier for people (honorific); classifier for binary bits (e.g. 十六位 16-bit or 2 bytes); (physics) potential"
+  },
+  {
+    "hanzi": "种",
+    "pinyin": "zhǒng",
+    "indonesian": "jenis; macam",
+    "hsk_level": 3,
+    "pos": [
+      "q",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhǒng",
+    "meaning_en_asli": "seed; species; kind; type; classifier for types, kinds, sorts"
+  },
+  {
+    "hanzi": "发现",
+    "pinyin": "fāxiàn",
+    "indonesian": "menemukan; menyadari",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fā xiàn",
+    "meaning_en_asli": "to notice; to become aware of; to discover; to find; to detect; a discovery"
+  },
+  {
+    "hanzi": "一定",
+    "pinyin": "yídìng",
+    "indonesian": "pasti; harus",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī dìng",
+    "meaning_en_asli": "surely; certainly; necessarily; fixed; a certain (extent etc); given; particular; must"
+  },
+  {
+    "hanzi": "一直",
+    "pinyin": "yìzhí",
+    "indonesian": "terus; selalu",
+    "hsk_level": 3,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī zhí",
+    "meaning_en_asli": "straight (in a straight line); continuously; always; all the way through"
+  },
+  {
+    "hanzi": "为了",
+    "pinyin": "wèile",
+    "indonesian": "demi; untuk",
+    "hsk_level": 3,
+    "pos": [
+      "p",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wèi le",
+    "meaning_en_asli": "for; for the purpose of; in order to"
+  },
+  {
+    "hanzi": "一样",
+    "pinyin": "yíyàng",
+    "indonesian": "sama",
+    "hsk_level": 3,
+    "pos": [
+      "u",
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī yàng",
+    "meaning_en_asli": "same; like; equal to; the same as; just like"
+  },
+  {
+    "hanzi": "世界",
+    "pinyin": "shìjiè",
+    "indonesian": "dunia",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shì jiè",
+    "meaning_en_asli": "world"
+  },
+  {
+    "hanzi": "而且",
+    "pinyin": "érqiě",
+    "indonesian": "lagi pula; dan juga",
+    "hsk_level": 3,
+    "pos": [
+      "c"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ér qiě",
+    "meaning_en_asli": "(not only ...) but also; moreover; in addition; furthermore"
+  },
+  {
+    "hanzi": "重要",
+    "pinyin": "zhòngyào",
+    "indonesian": "penting",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhòng yào",
+    "meaning_en_asli": "important; significant; major"
+  },
+  {
+    "hanzi": "必须",
+    "pinyin": "bìxū",
+    "indonesian": "harus",
+    "hsk_level": 3,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bì xū",
+    "meaning_en_asli": "to have to; must; compulsory; necessarily"
+  },
+  {
+    "hanzi": "地方",
+    "pinyin": "dìfang",
+    "indonesian": "tempat",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "dì fāng",
+    "meaning_en_asli": "region; regional (away from the central administration); local"
+  },
+  {
+    "hanzi": "老",
+    "pinyin": "lǎo",
+    "indonesian": "tua; lama; awalan akrab",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "d",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lǎo",
+    "meaning_en_asli": "prefix used before the surname of a person or a numeral indicating the order of birth of the children in a family or to indicate affection or familiarity; old ("
+  },
+  {
+    "hanzi": "其他",
+    "pinyin": "qítā",
+    "indonesian": "lainnya",
+    "hsk_level": 3,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qí tā",
+    "meaning_en_asli": "other; (sth or sb) else; the rest"
+  },
+  {
+    "hanzi": "比赛",
+    "pinyin": "bǐsài",
+    "indonesian": "pertandingan; lomba",
+    "hsk_level": 3,
+    "pos": [
+      "vn",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bǐ sài",
+    "meaning_en_asli": "competition (sports etc); match; to compete"
+  },
+  {
+    "hanzi": "然后",
+    "pinyin": "ránhòu",
+    "indonesian": "kemudian",
+    "hsk_level": 3,
+    "pos": [
+      "c"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "rán hòu",
+    "meaning_en_asli": "then; after that; afterwards"
+  },
+  {
+    "hanzi": "担心",
+    "pinyin": "dānxīn",
+    "indonesian": "khawatir",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dān xīn",
+    "meaning_en_asli": "anxious; worried; uneasy; to worry; to be anxious"
+  },
+  {
+    "hanzi": "条",
+    "pinyin": "tiáo",
+    "indonesian": "kata penggolong benda panjang (jalan, sungai, celana)",
+    "hsk_level": 3,
+    "pos": [
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tiáo",
+    "meaning_en_asli": "strip; item; article; clause (of law or treaty); classifier for long thin things (ribbon, river, road, trousers etc)"
+  },
+  {
+    "hanzi": "放",
+    "pinyin": "fàng",
+    "indonesian": "meletakkan; melepaskan",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fàng",
+    "meaning_en_asli": "to put; to place; to release; to free; to let go; to let out; to set off (fireworks)"
+  },
+  {
+    "hanzi": "拿",
+    "pinyin": "ná",
+    "indonesian": "mengambil; membawa",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "ná",
+    "meaning_en_asli": "old variant of 拿"
+  },
+  {
+    "hanzi": "为什么",
+    "pinyin": "wèishénme",
+    "indonesian": "mengapa",
+    "hsk_level": 3,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wèi shén me",
+    "meaning_en_asli": "why?; for what reason?"
+  },
+  {
+    "hanzi": "先",
+    "pinyin": "xiān",
+    "indonesian": "dulu; lebih dulu",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiān",
+    "meaning_en_asli": "early; prior; former; in advance; first"
+  },
+  {
+    "hanzi": "关系",
+    "pinyin": "guānxi",
+    "indonesian": "hubungan",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "guān xi",
+    "meaning_en_asli": "relation; relationship; to concern; to affect; to have to do with; guanxi"
+  },
+  {
+    "hanzi": "出现",
+    "pinyin": "chūxiàn",
+    "indonesian": "muncul",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chū xiàn",
+    "meaning_en_asli": "to appear; to arise; to emerge; to show up"
+  },
+  {
+    "hanzi": "了解",
+    "pinyin": "liǎojiě",
+    "indonesian": "memahami; mengetahui",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "liǎo jiě",
+    "meaning_en_asli": "to understand; to realize; to find out"
+  },
+  {
+    "hanzi": "过去",
+    "pinyin": "guòqù",
+    "indonesian": "masa lalu; lewat",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "guò qù",
+    "meaning_en_asli": "(in the) past; former; previous; to go over; to pass by"
+  },
+  {
+    "hanzi": "参加",
+    "pinyin": "cānjiā",
+    "indonesian": "ikut serta",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "cān jiā",
+    "meaning_en_asli": "to participate; to take part; to join"
+  },
+  {
+    "hanzi": "国家",
+    "pinyin": "guójiā",
+    "indonesian": "negara",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "guó jiā",
+    "meaning_en_asli": "country; nation; state"
+  },
+  {
+    "hanzi": "决定",
+    "pinyin": "juédìng",
+    "indonesian": "memutuskan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jué dìng",
+    "meaning_en_asli": "to decide (to do something); to resolve; decision; certainly"
+  },
+  {
+    "hanzi": "分",
+    "pinyin": "fēn",
+    "indonesian": "membagi; menit; poin",
+    "hsk_level": 3,
+    "pos": [
+      "t",
+      "qt",
+      "v",
+      "g",
+      "n",
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fēn",
+    "meaning_en_asli": "to divide; to separate; to distribute; to allocate; to distinguish (good and bad); (bound form) branch of (an organization); sub- (as in 局); fraction; one tenth"
+  },
+  {
+    "hanzi": "选择",
+    "pinyin": "xuǎnzé",
+    "indonesian": "memilih",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xuǎn zé",
+    "meaning_en_asli": "to select; to pick; choice; option; alternative"
+  },
+  {
+    "hanzi": "或者",
+    "pinyin": "huòzhě",
+    "indonesian": "atau",
+    "hsk_level": 3,
+    "pos": [
+      "c",
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huò zhě",
+    "meaning_en_asli": "or; possibly; maybe; perhaps"
+  },
+  {
+    "hanzi": "机会",
+    "pinyin": "jīhuì",
+    "indonesian": "kesempatan",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jī huì",
+    "meaning_en_asli": "opportunity; chance; occasion"
+  },
+  {
+    "hanzi": "别人",
+    "pinyin": "biéren",
+    "indonesian": "orang lain",
+    "hsk_level": 3,
+    "pos": [
+      "r"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bié ren",
+    "meaning_en_asli": "other people; others; other person"
+  },
+  {
+    "hanzi": "站",
+    "pinyin": "zhàn",
+    "indonesian": "berdiri; stasiun",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhàn",
+    "meaning_en_asli": "station; to stand; to halt; to stop; branch of a company or organization; website"
+  },
+  {
+    "hanzi": "使",
+    "pinyin": "shǐ",
+    "indonesian": "membuat; menyebabkan",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shǐ",
+    "meaning_en_asli": "to make; to cause; to enable; to use; to employ; to send; to instruct sb to do sth; envoy; messenger"
+  },
+  {
+    "hanzi": "其实",
+    "pinyin": "qíshí",
+    "indonesian": "sebenarnya",
+    "hsk_level": 3,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qí shí",
+    "meaning_en_asli": "actually; in fact; really"
+  },
+  {
+    "hanzi": "以后",
+    "pinyin": "yǐhòu",
+    "indonesian": "setelah; nanti",
+    "hsk_level": 3,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǐ hòu",
+    "meaning_en_asli": "after; later; afterwards; following; later on; in the future"
+  },
+  {
+    "hanzi": "要求",
+    "pinyin": "yāoqiú",
+    "indonesian": "meminta; tuntutan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yāo qiú",
+    "meaning_en_asli": "to request; to require; requirement; to stake a claim; to ask; to demand"
+  },
+  {
+    "hanzi": "信",
+    "pinyin": "xìn",
+    "indonesian": "surat; percaya",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xìn",
+    "meaning_en_asli": "letter; mail; to trust; to believe; to profess faith in; truthful; confidence; trust; at will; at random"
+  },
+  {
+    "hanzi": "当然",
+    "pinyin": "dāngrán",
+    "indonesian": "tentu saja",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dāng rán",
+    "meaning_en_asli": "only natural; as it should be; certainly; of course; without doubt"
+  },
+  {
+    "hanzi": "接",
+    "pinyin": "jiē",
+    "indonesian": "menerima; menyambut; menjawab (telepon)",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiē",
+    "meaning_en_asli": "to receive; to answer (the phone); to meet or welcome sb; to connect; to catch; to join; to extend; to take one's turn on duty; to take over for sb"
+  },
+  {
+    "hanzi": "相信",
+    "pinyin": "xiāngxìn",
+    "indonesian": "percaya",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiāng xìn",
+    "meaning_en_asli": "to be convinced (that sth is true); to believe; to accept sth as true"
+  },
+  {
+    "hanzi": "花",
+    "pinyin": "huā",
+    "indonesian": "bunga; menghabiskan (uang atau waktu)",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "n",
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Huā",
+    "meaning_en_asli": "surname Hua"
+  },
+  {
+    "hanzi": "虽然",
+    "pinyin": "suīrán",
+    "indonesian": "meskipun",
+    "hsk_level": 3,
+    "pos": [
+      "c"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "suī rán",
+    "meaning_en_asli": "although; even though (often used correlatively with 是 or 是 etc)"
+  },
+  {
+    "hanzi": "解决",
+    "pinyin": "jiějué",
+    "indonesian": "menyelesaikan; memecahkan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiě jué",
+    "meaning_en_asli": "to solve; to resolve; to settle (a problem); to eliminate; to wipe out (an enemy, bandits etc)"
+  },
+  {
+    "hanzi": "关于",
+    "pinyin": "guānyú",
+    "indonesian": "mengenai",
+    "hsk_level": 3,
+    "pos": [
+      "p"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "guān yú",
+    "meaning_en_asli": "pertaining to; concerning; with regard to; about; a matter of"
+  },
+  {
+    "hanzi": "完成",
+    "pinyin": "wánchéng",
+    "indonesian": "menyelesaikan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wán chéng",
+    "meaning_en_asli": "to complete; to accomplish"
+  },
+  {
+    "hanzi": "结束",
+    "pinyin": "jiéshù",
+    "indonesian": "berakhir; mengakhiri",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jié shù",
+    "meaning_en_asli": "termination; to finish; to end; to conclude; to close"
+  },
+  {
+    "hanzi": "努力",
+    "pinyin": "nǔlì",
+    "indonesian": "berusaha keras",
+    "hsk_level": 3,
+    "pos": [
+      "ad",
+      "an",
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nǔ lì",
+    "meaning_en_asli": "to make an effort; to try hard; to strive; hard-working; conscientious"
+  },
+  {
+    "hanzi": "以前",
+    "pinyin": "yǐqián",
+    "indonesian": "sebelumnya; dulu",
+    "hsk_level": 3,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǐ qián",
+    "meaning_en_asli": "before; formerly; previous; ago"
+  },
+  {
+    "hanzi": "办法",
+    "pinyin": "bànfǎ",
+    "indonesian": "cara",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bàn fǎ",
+    "meaning_en_asli": "means; method; way (of doing sth)"
+  },
+  {
+    "hanzi": "特别",
+    "pinyin": "tèbié",
+    "indonesian": "istimewa; khususnya",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tè bié",
+    "meaning_en_asli": "unusual; special; very; especially; particularly; expressly; for a specific purpose; (often followed by 是) in particular"
+  },
+  {
+    "hanzi": "难",
+    "pinyin": "nán",
+    "indonesian": "sulit",
+    "hsk_level": 3,
+    "pos": [
+      "ad",
+      "a",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nán",
+    "meaning_en_asli": "difficult (to...); problem; difficulty; difficult; not good"
+  },
+  {
+    "hanzi": "注意",
+    "pinyin": "zhùyì",
+    "indonesian": "memperhatikan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhù yì",
+    "meaning_en_asli": "to take note of; to pay attention to"
+  },
+  {
+    "hanzi": "讲",
+    "pinyin": "jiǎng",
+    "indonesian": "berbicara; menjelaskan",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiǎng",
+    "meaning_en_asli": "to speak; to explain; to negotiate; to emphasize; to be particular about; as far as sth is concerned; speech; lecture"
+  },
+  {
+    "hanzi": "离开",
+    "pinyin": "líkāi",
+    "indonesian": "meninggalkan; pergi",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lí kāi",
+    "meaning_en_asli": "to depart; to leave"
+  },
+  {
+    "hanzi": "万",
+    "pinyin": "wàn",
+    "indonesian": "sepuluh ribu",
+    "hsk_level": 3,
+    "pos": [
+      "m",
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "mò",
+    "meaning_en_asli": "used in 俟"
+  },
+  {
+    "hanzi": "以为",
+    "pinyin": "yǐwéi",
+    "indonesian": "mengira",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǐ wéi",
+    "meaning_en_asli": "to think (i.e. to take it to be true that ...) (Usually there is an implication that the notion is mistaken – except when expressing one's own current opinion.)"
+  },
+  {
+    "hanzi": "越",
+    "pinyin": "yuè",
+    "indonesian": "makin (越…越… = makin…makin…)",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "g",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "Yuè",
+    "meaning_en_asli": "generic word for peoples or states of south China or south Asia at different historical periods; abbr. for Vietnam 越南"
+  },
+  {
+    "hanzi": "城市",
+    "pinyin": "chéngshì",
+    "indonesian": "kota",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chéng shì",
+    "meaning_en_asli": "city; town"
+  },
+  {
+    "hanzi": "影响",
+    "pinyin": "yǐngxiǎng",
+    "indonesian": "pengaruh; memengaruhi",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǐng xiǎng",
+    "meaning_en_asli": "influence; effect; to influence; to affect (usually adversely); to disturb"
+  },
+  {
+    "hanzi": "游戏",
+    "pinyin": "yóuxì",
+    "indonesian": "permainan",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yóu xì",
+    "meaning_en_asli": "game; to play"
+  },
+  {
+    "hanzi": "马",
+    "pinyin": "mǎ",
+    "indonesian": "kuda",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "nr",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Mǎ",
+    "meaning_en_asli": "surname Ma; abbr. for Malaysia 马来西亚"
+  },
+  {
+    "hanzi": "比较",
+    "pinyin": "bǐjiào",
+    "indonesian": "lumayan; membandingkan",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "vn",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bǐ jiào",
+    "meaning_en_asli": "to compare; to contrast; comparatively; relatively; quite; comparison"
+  },
+  {
+    "hanzi": "最近",
+    "pinyin": "zuìjìn",
+    "indonesian": "akhir-akhir ini",
+    "hsk_level": 3,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zuì jìn",
+    "meaning_en_asli": "recently; soon; nearest"
+  },
+  {
+    "hanzi": "换",
+    "pinyin": "huàn",
+    "indonesian": "menukar; mengganti",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huàn",
+    "meaning_en_asli": "to exchange; to change (clothes etc); to substitute; to switch; to convert (currency)"
+  },
+  {
+    "hanzi": "终于",
+    "pinyin": "zhōngyú",
+    "indonesian": "akhirnya",
+    "hsk_level": 3,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhōng yú",
+    "meaning_en_asli": "at last; in the end; finally; eventually"
+  },
+  {
+    "hanzi": "脸",
+    "pinyin": "liǎn",
+    "indonesian": "wajah",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "liǎn",
+    "meaning_en_asli": "face"
+  },
+  {
+    "hanzi": "口",
+    "pinyin": "kǒu",
+    "indonesian": "mulut; penggolong anggota keluarga",
+    "hsk_level": 3,
+    "pos": [
+      "q",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kǒu",
+    "meaning_en_asli": "mouth; classifier for things with mouths (people, domestic animals, cannons, wells etc); classifier for bites or mouthfuls"
+  },
+  {
+    "hanzi": "除了",
+    "pinyin": "chúle",
+    "indonesian": "selain; kecuali",
+    "hsk_level": 3,
+    "pos": [
+      "p"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chú le",
+    "meaning_en_asli": "besides; apart from (... also...); in addition to; except (for)"
+  },
+  {
+    "hanzi": "总是",
+    "pinyin": "zǒngshì",
+    "indonesian": "selalu",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zǒng shì",
+    "meaning_en_asli": "always"
+  },
+  {
+    "hanzi": "双",
+    "pinyin": "shuāng",
+    "indonesian": "pasang (sepatu, sumpit)",
+    "hsk_level": 3,
+    "pos": [
+      "m",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Shuāng",
+    "meaning_en_asli": "surname Shuang"
+  },
+  {
+    "hanzi": "突然",
+    "pinyin": "tūrán",
+    "indonesian": "tiba-tiba",
+    "hsk_level": 3,
+    "pos": [
+      "ad",
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tū rán",
+    "meaning_en_asli": "sudden; abrupt; unexpected"
+  },
+  {
+    "hanzi": "段",
+    "pinyin": "duàn",
+    "indonesian": "bagian; potongan; ruas",
+    "hsk_level": 3,
+    "pos": [
+      "q",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Duàn",
+    "meaning_en_asli": "surname Duan"
+  },
+  {
+    "hanzi": "检查",
+    "pinyin": "jiǎnchá",
+    "indonesian": "memeriksa; pemeriksaan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiǎn chá",
+    "meaning_en_asli": "inspection; to examine; to inspect"
+  },
+  {
+    "hanzi": "米",
+    "pinyin": "mǐ",
+    "indonesian": "meter; beras",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Mǐ",
+    "meaning_en_asli": "surname Mi"
+  },
+  {
+    "hanzi": "容易",
+    "pinyin": "róngyì",
+    "indonesian": "mudah",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "róng yì",
+    "meaning_en_asli": "easy; straightforward; likely; liable to; apt to"
+  },
+  {
+    "hanzi": "明白",
+    "pinyin": "míngbai",
+    "indonesian": "paham; jelas",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "a",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "míng bai",
+    "meaning_en_asli": "clear; obvious; unequivocal; to understand; to realize"
+  },
+  {
+    "hanzi": "根据",
+    "pinyin": "gēnjù",
+    "indonesian": "berdasarkan",
+    "hsk_level": 3,
+    "pos": [
+      "p",
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gēn jù",
+    "meaning_en_asli": "according to; based on; basis; foundation"
+  },
+  {
+    "hanzi": "记得",
+    "pinyin": "jìde",
+    "indonesian": "ingat",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jì de",
+    "meaning_en_asli": "to remember"
+  },
+  {
+    "hanzi": "辆",
+    "pinyin": "liàng",
+    "indonesian": "kata penggolong kendaraan",
+    "hsk_level": 3,
+    "pos": [
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "liàng",
+    "meaning_en_asli": "classifier for vehicles"
+  },
+  {
+    "hanzi": "简单",
+    "pinyin": "jiǎndān",
+    "indonesian": "sederhana",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiǎn dān",
+    "meaning_en_asli": "simple; not complicated"
+  },
+  {
+    "hanzi": "半",
+    "pinyin": "bàn",
+    "indonesian": "setengah",
+    "hsk_level": 3,
+    "pos": [
+      "m"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bàn",
+    "meaning_en_asli": "half; semi-; incomplete; (after a number) and a half"
+  },
+  {
+    "hanzi": "愿意",
+    "pinyin": "yuànyì",
+    "indonesian": "bersedia; mau",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yuàn yì",
+    "meaning_en_asli": "to wish; to want; ready; willing (to do sth)"
+  },
+  {
+    "hanzi": "音乐",
+    "pinyin": "yīnyuè",
+    "indonesian": "musik",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yīn yuè",
+    "meaning_en_asli": "music"
+  },
+  {
+    "hanzi": "包",
+    "pinyin": "bāo",
+    "indonesian": "tas; bungkus; membungkus",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Bāo",
+    "meaning_en_asli": "surname Bao"
+  },
+  {
+    "hanzi": "楼",
+    "pinyin": "lóu",
+    "indonesian": "gedung bertingkat; lantai",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Lóu",
+    "meaning_en_asli": "surname Lou"
+  },
+  {
+    "hanzi": "清楚",
+    "pinyin": "qīngchu",
+    "indonesian": "jelas",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "v",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qīng chu",
+    "meaning_en_asli": "clear; distinct; to understand thoroughly; to be clear about"
+  },
+  {
+    "hanzi": "照片",
+    "pinyin": "zhàopiàn",
+    "indonesian": "foto",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhào piàn",
+    "meaning_en_asli": "photograph; picture"
+  },
+  {
+    "hanzi": "银行",
+    "pinyin": "yínháng",
+    "indonesian": "bank",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yín háng",
+    "meaning_en_asli": "bank"
+  },
+  {
+    "hanzi": "故事",
+    "pinyin": "gùshi",
+    "indonesian": "cerita",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "gù shì",
+    "meaning_en_asli": "old practice"
+  },
+  {
+    "hanzi": "一般",
+    "pinyin": "yìbān",
+    "indonesian": "biasa; umumnya",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "ad",
+      "u"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī bān",
+    "meaning_en_asli": "same; ordinary; so-so; common; general; generally; in general"
+  },
+  {
+    "hanzi": "可爱",
+    "pinyin": "kě'ài",
+    "indonesian": "lucu; menggemaskan",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kě ài",
+    "meaning_en_asli": "adorable; cute; lovely"
+  },
+  {
+    "hanzi": "新闻",
+    "pinyin": "xīnwén",
+    "indonesian": "berita",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xīn wén",
+    "meaning_en_asli": "news"
+  },
+  {
+    "hanzi": "声音",
+    "pinyin": "shēngyīn",
+    "indonesian": "suara",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shēng yīn",
+    "meaning_en_asli": "voice; sound"
+  },
+  {
+    "hanzi": "马上",
+    "pinyin": "mǎshàng",
+    "indonesian": "segera",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "s"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "mǎ shàng",
+    "meaning_en_asli": "at once; right away; immediately; on horseback (i.e. by military force)"
+  },
+  {
+    "hanzi": "表示",
+    "pinyin": "biǎoshì",
+    "indonesian": "menyatakan; menunjukkan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "biǎo shì",
+    "meaning_en_asli": "to express; to show; to say; to state; to indicate; to mean"
+  },
+  {
+    "hanzi": "经过",
+    "pinyin": "jīngguò",
+    "indonesian": "melewati; melalui",
+    "hsk_level": 3,
+    "pos": [
+      "p",
+      "v",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jīng guò",
+    "meaning_en_asli": "to pass; to go through; process; course"
+  },
+  {
+    "hanzi": "历史",
+    "pinyin": "lìshǐ",
+    "indonesian": "sejarah",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lì shǐ",
+    "meaning_en_asli": "history"
+  },
+  {
+    "hanzi": "哭",
+    "pinyin": "kū",
+    "indonesian": "menangis",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kū",
+    "meaning_en_asli": "to cry; to weep"
+  },
+  {
+    "hanzi": "敢",
+    "pinyin": "gǎn",
+    "indonesian": "berani",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gǎn",
+    "meaning_en_asli": "to dare; daring; (polite) may I venture"
+  },
+  {
+    "hanzi": "会议",
+    "pinyin": "huìyì",
+    "indonesian": "rapat",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huì yì",
+    "meaning_en_asli": "meeting; conference"
+  },
+  {
+    "hanzi": "经常",
+    "pinyin": "jīngcháng",
+    "indonesian": "sering",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jīng cháng",
+    "meaning_en_asli": "frequently; constantly; regularly; often; day-to-day; everyday; daily"
+  },
+  {
+    "hanzi": "低",
+    "pinyin": "dī",
+    "indonesian": "rendah",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "ad",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dī",
+    "meaning_en_asli": "low; beneath; to lower (one's head); to let droop; to hang down; to incline"
+  },
+  {
+    "hanzi": "节目",
+    "pinyin": "jiémù",
+    "indonesian": "acara; program",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jié mù",
+    "meaning_en_asli": "program; item (on a program)"
+  },
+  {
+    "hanzi": "健康",
+    "pinyin": "jiànkāng",
+    "indonesian": "sehat; kesehatan",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "an",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiàn kāng",
+    "meaning_en_asli": "health; healthy"
+  },
+  {
+    "hanzi": "作用",
+    "pinyin": "zuòyòng",
+    "indonesian": "fungsi; pengaruh",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zuò yòng",
+    "meaning_en_asli": "to act on; to affect; action; function; activity; impact; result; effect; purpose; intent; (suffix) -ation, -tion etc, as in 用, inhibition"
+  },
+  {
+    "hanzi": "西",
+    "pinyin": "xī",
+    "indonesian": "barat",
+    "hsk_level": 3,
+    "pos": [
+      "f",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "Xī",
+    "meaning_en_asli": "the West; abbr. for Spain 牙; Spanish"
+  },
+  {
+    "hanzi": "差",
+    "pinyin": "chà",
+    "indonesian": "kurang; buruk",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "chā",
+    "meaning_en_asli": "difference; discrepancy; (math.) difference (amount remaining after a subtraction); (literary) a little; somewhat; slightly"
+  },
+  {
+    "hanzi": "结婚",
+    "pinyin": "jiéhūn",
+    "indonesian": "menikah",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jié hūn",
+    "meaning_en_asli": "to marry; to get married"
+  },
+  {
+    "hanzi": "短",
+    "pinyin": "duǎn",
+    "indonesian": "pendek",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "duǎn",
+    "meaning_en_asli": "short; brief; to lack; weak point; fault"
+  },
+  {
+    "hanzi": "同意",
+    "pinyin": "tóngyì",
+    "indonesian": "setuju",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tóng yì",
+    "meaning_en_asli": "to agree; to consent; to approve"
+  },
+  {
+    "hanzi": "教",
+    "pinyin": "jiāo",
+    "indonesian": "mengajar",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Jiào",
+    "meaning_en_asli": "surname Jiao"
+  },
+  {
+    "hanzi": "几乎",
+    "pinyin": "jīhū",
+    "indonesian": "hampir",
+    "hsk_level": 3,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jī hū",
+    "meaning_en_asli": "almost; nearly; practically"
+  },
+  {
+    "hanzi": "附近",
+    "pinyin": "fùjìn",
+    "indonesian": "dekat sini; sekitar",
+    "hsk_level": 3,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fù jìn",
+    "meaning_en_asli": "nearby; neighboring; (in the) vicinity (of); neighborhood"
+  },
+  {
+    "hanzi": "认真",
+    "pinyin": "rènzhēn",
+    "indonesian": "serius; sungguh-sungguh",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "rèn zhēn",
+    "meaning_en_asli": "conscientious; earnest; serious; to take seriously; to take to heart"
+  },
+  {
+    "hanzi": "脚",
+    "pinyin": "jiǎo",
+    "indonesian": "kaki",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiǎo",
+    "meaning_en_asli": "foot; leg (of an animal or an object); base (of an object); classifier for kicks"
+  },
+  {
+    "hanzi": "主要",
+    "pinyin": "zhǔyào",
+    "indonesian": "utama",
+    "hsk_level": 3,
+    "pos": [
+      "b",
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhǔ yào",
+    "meaning_en_asli": "main; principal; major; primary"
+  },
+  {
+    "hanzi": "遇到",
+    "pinyin": "yùdào",
+    "indonesian": "bertemu; menjumpai",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yù dào",
+    "meaning_en_asli": "to meet; to run into; to come across"
+  },
+  {
+    "hanzi": "年轻",
+    "pinyin": "niánqīng",
+    "indonesian": "muda",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nián qīng",
+    "meaning_en_asli": "young"
+  },
+  {
+    "hanzi": "久",
+    "pinyin": "jiǔ",
+    "indonesian": "lama (waktu)",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "g",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiǔ",
+    "meaning_en_asli": "(long) time; (long) duration of time"
+  },
+  {
+    "hanzi": "画",
+    "pinyin": "huà",
+    "indonesian": "menggambar; lukisan",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huà",
+    "meaning_en_asli": "to draw; to paint; picture; painting; to draw (a line) (variant of 划); stroke of a Chinese character (variant of 划); (calligraphy) horizontal stroke (variant of"
+  },
+  {
+    "hanzi": "表演",
+    "pinyin": "biǎoyǎn",
+    "indonesian": "pertunjukan; tampil",
+    "hsk_level": 3,
+    "pos": [
+      "vn",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "biǎo yǎn",
+    "meaning_en_asli": "play; show; performance; exhibition; to perform; to act; to demonstrate"
+  },
+  {
+    "hanzi": "关",
+    "pinyin": "guān",
+    "indonesian": "menutup; mematikan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "n",
+      "nr"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Guān",
+    "meaning_en_asli": "surname Guan"
+  },
+  {
+    "hanzi": "刚才",
+    "pinyin": "gāngcái",
+    "indonesian": "baru saja",
+    "hsk_level": 3,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gāng cái",
+    "meaning_en_asli": "just now; a moment ago"
+  },
+  {
+    "hanzi": "办公室",
+    "pinyin": "bàngōngshì",
+    "indonesian": "kantor",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bàn gōng shì",
+    "meaning_en_asli": "office; business premises; bureau"
+  },
+  {
+    "hanzi": "环境",
+    "pinyin": "huánjìng",
+    "indonesian": "lingkungan",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huán jìng",
+    "meaning_en_asli": "environment; circumstances; surroundings; ambient"
+  },
+  {
+    "hanzi": "关心",
+    "pinyin": "guānxīn",
+    "indonesian": "peduli; memperhatikan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "guān xīn",
+    "meaning_en_asli": "to be concerned about; to care about"
+  },
+  {
+    "hanzi": "祝",
+    "pinyin": "zhù",
+    "indonesian": "mendoakan; mengucapkan selamat",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "nr"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Zhù",
+    "meaning_en_asli": "surname Zhu"
+  },
+  {
+    "hanzi": "层",
+    "pinyin": "céng",
+    "indonesian": "lapisan; tingkat (lantai)",
+    "hsk_level": 3,
+    "pos": [
+      "qv",
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "céng",
+    "meaning_en_asli": "to pile on top of one another; layer; stratum; floor (of a building); story; (math.) sheaf; classifier for layers"
+  },
+  {
+    "hanzi": "腿",
+    "pinyin": "tuǐ",
+    "indonesian": "kaki (tungkai)",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tuǐ",
+    "meaning_en_asli": "leg"
+  },
+  {
+    "hanzi": "班",
+    "pinyin": "bān",
+    "indonesian": "kelas; kelompok; shift",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "q",
+      "nr"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Bān",
+    "meaning_en_asli": "surname Ban"
+  },
+  {
+    "hanzi": "坏",
+    "pinyin": "huài",
+    "indonesian": "buruk; rusak",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huài",
+    "meaning_en_asli": "bad; spoiled; broken; to break down; (suffix) to the utmost"
+  },
+  {
+    "hanzi": "一边",
+    "pinyin": "yìbiān",
+    "indonesian": "sambil (一边…一边…)",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī biān",
+    "meaning_en_asli": "one side; either side; on the one hand; on the other hand; doing while"
+  },
+  {
+    "hanzi": "鞋",
+    "pinyin": "xié",
+    "indonesian": "sepatu",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xié",
+    "meaning_en_asli": "shoe"
+  },
+  {
+    "hanzi": "习惯",
+    "pinyin": "xíguàn",
+    "indonesian": "kebiasaan; terbiasa",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xí guàn",
+    "meaning_en_asli": "habit; custom; usual practice; to be used to"
+  },
+  {
+    "hanzi": "变化",
+    "pinyin": "biànhuà",
+    "indonesian": "perubahan",
+    "hsk_level": 3,
+    "pos": [
+      "vn",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "biàn huà",
+    "meaning_en_asli": "(intransitive) to change; to vary; change; variation"
+  },
+  {
+    "hanzi": "周末",
+    "pinyin": "zhōumò",
+    "indonesian": "akhir pekan",
+    "hsk_level": 3,
+    "pos": [
+      "t"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhōu mò",
+    "meaning_en_asli": "weekend"
+  },
+  {
+    "hanzi": "忘记",
+    "pinyin": "wàngjì",
+    "indonesian": "lupa",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wàng jì",
+    "meaning_en_asli": "to forget"
+  },
+  {
+    "hanzi": "打算",
+    "pinyin": "dǎsuàn",
+    "indonesian": "berencana",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "n",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dǎ suàn",
+    "meaning_en_asli": "to plan; to intend; to calculate; plan; intention; calculation"
+  },
+  {
+    "hanzi": "极",
+    "pinyin": "jí",
+    "indonesian": "sangat (极了 = sekali)",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jí",
+    "meaning_en_asli": "extremely; pole (geography, physics); utmost; top"
+  },
+  {
+    "hanzi": "小心",
+    "pinyin": "xiǎoxīn",
+    "indonesian": "berhati-hati",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "v",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiǎo xīn",
+    "meaning_en_asli": "to be careful; to take care"
+  },
+  {
+    "hanzi": "举行",
+    "pinyin": "jǔxíng",
+    "indonesian": "menyelenggarakan",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jǔ xíng",
+    "meaning_en_asli": "to hold (a meeting, ceremony etc)"
+  },
+  {
+    "hanzi": "动物",
+    "pinyin": "dòngwù",
+    "indonesian": "hewan",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dòng wù",
+    "meaning_en_asli": "animal"
+  },
+  {
+    "hanzi": "饿",
+    "pinyin": "è",
+    "indonesian": "lapar",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "è",
+    "meaning_en_asli": "to be hungry; hungry; to starve (sb)"
+  },
+  {
+    "hanzi": "树",
+    "pinyin": "shù",
+    "indonesian": "pohon",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shù",
+    "meaning_en_asli": "tree; to cultivate; to set up"
+  },
+  {
+    "hanzi": "水平",
+    "pinyin": "shuǐpíng",
+    "indonesian": "tingkat; level",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shuǐ píng",
+    "meaning_en_asli": "level (of achievement etc); standard; horizontal"
+  },
+  {
+    "hanzi": "借",
+    "pinyin": "jiè",
+    "indonesian": "meminjam; meminjamkan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "p"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiè",
+    "meaning_en_asli": "to lend; to borrow; by means of; to take (an opportunity)"
+  },
+  {
+    "hanzi": "东",
+    "pinyin": "dōng",
+    "indonesian": "timur",
+    "hsk_level": 3,
+    "pos": [
+      "f",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Dōng",
+    "meaning_en_asli": "surname Dong"
+  },
+  {
+    "hanzi": "头发",
+    "pinyin": "tóufa",
+    "indonesian": "rambut",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tóu fa",
+    "meaning_en_asli": "hair (on the head)"
+  },
+  {
+    "hanzi": "害怕",
+    "pinyin": "hàipà",
+    "indonesian": "takut",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hài pà",
+    "meaning_en_asli": "to be afraid; to be scared"
+  },
+  {
+    "hanzi": "鸟",
+    "pinyin": "niǎo",
+    "indonesian": "burung",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "diǎo",
+    "meaning_en_asli": "variant of 屌; penis"
+  },
+  {
+    "hanzi": "蓝",
+    "pinyin": "lán",
+    "indonesian": "biru",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Lán",
+    "meaning_en_asli": "surname Lan"
+  },
+  {
+    "hanzi": "照顾",
+    "pinyin": "zhàogu",
+    "indonesian": "merawat; mengurus",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhào gu",
+    "meaning_en_asli": "to take care of; to show consideration; to attend to; to look after"
+  },
+  {
+    "hanzi": "文化",
+    "pinyin": "wénhuà",
+    "indonesian": "budaya",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "wén huà",
+    "meaning_en_asli": "culture; civilization; cultural"
+  },
+  {
+    "hanzi": "疼",
+    "pinyin": "téng",
+    "indonesian": "sakit; nyeri",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "téng",
+    "meaning_en_asli": "(it) hurts; sore; to love dearly"
+  },
+  {
+    "hanzi": "奇怪",
+    "pinyin": "qíguài",
+    "indonesian": "aneh",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qí guài",
+    "meaning_en_asli": "strange; odd; to marvel; to be baffled"
+  },
+  {
+    "hanzi": "礼物",
+    "pinyin": "lǐwù",
+    "indonesian": "hadiah",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lǐ wù",
+    "meaning_en_asli": "gift; present"
+  },
+  {
+    "hanzi": "南",
+    "pinyin": "nán",
+    "indonesian": "selatan",
+    "hsk_level": 3,
+    "pos": [
+      "b",
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Nán",
+    "meaning_en_asli": "surname Nan"
+  },
+  {
+    "hanzi": "提高",
+    "pinyin": "tígāo",
+    "indonesian": "meningkatkan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tí gāo",
+    "meaning_en_asli": "to raise; to increase; to improve"
+  },
+  {
+    "hanzi": "满意",
+    "pinyin": "mǎnyì",
+    "indonesian": "puas",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "mǎn yì",
+    "meaning_en_asli": "satisfied; pleased; to one's satisfaction"
+  },
+  {
+    "hanzi": "旧",
+    "pinyin": "jiù",
+    "indonesian": "lama; bekas",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiù",
+    "meaning_en_asli": "old; opposite: new 新; former; worn (with age)"
+  },
+  {
+    "hanzi": "司机",
+    "pinyin": "sījī",
+    "indonesian": "sopir",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "sī jī",
+    "meaning_en_asli": "chauffeur; driver"
+  },
+  {
+    "hanzi": "黄",
+    "pinyin": "huáng",
+    "indonesian": "kuning",
+    "hsk_level": 3,
+    "pos": [
+      "nr",
+      "a",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Huáng",
+    "meaning_en_asli": "surname Huang or Hwang"
+  },
+  {
+    "hanzi": "经理",
+    "pinyin": "jīnglǐ",
+    "indonesian": "manajer",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jīng lǐ",
+    "meaning_en_asli": "manager; director"
+  },
+  {
+    "hanzi": "兴趣",
+    "pinyin": "xìngqù",
+    "indonesian": "minat",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xìng qù",
+    "meaning_en_asli": "interest (desire to know about sth); interest (thing in which one is interested); hobby"
+  },
+  {
+    "hanzi": "帮忙",
+    "pinyin": "bāngmáng",
+    "indonesian": "membantu",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bāng máng",
+    "meaning_en_asli": "to help; to lend a hand; to do a favor; to do a good turn"
+  },
+  {
+    "hanzi": "电子",
+    "pinyin": "diànzǐ",
+    "indonesian": "elektronik",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "diàn zǐ",
+    "meaning_en_asli": "electronic; electron (particle physics)"
+  },
+  {
+    "hanzi": "见面",
+    "pinyin": "jiànmiàn",
+    "indonesian": "bertemu",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiàn miàn",
+    "meaning_en_asli": "to meet; to see each other"
+  },
+  {
+    "hanzi": "成绩",
+    "pinyin": "chéngjì",
+    "indonesian": "prestasi; nilai",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chéng jì",
+    "meaning_en_asli": "achievement; performance records; grades"
+  },
+  {
+    "hanzi": "中间",
+    "pinyin": "zhōngjiān",
+    "indonesian": "tengah",
+    "hsk_level": 3,
+    "pos": [
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhōng jiān",
+    "meaning_en_asli": "the middle; the inside; in the middle; within; between; among; during; in the meantime"
+  },
+  {
+    "hanzi": "聪明",
+    "pinyin": "cōngming",
+    "indonesian": "pintar",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "cōng ming",
+    "meaning_en_asli": "intelligent; clever; bright; smart; acute (of sight and hearing)"
+  },
+  {
+    "hanzi": "多么",
+    "pinyin": "duōme",
+    "indonesian": "betapa",
+    "hsk_level": 3,
+    "pos": [
+      "d",
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "duō me",
+    "meaning_en_asli": "how (wonderful etc); what (a great idea etc); however (difficult it may be etc); (in interrogative sentences) how (much etc); to what extent"
+  },
+  {
+    "hanzi": "灯",
+    "pinyin": "dēng",
+    "indonesian": "lampu",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dēng",
+    "meaning_en_asli": "lamp; light; lantern"
+  },
+  {
+    "hanzi": "太阳",
+    "pinyin": "tàiyang",
+    "indonesian": "matahari",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tài yang",
+    "meaning_en_asli": "sun; abbr. for 太阳穴"
+  },
+  {
+    "hanzi": "方便",
+    "pinyin": "fāngbiàn",
+    "indonesian": "praktis; nyaman",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "a",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fāng biàn",
+    "meaning_en_asli": "convenient; suitable; to facilitate; to make things easy; having money to spare; (euphemism) to relieve oneself"
+  },
+  {
+    "hanzi": "糖",
+    "pinyin": "táng",
+    "indonesian": "gula; permen",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "táng",
+    "meaning_en_asli": "sugar; sweets; candy"
+  },
+  {
+    "hanzi": "相同",
+    "pinyin": "xiāngtóng",
+    "indonesian": "sama",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiāng tóng",
+    "meaning_en_asli": "identical; same"
+  },
+  {
+    "hanzi": "生气",
+    "pinyin": "shēngqì",
+    "indonesian": "marah",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "n",
+      "v",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shēng qì",
+    "meaning_en_asli": "to get angry; to take offense; angry; vitality; liveliness"
+  },
+  {
+    "hanzi": "公园",
+    "pinyin": "gōngyuán",
+    "indonesian": "taman",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gōng yuán",
+    "meaning_en_asli": "park (for public recreation)"
+  },
+  {
+    "hanzi": "热情",
+    "pinyin": "rèqíng",
+    "indonesian": "ramah; antusias",
+    "hsk_level": 3,
+    "pos": [
+      "an",
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "rè qíng",
+    "meaning_en_asli": "cordial; enthusiastic; passion; passionate; passionately"
+  },
+  {
+    "hanzi": "一会儿",
+    "pinyin": "yíhuìr",
+    "indonesian": "sebentar",
+    "hsk_level": 3,
+    "pos": [
+      "mq"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī huì r",
+    "meaning_en_asli": "a moment; a while; in a moment; now...now...; also pr. [yī huǐ r]"
+  },
+  {
+    "hanzi": "骑",
+    "pinyin": "qí",
+    "indonesian": "menunggang; mengendarai (sepeda atau motor)",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "jì",
+    "meaning_en_asli": "(Tw) saddle horse; mounted soldier"
+  },
+  {
+    "hanzi": "河",
+    "pinyin": "hé",
+    "indonesian": "sungai",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hé",
+    "meaning_en_asli": "river"
+  },
+  {
+    "hanzi": "搬",
+    "pinyin": "bān",
+    "indonesian": "memindahkan; pindah (rumah)",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bān",
+    "meaning_en_asli": "to move (i.e. relocate oneself); to move (sth relatively heavy or bulky); to shift; to copy indiscriminately"
+  },
+  {
+    "hanzi": "同事",
+    "pinyin": "tóngshì",
+    "indonesian": "rekan kerja",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tóng shì",
+    "meaning_en_asli": "colleague; co-worker"
+  },
+  {
+    "hanzi": "舒服",
+    "pinyin": "shūfu",
+    "indonesian": "nyaman; enak badan",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shū fu",
+    "meaning_en_asli": "comfortable; feeling well"
+  },
+  {
+    "hanzi": "体育",
+    "pinyin": "tǐyù",
+    "indonesian": "olahraga; pendidikan jasmani",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tǐ yù",
+    "meaning_en_asli": "sports; physical education"
+  },
+  {
+    "hanzi": "角",
+    "pinyin": "jiǎo",
+    "indonesian": "sudut; jiao (0,1 yuan)",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "q",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Jué",
+    "meaning_en_asli": "surname Jue"
+  },
+  {
+    "hanzi": "胖",
+    "pinyin": "pàng",
+    "indonesian": "gemuk",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "pán",
+    "meaning_en_asli": "healthy; at ease"
+  },
+  {
+    "hanzi": "干净",
+    "pinyin": "gānjìng",
+    "indonesian": "bersih",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gān jìng",
+    "meaning_en_asli": "clean; neat"
+  },
+  {
+    "hanzi": "放心",
+    "pinyin": "fàngxīn",
+    "indonesian": "tenang; tidak khawatir",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fàng xīn",
+    "meaning_en_asli": "to feel relieved; to feel reassured; to be at ease"
+  },
+  {
+    "hanzi": "草",
+    "pinyin": "cǎo",
+    "indonesian": "rumput",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "cǎo",
+    "meaning_en_asli": "variant of 草"
+  },
+  {
+    "hanzi": "甜",
+    "pinyin": "tián",
+    "indonesian": "manis",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tián",
+    "meaning_en_asli": "sweet"
+  },
+  {
+    "hanzi": "安静",
+    "pinyin": "ānjìng",
+    "indonesian": "tenang; sepi",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ān jìng",
+    "meaning_en_asli": "quiet; peaceful; calm"
+  },
+  {
+    "hanzi": "作业",
+    "pinyin": "zuòyè",
+    "indonesian": "pekerjaan rumah; tugas",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zuò yè",
+    "meaning_en_asli": "school assignment; homework; work; task; operation; to operate"
+  },
+  {
+    "hanzi": "瘦",
+    "pinyin": "shòu",
+    "indonesian": "kurus",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shòu",
+    "meaning_en_asli": "thin; to lose weight; (of clothing) tight; (of meat) lean; (of land) unproductive"
+  },
+  {
+    "hanzi": "绿",
+    "pinyin": "lǜ",
+    "indonesian": "hijau",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "an"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lǜ",
+    "meaning_en_asli": "green; (slang) (derived from 绿帽子) to cheat on (one's spouse or boyfriend or girlfriend)"
+  },
+  {
+    "hanzi": "啤酒",
+    "pinyin": "píjiǔ",
+    "indonesian": "bir",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "pí jiǔ",
+    "meaning_en_asli": "beer (loanword)"
+  },
+  {
+    "hanzi": "蛋糕",
+    "pinyin": "dàngāo",
+    "indonesian": "kue",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dàn gāo",
+    "meaning_en_asli": "cake"
+  },
+  {
+    "hanzi": "新鲜",
+    "pinyin": "xīnxiān",
+    "indonesian": "segar",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xīn xiān",
+    "meaning_en_asli": "fresh (experience, food etc); freshness; novel; uncommon"
+  },
+  {
+    "hanzi": "难过",
+    "pinyin": "nánguò",
+    "indonesian": "sedih",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nán guò",
+    "meaning_en_asli": "to feel sad; to feel unwell; (of life) to be difficult"
+  },
+  {
+    "hanzi": "客人",
+    "pinyin": "kèren",
+    "indonesian": "tamu",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "kè rén",
+    "meaning_en_asli": "visitor; guest; customer; client"
+  },
+  {
+    "hanzi": "奶奶",
+    "pinyin": "nǎinai",
+    "indonesian": "nenek (dari pihak ayah)",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nǎi nai",
+    "meaning_en_asli": "(informal) grandma (paternal grandmother); (respectful) mistress of the house; (coll.) boobies; breasts"
+  },
+  {
+    "hanzi": "碗",
+    "pinyin": "wǎn",
+    "indonesian": "mangkuk",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "q"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "wǎn",
+    "meaning_en_asli": "variant of 碗"
+  },
+  {
+    "hanzi": "数学",
+    "pinyin": "shùxué",
+    "indonesian": "matematika",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shù xué",
+    "meaning_en_asli": "mathematics; mathematical"
+  },
+  {
+    "hanzi": "地铁",
+    "pinyin": "dìtiě",
+    "indonesian": "kereta bawah tanah; MRT",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dì tiě",
+    "meaning_en_asli": "underground railway; subway; subway train"
+  },
+  {
+    "hanzi": "刷",
+    "pinyin": "shuā",
+    "indonesian": "menyikat; menggosok; menggesek (kartu)",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "o"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shuā",
+    "meaning_en_asli": "to brush; to paint; to daub; to paste up; to skip class (of students); to fire from a job"
+  },
+  {
+    "hanzi": "厨房",
+    "pinyin": "chúfáng",
+    "indonesian": "dapur",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chú fáng",
+    "meaning_en_asli": "kitchen"
+  },
+  {
+    "hanzi": "练习",
+    "pinyin": "liànxí",
+    "indonesian": "berlatih; latihan",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "liàn xí",
+    "meaning_en_asli": "to practice; exercise; drill; practice"
+  },
+  {
+    "hanzi": "爷爷",
+    "pinyin": "yéye",
+    "indonesian": "kakek (dari pihak ayah)",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yé ye",
+    "meaning_en_asli": "(coll.) father's father; paternal grandfather"
+  },
+  {
+    "hanzi": "云",
+    "pinyin": "yún",
+    "indonesian": "awan",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "g",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yún",
+    "meaning_en_asli": "(classical) to say"
+  },
+  {
+    "hanzi": "邻居",
+    "pinyin": "línjū",
+    "indonesian": "tetangga",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "lín jū",
+    "meaning_en_asli": "neighbor; next door"
+  },
+  {
+    "hanzi": "校长",
+    "pinyin": "xiàozhǎng",
+    "indonesian": "kepala sekolah; rektor",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiào zhǎng",
+    "meaning_en_asli": "(college, university) president; headmaster"
+  },
+  {
+    "hanzi": "花园",
+    "pinyin": "huāyuán",
+    "indonesian": "kebun; taman",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "huā yuán",
+    "meaning_en_asli": "garden"
+  },
+  {
+    "hanzi": "耳朵",
+    "pinyin": "ěrduo",
+    "indonesian": "telinga",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ěr duo",
+    "meaning_en_asli": "ear; handle (on a cup)"
+  },
+  {
+    "hanzi": "节日",
+    "pinyin": "jiérì",
+    "indonesian": "hari raya; festival",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jié rì",
+    "meaning_en_asli": "holiday; festival"
+  },
+  {
+    "hanzi": "鼻子",
+    "pinyin": "bízi",
+    "indonesian": "hidung",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bí zi",
+    "meaning_en_asli": "nose"
+  },
+  {
+    "hanzi": "叔叔",
+    "pinyin": "shūshu",
+    "indonesian": "paman (adik ayah)",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shū shu",
+    "meaning_en_asli": "father's younger brother; uncle; Taiwan pr. [shú shu]"
+  },
+  {
+    "hanzi": "洗澡",
+    "pinyin": "xǐzǎo",
+    "indonesian": "mandi",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xǐ zǎo",
+    "meaning_en_asli": "to bathe; to take a shower"
+  },
+  {
+    "hanzi": "地图",
+    "pinyin": "dìtú",
+    "indonesian": "peta",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dì tú",
+    "meaning_en_asli": "map"
+  },
+  {
+    "hanzi": "帽子",
+    "pinyin": "màozi",
+    "indonesian": "topi",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "mào zi",
+    "meaning_en_asli": "hat; cap; (fig.) label; bad name"
+  },
+  {
+    "hanzi": "街道",
+    "pinyin": "jiēdào",
+    "indonesian": "jalan; jalan raya",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jiē dào",
+    "meaning_en_asli": "street; subdistrict; residential district"
+  },
+  {
+    "hanzi": "感冒",
+    "pinyin": "gǎnmào",
+    "indonesian": "flu; pilek; masuk angin",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "gǎn mào",
+    "meaning_en_asli": "to catch cold; (common) cold; (coll.) to be interested in (often used in the negative); (Tw) to detest; can't stand"
+  },
+  {
+    "hanzi": "迟到",
+    "pinyin": "chídào",
+    "indonesian": "terlambat",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chí dào",
+    "meaning_en_asli": "to arrive late"
+  },
+  {
+    "hanzi": "刻",
+    "pinyin": "kè",
+    "indonesian": "seperempat jam; mengukir",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "qt"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kè",
+    "meaning_en_asli": "quarter (hour); moment; to carve; to engrave; to cut; oppressive; classifier for short time intervals"
+  },
+  {
+    "hanzi": "锻炼",
+    "pinyin": "duànliàn",
+    "indonesian": "berolahraga; melatih",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "duàn liàn",
+    "meaning_en_asli": "to toughen; to temper; to engage in physical exercise; to work out; (fig.) to develop one's skills; to train oneself"
+  },
+  {
+    "hanzi": "裤子",
+    "pinyin": "kùzi",
+    "indonesian": "celana",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "kù zi",
+    "meaning_en_asli": "variant of 裤子, trousers; pants"
+  },
+  {
+    "hanzi": "夏",
+    "pinyin": "xià",
+    "indonesian": "musim panas",
+    "hsk_level": 3,
+    "pos": [
+      "tg",
+      "g",
+      "nr"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "Xià",
+    "meaning_en_asli": "the Xia or Hsia dynasty c. 2000 BC; Xia of the Sixteen Kingdoms (407-432); surname Xia"
+  },
+  {
+    "hanzi": "图书馆",
+    "pinyin": "túshūguǎn",
+    "indonesian": "perpustakaan",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "tú shū guǎn",
+    "meaning_en_asli": "library"
+  },
+  {
+    "hanzi": "电梯",
+    "pinyin": "diàntī",
+    "indonesian": "lift",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "diàn tī",
+    "meaning_en_asli": "elevator; escalator"
+  },
+  {
+    "hanzi": "刮",
+    "pinyin": "guā",
+    "indonesian": "bertiup (angin); mengikis",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "guā",
+    "meaning_en_asli": "to scrape; to blow; to shave; to plunder; to extort"
+  },
+  {
+    "hanzi": "矮",
+    "pinyin": "ǎi",
+    "indonesian": "pendek (tinggi badan)",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ǎi",
+    "meaning_en_asli": "low; short (in length)"
+  },
+  {
+    "hanzi": "眼镜",
+    "pinyin": "yǎnjìng",
+    "indonesian": "kacamata",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǎn jìng",
+    "meaning_en_asli": "spectacles; eyeglasses"
+  },
+  {
+    "hanzi": "上网",
+    "pinyin": "shàngwǎng",
+    "indonesian": "berselancar internet; online",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "shàng wǎng",
+    "meaning_en_asli": "to go online; to connect to the Internet; (of a document etc) to be uploaded to the Internet; (tennis, volleyball etc) to move in close to the net"
+  },
+  {
+    "hanzi": "春",
+    "pinyin": "chūn",
+    "indonesian": "musim semi",
+    "hsk_level": 3,
+    "pos": [
+      "tg"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "chūn",
+    "meaning_en_asli": "old variant of 春"
+  },
+  {
+    "hanzi": "面包",
+    "pinyin": "miànbāo",
+    "indonesian": "roti",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "miàn bāo",
+    "meaning_en_asli": "bread"
+  },
+  {
+    "hanzi": "冰箱",
+    "pinyin": "bīngxiāng",
+    "indonesian": "kulkas",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bīng xiāng",
+    "meaning_en_asli": "icebox; freezer cabinet; refrigerator"
+  },
+  {
+    "hanzi": "阿姨",
+    "pinyin": "āyí",
+    "indonesian": "tante; bibi",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ā yí",
+    "meaning_en_asli": "maternal aunt; step-mother; childcare worker; nursemaid; woman of similar age to one's parents (term of address used by child)"
+  },
+  {
+    "hanzi": "超市",
+    "pinyin": "chāoshì",
+    "indonesian": "supermarket",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chāo shì",
+    "meaning_en_asli": "supermarket (abbr. for 超级市场)"
+  },
+  {
+    "hanzi": "着急",
+    "pinyin": "zháojí",
+    "indonesian": "cemas; terburu-buru",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "ad"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zháo jí",
+    "meaning_en_asli": "to worry; to feel anxious; to feel a sense of urgency; to be in a hurry; Taiwan pr. [zhāo jí]"
+  },
+  {
+    "hanzi": "季节",
+    "pinyin": "jìjié",
+    "indonesian": "musim",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jì jié",
+    "meaning_en_asli": "time; season; period"
+  },
+  {
+    "hanzi": "饱",
+    "pinyin": "bǎo",
+    "indonesian": "kenyang",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "ad",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bǎo",
+    "meaning_en_asli": "to eat till full; satisfied"
+  },
+  {
+    "hanzi": "空调",
+    "pinyin": "kōngtiáo",
+    "indonesian": "AC",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kōng tiáo",
+    "meaning_en_asli": "air conditioning; air conditioner (including units that have a heating mode)"
+  },
+  {
+    "hanzi": "一共",
+    "pinyin": "yígòng",
+    "indonesian": "total; seluruhnya",
+    "hsk_level": 3,
+    "pos": [
+      "d"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yī gòng",
+    "meaning_en_asli": "altogether"
+  },
+  {
+    "hanzi": "月亮",
+    "pinyin": "yuèliang",
+    "indonesian": "bulan",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yuè liang",
+    "meaning_en_asli": "the moon"
+  },
+  {
+    "hanzi": "北方",
+    "pinyin": "běifāng",
+    "indonesian": "utara; wilayah utara",
+    "hsk_level": 3,
+    "pos": [
+      "s",
+      "f"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "běi fāng",
+    "meaning_en_asli": "north; the northern part a country; China north of the Yellow River"
+  },
+  {
+    "hanzi": "爱好",
+    "pinyin": "àihào",
+    "indonesian": "hobi",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "ài hào",
+    "meaning_en_asli": "to like; to be fond of; to take pleasure in; to be keen on; interest; hobby"
+  },
+  {
+    "hanzi": "衬衫",
+    "pinyin": "chènshān",
+    "indonesian": "kemeja",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "chèn shān",
+    "meaning_en_asli": "shirt; blouse"
+  },
+  {
+    "hanzi": "宾馆",
+    "pinyin": "bīnguǎn",
+    "indonesian": "hotel kecil; penginapan",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "bīn guǎn",
+    "meaning_en_asli": "guesthouse; lodge; hotel"
+  },
+  {
+    "hanzi": "冬",
+    "pinyin": "dōng",
+    "indonesian": "musim dingin",
+    "hsk_level": 3,
+    "pos": [
+      "tg"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dōng",
+    "meaning_en_asli": "winter"
+  },
+  {
+    "hanzi": "裙子",
+    "pinyin": "qúnzi",
+    "indonesian": "rok",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qún zi",
+    "meaning_en_asli": "skirt"
+  },
+  {
+    "hanzi": "香蕉",
+    "pinyin": "xiāngjiāo",
+    "indonesian": "pisang",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xiāng jiāo",
+    "meaning_en_asli": "banana"
+  },
+  {
+    "hanzi": "秋",
+    "pinyin": "qiū",
+    "indonesian": "musim gugur",
+    "hsk_level": 3,
+    "pos": [
+      "tg",
+      "g"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": true,
+    "pinyin_asli": "Qiū",
+    "meaning_en_asli": "surname Qiu"
+  },
+  {
+    "hanzi": "发烧",
+    "pinyin": "fāshāo",
+    "indonesian": "demam",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn",
+      "b"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fā shāo",
+    "meaning_en_asli": "to have a high temperature (from illness); to have a fever"
+  },
+  {
+    "hanzi": "伞",
+    "pinyin": "sǎn",
+    "indonesian": "payung",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "sǎn",
+    "meaning_en_asli": "umbrella; parasol"
+  },
+  {
+    "hanzi": "有名",
+    "pinyin": "yǒumíng",
+    "indonesian": "terkenal",
+    "hsk_level": 3,
+    "pos": [
+      "a"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "yǒu míng",
+    "meaning_en_asli": "famous; well-known"
+  },
+  {
+    "hanzi": "打扫",
+    "pinyin": "dǎsǎo",
+    "indonesian": "membersihkan; menyapu",
+    "hsk_level": 3,
+    "pos": [
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "dǎ sǎo",
+    "meaning_en_asli": "to clean; to sweep"
+  },
+  {
+    "hanzi": "葡萄",
+    "pinyin": "pútao",
+    "indonesian": "anggur",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "pú tao",
+    "meaning_en_asli": "grape"
+  },
+  {
+    "hanzi": "复习",
+    "pinyin": "fùxí",
+    "indonesian": "mengulang pelajaran",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "fù xí",
+    "meaning_en_asli": "to review; revision"
+  },
+  {
+    "hanzi": "熊猫",
+    "pinyin": "xióngmāo",
+    "indonesian": "panda",
+    "hsk_level": 3,
+    "pos": [
+      "n",
+      "nz"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xióng māo",
+    "meaning_en_asli": "panda"
+  },
+  {
+    "hanzi": "护照",
+    "pinyin": "hùzhào",
+    "indonesian": "paspor",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hù zhào",
+    "meaning_en_asli": "passport"
+  },
+  {
+    "hanzi": "菜单",
+    "pinyin": "càidān",
+    "indonesian": "menu",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "cài dān",
+    "meaning_en_asli": "menu"
+  },
+  {
+    "hanzi": "年级",
+    "pinyin": "niánjí",
+    "indonesian": "tingkat kelas",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "nián jí",
+    "meaning_en_asli": "grade; year (in school, college etc)"
+  },
+  {
+    "hanzi": "果汁",
+    "pinyin": "guǒzhī",
+    "indonesian": "jus buah",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "guǒ zhī",
+    "meaning_en_asli": "fruit juice"
+  },
+  {
+    "hanzi": "面条",
+    "pinyin": "miàntiáo",
+    "indonesian": "mi",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "miàn tiáo",
+    "meaning_en_asli": "noodles"
+  },
+  {
+    "hanzi": "盘子",
+    "pinyin": "pánzi",
+    "indonesian": "piring",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "pán zi",
+    "meaning_en_asli": "tray; plate; dish"
+  },
+  {
+    "hanzi": "铅笔",
+    "pinyin": "qiānbǐ",
+    "indonesian": "pensil",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "qiān bǐ",
+    "meaning_en_asli": "(lead) pencil"
+  },
+  {
+    "hanzi": "渴",
+    "pinyin": "kě",
+    "indonesian": "haus",
+    "hsk_level": 3,
+    "pos": [
+      "a",
+      "v"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kě",
+    "meaning_en_asli": "thirsty"
+  },
+  {
+    "hanzi": "洗手间",
+    "pinyin": "xǐshǒujiān",
+    "indonesian": "toilet",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xǐ shǒu jiān",
+    "meaning_en_asli": "toilet; lavatory; washroom"
+  },
+  {
+    "hanzi": "词语",
+    "pinyin": "cíyǔ",
+    "indonesian": "kata; istilah",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "cí yǔ",
+    "meaning_en_asli": "word (general term including monosyllables through to short phrases); term (e.g. technical term); expression"
+  },
+  {
+    "hanzi": "句子",
+    "pinyin": "jùzi",
+    "indonesian": "kalimat",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "jù zi",
+    "meaning_en_asli": "sentence"
+  },
+  {
+    "hanzi": "照相机",
+    "pinyin": "zhàoxiàngjī",
+    "indonesian": "kamera",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zhào xiàng jī",
+    "meaning_en_asli": "camera"
+  },
+  {
+    "hanzi": "筷子",
+    "pinyin": "kuàizi",
+    "indonesian": "sumpit",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "kuài zi",
+    "meaning_en_asli": "chopsticks"
+  },
+  {
+    "hanzi": "字典",
+    "pinyin": "zìdiǎn",
+    "indonesian": "kamus (aksara)",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "zì diǎn",
+    "meaning_en_asli": "Chinese character dictionary (containing entries for single characters, contrasted with a 词典, which has entries for words of one or more characters); (coll.) di"
+  },
+  {
+    "hanzi": "普通话",
+    "pinyin": "pǔtōnghuà",
+    "indonesian": "bahasa Mandarin standar",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "pǔ tōng huà",
+    "meaning_en_asli": "Mandarin (common language); Putonghua (common speech of the Chinese language); ordinary speech"
+  },
+  {
+    "hanzi": "爬山",
+    "pinyin": "páshān",
+    "indonesian": "mendaki gunung",
+    "hsk_level": 3,
+    "pos": [
+      "v",
+      "vn"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "pá shān",
+    "meaning_en_asli": "to climb a mountain; to mountaineer; hiking; mountaineering"
+  },
+  {
+    "hanzi": "黑板",
+    "pinyin": "hēibǎn",
+    "indonesian": "papan tulis",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "hēi bǎn",
+    "meaning_en_asli": "blackboard"
+  },
+  {
+    "hanzi": "行李箱",
+    "pinyin": "xínglixiāng",
+    "indonesian": "koper",
+    "hsk_level": 3,
+    "pos": [
+      "n"
+    ],
+    "status": "draf_perlu_dicek_penutur",
+    "sumber_asli_bermasalah": false,
+    "pinyin_asli": "xíng li xiāng",
+    "meaning_en_asli": "suitcase; baggage compartment; overhead bin; (car) trunk; boot"
+  }
+]
