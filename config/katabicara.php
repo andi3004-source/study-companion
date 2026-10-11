@@ -4,8 +4,10 @@
  * "Kata bicara" word catalog (App\Services\KataBicaraCatalog).
  *
  * Expected file: a JSON array of entries (or {"items": [...]}), each with
- *   indonesia, inggris, ipa_inggris, hanzi, pinyin  (strings)
- *   ikut_prompt                                     (bool; only true entries are used)
+ *   id, hanzi, pinyin, inggris, ipa_inggris, cefr_level
+ *   nama_untuk_prompt   Indonesian name (falls back to arti_tampil when empty)
+ *   ikut_prompt         bool; only true entries are used
+ *   tampil              {mandarin, inggris, indonesia} — not used by this page
  * A missing or unreadable file shows "Katalog belum tersedia" — never an error.
  */
 return [

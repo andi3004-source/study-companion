@@ -41,11 +41,14 @@ class KataBicaraCatalog
         return $this->entries = collect($data)
             ->filter(fn ($entry) => is_array($entry) && ($entry['ikut_prompt'] ?? false) === true)
             ->map(fn (array $entry) => [
-                'indonesia' => trim((string) ($entry['indonesia'] ?? '')),
+                'id' => $entry['id'] ?? null,
+                // Indonesian name: nama_untuk_prompt, falling back to arti_tampil.
+                'indonesia' => trim((string) ($entry['nama_untuk_prompt'] ?? '')) ?: trim((string) ($entry['arti_tampil'] ?? '')),
                 'inggris' => trim((string) ($entry['inggris'] ?? '')),
                 'ipa_inggris' => trim((string) ($entry['ipa_inggris'] ?? '')),
                 'hanzi' => trim((string) ($entry['hanzi'] ?? '')),
                 'pinyin' => trim((string) ($entry['pinyin'] ?? '')),
+                'cefr_level' => $entry['cefr_level'] ?? null,
             ])
             ->filter(fn (array $entry) => $entry['indonesia'] !== '')
             ->values();
