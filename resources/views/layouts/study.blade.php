@@ -44,6 +44,7 @@
                         ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => '💬'],
                         ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => '🎤'],
                         ['route' => 'progress', 'label' => 'Progress', 'icon' => '📈'],
+                        ['route' => 'bantuan', 'label' => 'Bantuan', 'icon' => '❓'],
                     ];
                 @endphp
                 @foreach ($navItems as $item)
@@ -60,11 +61,11 @@
             <div class="mt-auto pt-6">
                 <div class="rounded-2xl bg-navy-deep p-4 mb-4">
                     <p class="font-hand text-2xl text-orange leading-none">Keep going!</p>
-                    <p class="text-xs text-white/60 mt-1">Hari {{ auth()->user()->dayNumber() ?? '-' }} sejak mulai</p>
+                    <p class="text-xs text-white/80 mt-1">Hari {{ auth()->user()->dayNumber() ?? '-' }} sejak mulai</p>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="text-xs text-white/50 hover:text-white/80 px-3">Keluar</button>
+                    <button type="submit" class="text-xs text-white/80 hover:text-white underline px-3">Keluar</button>
                 </form>
             </div>
         </aside>
@@ -114,6 +115,7 @@
 
             <footer class="px-4 sidebar:px-8 pb-28 sidebar:pb-8 text-sm text-ink-soft">
                 <p>Belajar bahasa dengan keyboard dan suara. Dirancang agar mudah diakses.</p>
+                <p class="mt-1"><a href="{{ route('bantuan') }}" class="underline">Bantuan dan pernyataan aksesibilitas</a></p>
             </footer>
         </div>
     </div>

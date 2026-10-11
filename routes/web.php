@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use App\Livewire\Bantuan;
 use App\Livewire\Cards\Deck;
 use App\Livewire\Conversation\Chat;
 use App\Livewire\Conversation\Picker as ConversationPicker;
@@ -54,6 +55,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/progress', ProgressOverview::class)->name('progress');
 
         Route::get('/pronunciation-check', PronunciationCheck::class)->name('pronunciation-check');
+
+        Route::get('/bantuan', Bantuan::class)->name('bantuan');
     });
 });
 
