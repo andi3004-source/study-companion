@@ -12,6 +12,87 @@ body {
     display: none !important;
 }
 
+/*
+ * Display settings (header "Tampilan" panel). Classes are set on <html> by the
+ * inline script in layouts/study.blade.php from localStorage. Tailwind sizes
+ * are rem-based, so changing the root font size scales the whole page.
+ */
+html {
+    font-size: 112.5%; /* 18px base */
+}
+
+html.teks-besar {
+    font-size: 125%; /* 20px */
+}
+
+html.teks-sangat-besar {
+    font-size: 137.5%; /* 22px */
+}
+
+/* Thick, always-visible focus indicator (two-tone so it shows on light and navy backgrounds). */
+:focus-visible {
+    outline: 3px solid #b45309 !important;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px #ffffff;
+}
+
+/* Minimum 44px touch targets for controls (inline text links are exempt). */
+button,
+summary,
+[role='button'],
+input[type='submit'],
+select {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* Current page is marked by shape, not only by colour. */
+nav [aria-current='page'] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+/* High contrast mode: pure black on white, muted greys become black, links underlined. */
+html.kontras-tinggi body,
+html.kontras-tinggi .bg-cream,
+html.kontras-tinggi .bg-card,
+html.kontras-tinggi .bg-card-alt {
+    background-color: #ffffff !important;
+}
+
+html.kontras-tinggi .text-ink,
+html.kontras-tinggi .text-ink-soft,
+html.kontras-tinggi .text-ink-faint {
+    color: #000000 !important;
+}
+
+html.kontras-tinggi .border-line-card,
+html.kontras-tinggi .border-line {
+    border-color: #000000 !important;
+}
+
+html.kontras-tinggi main a {
+    text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* Skip links: off-screen until focused, then shown top-left above everything. */
 .skip-link {
     position: absolute;

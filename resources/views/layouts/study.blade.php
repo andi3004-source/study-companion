@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Study Companion' }}</title>
+    {{-- Applies saved display settings before first paint (see displaySettings() in app.js). --}}
+    <script>
+        try {
+            var tampilan = JSON.parse(localStorage.getItem('tampilan') || '{}');
+            var kelas = document.documentElement.classList;
+            if (tampilan.ukuran === 'besar') kelas.add('teks-besar');
+            if (tampilan.ukuran === 'sangat-besar') kelas.add('teks-sangat-besar');
+            if (tampilan.kontras) kelas.add('kontras-tinggi');
+            if (tampilan.pembacaLayar) kelas.add('mode-pembaca-layar');
+        } catch (e) {}
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -63,7 +74,38 @@
             {{-- Always rendered (the brand only shows on mobile, where the sidebar is hidden) so every page has a header landmark. --}}
             <header class="flex items-center justify-between gap-3 px-4 py-3 bg-navy text-white sticky top-0 z-30 sidebar:static sidebar:bg-transparent sidebar:text-ink sidebar:px-8">
                 <span class="font-display font-600 sidebar:hidden">Study Companion</span>
-                <span class="text-xs text-white/80 sidebar:text-ink-soft">Hari {{ auth()->user()->dayNumber() ?? '-' }}</span>
+                <div class="flex items-center gap-3 ml-auto">
+                    <span class="text-xs text-white/80 sidebar:text-ink-soft">Hari {{ auth()->user()->dayNumber() ?? '-' }}</span>
+
+                    {{-- Native disclosure: opens with Enter/Space, every control inside is a plain form control. --}}
+                    <details class="relative" x-data="displaySettings()" x-on:keydown.escape="$el.open = false; $el.querySelector('summary').focus()">
+                        <summary class="cursor-pointer list-none flex items-center rounded-xl px-3 text-sm font-700 bg-white/10 sidebar:bg-card sidebar:border sidebar:border-line-card">Tampilan</summary>
+                        <div class="absolute right-0 mt-2 w-72 max-w-[calc(100vw-2rem)] bg-card text-ink rounded-2xl border border-line-card shadow-lg p-4 space-y-4 z-50">
+                            <fieldset>
+                                <legend class="text-sm font-700 mb-2">Ukuran teks</legend>
+                                <div class="space-y-1">
+                                    @foreach (['normal' => 'Normal', 'besar' => 'Besar', 'sangat-besar' => 'Sangat besar'] as $value => $label)
+                                        <label class="flex items-center gap-2 text-sm min-h-[44px]">
+                                            <input type="radio" name="ukuran-teks" value="{{ $value }}" x-model="ukuran" x-on:change="simpan()">
+                                            {{ $label }}
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </fieldset>
+                            <label class="flex items-center gap-2 text-sm min-h-[44px]">
+                                <input type="checkbox" x-model="kontras" x-on:change="simpan()">
+                                Mode kontras tinggi
+                            </label>
+                            <div>
+                                <label class="flex items-center gap-2 text-sm min-h-[44px]">
+                                    <input type="checkbox" x-model="pembacaLayar" x-on:change="simpan()" aria-describedby="petunjuk-pembaca-layar">
+                                    Mode pembaca layar
+                                </label>
+                                <p id="petunjuk-pembaca-layar" class="text-xs text-ink-soft">Suara tidak diputar otomatis; suara hanya diputar saat kamu menekan tombol putar.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
             </header>
 
             <main id="konten" tabindex="-1" class="pb-8 focus:outline-none">
@@ -98,6 +140,7 @@
     <nav aria-label="Navigasi bawah" class="sidebar:hidden fixed bottom-0 inset-x-0 bg-card border-t border-line-card flex justify-around py-2 z-40" x-data="{ moreOpen: false }">
         @foreach ($mobileMainItems as $item)
             <a href="{{ route($item['route']) }}"
+               @if (request()->routeIs($item['route'].'*')) aria-current="page" @endif
                class="flex flex-col items-center gap-0.5 px-2 py-1 text-xs font-600
                       {{ request()->routeIs($item['route'].'*') ? 'text-mandarin' : 'text-ink-faint' }}">
                 <span class="text-lg leading-none" aria-hidden="true">{{ $item['icon'] }}</span>

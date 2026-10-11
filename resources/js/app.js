@@ -133,11 +133,51 @@ window.voiceInput = function (langCode) {
         },
 
         handleAiReply(text, replyLangCode) {
-            if (!this.$wire.autoPlay) return;
+            // Screen reader mode: never talk over the screen reader; replies play only via their play button.
+            if (!this.$wire.autoPlay || window.screenReaderMode()) return;
             this.state = 'speaking';
             speak(text, replyLangCode, () => {
                 this.state = 'idle';
             });
+        },
+    };
+};
+
+/** True when the "Mode pembaca layar" display setting is on (class set on <html>). */
+window.screenReaderMode = function () {
+    return document.documentElement.classList.contains('mode-pembaca-layar');
+};
+
+/**
+ * Alpine component: header "Tampilan" panel. Persists to localStorage key
+ * 'tampilan' and mirrors the settings as classes on <html> (the same classes
+ * the inline <head> script in layouts/study.blade.php applies on page load).
+ */
+window.displaySettings = function () {
+    let saved = {};
+    try {
+        saved = JSON.parse(localStorage.getItem('tampilan') || '{}');
+    } catch (e) {}
+
+    return {
+        ukuran: saved.ukuran || 'normal',
+        kontras: !!saved.kontras,
+        pembacaLayar: !!saved.pembacaLayar,
+
+        simpan() {
+            const kelas = document.documentElement.classList;
+            kelas.toggle('teks-besar', this.ukuran === 'besar');
+            kelas.toggle('teks-sangat-besar', this.ukuran === 'sangat-besar');
+            kelas.toggle('kontras-tinggi', this.kontras);
+            kelas.toggle('mode-pembaca-layar', this.pembacaLayar);
+            if (this.pembacaLayar && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+            try {
+                localStorage.setItem('tampilan', JSON.stringify({
+                    ukuran: this.ukuran,
+                    kontras: this.kontras,
+                    pembacaLayar: this.pembacaLayar,
+                }));
+            } catch (e) {}
         },
     };
 };
