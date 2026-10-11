@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Services\SttMatchPronunciationChecker;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class SttMatchPronunciationCheckerTest extends TestCase
@@ -103,5 +104,73 @@ class SttMatchPronunciationCheckerTest extends TestCase
 
         $this->assertFalse($result['isCorrect']);
         $this->assertStringContainsString('Mesin pengenalan suara kesulitan', $result['feedback']);
+    }
+
+    /**
+     * Chrome's zh-CN recognizer almost always appends punctuation ("妈妈。"),
+     * and may put spaces between characters; neither is a pronunciation error.
+     *
+     * @return array<string, array{string, string}>
+     */
+    public static function mandarinPunctuationAndSpaceCases(): array
+    {
+        return [
+            'trailing full stop, two chars' => ['妈妈', '妈妈。'],
+            'trailing full stop, one char' => ['我', '我。'],
+            'trailing exclamation' => ['你好', '你好！'],
+            'ascii space between chars' => ['你好', '你 好'],
+            'full-width space between chars' => ['你好', '你　好'],
+            'punctuation in the target too' => ['你好！', '你好'],
+        ];
+    }
+
+    #[DataProvider('mandarinPunctuationAndSpaceCases')]
+    public function test_mandarin_ignores_punctuation_and_spaces(string $target, string $heard): void
+    {
+        $result = $this->checker->check('/tmp/audio.wav', $target, 'mandarin', $heard);
+
+        $this->assertTrue($result['isCorrect'], $result['feedback']);
+    }
+
+    public function test_mandarin_different_characters_still_fail_after_normalization(): void
+    {
+        $result = $this->checker->check('/tmp/audio.wav', '爸爸', 'mandarin', '妈妈。');
+
+        $this->assertFalse($result['isCorrect']);
+        $this->assertStringContainsString('karakter ke-1 beda (target "爸", terdengar "妈")', $result['feedback']);
+        $this->assertStringContainsString('karakter ke-2 beda (target "爸", terdengar "妈")', $result['feedback']);
+        $this->assertStringNotContainsString('。', mb_substr($result['feedback'], mb_strpos($result['feedback'], '—')));
+    }
+
+    public function test_mandarin_diff_positions_are_counted_after_normalization(): void
+    {
+        // Without normalization the space would shift "们" to position 3.
+        $result = $this->checker->check('/tmp/audio.wav', '我们', 'mandarin', '我 门。');
+
+        $this->assertFalse($result['isCorrect']);
+        $this->assertStringContainsString('karakter ke-2 beda (target "们", terdengar "门")', $result['feedback']);
+        $this->assertStringNotContainsString('karakter ke-1', $result['feedback']);
+        $this->assertStringNotContainsString('karakter ke-3', $result['feedback']);
+    }
+
+    public function test_full_stop_only_or_empty_transcript_is_still_not_a_wrong_answer(): void
+    {
+        $fullStop = $this->checker->check('/tmp/audio.wav', '妈妈', 'mandarin', '。');
+        $this->assertFalse($fullStop['isCorrect']);
+        $this->assertStringContainsString('Mesin pengenalan suara kesulitan', $fullStop['feedback']);
+        $this->assertStringNotContainsString('Kurang tepat', $fullStop['feedback']);
+
+        $empty = $this->checker->check('/tmp/audio.wav', '妈妈', 'mandarin', '');
+        $this->assertFalse($empty['isCorrect']);
+        $this->assertStringContainsString('Tidak ada suara yang terdeteksi', $empty['feedback']);
+    }
+
+    public function test_english_single_word_with_capital_and_full_stop_matches(): void
+    {
+        foreach (['Mother.', 'Mother,', 'mother.'] as $heard) {
+            $result = $this->checker->check('/tmp/audio.wav', 'mother', 'english', $heard);
+
+            $this->assertTrue($result['isCorrect'], "{$heard}: {$result['feedback']}");
+        }
     }
 }

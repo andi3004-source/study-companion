@@ -65,8 +65,10 @@ class SttMatchPronunciationChecker implements PronunciationChecker
 
     private function checkMandarin(string $heard, string $target, ?string $targetPinyin): array
     {
-        $targetChars = mb_str_split($target);
-        $heardChars = mb_str_split($heard);
+        // Chrome's zh-CN engine almost always ends with "。"; compare (and number
+        // character positions) on the text without punctuation or spaces.
+        $targetChars = mb_str_split($this->stripPunctuationAndSpaces($target));
+        $heardChars = mb_str_split($this->stripPunctuationAndSpaces($heard));
 
         if ($heardChars === $targetChars) {
             return ['isCorrect' => true, 'feedback' => "Bagus! Pengucapan \"{$target}\" terdengar sudah tepat."];
@@ -110,9 +112,25 @@ class SttMatchPronunciationChecker implements PronunciationChecker
      */
     private function isUnrecognizable(string $heard, string $lang): bool
     {
+        // Checked on the text without punctuation: PCRE's \p{Han} also matches
+        // CJK punctuation such as "。" (Script_Extensions), so a lone "。"
+        // would otherwise look like a recognized Hanzi.
+        $heard = $this->stripPunctuationAndSpaces($heard);
+
         return $lang === 'mandarin'
             ? ! preg_match('/\p{Han}/u', $heard)
             : ! preg_match('/\p{L}/u', $heard);
+    }
+
+    /**
+     * Removes Unicode punctuation (Chinese 。，、！？；：「」『』（）…—· and ASCII
+     * punctuation), ASCII symbols, and all whitespace including the full-width
+     * space U+3000. Letters, Hanzi and digits are kept, so a different
+     * character is still a difference.
+     */
+    private function stripPunctuationAndSpaces(string $text): string
+    {
+        return preg_replace('/[\p{P}\p{Z}\s!-\/:-@\[-`{-~]+/u', '', $text);
     }
 
     private function normalize(string $text): string
