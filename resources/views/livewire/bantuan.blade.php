@@ -53,6 +53,6 @@
 
     <section aria-labelledby="bantuan-pernyataan" class="bg-card rounded-2xl p-5 space-y-3">
         <h2 id="bantuan-pernyataan" class="font-display font-600 text-lg text-ink">Pernyataan aksesibilitas</h2>
-        <p class="text-ink">Pernyataan aksesibilitas (draf): kami berupaya mengikuti pedoman WCAG 2.2 AA. Aplikasi ini diuji oleh tim dengan pembaca layar Narator dan belum diuji dengan pengguna tunanetra. Masukan Anda sangat kami harapkan.</p>
+        <p class="text-ink">Pernyataan aksesibilitas (draf): kami berupaya mengikuti pedoman WCAG 2.2 AA. Aplikasi ini dirancang untuk pembaca layar; pengujian oleh tim dengan Narator sedang berlangsung dan belum dilakukan dengan pengguna tunanetra. Masukan Anda sangat kami harapkan.</p>
     </section>
 </div>

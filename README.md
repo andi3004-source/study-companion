@@ -196,7 +196,7 @@ Untuk sebagian kata, dataset ini memilih homograf yang keliru, misalnya 都
 
 ## Aksesibilitas
 
-Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dikerjakan dan markup HTML-nya dites otomatis (`AccessibilityChatTest`, `DisplaySettingsTest`, `BantuanPageTest`, `KataBicaraTest`). Perilaku di browser dan pembaca layar dicek manual, bukan oleh tes.
+Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dikerjakan dan markup HTML-nya dites otomatis (`AccessibilityChatTest`, `DisplaySettingsTest`, `BantuanPageTest`, `KataBicaraTest`). Itu belum berarti sudah diverifikasi dengan pembaca layar: pengujian manual oleh tim dengan Narator sedang berlangsung.
 
 | Butir | Status | Catatan |
 |---|---|---|
@@ -213,10 +213,12 @@ Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dike
 | Halaman Bantuan (`/bantuan`) dan pernyataan aksesibilitas (draf) | Selesai | |
 | Kata bicara (`/kata-bicara`) | Selesai | Katalog `storage/app/seed-data/daftar_benda_tertutup.json` belum ada di repo, jadi halaman menampilkan "Katalog belum tersedia". Skema yang diharapkan ada di `config/katabicara.php`. |
 | Halaman lain (Kartu, Kamus, Ujian, Isian, Game, Ucapan, Progress) | Belum diaudit | Hanya mendapat perubahan layout dan warna global. |
+| Uji manual oleh tim dengan pembaca layar Narator | Sedang berlangsung | Belum selesai untuk butir mana pun di atas. |
+| Uji dengan pengguna tunanetra | Belum dilakukan | |
 
 **Batas:**
 
-- Diuji oleh tim dengan pembaca layar, **belum** diuji dengan pengguna tunanetra.
+- Dirancang untuk pembaca layar. Pengujian oleh tim dengan Narator **sedang berlangsung**; **belum** dilakukan dengan pengguna tunanetra.
 - Input dan output suara memakai Web Speech API dan hanya berjalan di **Chrome atau Edge**.
 - Tes otomatis memeriksa markup HTML, bukan pengalaman nyata dengan pembaca layar.
 

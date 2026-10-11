@@ -45,7 +45,8 @@ class BantuanPageTest extends TestCase
         $this->actingAs($this->onboardedUser())->get('/bantuan')
             ->assertOk()
             ->assertSee('Belajar bahasa dengan keyboard dan suara. Dirancang agar mudah diakses.')
-            ->assertSee('Pernyataan aksesibilitas (draf): kami berupaya mengikuti pedoman WCAG 2.2 AA. Aplikasi ini diuji oleh tim dengan pembaca layar Narator dan belum diuji dengan pengguna tunanetra. Masukan Anda sangat kami harapkan.')
+            ->assertSee('Pernyataan aksesibilitas (draf): kami berupaya mengikuti pedoman WCAG 2.2 AA. Aplikasi ini dirancang untuk pembaca layar; pengujian oleh tim dengan Narator sedang berlangsung dan belum dilakukan dengan pengguna tunanetra. Masukan Anda sangat kami harapkan.')
+            ->assertDontSee('diuji oleh tim dengan pembaca layar Narator')
             ->assertDontSee('membantu penyandang disabilitas');
     }
 
