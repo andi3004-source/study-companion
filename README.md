@@ -193,3 +193,29 @@ Untuk sebagian kata, dataset ini memilih homograf yang keliru, misalnya 都
 - Data terkoreksi masih berstatus **draf** dan belum ditinjau ulang.
 - **HSK4-6 belum dikoreksi**, jadi masih bisa memuat homograf atau glos yang keliru.
 - Arti Indonesia hasil `translate:meanings` adalah terjemahan mesin dari glos Inggris.
+
+## Aksesibilitas
+
+Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dikerjakan dan markup HTML-nya dites otomatis (`AccessibilityChatTest`, `DisplaySettingsTest`, `BantuanPageTest`, `KataBicaraTest`). Perilaku di browser dan pembaca layar dicek manual, bukan oleh tes.
+
+| Butir | Status | Catatan |
+|---|---|---|
+| `lang="id"`, tautan "Lewati ke konten" / "Lewati ke kolom tulis" | Selesai | Tautan tampil saat mendapat fokus. |
+| Landmark header, nav (berlabel), main `#konten`, footer; satu `h1` | Sebagian | Ada di layout halaman belajar. Layout `app`/`guest` (profil, login) hanya mendapat `lang="id"`. |
+| Kolom tulis chat: label, `aria-describedby`, Enter / Shift+Enter, IME | Selesai | Fokus tetap di kolom setelah kirim. |
+| Percakapan `role="log"` + `aria-live="polite"`, nama pengirim, `lang` zh-Hans/en/id | Selesai | Pesan pengguna berhanzi diberi `zh-Hans`; pinyin tidak. |
+| Daerah `role="status"` (Terkirim, membalas, analisis) | Selesai | Polling tidak memindahkan fokus. |
+| Tombol bicara `aria-pressed`, tombol putar per balasan, konfirmasi "Selesai dan analisis" sebaris | Selesai | |
+| Pengaturan tampilan: ukuran teks (3 tingkat), kontras tinggi, mode pembaca layar | Selesai | Disimpan di `localStorage`, diterapkan sebagai kelas pada `<html>`. Hanya di layout halaman belajar. |
+| Teks dasar 18 px, fokus 3 px, target 44 px, `prefers-reduced-motion` | Sebagian | Aturan CSS global sudah ada; belum dicek visual di setiap halaman. |
+| Kontras teks ≥ 4,5:1 | Sebagian | Warna `ink-soft`, `ink-faint`, `mandarin`, `english` digelapkan (≥ 5:1 di latar cream/putih). Halaman lain belum diaudit satu per satu. |
+| Informasi tidak hanya lewat warna | Sebagian | Halaman aktif di navigasi diberi garis bawah + `aria-current`. Halaman lain belum diaudit. |
+| Halaman Bantuan (`/bantuan`) dan pernyataan aksesibilitas (draf) | Selesai | |
+| Kata bicara (`/kata-bicara`) | Selesai | Katalog `storage/app/seed-data/daftar_benda_tertutup.json` belum ada di repo, jadi halaman menampilkan "Katalog belum tersedia". Skema yang diharapkan ada di `config/katabicara.php`. |
+| Halaman lain (Kartu, Kamus, Ujian, Isian, Game, Ucapan, Progress) | Belum diaudit | Hanya mendapat perubahan layout dan warna global. |
+
+**Batas:**
+
+- Diuji oleh tim dengan pembaca layar, **belum** diuji dengan pengguna tunanetra.
+- Input dan output suara memakai Web Speech API dan hanya berjalan di **Chrome atau Edge**.
+- Tes otomatis memeriksa markup HTML, bukan pengalaman nyata dengan pembaca layar.
