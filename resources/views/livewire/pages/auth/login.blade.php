@@ -27,16 +27,15 @@ new #[Layout('layouts.guest')] class extends Component
 <div>
     {{-- Local demo account (config/demo.php). Rendered only when enabled, outside production, and a password is set. --}}
     @if (config('demo.enabled') && ! app()->environment('production') && filled(config('demo.password')))
-        <section aria-labelledby="akun-demo-judul" class="mb-6 rounded-xl border-2 border-navy bg-card p-4 text-ink"
+        <section aria-labelledby="akun-demo-judul" class="mb-6 rounded-xl border-2 border-navy bg-navy/5 p-4 text-ink"
                  x-data="{ terisi: false }">
-            <h2 id="akun-demo-judul" class="font-700 text-sm">Akun demo (hanya lingkungan lokal)</h2>
+            <h2 id="akun-demo-judul" class="font-700 text-sm text-navy">Akun demo (hanya lingkungan lokal)</h2>
             <dl class="mt-2 text-sm grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
                 <dt class="font-700">Email</dt>
                 <dd class="break-all">{{ config('demo.email') }}</dd>
                 <dt class="font-700">Kata sandi</dt>
                 <dd class="break-all">{{ config('demo.password') }}</dd>
             </dl>
-            {{-- Only fills the fields (dispatching input so wire:model picks it up); never submits. --}}
             <button type="button"
                     x-on:click="
                         for (const [id, value] of [['email', {{ \Illuminate\Support\Js::from(config('demo.email')) }}], ['password', {{ \Illuminate\Support\Js::from(config('demo.password')) }}]]) {
@@ -51,47 +50,54 @@ new #[Layout('layouts.guest')] class extends Component
         </section>
     @endif
 
+    <h1 class="font-display font-600 text-xl text-ink mb-5">Masuk ke akunmu</h1>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form wire:submit="login">
+    <form wire:submit="login" class="space-y-4">
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+            <x-text-input wire:model="form.email" id="email" class="block w-full" type="email" name="email" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('form.email')" class="mt-1" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
+        <div>
+            <x-input-label for="password" :value="__('Kata Sandi')" />
+            <x-text-input wire:model="form.password" id="password" class="block w-full"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
+            <x-input-error :messages="$errors->get('form.password')" class="mt-1" />
         </div>
 
         <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+        <div>
+            <label for="remember" class="inline-flex items-center gap-2 cursor-pointer">
+                <input wire:model="form.remember" id="remember" type="checkbox"
+                       class="rounded border-line-card text-navy focus:ring-navy" name="remember">
+                <span class="text-sm text-ink-soft">{{ __('Ingat saya') }}</span>
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-between pt-1">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
+                <a class="text-sm text-mandarin hover:underline focus:outline-none"
+                   href="{{ route('password.request') }}" wire:navigate>
+                    {{ __('Lupa kata sandi?') }}
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
+            <x-primary-button class="px-6">
+                {{ __('Masuk') }}
             </x-primary-button>
         </div>
     </form>
+
+    <div class="mt-5 pt-5 border-t border-line-card text-center text-sm text-ink-soft">
+        Belum punya akun?
+        <a href="{{ route('register') }}" wire:navigate class="text-mandarin font-700 hover:underline ml-1">Daftar sekarang</a>
+    </div>
 </div>

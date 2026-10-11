@@ -37,25 +37,31 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+    <h1 class="font-display font-600 text-xl text-ink mb-4">Lupa Kata Sandi?</h1>
+    <p class="mb-5 text-sm text-ink-soft">
+        {{ __('Masukkan emailmu dan kami akan mengirimkan link untuk reset kata sandi.') }}
+    </p>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form wire:submit="sendPasswordResetLink">
+    <form wire:submit="sendPasswordResetLink" class="space-y-4">
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-text-input wire:model="email" id="email" class="block w-full" type="email" name="email" required autofocus />
+            <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
+        <div class="flex items-center justify-end pt-1">
+            <x-primary-button class="px-6">
+                {{ __('Kirim Link Reset') }}
             </x-primary-button>
         </div>
     </form>
+
+    <div class="mt-5 pt-5 border-t border-line-card text-center text-sm text-ink-soft">
+        Ingat kata sandimu?
+        <a href="{{ route('login') }}" wire:navigate class="text-mandarin font-700 hover:underline ml-1">Masuk</a>
+    </div>
 </div>
