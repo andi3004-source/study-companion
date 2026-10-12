@@ -52,6 +52,32 @@ class WelcomePageTest extends TestCase
         }
     }
 
+    public function test_each_feature_has_the_agreed_status(): void
+    {
+        $html = $this->html();
+
+        foreach ([
+            'Percakapan dengan AI' => 'Berjalan',
+            'Analisis kesalahan' => 'Eksperimen',
+            'Cek Pengucapan' => 'Berjalan',
+            'Arti Indonesia untuk kosakata HSK' => 'Draf',
+            'Game Pemburu Kesalahan' => 'Draf',
+            'Kata bicara' => 'Draf',
+        ] as $fitur => $status) {
+            $this->assertMatchesRegularExpression('#<h3[^>]*>'.preg_quote($fitur, '#').'</h3>\s*<p[^>]*><span[^>]*>Status: '.$status.'</span>#', $html, $fitur);
+        }
+    }
+
+    public function test_ai_tool_roles_use_the_agreed_wording(): void
+    {
+        $this->get('/')
+            ->assertSee('Asisten pengembangan di editor (peran terbatas).')
+            ->assertSee('basis pengetahuan untuk RAG (pola kesalahan dan glosarium)')
+            ->assertSee('Tim menentukan arah dan keputusan desain, mengaudit data, meninjau kode, menguji, dan memverifikasi hasil.')
+            ->assertDontSee('menyambungkan aplikasi ke Langflow')
+            ->assertDontSee('penyimpan data alur');
+    }
+
     public function test_hero_and_header_offer_login_and_register(): void
     {
         $html = $this->html();

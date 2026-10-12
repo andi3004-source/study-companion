@@ -5,12 +5,12 @@
 --}}
 @php
     $fitur = [
-        ['nama' => 'Ngobrol dengan AI', 'status' => 'Berjalan', 'isi' => 'Latihan percakapan Mandarin atau Inggris sesuai skenario, dengan koreksi singkat dalam bahasa Indonesia.'],
+        ['nama' => 'Percakapan dengan AI', 'status' => 'Berjalan', 'isi' => 'Latihan percakapan Mandarin atau Inggris sesuai skenario, dengan koreksi singkat dalam bahasa Indonesia.'],
         ['nama' => 'Analisis kesalahan', 'status' => 'Eksperimen', 'isi' => 'Setelah sesi selesai, kesalahan dikelompokkan per jenis dan ditampilkan di halaman Progress.'],
         ['nama' => 'Kartu, Kamus, Ujian, dan Isian', 'status' => 'Berjalan', 'isi' => 'Latihan kosakata HSK dan IELTS dengan jadwal harian.'],
         ['nama' => 'Arti Indonesia untuk kosakata HSK', 'status' => 'Draf', 'isi' => 'Arti yang sudah dikoreksi diberi tanda draf sampai diperiksa penutur.'],
         ['nama' => 'Game Pemburu Kesalahan', 'status' => 'Draf', 'isi' => 'Tebak jenis kesalahan dalam kalimat Mandarin. Sebagian soal masih diverifikasi.'],
-        ['nama' => 'Cek Pengucapan', 'status' => 'Eksperimen', 'isi' => 'Rekam satu kata dan bandingkan dengan target. Hasilnya bisa meleset karena bergantung pada pengenal suara browser.'],
+        ['nama' => 'Cek Pengucapan', 'status' => 'Berjalan', 'isi' => 'Rekam satu kata dan bandingkan dengan target. Hasilnya bisa meleset karena bergantung pada pengenal suara browser.'],
         ['nama' => 'Kata bicara', 'status' => 'Draf', 'isi' => 'Cari satu kata dan lihat dalam bahasa Indonesia, Inggris, dan Mandarin. Daftar katanya masih perlu dicek penutur.'],
     ];
 @endphp
@@ -132,15 +132,15 @@
                     </div>
                     <div class="rounded-2xl border border-line p-5">
                         <dt class="font-bold">IBM Langflow dan Astra DB</dt>
-                        <dd class="mt-1">Alur analisis kesalahan sesi Ngobrol dibangun di IBM Langflow, dengan Astra DB sebagai penyimpan data alurnya.</dd>
+                        <dd class="mt-1">Alur analisis kesalahan sesi Ngobrol dibangun di IBM Langflow. Astra DB menjadi basis pengetahuan untuk RAG (pola kesalahan dan glosarium).</dd>
                     </div>
                     <div class="rounded-2xl border border-line p-5">
                         <dt class="font-bold">IBM Bob</dt>
-                        <dd class="mt-1">Membantu pengodean saat menyambungkan aplikasi ke Langflow.</dd>
+                        <dd class="mt-1">Asisten pengembangan di editor (peran terbatas).</dd>
                     </div>
                     <div class="rounded-2xl border border-line p-5">
                         <dt class="font-bold">Peran tim</dt>
-                        <dd class="mt-1">Tim menentukan fitur, mengaudit dan mengoreksi data HSK, menguji dengan keyboard dan pembaca layar, serta meninjau setiap perubahan yang dibuat dengan bantuan AI.</dd>
+                        <dd class="mt-1">Tim menentukan arah dan keputusan desain, mengaudit data, meninjau kode, menguji, dan memverifikasi hasil.</dd>
                     </div>
                 </dl>
             </div>
