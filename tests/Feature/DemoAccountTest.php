@@ -84,7 +84,7 @@ class DemoAccountTest extends TestCase
 
         $this->get('/login')
             ->assertOk()
-            ->assertSee('Akun demo (hanya lingkungan lokal)')
+            ->assertSee('Akun demo (lokal dan staging, bukan production)')
             ->assertSee('demo@studycompanion.test')
             ->assertSee(self::PASSWORD)
             ->assertSee('Isi otomatis')

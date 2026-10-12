@@ -25,11 +25,11 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    {{-- Local demo account (config/demo.php). Rendered only when enabled, outside production, and a password is set. --}}
+    {{-- Demo account for local and staging (config/demo.php). Rendered only when enabled, outside production, and a password is set. --}}
     @if (config('demo.enabled') && ! app()->environment('production') && filled(config('demo.password')))
         <section aria-labelledby="akun-demo-judul" class="mb-6 rounded-xl border-2 border-navy bg-navy/5 p-4 text-ink"
                  x-data="{ terisi: false }">
-            <h2 id="akun-demo-judul" class="font-700 text-sm text-navy">Akun demo (hanya lingkungan lokal)</h2>
+            <h2 id="akun-demo-judul" class="font-700 text-sm text-navy">Akun demo (lokal dan staging, bukan production)</h2>
             <dl class="mt-2 text-sm grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
                 <dt class="font-700">Email</dt>
                 <dd class="break-all">{{ config('demo.email') }}</dd>

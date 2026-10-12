@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Demo account for reviewers running the app locally (Database\Seeders\DemoUserSeeder
+ * Demo account for reviewers on local and staging environments (Database\Seeders\DemoUserSeeder
  * and the "Akun demo" box on the login page). Never enabled in production.
  * The password is only ever read from .env — there is no default.
  */

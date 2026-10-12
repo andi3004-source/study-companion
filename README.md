@@ -406,7 +406,7 @@ pembaca layar tetap jalur utama dan tidak diubah. Mati secara bawaan.
 
 ## Akun demo
 
-Akun siap pakai untuk peninjau yang menjalankan aplikasi **secara lokal**. Akun ini mati secara bawaan.
+Akun siap pakai untuk peninjau di lingkungan **lokal atau staging** (`APP_ENV=local` atau `staging`). Akun ini mati secara bawaan dan tidak pernah tersedia di `APP_ENV=production`.
 
 1. Di `.env`, isi:
 
@@ -418,10 +418,10 @@ Akun siap pakai untuk peninjau yang menjalankan aplikasi **secara lokal**. Akun 
    ```
 
 2. Jalankan `php artisan db:seed --class=DemoUserSeeder`. Perintah ini membuat atau memperbarui pengguna "Akun Demo" dengan email terverifikasi dan onboarding selesai. Tidak ada data sesi atau latihan palsu. Bila akun demo aktif, `php artisan db:seed` juga memanggil seeder ini.
-3. Halaman login menampilkan kotak "Akun demo (hanya lingkungan lokal)" berisi email, kata sandi, dan tombol **Isi otomatis**. Tombol itu hanya mengisi kolom, tidak mengirim formulir.
+3. Halaman login menampilkan kotak "Akun demo (lokal dan staging, bukan production)" berisi email, kata sandi, dan tombol **Isi otomatis**. Tombol itu hanya mengisi kolom, tidak mengirim formulir.
 
 **Peringatan:**
 
-- Hanya untuk lingkungan lokal. Seeder menolak berjalan di `APP_ENV=production`, dan kotak login tidak dirender di production. Bila akun demo mati, kotak itu tidak meninggalkan jejak di HTML.
+- Hanya untuk lokal dan staging. Seeder menolak berjalan di `APP_ENV=production`, dan kotak login hanya dirender bila `DEMO_ACCOUNT_ENABLED=true`, kata sandi terisi, **dan** environment bukan production. Bila akun demo mati, kotak itu tidak meninggalkan jejak di HTML.
 - Kata sandi tampil apa adanya di halaman login. Pakai kata sandi **khusus demo** dan **jangan pernah** dipakai di tempat lain.
 - Kata sandi hanya dibaca dari `.env`; tidak ada nilai bawaan di kode. Bila kosong, seeder berhenti dengan pesan galat.
