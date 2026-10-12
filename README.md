@@ -222,6 +222,47 @@ Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dike
 - Input dan output suara memakai Web Speech API dan hanya berjalan di **Chrome atau Edge**.
 - Tes otomatis memeriksa markup HTML, bukan pengalaman nyata dengan pembaca layar.
 
+## Game inklusif
+
+Halaman `/game` berisi kartu permainan (`App\Livewire\Games\Hub`; tambah game
+dengan menambah satu entri di `games()`). Semua game tanpa panggilan AI.
+
+- **Dengar & Pilih** (`/game/dengar-pilih`): 5 soal per sesi. Kata diambil dari
+  kosakata HSK 1 yang punya arti bahasa Indonesia (tabel yang sama dengan
+  Kartu, satu baris per hanzi) dan, bila ada, daftar benda tertutup
+  (`ikut_prompt: true`). Hanzi dan pinyin selalu tampil sebagai teks; kata
+  diucapkan dengan suara browser (tidak otomatis bila Mode pembaca layar
+  aktif), ada tombol "Dengarkan lagi" dan pilihan kecepatan suara. Empat
+  pilihan arti (pengecoh dari level yang sama). Jawaban tidak disimpan ke
+  basis data: `game_attempts` dipakai Progress sebagai kategori kesalahan
+  Pemburu Kesalahan, jadi jawaban kosakata tidak dicampur ke sana.
+- **Pemburu Kesalahan** (`/game/pemburu-kesalahan`): alur dan penyimpanan
+  jawaban tidak berubah; pilihan kini berupa radio dalam fieldset dan ada
+  tombol "Dengarkan kalimat". Soalnya dibaca dari
+  `storage/app/seed-data/kesalahan_game.json` (`GAME_ITEMS_PATH`); berkas itu
+  belum ada di repo, jadi tanpa berkas tersebut halaman hanya menampilkan
+  pesan bahwa soal belum tersedia.
+
+**Dirancang agar dapat dimainkan dengan keyboard, suara, dan tampilan
+diperbesar:** pilihan berupa radio berlabel dalam fieldset (panah untuk
+memilih, Enter untuk menjawab), tanpa batas waktu dan tanpa seret-lepas,
+umpan balik berupa teks dengan simbol ✓/✗ yang diumumkan (`role="status"`),
+fokus pindah ke tombol berikutnya setelah menjawab, hanzi berukuran 4rem dan
+tombol jawaban minimal 3,5rem yang ikut membesar mengikuti ukuran teks, satu
+kolom, serta opsi "Jarak baris dan huruf lebih lega" di panel Tampilan.
+
+**Batas:**
+
+- **Belum** diuji dengan pengguna tunanetra atau pengguna lemah penglihatan.
+  Tes otomatis hanya memeriksa markup HTML.
+- Suara memakai suara bawaan browser (Web Speech API); kualitasnya bervariasi
+  antarperangkat, dan suara Mandarin harus terpasang di perangkat agar kata
+  Mandarin terdengar benar.
+- Panel Tampilan masih punya tiga tingkat ukuran teks (Normal, Besar, Sangat
+  besar). Tingkat keempat belum ditambahkan.
+- Tahap "Apakah kalimat ini benar atau salah?" pada Pemburu Kesalahan belum
+  dibuat.
+
 ## Raba lalu dengar
 
 Pelajar memotret satu benda yang dipegang dengan kamera bawaan perangkat, lalu
