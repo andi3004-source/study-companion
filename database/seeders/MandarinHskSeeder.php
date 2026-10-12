@@ -60,7 +60,7 @@ class MandarinHskSeeder extends Seeder
             }
 
             // pinyin/pinyin_normalized/meaning_en deliberately stay as curated
-            // (database/seeders/data): this dataset picks the wrong homograph
+            // (storage/app/seed-data/reference): this dataset picks the wrong homograph
             // for several common words (个 "gě", 都 "Dū, surname Du", 听 "yǐn",
             // ...). Only columns the curated data doesn't have are filled in.
             $existing->update([

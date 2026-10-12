@@ -164,6 +164,31 @@ Analisis berjalan sebagai job antrean. Ada dua cara:
    diatur (misalnya `PHP_CLI_SERVER_WORKERS=4`). Jadi selama analisis berjalan
    (bisa sampai puluhan detik), polling dan halaman lain bisa tertahan.
 
+## Mengisi konten (`app:seed-content`)
+
+Semua berkas data dibaca dari `storage/app/seed-data`:
+
+- `reference/*.json` (di-commit): kurikulum HSK1, minggu, tips, tautan, dan
+  data referensi lain (`ReferenceDataSeeder`);
+- `mandarin_hsk1to6_complete.json`, `irregular_verbs_183_complete.json`,
+  `english_vocab_cefr_10674.json` (**tidak** di-commit, karena besar; salin
+  sendiri ke server);
+- `kesalahan_game.json`, `daftar_benda_tertutup.json`,
+  `hsk1to3_kosakata_id.json` (di-commit; dibaca saat aplikasi berjalan).
+
+Setelah `php artisan migrate`, jalankan sekali:
+
+```
+php artisan app:seed-content
+```
+
+Perintah ini hanya mengisi tabel konten (tidak membuat pengguna) dan aman
+dijalankan ulang: tabel referensi yang sudah berisi dilewati (id-nya dipakai
+progres pengguna, jadi tidak pernah dihapus), sedangkan HSK, kata kerja, dan
+kosakata memakai upsert. Bila berkas sumber tidak ada, seeder itu dilewati
+dengan pesan, lalu perintah keluar dengan status gagal supaya terlihat di log
+deploy.
+
 ## Data HSK dan koreksinya
 
 Kosakata HSK1-6 diimpor dari `storage/app/seed-data/mandarin_hsk1to6_complete.json`.
@@ -171,7 +196,7 @@ Untuk sebagian kata, dataset ini memilih homograf yang keliru, misalnya 都
 "Dū, surname Du" (seharusnya dōu) atau 听 "yǐn, smile (archaic)" (seharusnya tīng).
 
 - **HSK1 (kurikulum, `mandarin_words`)**: pinyin dan arti diambil dari data kurasi
-  `database/seeders/data/`. Seeder HSK hanya menambah kolom pelengkap.
+  `storage/app/seed-data/reference/`. Seeder HSK hanya menambah kolom pelengkap.
   Basis data yang sudah terlanjur tertimpa dipulihkan dengan
   `php artisan hsk:repair-curriculum` (pakai `--dry-run` untuk melihat perubahan dulu).
 - **HSK2-3 (`mandarin_hsk_words`)**: dikoreksi dari

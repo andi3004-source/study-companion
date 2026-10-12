@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\MandarinWord;
 use App\Services\AnswerChecker;
+use Database\Seeders\ReferenceDataSeeder;
 use Illuminate\Console\Command;
 
 /**
@@ -100,6 +101,6 @@ class RepairHskCurriculum extends Command
 
     private function loadJson(string $file): array
     {
-        return json_decode(file_get_contents(database_path('seeders/data/'.$file)), true, 512, JSON_THROW_ON_ERROR);
+        return json_decode(file_get_contents(storage_path(ReferenceDataSeeder::DATA_PATH.'/'.$file)), true, 512, JSON_THROW_ON_ERROR);
     }
 }

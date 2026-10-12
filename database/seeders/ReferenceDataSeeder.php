@@ -15,13 +15,20 @@ use App\Models\WeekTopic;
 use App\Services\AnswerChecker;
 use Illuminate\Database\Seeder;
 
+/**
+ * Curriculum and reference tables from storage/app/seed-data/reference/*.json.
+ * Idempotent: a table that already has rows is left alone (the ids are
+ * referenced by user progress, so they are never truncated and re-inserted).
+ */
 class ReferenceDataSeeder extends Seeder
 {
+    public const DATA_PATH = 'app/seed-data/reference';
+
     protected string $dataPath;
 
     public function __construct()
     {
-        $this->dataPath = database_path('seeders/data');
+        $this->dataPath = storage_path(self::DATA_PATH);
     }
 
     protected function loadJson(string $file): mixed
@@ -31,16 +38,25 @@ class ReferenceDataSeeder extends Seeder
 
     public function run(): void
     {
-        $this->seedMandarinWords();
-        $this->seedIrregularVerbs();
-        $this->seedIeltsVocab();
-        $this->seedWeekTopics();
-        $this->seedPastTenseSteps();
-        $this->seedMandarinWeekGrammar();
-        $this->seedInfoDetails();
-        $this->seedGenericTips();
-        $this->seedPlatformLinks();
-        $this->seedMandarinConversations();
+        $tables = [
+            MandarinWord::class => fn () => $this->seedMandarinWords(),
+            IrregularVerb::class => fn () => $this->seedIrregularVerbs(),
+            IeltsVocab::class => fn () => $this->seedIeltsVocab(),
+            WeekTopic::class => fn () => $this->seedWeekTopics(),
+            PastTenseStep::class => fn () => $this->seedPastTenseSteps(),
+            MandarinWeekGrammar::class => fn () => $this->seedMandarinWeekGrammar(),
+            InfoDetail::class => fn () => $this->seedInfoDetails(),
+            GenericTip::class => fn () => $this->seedGenericTips(),
+            PlatformLink::class => fn () => $this->seedPlatformLinks(),
+            MandarinConversation::class => fn () => $this->seedMandarinConversations(),
+        ];
+
+        foreach ($tables as $model => $seed) {
+            if ($model::query()->exists()) {
+                continue;
+            }
+            $seed();
+        }
     }
 
     protected function seedMandarinWords(): void
