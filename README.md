@@ -222,6 +222,41 @@ Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dike
 - Input dan output suara memakai Web Speech API dan hanya berjalan di **Chrome atau Edge**.
 - Tes otomatis memeriksa markup HTML, bukan pengalaman nyata dengan pembaca layar.
 
+## Raba lalu dengar
+
+Pelajar memotret satu benda yang dipegang dengan kamera bawaan perangkat, lalu
+aplikasi menampilkan dan membacakan namanya dalam bahasa Indonesia, Inggris,
+dan Mandarin (`/scan-benda`).
+
+- **Dimatikan secara default.** Aktifkan dengan `SCAN_BENDA_ENABLED=true`.
+  Selama mati, `/scan-benda` dan `POST /scan-benda/kenali` menjawab 404 dan
+  tautannya tidak tampil di navigasi. Pengaturan lain ada di `config/scan.php`
+  (`SCAN_BENDA_MAX_IMAGE_BYTES`, `SCAN_BENDA_RATE_LIMIT_PER_MINUTE`,
+  `SCAN_BENDA_TIMEOUT`).
+- **Daftar tertutup.** Model visi (Gemini, memakai `GEMINI_API_KEY` dan
+  `GEMINI_MODEL`) hanya boleh memilih `benda_id` dari entri `ikut_prompt: true`
+  di `storage/app/seed-data/daftar_benda_tertutup.json` (lewat
+  `KataBicaraCatalog`), atau menjawab "tidak yakin" atau "perlu foto ulang".
+  Nama Indonesia, Inggris, hanzi, pinyin, dan IPA selalu diambil dari katalog,
+  tidak pernah dari teks model. `benda_id` di luar daftar dianggap "tidak
+  yakin". Tanpa `GEMINI_API_KEY`, aplikasi selalu menjawab "tidak yakin"
+  (catatan: model visi belum terhubung).
+- **Hanya keyakinan tinggi yang diumumkan pasti.** Keyakinan sedang atau rendah
+  diumumkan sebagai "Mungkin …" dengan tawaran foto ulang.
+- **Foto tidak disimpan.** Foto dikompres di browser (sisi terpanjang sekitar
+  1024 px, JPEG), dikirim sebagai base64 di badan JSON, diproses di memori,
+  lalu dibuang. Tidak ada berkas gambar di storage, tidak ada kolom basis
+  data, tidak memakai unggahan sementara Livewire, dan gambar maupun teks
+  model tidak ditulis ke log. Foto memang dikirim ke layanan Gemini untuk
+  dikenali; pengguna harus mencentang persetujuan dulu.
+- **Bukan alat keselamatan atau medis.** Jangan dipakai untuk obat atau benda
+  berbahaya; peringatan ini tampil di halaman.
+- **Deskripsi bentuk adalah perkiraan** dari foto dan mungkin tidak persis
+  dengan perabaan.
+- **Status uji:** baru diuji dengan tes otomatis memakai pengenal palsu dan
+  `Http::fake`. **Belum** diuji dengan foto sungguhan maupun dengan model visi
+  yang benar-benar terhubung, dan belum diuji dengan pengguna tunanetra.
+
 ## Akun demo
 
 Akun siap pakai untuk peninjau yang menjalankan aplikasi **secara lokal**. Akun ini mati secara bawaan.
