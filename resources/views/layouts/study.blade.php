@@ -25,6 +25,42 @@
     <a href="#konten" class="skip-link">Lewati ke konten</a>
     @stack('skip-links')
 
+    {{--
+        "Mode suara" (resources/js/voice/engine.js): the first focusable control after the skip links.
+        A complement to the semantic markup and screen readers, never a replacement. Off by default.
+    --}}
+    @php
+        $voiceRoutes = collect(['dashboard', 'cards.index', 'kamus', 'ujian', 'latihan-isian', 'game', 'game.error-hunter', 'game.listen-pick', 'conversation', 'pronunciation-check', 'kata-bicara', 'progress', 'bantuan'])
+            ->when(config('scan.enabled'), fn ($routes) => $routes->push('scan.object'))
+            ->mapWithKeys(fn ($name) => [$name => route($name)]);
+    @endphp
+    <div x-data="voiceModeBar({{ \Illuminate\Support\Js::from(route('voice.command')) }}, {{ \Illuminate\Support\Js::from($voiceRoutes) }})"
+         class="bg-card border-b border-line-card px-4 py-2 flex flex-wrap items-center gap-3">
+        <button type="button" id="tombol-mode-suara" x-ref="tombol" x-on:click="toggle()"
+                aria-pressed="false" x-bind:aria-pressed="aktif ? 'true' : 'false'"
+                x-bind:aria-disabled="didukung ? 'false' : 'true'" aria-describedby="mode-suara-catatan"
+                class="min-h-[44px] px-5 rounded-xl bg-navy text-white font-700 aria-disabled:opacity-60">
+            <span aria-hidden="true">🎙️</span> Mode suara
+        </button>
+        <button type="button" x-show="aktif" x-cloak x-on:click="berhenti()"
+                class="min-h-[44px] px-5 rounded-xl border-2 border-red-700 text-red-700 font-700">Berhenti</button>
+        <p id="mode-suara-catatan" class="text-sm text-ink-soft">
+            <span x-show="!didukung">Mode suara membutuhkan Chrome atau Edge</span>
+            <span x-show="didukung">Pelengkap pembaca layar; mati secara bawaan.</span>
+        </p>
+        <p id="mode-suara-status" role="status" class="w-full text-sm text-ink empty:hidden"></p>
+
+        {{-- One-time consent before the first microphone use; only the yes/no flag is stored. --}}
+        <div x-show="mintaSetuju" x-cloak role="group" aria-labelledby="mode-suara-setuju-judul" class="w-full rounded-xl border-2 border-navy p-4 space-y-3">
+            <p id="mode-suara-setuju-judul" class="font-700 text-ink">Sebelum memakai Mode suara</p>
+            <p class="text-ink">Mode suara memakai pengenalan suara bawaan browser (Chrome atau Edge). Suaramu dikirim ke penyedia browser untuk diubah menjadi teks. Aplikasi ini tidak menyimpan suara.</p>
+            <div class="flex flex-wrap gap-2">
+                <button type="button" x-ref="setuju" x-on:click="setuju()" class="min-h-[44px] px-5 rounded-xl bg-navy text-white font-700">Setuju dan aktifkan</button>
+                <button type="button" x-on:click="batal()" class="min-h-[44px] px-5 rounded-xl border border-line-card text-ink font-700">Batal</button>
+            </div>
+        </div>
+    </div>
+
     <div class="sidebar:flex min-h-screen">
         {{-- Desktop sidebar --}}
         <aside class="hidden sidebar:flex sidebar:flex-col w-[252px] shrink-0 bg-navy text-white px-5 py-6">

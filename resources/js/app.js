@@ -1,4 +1,5 @@
 import './bootstrap';
+import './voice/engine';
 
 /**
  * Web Speech API text-to-speech. lang: 'zh-CN' for Mandarin, 'en-US' for English.
@@ -404,7 +405,13 @@ window.displaySettings = function () {
         pembacaLayar: !!saved.pembacaLayar,
         lega: !!saved.lega,
 
+        init() {
+            // Mode suara and Mode pembaca layar are mutually exclusive (see voice/engine.js).
+            window.addEventListener('mode-pembaca-layar-mati', () => (this.pembacaLayar = false));
+        },
+
         simpan() {
+            if (this.pembacaLayar) window.dispatchEvent(new CustomEvent('mode-pembaca-layar-aktif'));
             const kelas = document.documentElement.classList;
             kelas.toggle('teks-besar', this.ukuran === 'besar');
             kelas.toggle('teks-sangat-besar', this.ukuran === 'sangat-besar');
