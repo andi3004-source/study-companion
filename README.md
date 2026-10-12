@@ -225,7 +225,8 @@ Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dike
 ## Game inklusif
 
 Halaman `/game` berisi kartu permainan (`App\Livewire\Games\Hub`; tambah game
-dengan menambah satu entri di `games()`). Semua game tanpa panggilan AI.
+dengan menambah satu entri di `games()`). Tautan "Game" di navigasi membuka
+halaman ini. Semua game tanpa panggilan AI.
 
 - **Dengar & Pilih** (`/game/dengar-pilih`): 5 soal per sesi. Kata diambil dari
   kosakata HSK 1 yang punya arti bahasa Indonesia (tabel yang sama dengan
@@ -255,6 +256,9 @@ kolom, serta opsi "Jarak baris dan huruf lebih lega" di panel Tampilan.
 
 - **Belum** diuji dengan pengguna tunanetra atau pengguna lemah penglihatan.
   Tes otomatis hanya memeriksa markup HTML.
+- Hasil Dengar & Pilih **tidak masuk halaman Progress**. Ini disengaja: Progress
+  membaca `game_attempts` sebagai kategori kesalahan Pemburu Kesalahan, dan
+  jawaban kosakata akan mencemari kategori itu.
 - Suara memakai suara bawaan browser (Web Speech API); kualitasnya bervariasi
   antarperangkat, dan suara Mandarin harus terpasang di perangkat agar kata
   Mandarin terdengar benar.
