@@ -294,13 +294,24 @@ dan Mandarin (`/scan-benda`).
   data, tidak memakai unggahan sementara Livewire, dan gambar maupun teks
   model tidak ditulis ke log. Foto memang dikirim ke layanan Gemini untuk
   dikenali; pengguna harus mencentang persetujuan dulu.
+- **Pratinjau foto hanya tampil di layar.** Foto yang sama (versi sekitar
+  1024 px) ditampilkan di samping hasil lewat object URL di browser, dengan
+  keterangan bahwa foto tidak disimpan. Foto tidak ditulis ke localStorage,
+  sessionStorage, IndexedDB, atau state Livewire, dan object URL dilepas saat
+  "Foto lagi", saat foto baru dipilih, saat galat, dan saat meninggalkan
+  halaman. Kotak centang "Tampilkan foto di layar" (bawaan aktif) bisa
+  dimatikan untuk menyembunyikan foto yang berisi hal pribadi; yang disimpan di
+  localStorage (`scanBenda`) hanya pilihan kotak centang itu, bukan fotonya.
+- **Lembar catatan uji di browser belum dibuat.** Rencananya hanya di memori
+  halaman dan tanpa foto, tetapi membutuhkan `benda_id` dan keyakinan dalam
+  jawaban endpoint, yang belum dikirim.
 - **Bukan alat keselamatan atau medis.** Jangan dipakai untuk obat atau benda
   berbahaya; peringatan ini tampil di halaman.
 - **Deskripsi bentuk adalah perkiraan** dari foto dan mungkin tidak persis
   dengan perabaan.
 - **Status uji:** baru diuji dengan tes otomatis memakai pengenal palsu dan
   `Http::fake`. **Belum** diuji dengan foto sungguhan maupun dengan model visi
-  yang benar-benar terhubung, dan belum diuji dengan pengguna tunanetra.
+  yang benar-benar terhubung, dan **belum diuji dengan pengguna tunanetra**.
 
 ## Akun demo
 
