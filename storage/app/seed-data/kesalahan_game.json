@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "kategori": "urutan_kata",
+    "salah": "我学习在家。",
+    "benar": "我在家学习。",
+    "arti_id": "Saya belajar di rumah.",
+    "penjelasan": "Tempat (在家) diletakkan sebelum kata kerja, tidak di akhir seperti dalam bahasa Indonesia.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 2,
+    "kategori": "urutan_kata",
+    "salah": "我去学校明天。",
+    "benar": "我明天去学校。",
+    "arti_id": "Saya pergi ke sekolah besok.",
+    "penjelasan": "Keterangan waktu diletakkan sebelum kata kerja.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 3,
+    "kategori": "urutan_kata",
+    "salah": "书我的。",
+    "benar": "我的书。",
+    "arti_id": "Buku saya.",
+    "penjelasan": "Pemilik diletakkan sebelum benda, kebalikan dari bahasa Indonesia.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 4,
+    "kategori": "urutan_kata",
+    "salah": "我吃饭在学校。",
+    "benar": "我在学校吃饭。",
+    "arti_id": "Saya makan di sekolah.",
+    "penjelasan": "在 + tempat diletakkan sebelum kata kerja.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 5,
+    "kategori": "urutan_kata",
+    "salah": "她工作在医院。",
+    "benar": "她在医院工作。",
+    "arti_id": "Dia bekerja di rumah sakit.",
+    "penjelasan": "在 + tempat diletakkan sebelum kata kerja.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 6,
+    "kategori": "urutan_kata",
+    "salah": "我看电影今天。",
+    "benar": "我今天看电影。",
+    "arti_id": "Saya menonton film hari ini.",
+    "penjelasan": "Keterangan waktu diletakkan sebelum kata kerja.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 7,
+    "kategori": "shi_dengan_kata_sifat",
+    "salah": "我是高兴。",
+    "benar": "我很高兴。",
+    "arti_id": "Saya senang.",
+    "penjelasan": "是 menyambung dua kata benda. Kata sifat tidak memakai 是 dan biasanya diberi 很.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 8,
+    "kategori": "shi_dengan_kata_sifat",
+    "salah": "她是漂亮。",
+    "benar": "她很漂亮。",
+    "arti_id": "Dia cantik.",
+    "penjelasan": "Kata sifat tidak memakai 是; pakai 很.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 9,
+    "kategori": "shi_dengan_kata_sifat",
+    "salah": "今天是热。",
+    "benar": "今天很热。",
+    "arti_id": "Hari ini panas.",
+    "penjelasan": "Kata sifat tidak memakai 是; pakai 很.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 10,
+    "kategori": "shi_dengan_kata_sifat",
+    "salah": "这个是大。",
+    "benar": "这个很大。",
+    "arti_id": "Ini besar.",
+    "penjelasan": "Kata sifat tidak memakai 是; pakai 很.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 11,
+    "kategori": "bu_atau_mei",
+    "salah": "我不有钱。",
+    "benar": "我没有钱。",
+    "arti_id": "Saya tidak punya uang.",
+    "penjelasan": "Negasi 有 selalu 没有, tidak pernah 不有.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 12,
+    "kategori": "bu_atau_mei",
+    "salah": "昨天我不去学校。",
+    "benar": "昨天我没去学校。",
+    "arti_id": "Kemarin saya tidak pergi ke sekolah.",
+    "penjelasan": "Perbuatan yang sudah lewat dinegasikan dengan 没.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 13,
+    "kategori": "bu_atau_mei",
+    "salah": "我没喜欢茶。",
+    "benar": "我不喜欢茶。",
+    "arti_id": "Saya tidak suka teh.",
+    "penjelasan": "Kesukaan atau perasaan dinegasikan dengan 不.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 14,
+    "kategori": "bu_atau_mei",
+    "salah": "他不有朋友。",
+    "benar": "他没有朋友。",
+    "arti_id": "Dia tidak punya teman.",
+    "penjelasan": "Negasi 有 selalu 没有.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 15,
+    "kategori": "bu_atau_mei",
+    "salah": "我没是老师。",
+    "benar": "我不是老师。",
+    "arti_id": "Saya bukan guru.",
+    "penjelasan": "是 dinegasikan dengan 不: 不是.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 16,
+    "kategori": "kata_penggolong",
+    "salah": "我有三书。",
+    "benar": "我有三本书。",
+    "arti_id": "Saya punya tiga buku.",
+    "penjelasan": "Antara angka dan benda perlu kata penggolong; buku memakai 本.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 17,
+    "kategori": "kata_penggolong",
+    "salah": "我有一学生。",
+    "benar": "我有一个学生。",
+    "arti_id": "Saya punya satu pelajar.",
+    "penjelasan": "Orang memakai penggolong 个.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 18,
+    "kategori": "kata_penggolong",
+    "salah": "我想喝一茶。",
+    "benar": "我想喝一杯茶。",
+    "arti_id": "Saya ingin minum segelas teh.",
+    "penjelasan": "Gelas memakai penggolong 杯.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 19,
+    "kategori": "kata_penggolong",
+    "salah": "我买了三苹果。",
+    "benar": "我买了三个苹果。",
+    "arti_id": "Saya membeli tiga apel.",
+    "penjelasan": "Benda umum memakai penggolong 个.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 20,
+    "kategori": "kata_penggolong",
+    "salah": "那里有五人。",
+    "benar": "那里有五个人。",
+    "arti_id": "Di sana ada lima orang.",
+    "penjelasan": "Orang memakai penggolong 个.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 21,
+    "kategori": "kosakata",
+    "salah": "书有桌子上。",
+    "benar": "书在桌子上。",
+    "arti_id": "Buku ada di atas meja.",
+    "penjelasan": "在 menyatakan berada di suatu tempat; 有 menyatakan memiliki atau terdapat.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 22,
+    "kategori": "kosakata",
+    "salah": "学校里在很多人。",
+    "benar": "学校里有很多人。",
+    "arti_id": "Di sekolah ada banyak orang.",
+    "penjelasan": "有 menyatakan keberadaan atau terdapat; 在 menyatakan lokasi sesuatu.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 23,
+    "kategori": "kosakata",
+    "salah": "我在三本书。",
+    "benar": "我有三本书。",
+    "arti_id": "Saya punya tiga buku.",
+    "penjelasan": "有 menyatakan kepemilikan; 在 menyatakan lokasi.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 24,
+    "kategori": "lainnya",
+    "salah": "你去哪儿吗？",
+    "benar": "你去哪儿？",
+    "arti_id": "Kamu pergi ke mana?",
+    "penjelasan": "吗 tidak dipakai bersama kata tanya.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 25,
+    "kategori": "lainnya",
+    "salah": "你喝什么吗？",
+    "benar": "你喝什么？",
+    "arti_id": "Kamu minum apa?",
+    "penjelasan": "吗 tidak dipakai bersama kata tanya.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 26,
+    "kategori": "lainnya",
+    "salah": "书书很多。",
+    "benar": "书很多。",
+    "arti_id": "Bukunya banyak.",
+    "penjelasan": "Mandarin tidak membentuk jamak dengan pengulangan seperti 'buku-buku'.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  },
+  {
+    "id": 27,
+    "kategori": "lainnya",
+    "salah": "书们在桌子上。",
+    "benar": "书在桌子上。",
+    "arti_id": "Buku-buku ada di atas meja.",
+    "penjelasan": "Akhiran 们 hanya untuk orang, bukan benda.",
+    "hanzi_di_luar_hsk1": [],
+    "status": "draf_perlu_dicek_penutur"
+  }
+]
