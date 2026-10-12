@@ -19,8 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
-});
+    return auth()->check() ? redirect()->route('dashboard') : view('welcome');
+})->name('home');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

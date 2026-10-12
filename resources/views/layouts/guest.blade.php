@@ -14,7 +14,7 @@
 
             {{-- Logo & brand --}}
             <div class="flex items-center gap-2 mb-2">
-                <a href="/" wire:navigate class="flex items-center gap-2">
+                <a href="/" class="flex items-center gap-2">
                     <div class="w-12 h-12 rounded-2xl bg-navy flex items-center justify-center font-display font-600 text-2xl text-orange shadow-md">好</div>
                     <span class="font-display font-600 text-xl text-navy">Study Companion</span>
                 </a>
@@ -27,7 +27,7 @@
             </div>
 
             {{-- Back to home --}}
-            <a href="/" wire:navigate class="mt-5 text-xs text-ink-faint hover:text-ink underline">
+            <a href="/" class="mt-5 inline-flex items-center min-h-[44px] text-sm text-ink-soft hover:text-ink underline">
                 ← Kembali ke beranda
             </a>
         </div>
