@@ -69,6 +69,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        RateLimiter::for('voice-command', fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip()));
+
         RateLimiter::for('scan-benda', function (Request $request) {
             return Limit::perMinute(max(1, (int) config('scan.rate_limit_per_minute', 6)))
                 ->by($request->user()?->id ?: $request->ip());

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ScanBendaController;
+use App\Http\Controllers\VoiceCommandController;
 use App\Livewire\Actions\Logout;
 use App\Livewire\Bantuan;
 use App\Livewire\Cards\Deck;
@@ -74,6 +75,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/scan-benda', ScanBenda::class)->name('scan.object');
 
         Route::get('/bantuan', Bantuan::class)->name('bantuan');
+
+        // "Mode suara": transcript in, {type, target, index} out; nothing stored.
+        Route::post('/voice/command', VoiceCommandController::class)
+            ->middleware('throttle:voice-command')
+            ->name('voice.command');
     });
 });
 
