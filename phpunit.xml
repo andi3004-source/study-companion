@@ -27,6 +27,10 @@
         <env name="DB_DATABASE" value=":memory:"/>
         <env name="DB_URL" value=""/>
         <env name="HSK_CORRECTIONS_PATH" value=""/>
+        <env name="SCAN_BENDA_ENABLED" value="false"/>
+        <env name="SCAN_BENDA_MAX_IMAGE_BYTES" value="4000000"/>
+        <env name="SCAN_BENDA_RATE_LIMIT_PER_MINUTE" value="6"/>
+        <env name="SCAN_BENDA_TIMEOUT" value="30"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>

@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Livewire\Games;
+
+use App\Support\ErrorGameItems;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
+
+/**
+ * Game hub: one card per game. Add a game by adding an entry to games();
+ * 'available' decides whether the card links to the game or explains why
+ * there is nothing to play yet.
+ */
+#[Layout('layouts.study')]
+class Hub extends Component
+{
+    /** @return array<int, array{judul: string, penjelasan: string, status: string, cara: string, route: string, tautan: string, available: bool, kosong: string}> */
+    public function games(): array
+    {
+        return [
+            [
+                'judul' => 'Pemburu Kesalahan',
+                'penjelasan' => 'Baca kalimat Mandarin yang keliru, lalu tentukan jenis kesalahannya.',
+                'status' => 'Draf',
+                'cara' => 'Cara bermain: keyboard dan suara, tanpa batas waktu.',
+                'route' => 'game.error-hunter',
+                'tautan' => 'Mulai Pemburu Kesalahan',
+                'available' => ErrorGameItems::all() !== [],
+                'kosong' => 'Soal Pemburu Kesalahan belum tersedia karena berkas soalnya belum dipasang. Sementara itu, coba game lain atau latihan di halaman Kartu.',
+            ],
+        ];
+    }
+
+    public function render()
+    {
+        return view('livewire.games.hub', ['games' => $this->games()])->title('Game');
+    }
+}

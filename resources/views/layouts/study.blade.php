@@ -40,7 +40,7 @@
                         ['route' => 'kamus', 'label' => 'Kamus', 'icon' => '🔎'],
                         ['route' => 'ujian', 'label' => 'Ujian', 'icon' => '📝'],
                         ['route' => 'latihan-isian', 'label' => 'Isian', 'icon' => '🧠'],
-                        ['route' => 'game.error-hunter', 'label' => 'Game', 'icon' => '🎯'],
+                        ['route' => 'game.error-hunter', 'aktif' => 'game*', 'label' => 'Game', 'icon' => '🎯'],
                         ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => '💬'],
                         ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => '🎤'],
                         ['route' => 'kata-bicara', 'label' => 'Kata bicara', 'icon' => '🗣️'],
@@ -51,9 +51,9 @@
                 @endphp
                 @foreach ($navItems as $item)
                     <a href="{{ route($item['route']) }}"
-                       @if (request()->routeIs($item['route'].'*')) aria-current="page" @endif
+                       @if (request()->routeIs($item['aktif'] ?? $item['route'].'*')) aria-current="page" @endif
                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl font-600 text-sm transition
-                              {{ request()->routeIs($item['route'].'*') ? 'bg-navy-soft text-white' : 'text-white/80 hover:bg-navy-soft/60 hover:text-white' }}">
+                              {{ request()->routeIs($item['aktif'] ?? $item['route'].'*') ? 'bg-navy-soft text-white' : 'text-white/80 hover:bg-navy-soft/60 hover:text-white' }}">
                         <span aria-hidden="true">{{ $item['icon'] }}</span>
                         <span>{{ $item['label'] }}</span>
                     </a>
@@ -139,14 +139,14 @@
         $mobileMoreItems = collect($navItems)
             ->reject(fn ($item) => in_array($item['route'], $mobileMainRoutes, true))
             ->values();
-        $mobileMoreActive = $mobileMoreItems->contains(fn ($item) => request()->routeIs($item['route'].'*'));
+        $mobileMoreActive = $mobileMoreItems->contains(fn ($item) => request()->routeIs($item['aktif'] ?? $item['route'].'*'));
     @endphp
     <nav aria-label="Navigasi bawah" class="sidebar:hidden fixed bottom-0 inset-x-0 bg-card border-t border-line-card flex justify-around py-2 z-40" x-data="{ moreOpen: false }">
         @foreach ($mobileMainItems as $item)
             <a href="{{ route($item['route']) }}"
-               @if (request()->routeIs($item['route'].'*')) aria-current="page" @endif
+               @if (request()->routeIs($item['aktif'] ?? $item['route'].'*')) aria-current="page" @endif
                class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 min-h-[44px] min-w-[44px] text-xs font-600
-                      {{ request()->routeIs($item['route'].'*') ? 'text-mandarin' : 'text-ink-faint' }}">
+                      {{ request()->routeIs($item['aktif'] ?? $item['route'].'*') ? 'text-mandarin' : 'text-ink-faint' }}">
                 <span class="text-lg leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
                 <span>{{ $item['label'] }}</span>
             </a>
@@ -171,7 +171,7 @@
                         @foreach ($mobileMoreItems as $item)
                             <a href="{{ route($item['route']) }}"
                                class="flex flex-col items-center justify-center gap-1 px-2 py-3 min-h-[44px] rounded-xl text-xs font-600
-                                      {{ request()->routeIs($item['route'].'*') ? 'bg-mandarin-soft text-mandarin' : 'text-ink-soft hover:bg-card-alt' }}">
+                                      {{ request()->routeIs($item['aktif'] ?? $item['route'].'*') ? 'bg-mandarin-soft text-mandarin' : 'text-ink-soft hover:bg-card-alt' }}">
                                 <span class="text-xl leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
                                 <span>{{ $item['label'] }}</span>
                             </a>

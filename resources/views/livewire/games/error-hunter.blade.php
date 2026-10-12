@@ -1,9 +1,13 @@
 <div class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
+    <p class="mb-3"><a href="{{ route('game') }}" class="inline-flex items-center min-h-[44px] text-sm font-700 text-navy underline"><span aria-hidden="true">←</span>&nbsp;Semua game</a></p>
     <h1 class="font-display font-600 text-2xl text-ink mb-1">Pemburu Kesalahan</h1>
     <p class="text-ink-soft text-sm mb-6">Temukan jenis kesalahan di kalimat Mandarin ini.</p>
 
     @if ($questions === [])
-        <div class="bg-card rounded-2xl p-10 text-center text-ink-soft text-sm">Data game belum tersedia.</div>
+        <div role="status" class="bg-card rounded-2xl p-6 text-ink">
+            <p class="font-700">Data game belum tersedia.</p>
+            <p class="mt-1">Berkas soal Pemburu Kesalahan belum dipasang, jadi belum ada soal untuk dimainkan. Coba game lain di halaman <a href="{{ route('game') }}" class="underline font-700 text-navy">Game</a>.</p>
+        </div>
     @elseif ($finished)
         {{-- End screen --}}
         <div class="bg-card rounded-2xl p-6 text-center">
