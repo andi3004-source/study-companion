@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ScanBendaController;
 use App\Livewire\Actions\Logout;
 use App\Livewire\Bantuan;
 use App\Livewire\Cards\Deck;
@@ -34,6 +35,11 @@ Route::post('/logout', function (Request $request, Logout $logout) {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/onboarding', Onboarding::class)->name('onboarding');
+
+    // "Raba lalu dengar": 404 while SCAN_BENDA_ENABLED is off (checked in the controller).
+    Route::post('/scan-benda/kenali', [ScanBendaController::class, 'recognize'])
+        ->middleware('throttle:scan-benda')
+        ->name('scan.recognize');
 
     Route::middleware('onboarded')->group(function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
