@@ -1,4 +1,4 @@
-<div class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
+<div data-voice-page="progress" class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
     <h1 class="font-display font-600 text-2xl text-ink mb-1">Progress</h1>
     <p class="text-ink-soft text-sm mb-6">Hari ke-{{ $day }} · {{ $totalTasks }} tugas selesai sepanjang perjalanan</p>
 

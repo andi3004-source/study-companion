@@ -1,4 +1,4 @@
-<div class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 space-y-4">
+<div data-voice-page="game-listen-pick" class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 space-y-4">
     <p><a href="{{ route('game') }}" class="inline-flex items-center min-h-[44px] text-sm font-700 text-navy underline"><span aria-hidden="true">←</span>&nbsp;Semua game</a></p>
     <h1 class="font-display font-600 text-2xl text-ink">Dengar &amp; Pilih</h1>
     <p class="text-ink">Dengarkan kata Mandarin, baca hanzi dan pinyinnya, lalu pilih artinya. Tidak ada batas waktu.</p>

@@ -1,5 +1,6 @@
 import './bootstrap';
 import './voice/engine';
+import './voice/adapters';
 
 /**
  * Web Speech API text-to-speech. lang: 'zh-CN' for Mandarin, 'en-US' for English.

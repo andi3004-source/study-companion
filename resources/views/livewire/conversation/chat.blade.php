@@ -11,7 +11,7 @@
     @endpush
 @endif
 
-<div class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 flex flex-col" style="min-height: calc(100vh - 2rem);">
+<div data-voice-page="chat" class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 flex flex-col" style="min-height: calc(100vh - 2rem);">
     <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
         <div>
             <h1 class="font-display font-600 text-xl text-ink">{{ $this->scenario['label'] }}</h1>

@@ -1,4 +1,4 @@
-<div class="max-w-3xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
+<div data-voice-page="dashboard" class="max-w-3xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
     {{-- Header --}}
     <div class="flex items-center justify-between mb-6">
         <div>

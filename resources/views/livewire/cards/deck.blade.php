@@ -1,4 +1,4 @@
-<div class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
+<div data-voice-page="cards" class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
     <h1 class="font-display font-600 text-2xl text-ink mb-4">Kartu</h1>
 
     {{-- Deck switcher --}}

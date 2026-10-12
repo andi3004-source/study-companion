@@ -1,4 +1,4 @@
-<div class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 space-y-4">
+<div data-voice-page="kata-bicara" class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 space-y-4">
     <h1 class="font-display font-600 text-2xl text-ink">Kata bicara</h1>
     <p class="text-ink">Cari satu kata dan lihat dalam bahasa Indonesia, Inggris, dan Mandarin.</p>
 

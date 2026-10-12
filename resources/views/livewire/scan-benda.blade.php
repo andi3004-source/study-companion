@@ -1,4 +1,4 @@
-<div class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 space-y-4"
+<div data-voice-page="scan" class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 space-y-4"
      x-data="scanBenda({{ \Illuminate\Support\Js::from(route('scan.recognize')) }})">
     <h1 class="font-display font-600 text-2xl text-ink">Raba lalu dengar</h1>
     <p class="text-ink">Pegang satu benda, arahkan ke kamera, lalu ambil foto. Foto hanya diproses dan tidak disimpan.</p>
