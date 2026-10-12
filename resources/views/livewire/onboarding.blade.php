@@ -11,7 +11,7 @@
                 <label class="block text-sm font-700 text-ink mb-2">Mulai belajar dari tanggal</label>
                 <input type="date" wire:model="start_date"
                        class="w-full rounded-xl border-line-card focus:border-mandarin focus:ring-mandarin">
-                @error('start_date') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                @error('start_date') <p class="text-red-700 text-xs mt-1">{{ $message }}</p> @enderror
                 <p class="text-xs text-ink-faint mt-1">Jadwal harianmu (Hari 1, Hari 2, dst) dihitung dari tanggal ini — bukan tanggal kalender tetap.</p>
             </div>
 

@@ -1,14 +1,15 @@
-<div class="fixed inset-0 bg-black/40 z-50 flex items-end sidebar:items-center justify-center" wire:click.self="closeItem">
-    <div class="bg-card w-full sidebar:max-w-lg sidebar:rounded-3xl rounded-t-3xl max-h-[85vh] overflow-y-auto">
+<div class="fixed inset-0 bg-black/40 z-50 flex items-end sidebar:items-center justify-center" wire:click.self="closeItem"
+     x-data="modalDialog()" x-on:keydown.escape="$wire.closeItem()">
+    <div role="dialog" aria-modal="true" aria-labelledby="judul-detail-item" class="bg-card w-full sidebar:max-w-lg sidebar:rounded-3xl rounded-t-3xl max-h-[85vh] overflow-y-auto">
         <div class="sticky top-0 bg-card flex items-start justify-between px-5 py-4 border-b border-line-card">
             <div>
                 <span class="inline-block text-xs font-700 uppercase tracking-wide px-2 py-0.5 rounded-full mb-1
                              {{ $item['lang'] === 'mandarin' ? 'bg-mandarin-soft text-mandarin' : 'bg-english-soft text-english' }}">
                     {{ $item['lang'] === 'mandarin' ? 'Mandarin' : 'English' }}
                 </span>
-                <h2 class="font-display font-600 text-lg text-ink">{{ $item['title'] }}</h2>
+                <h2 id="judul-detail-item" class="font-display font-600 text-lg text-ink">{{ $item['title'] }}</h2>
             </div>
-            <button wire:click="closeItem" class="text-ink-faint text-xl leading-none">✕</button>
+            <button type="button" wire:click="closeItem" aria-label="Tutup" data-autofocus class="text-ink-soft text-xl leading-none"><span aria-hidden="true">✕</span></button>
         </div>
 
         <div class="p-5 space-y-4">
@@ -28,9 +29,8 @@
                             </div>
                             <button type="button"
                                     onclick="speak('{{ addslashes($word['hanzi'] ?? $word['word_en']) }}', '{{ isset($word['hanzi']) ? 'zh-CN' : 'en-US' }}')"
-                                    class="shrink-0 w-9 h-9 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy">
-                                🔊
-                            </button>
+                                    aria-label="Dengarkan {{ $word['hanzi'] ?? $word['word_en'] }}"
+                                    class="shrink-0 w-9 h-9 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy"><span aria-hidden="true">🔊</span></button>
                         </div>
                     @endforeach
 
@@ -103,8 +103,8 @@
                                     <p class="text-xs text-ink-soft">{{ $pair['q_pinyin'] }}</p>
                                     <p class="text-xs text-ink-faint">{{ $pair['q_id'] }}</p>
                                 </div>
-                                <button type="button" onclick="speak('{{ addslashes($pair['q_hanzi']) }}', 'zh-CN')"
-                                        class="shrink-0 w-8 h-8 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy text-sm">🔊</button>
+                                <button type="button" onclick="speak('{{ addslashes($pair['q_hanzi']) }}', 'zh-CN')" aria-label="Dengarkan {{ $pair['q_hanzi'] }}"
+                                        class="shrink-0 w-8 h-8 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy text-sm"><span aria-hidden="true">🔊</span></button>
                             </div>
                             <div class="flex items-start justify-between gap-2 bg-mandarin-soft rounded-xl px-4 py-3 ml-4">
                                 <div>
@@ -112,8 +112,8 @@
                                     <p class="text-xs text-ink-soft">{{ $pair['a_pinyin'] }}</p>
                                     <p class="text-xs text-ink-faint">{{ $pair['a_id'] }}</p>
                                 </div>
-                                <button type="button" onclick="speak('{{ addslashes($pair['a_hanzi']) }}', 'zh-CN')"
-                                        class="shrink-0 w-8 h-8 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy text-sm">🔊</button>
+                                <button type="button" onclick="speak('{{ addslashes($pair['a_hanzi']) }}', 'zh-CN')" aria-label="Dengarkan {{ $pair['a_hanzi'] }}"
+                                        class="shrink-0 w-8 h-8 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy text-sm"><span aria-hidden="true">🔊</span></button>
                             </div>
                         </div>
                     @endforeach
@@ -130,8 +130,8 @@
                         @foreach ($item['payload']['prompts'] as $prompt)
                             <div class="flex items-start justify-between gap-2 bg-card-alt rounded-xl px-4 py-3">
                                 <p class="text-sm text-ink whitespace-pre-line">{{ $prompt }}</p>
-                                <button type="button" onclick="speak('{{ addslashes($prompt) }}', 'en-US')"
-                                        class="shrink-0 w-8 h-8 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy text-sm">🔊</button>
+                                <button type="button" onclick="speak('{{ addslashes($prompt) }}', 'en-US')" aria-label="Dengarkan pertanyaan {{ $loop->iteration }}"
+                                        class="shrink-0 w-8 h-8 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy text-sm"><span aria-hidden="true">🔊</span></button>
                             </div>
                         @endforeach
                     </div>
@@ -250,12 +250,12 @@
 
             @if (!empty($item['links']))
                 <div class="pt-3 mt-1 border-t border-line-card">
-                    <div class="text-[10px] font-600 text-ink-faint mb-2 tracking-wide">Referensi Tambahan</div>
+                    <div class="text-xs font-600 text-ink-soft mb-2 tracking-wide">Referensi Tambahan</div>
                     <div class="flex flex-wrap gap-1.5">
                         @foreach ($item['links'] as $link)
                             <a href="{{ $link['url'] }}" target="_blank" rel="noopener"
                                class="flex items-center gap-1 bg-card-alt text-ink-faint text-[11px] font-600 px-2.5 py-1 rounded-full no-underline hover:text-ink-soft hover:bg-line-card">
-                                {{ $link['name'] }} ↗
+                                {{ $link['name'] }} <span aria-hidden="true">↗</span><span class="sr-only">(tab baru)</span>
                             </a>
                         @endforeach
                     </div>

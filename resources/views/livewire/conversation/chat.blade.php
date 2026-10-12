@@ -41,7 +41,7 @@
                     </div>
                 </div>
             @endif
-            <a href="{{ route('conversation') }}" class="text-sm text-ink-soft">← Kembali</a>
+            <a href="{{ route('conversation') }}" class="text-sm text-ink-soft"><span aria-hidden="true">←</span> Kembali</a>
         </div>
     </div>
 
@@ -134,7 +134,7 @@
         @forelse ($this->turns as $turn)
             @if ($turn->role === 'user')
                 <div class="flex justify-end" wire:key="turn-{{ $turn->id }}">
-                    <div class="max-w-[80%] bg-navy text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm">
+                    <div class="max-w-[80%] break-words bg-navy text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm">
                         <p class="text-xs font-700 text-white/80">Kamu:</p>
                         {{-- Learners type hanzi or tone-numbered pinyin; only tag hanzi as Chinese so pinyin isn't read with a Chinese voice. --}}
                         @php($userLang = preg_match('/\p{Han}/u', $turn->content) ? 'zh-Hans' : ($session->lang !== 'mandarin' ? 'en' : null))
@@ -144,7 +144,7 @@
             @else
                 @php($replyNumber++)
                 <div class="flex justify-start" wire:key="turn-{{ $turn->id }}">
-                    <div class="max-w-[80%] bg-card rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm text-ink border border-line-card">
+                    <div class="max-w-[80%] break-words bg-card rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm text-ink border border-line-card">
                         <p class="text-xs font-700 text-ink-soft">Teman bicara:</p>
                         <p lang="{{ $targetLang }}">{{ $turn->content }}</p>
                         @if ($turn->translation)

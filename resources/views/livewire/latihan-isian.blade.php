@@ -5,16 +5,16 @@
     {{-- Controls --}}
     <div class="grid grid-cols-1 sidebar:grid-cols-3 gap-3 mb-5">
         <div>
-            <label class="block text-xs font-700 text-ink-soft mb-1">Mode Soal</label>
-            <select wire:model.live="modeSoal" class="w-full rounded-xl border-line-card text-sm focus:border-mandarin focus:ring-mandarin">
+            <label for="isian-mode" class="block text-sm font-700 text-ink mb-1">Mode Soal</label>
+            <select id="isian-mode" wire:model.live="modeSoal" class="w-full rounded-xl border-line-card text-sm focus:border-mandarin focus:ring-mandarin">
                 <option value="hanzi_from_pinyin">Tebak Hanzi (Petunjuk: Pinyin)</option>
                 <option value="pinyin_from_hanzi">Tebak Pinyin (Petunjuk: Hanzi)</option>
                 <option value="both_from_meaning">Tebak Hanzi & Pinyin (Petunjuk: Arti)</option>
             </select>
         </div>
         <div>
-            <label class="block text-xs font-700 text-ink-soft mb-1">Jumlah Soal</label>
-            <select wire:model.live="jumlah" class="w-full rounded-xl border-line-card text-sm focus:border-mandarin focus:ring-mandarin">
+            <label for="isian-jumlah" class="block text-sm font-700 text-ink mb-1">Jumlah Soal</label>
+            <select id="isian-jumlah" wire:model.live="jumlah" class="w-full rounded-xl border-line-card text-sm focus:border-mandarin focus:ring-mandarin">
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="50">50</option>
@@ -23,8 +23,8 @@
             </select>
         </div>
         <div>
-            <label class="block text-xs font-700 text-ink-soft mb-1">Urutan</label>
-            <select wire:model.live="urutan" class="w-full rounded-xl border-line-card text-sm focus:border-mandarin focus:ring-mandarin">
+            <label for="isian-urutan" class="block text-sm font-700 text-ink mb-1">Urutan</label>
+            <select id="isian-urutan" wire:model.live="urutan" class="w-full rounded-xl border-line-card text-sm focus:border-mandarin focus:ring-mandarin">
                 <option value="sequential">Berurutan (Sesuai List)</option>
                 <option value="random">Acak</option>
             </select>
@@ -32,16 +32,21 @@
     </div>
 
     {{-- Summary --}}
+    <p role="status" class="sr-only">
+        @if ($checked)
+            Hasil analisis: {{ $this->summary['benar'] }} benar, {{ $this->summary['salah'] }} salah, {{ $this->summary['kosong'] }} kosong dari {{ $this->summary['total'] }} soal.
+        @endif
+    </p>
     <div class="grid grid-cols-4 gap-2 mb-5">
         @foreach ([
             ['label' => 'Total Soal', 'value' => $this->summary['total'], 'class' => 'text-ink'],
             ['label' => 'Benar', 'value' => $this->summary['benar'], 'class' => 'text-good'],
-            ['label' => 'Salah', 'value' => $this->summary['salah'], 'class' => 'text-red-500'],
+            ['label' => 'Salah', 'value' => $this->summary['salah'], 'class' => 'text-red-700'],
             ['label' => 'Kosong', 'value' => $this->summary['kosong'], 'class' => 'text-ink-faint'],
         ] as $stat)
             <div class="bg-card rounded-xl px-3 py-2.5 text-center">
                 <p class="text-lg font-display font-600 {{ $stat['class'] }}">{{ $checked ? $stat['value'] : '–' }}</p>
-                <p class="text-[11px] text-ink-soft">{{ $stat['label'] }}</p>
+                <p class="text-xs text-ink-soft">{{ $stat['label'] }}</p>
             </div>
         @endforeach
     </div>
@@ -51,7 +56,7 @@
         <table class="w-full text-sm">
             <thead>
                 <tr class="border-b border-line-card text-left text-ink-soft text-xs">
-                    <th class="px-3 py-2.5 font-700 w-10">No</th>
+                    <th scope="col" class="px-3 py-2.5 font-700 w-10">No</th>
                     <th class="px-3 py-2.5 font-700">{{ $this->promptLabel() }}</th>
                     @foreach ($fields as $field)
                         <th class="px-3 py-2.5 font-700">{{ $fieldLabels[$field] }}</th>
@@ -70,6 +75,7 @@
                             <td class="px-3 py-2.5">
                                 <input type="text"
                                        wire:model="answers.{{ $i }}.{{ $field }}"
+                                       aria-label="{{ $fieldLabels[$field] }} untuk soal {{ $i + 1 }}"
                                        placeholder="{{ $fieldLabels[$field] }}"
                                        class="w-full rounded-lg border-line-card text-sm py-1.5 px-2 focus:border-mandarin focus:ring-mandarin {{ $field === 'hanzi' ? 'font-display' : '' }}">
                             </td>
@@ -83,7 +89,7 @@
                             @elseif ($result['status'] === 'empty')
                                 <span class="inline-block px-2 py-1 rounded-full bg-card-alt text-ink-faint text-xs font-700">Kosong</span>
                             @else
-                                <span class="inline-block px-2 py-1 rounded-full bg-red-50 text-red-500 text-xs font-700">✗ Salah</span>
+                                <span class="inline-block px-2 py-1 rounded-full bg-red-50 text-red-700 text-xs font-700">✗ Salah</span>
                                 <span class="block text-xs text-ink-soft mt-1">{{ $result['detail'] }}</span>
                             @endif
                         </td>
@@ -99,9 +105,10 @@
 
     {{-- Actions --}}
     <div class="flex gap-3 mt-5">
-        <button type="button" wire:click="checkAnswers"
-                class="flex-1 py-3 rounded-xl bg-navy text-white font-700 text-sm hover:bg-navy-soft transition">
-            Analisis Jawaban
+        <button type="button" wire:click="checkAnswers" wire:loading.attr="disabled" wire:target="checkAnswers"
+                class="disabled:opacity-60 flex-1 py-3 rounded-xl bg-navy text-white font-700 text-sm hover:bg-navy-soft transition">
+            <span wire:loading.remove wire:target="checkAnswers">Analisis Jawaban</span>
+            <span wire:loading wire:target="checkAnswers">Menganalisis…</span>
         </button>
         <button type="button" wire:click="resetAnswers"
                 class="px-5 py-3 rounded-xl bg-card-alt text-ink-soft font-700 text-sm hover:bg-line-card transition">

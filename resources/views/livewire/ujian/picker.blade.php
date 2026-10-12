@@ -7,7 +7,7 @@
             <a href="{{ route('ujian.run', ['mode' => 'today', 'day' => $day]) }}"
                class="block rounded-2xl bg-navy text-white px-5 py-4 hover:bg-navy-soft transition">
                 <span class="font-display font-600">Tes Hari Ini</span>
-                <span class="block text-xs text-white/70 mt-0.5">Scoped ke vocab hari ini · beberapa soal · ~3-5 menit</span>
+                <span class="block text-xs text-white/80 mt-0.5">Scoped ke vocab hari ini · beberapa soal · ~3-5 menit</span>
             </a>
         @endif
 

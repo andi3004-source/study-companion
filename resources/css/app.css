@@ -82,6 +82,11 @@ html.kontras-tinggi main a {
     text-decoration: underline;
 }
 
+/* Translucent white text on navy becomes solid white. */
+html.kontras-tinggi [class*='text-white/'] {
+    color: #ffffff !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

@@ -36,7 +36,7 @@ new class extends Component
                        @class([
                            'px-3 py-2 rounded-xl text-sm font-600 transition',
                            'bg-navy-soft text-white' => request()->routeIs('dashboard'),
-                           'text-white/70 hover:text-white hover:bg-navy-soft/60' => ! request()->routeIs('dashboard'),
+                           'text-white/80 hover:text-white hover:bg-navy-soft/60' => ! request()->routeIs('dashboard'),
                        ])>
                         🏠 Dashboard
                     </a>
@@ -72,7 +72,7 @@ new class extends Component
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-xl text-white/60 hover:text-white hover:bg-navy-soft transition">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-xl text-white/80 hover:text-white hover:bg-navy-soft transition">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -90,7 +90,7 @@ new class extends Component
                @class([
                    'block px-3 py-2 rounded-xl text-sm font-600 transition',
                    'bg-navy-soft text-white' => request()->routeIs('dashboard'),
-                   'text-white/70 hover:text-white hover:bg-navy-soft/60' => ! request()->routeIs('dashboard'),
+                   'text-white/80 hover:text-white hover:bg-navy-soft/60' => ! request()->routeIs('dashboard'),
                ])>
                 🏠 Dashboard
             </a>
@@ -100,17 +100,17 @@ new class extends Component
         <div class="pt-3 pb-3 px-3 border-t border-navy-soft">
             <div class="px-2 mb-2">
                 <div class="font-600 text-sm text-white" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-                <div class="text-xs text-white/60">{{ auth()->user()->email }}</div>
+                <div class="text-xs text-white/80">{{ auth()->user()->email }}</div>
             </div>
 
             <div class="space-y-1">
                 <a href="{{ route('profile') }}"
                    wire:navigate
-                   class="block px-3 py-2 rounded-xl text-sm font-600 text-white/70 hover:text-white hover:bg-navy-soft/60 transition">
+                   class="block px-3 py-2 rounded-xl text-sm font-600 text-white/80 hover:text-white hover:bg-navy-soft/60 transition">
                     {{ __('Profil') }}
                 </a>
 
-                <button wire:click="logout" class="w-full text-start px-3 py-2 rounded-xl text-sm font-600 text-white/70 hover:text-white hover:bg-navy-soft/60 transition">
+                <button wire:click="logout" class="w-full text-start px-3 py-2 rounded-xl text-sm font-600 text-white/80 hover:text-white hover:bg-navy-soft/60 transition">
                     {{ __('Keluar') }}
                 </button>
             </div>

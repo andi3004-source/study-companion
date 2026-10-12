@@ -10,12 +10,12 @@
         @endif
     </div>
 
-    <div class="flex gap-2 mb-5">
-        <button type="button" wire:click="$set('lang', 'mandarin')"
+    <div class="flex gap-2 mb-5" role="group" aria-label="Bahasa">
+        <button type="button" wire:click="$set('lang', 'mandarin')" aria-pressed="{{ $lang === 'mandarin' ? 'true' : 'false' }}"
                 class="flex-1 py-2.5 rounded-xl font-700 text-sm transition {{ $lang === 'mandarin' ? 'bg-mandarin text-white' : 'bg-mandarin-soft text-mandarin' }}">
             Mandarin
         </button>
-        <button type="button" wire:click="$set('lang', 'english')"
+        <button type="button" wire:click="$set('lang', 'english')" aria-pressed="{{ $lang === 'english' ? 'true' : 'false' }}"
                 class="flex-1 py-2.5 rounded-xl font-700 text-sm transition {{ $lang === 'english' ? 'bg-english text-white' : 'bg-english-soft text-english' }}">
             English
         </button>
@@ -32,7 +32,7 @@
 
         <button type="button" wire:click="startRandom" wire:loading.attr="disabled" wire:target="startRandom"
                 class="w-full text-left block rounded-2xl bg-orange/10 px-5 py-4 hover:bg-orange/20 transition border border-dashed border-orange disabled:opacity-60">
-            <span class="font-display font-600 text-navy" wire:loading.remove wire:target="startRandom">🎲 Ngobrol Bebas</span>
+            <span class="font-display font-600 text-navy" wire:loading.remove wire:target="startRandom"><span aria-hidden="true">🎲</span> Ngobrol Bebas</span>
             <span class="font-display font-600 text-navy" wire:loading wire:target="startRandom">Menyiapkan obrolan...</span>
             <span class="block text-xs text-ink-soft mt-0.5" wire:loading.remove wire:target="startRandom">Topik acak, AI mulai duluan — gak perlu mikir dulu</span>
         </button>

@@ -4,7 +4,7 @@
 
     @if ($streak > 0)
         <div class="flex items-center gap-2 mb-6 bg-orange/10 border border-orange/30 rounded-xl px-4 py-2.5 text-sm">
-            <span class="text-lg">🔥</span>
+            <span class="text-lg" aria-hidden="true">🔥</span>
             <span class="font-700 text-ink">{{ $streak }} hari beruntun</span>
         </div>
     @endif

@@ -2,38 +2,40 @@
     <h1 class="font-display font-600 text-2xl text-ink mb-4">Kamus</h1>
 
     <div class="mb-3">
-        <input type="text" wire:model.live.debounce.300ms="query"
+        <label for="cari-kamus" class="block text-sm font-700 text-ink mb-1">Cari kata</label>
+        <input type="text" id="cari-kamus" wire:model.live.debounce.300ms="query"
                placeholder="Cari kata (Mandarin / pinyin / English / Indonesia)..."
                class="w-full rounded-xl border-line-card focus:border-mandarin focus:ring-mandarin text-sm">
     </div>
 
-    <div class="flex gap-2 mb-3">
+    <div class="flex gap-2 mb-3" role="group" aria-label="Bahasa">
         @foreach (['all' => 'Semua', 'mandarin' => 'Mandarin', 'english' => 'English'] as $key => $label)
-            <button type="button" wire:click="$set('filterLang', '{{ $key }}')"
+            <button type="button" wire:click="$set('filterLang', '{{ $key }}')" aria-pressed="{{ $filterLang === $key ? 'true' : 'false' }}"
                     class="px-3 py-1.5 rounded-full text-xs font-700 transition {{ $filterLang === $key ? 'bg-navy text-white' : 'bg-card text-ink-soft hover:bg-card-alt' }}">{{ $label }}</button>
         @endforeach
     </div>
 
     @if ($filterLang !== 'all')
-        <div class="flex gap-2 mb-4 flex-wrap">
-            <button type="button" wire:click="$set('filterLevel', 'all')"
+        <div class="flex gap-2 mb-4 flex-wrap" role="group" aria-label="Level">
+            <button type="button" wire:click="$set('filterLevel', 'all')" aria-pressed="{{ $filterLevel === 'all' ? 'true' : 'false' }}"
                     class="px-3 py-1 rounded-full text-xs font-700 transition {{ $filterLevel === 'all' ? 'bg-orange text-navy' : 'bg-card text-ink-soft hover:bg-card-alt' }}">Semua</button>
             @if ($filterLang === 'mandarin')
                 @foreach ($mandarinLevels as $lvl)
-                    <button type="button" wire:click="$set('filterLevel', '{{ $lvl }}')"
+                    <button type="button" wire:click="$set('filterLevel', '{{ $lvl }}')" aria-pressed="{{ $filterLevel === (string) $lvl ? 'true' : 'false' }}"
                             class="px-3 py-1 rounded-full text-xs font-700 transition {{ $filterLevel === $lvl ? 'bg-orange text-navy' : 'bg-card text-ink-soft hover:bg-card-alt' }}">HSK{{ $lvl }}</button>
                 @endforeach
             @else
                 @foreach ($englishLevels as $lvl)
-                    <button type="button" wire:click="$set('filterLevel', '{{ $lvl }}')"
+                    <button type="button" wire:click="$set('filterLevel', '{{ $lvl }}')" aria-pressed="{{ $filterLevel === (string) $lvl ? 'true' : 'false' }}"
                             class="px-3 py-1 rounded-full text-xs font-700 transition {{ $filterLevel === $lvl ? 'bg-orange text-navy' : 'bg-card text-ink-soft hover:bg-card-alt' }}">{{ $lvl }}</button>
                 @endforeach
             @endif
         </div>
     @endif
 
-    <p class="text-xs text-ink-faint mb-2" wire:loading.class="opacity-50" wire:target="query,filterLang,filterLevel">
-        {{ number_format($this->totalCount) }} hasil
+    <p role="status" class="text-xs text-ink-soft mb-2">
+        <span wire:loading wire:target="query,filterLang,filterLevel">Mencari…</span>
+        <span wire:loading.remove wire:target="query,filterLang,filterLevel">{{ number_format($this->totalCount) }} hasil</span>
     </p>
 
     <div class="space-y-2">
@@ -66,7 +68,7 @@
                         <p class="text-sm text-ink-faint italic">Arti belum tersedia</p>
                     @endif
                     @if ($entry->meaning_en && ! $primaryIsEnglish)
-                        <p class="text-[11px] text-ink-faint/70">🇬🇧 {{ $entry->meaning_en }}</p>
+                        <p class="text-xs text-ink-faint">🇬🇧 {{ $entry->meaning_en }}</p>
                     @endif
                     @if ($entry->example_en)
                         <p class="text-xs text-ink-faint italic mt-0.5">"{{ $entry->example_en }}"</p>
@@ -85,15 +87,17 @@
                 </div>
                 <div class="flex items-center gap-1.5 shrink-0">
                     <button type="button" onclick="speak({{ \Illuminate\Support\Js::from($entry->headword) }}, '{{ $entry->lang_code }}')"
-                            class="w-9 h-9 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy">🔊</button>
+                            aria-label="Dengarkan {{ $entry->headword }}"
+                            class="w-9 h-9 rounded-full bg-navy/5 hover:bg-navy/10 flex items-center justify-center text-navy"><span aria-hidden="true">🔊</span></button>
                     @if ($entry->lang === 'mandarin')
                         <button type="button" x-on:click="practiceChar = {{ \Illuminate\Support\Js::from($entry->headword) }}"
-                                class="w-9 h-9 rounded-full bg-mandarin-soft hover:bg-mandarin/20 flex items-center justify-center text-mandarin text-sm">✍️</button>
+                                aria-label="Latihan tulis {{ $entry->headword }}"
+                                class="w-9 h-9 rounded-full bg-mandarin-soft hover:bg-mandarin/20 flex items-center justify-center text-mandarin text-sm"><span aria-hidden="true">✍️</span></button>
                     @endif
                 </div>
             </div>
         @empty
-            <div class="text-center text-ink-soft text-sm py-10">Tidak ditemukan.</div>
+            <div class="text-center text-ink-soft text-sm py-10">Kata tidak ditemukan. Coba ejaan lain, pinyin tanpa nada, atau ubah filter bahasa.</div>
         @endforelse
     </div>
 
@@ -106,13 +110,14 @@
 
     {{-- Hanzi writing practice modal --}}
     <template x-if="practiceChar">
-        <div class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center px-4" x-on:click.self="practiceChar = null">
-            <div class="bg-card rounded-3xl p-5 w-full max-w-sm" x-data="hanziCanvas(practiceChar)" x-init="$nextTick(() => init())">
+        <div class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center px-4" x-on:click.self="practiceChar = null"
+             x-data="modalDialog()" x-on:keydown.escape="practiceChar = null">
+            <div role="dialog" aria-modal="true" aria-labelledby="judul-latihan-tulis" class="bg-card rounded-3xl p-5 w-full max-w-sm" x-data="hanziCanvas(practiceChar)" x-init="$nextTick(() => init())">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-display font-600 text-lg" x-text="'Latihan Tulis: ' + practiceChar"></h3>
-                    <button type="button" x-on:click="practiceChar = null" class="text-ink-faint text-xl leading-none">✕</button>
+                    <h2 id="judul-latihan-tulis" class="font-display font-600 text-lg" x-text="'Latihan Tulis: ' + practiceChar"></h2>
+                    <button type="button" x-on:click="practiceChar = null" aria-label="Tutup" data-autofocus class="text-ink-soft text-xl leading-none"><span aria-hidden="true">✕</span></button>
                 </div>
-                <canvas x-ref="canvas"
+                <canvas x-ref="canvas" role="img" aria-label="Kanvas latihan menulis hanzi dengan jari atau mouse"
                         x-on:pointerdown="startDraw($event)"
                         x-on:pointermove="draw($event)"
                         x-on:pointerup="endDraw"

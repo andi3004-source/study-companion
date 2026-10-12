@@ -143,6 +143,27 @@ window.voiceInput = function (langCode) {
     };
 };
 
+/**
+ * Alpine component for a modal dialog element: on open, remembers the control
+ * that opened it and moves focus inside; on removal (Alpine destroy), returns
+ * focus to that control. Escape handling is wired per dialog in the markup.
+ */
+window.modalDialog = function () {
+    return {
+        trigger: null,
+        init() {
+            this.trigger = document.activeElement;
+            this.$nextTick(() => {
+                const target = this.$el.querySelector('[data-autofocus]') || this.$el.querySelector('button, a[href], input, select, textarea');
+                if (target) target.focus();
+            });
+        },
+        destroy() {
+            if (this.trigger && document.contains(this.trigger)) this.trigger.focus();
+        },
+    };
+};
+
 /** True when the "Mode pembaca layar" display setting is on (class set on <html>). */
 window.screenReaderMode = function () {
     return document.documentElement.classList.contains('mode-pembaca-layar');

@@ -52,7 +52,7 @@
                     <a href="{{ route($item['route']) }}"
                        @if (request()->routeIs($item['route'].'*')) aria-current="page" @endif
                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl font-600 text-sm transition
-                              {{ request()->routeIs($item['route'].'*') ? 'bg-navy-soft text-white' : 'text-white/70 hover:bg-navy-soft/60 hover:text-white' }}">
+                              {{ request()->routeIs($item['route'].'*') ? 'bg-navy-soft text-white' : 'text-white/80 hover:bg-navy-soft/60 hover:text-white' }}">
                         <span aria-hidden="true">{{ $item['icon'] }}</span>
                         <span>{{ $item['label'] }}</span>
                     </a>
@@ -144,7 +144,7 @@
         @foreach ($mobileMainItems as $item)
             <a href="{{ route($item['route']) }}"
                @if (request()->routeIs($item['route'].'*')) aria-current="page" @endif
-               class="flex flex-col items-center gap-0.5 px-2 py-1 text-xs font-600
+               class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 min-h-[44px] min-w-[44px] text-xs font-600
                       {{ request()->routeIs($item['route'].'*') ? 'text-mandarin' : 'text-ink-faint' }}">
                 <span class="text-lg leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
                 <span>{{ $item['label'] }}</span>
@@ -152,23 +152,24 @@
         @endforeach
 
         <button type="button" x-on:click="moreOpen = true"
-                class="flex flex-col items-center gap-0.5 px-2 py-1 text-xs font-600
+                class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 min-h-[44px] min-w-[44px] text-xs font-600
                        {{ $mobileMoreActive ? 'text-mandarin' : 'text-ink-faint' }}">
             <span class="text-lg leading-none" aria-hidden="true">⋯</span>
             <span>Lainnya</span>
         </button>
 
         <template x-if="moreOpen">
-            <div class="fixed inset-0 bg-black/40 z-50 flex items-end" x-on:click.self="moreOpen = false">
-                <div class="bg-card rounded-t-3xl w-full p-4 pb-6">
+            <div class="fixed inset-0 bg-black/40 z-50 flex items-end" x-on:click.self="moreOpen = false"
+                 x-data="modalDialog()" x-on:keydown.escape="moreOpen = false">
+                <div class="bg-card rounded-t-3xl w-full p-4 pb-6" role="dialog" aria-modal="true" aria-labelledby="judul-lainnya">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="font-display font-600 text-base text-ink">Lainnya</h2>
-                        <button type="button" x-on:click="moreOpen = false" aria-label="Tutup" class="text-ink-faint text-xl leading-none">✕</button>
+                        <h2 id="judul-lainnya" class="font-display font-600 text-base text-ink">Lainnya</h2>
+                        <button type="button" x-on:click="moreOpen = false" aria-label="Tutup" data-autofocus class="text-ink-soft text-xl leading-none"><span aria-hidden="true">✕</span></button>
                     </div>
                     <div class="grid grid-cols-4 gap-2">
                         @foreach ($mobileMoreItems as $item)
                             <a href="{{ route($item['route']) }}"
-                               class="flex flex-col items-center gap-1 px-2 py-3 rounded-xl text-xs font-600
+                               class="flex flex-col items-center justify-center gap-1 px-2 py-3 min-h-[44px] rounded-xl text-xs font-600
                                       {{ request()->routeIs($item['route'].'*') ? 'bg-mandarin-soft text-mandarin' : 'text-ink-soft hover:bg-card-alt' }}">
                                 <span class="text-xl leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
                                 <span>{{ $item['label'] }}</span>
