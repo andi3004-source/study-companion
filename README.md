@@ -59,6 +59,109 @@ Lihat `.env.example` untuk keterangan dan nilai bawaan. Variabel utama:
 
 Jangan commit `.env`.
 
+## Deploy ke Laravel Cloud
+
+Target: MySQL terkelola, antrean `database`, HTTPS di belakang proxy. Belum
+pernah di-deploy sungguhan; ikuti daftar uji di akhir bagian ini.
+
+**Perintah build:**
+
+```
+composer install --no-dev --optimize-autoloader
+npm ci
+npm run build
+```
+
+**Perintah deploy** (setiap rilis):
+
+```
+php artisan migrate --force
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+**Pekerja antrean** (analisis kesalahan sesi, terjemahan arti):
+
+```
+php artisan queue:work --tries=3
+```
+
+**Perintah sekali jalan** (setelah migrasi pertama):
+
+```
+php artisan app:seed-content
+# hanya di staging, bila akun demo dipakai:
+php artisan db:seed --class=DemoUserSeeder
+```
+
+`app:seed-content` membutuhkan tiga berkas besar yang tidak di-commit (lihat
+"Mengisi konten"). Tanpa berkas itu, perintah melewati seeder terkait dan
+keluar dengan status gagal. `DemoUserSeeder` selalu menolak bila `APP_ENV` bernilai production.
+
+**Variabel lingkungan** (nama saja; nilai diisi di dasbor Laravel Cloud, jangan
+di-commit):
+
+- Aplikasi: `APP_NAME`, `APP_ENV`, `APP_KEY`, `APP_DEBUG`, `APP_URL`,
+  `APP_LOCALE`, `APP_FALLBACK_LOCALE`
+- Basis data (biasanya diisi otomatis oleh Laravel Cloud): `DB_CONNECTION`,
+  `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
+- Antrean, cache, sesi, log: `QUEUE_CONNECTION`, `CACHE_STORE`,
+  `SESSION_DRIVER`, `SESSION_SECURE_COOKIE`, `LOG_CHANNEL`, `LOG_LEVEL`
+- Email: `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`,
+  `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME`
+- AI dan layanan: `GEMINI_API_KEY`, `GEMINI_MODEL`, `ANTHROPIC_API_KEY`,
+  `ANTHROPIC_MODEL`, `LANGFLOW_URL`, `LANGFLOW_FLOW_ID`, `LANGFLOW_API_KEY`,
+  `LANGFLOW_TIMEOUT`, `PRONUNCIATION_SERVICE_URL`,
+  `PRONUNCIATION_CHECKER_DRIVER`
+- Fitur: `HSK_LEVEL_LOCK`, `HSK_CORRECTIONS_PATH`, `GAME_ITEMS_PATH`,
+  `KATABICARA_PATH`, `SCAN_BENDA_ENABLED`, `SCAN_BENDA_MAX_IMAGE_BYTES`,
+  `SCAN_BENDA_RATE_LIMIT_PER_MINUTE`, `SCAN_BENDA_TIMEOUT`
+- Akses: `REGISTRATION_ENABLED`, `REGISTRATION_INVITE_CODE`,
+  `DEMO_ACCOUNT_ENABLED`, `DEMO_ACCOUNT_EMAIL`, `DEMO_ACCOUNT_PASSWORD`
+
+Wajib di produksi: `APP_KEY`, `APP_ENV`, `APP_URL` (dengan `https://`), `APP_DEBUG`
+(harus `false`), kredensial DB, `QUEUE_CONNECTION` (`database`), dan kunci AI
+untuk fitur yang dipakai. Tanpa `GEMINI_API_KEY`, Ngobrol tidak bisa membalas.
+Analisis kesalahan memakai Langflow lalu Gemini sebagai cadangan.
+
+**Catatan:**
+
+- **Basis data:** migrasi sudah disesuaikan untuk MySQL 8.0.13+ (indeks
+  fungsional `LOWER(word)`, `meaning_en` HSK bertipe `text`). Pencarian Kamus
+  memakai `JSON_UNQUOTE`/`CONCAT` di MySQL dan sintaks SQLite di lokal/tes.
+  Tes otomatis hanya berjalan di SQLite.
+- **Disk lokal** di server bersifat sementara. Aplikasi tidak menyimpan unggahan
+  pengguna; foto Raba lalu dengar tidak disimpan. `php artisan langflow:ping`
+  menulis `storage/app/langflow-last-response.json` (diagnostik saja).
+- **HTTPS di belakang proxy:** pastikan tautan yang dibuat aplikasi memakai
+  `https://` (lihat daftar uji). Bila tidak, proxy belum dipercaya dan
+  `trustProxies` perlu diatur di `bootstrap/app.php`.
+- **Pendaftaran:** untuk demo publik, pertimbangkan mematikan `REGISTRATION_ENABLED`
+  atau `REGISTRATION_INVITE_CODE`.
+
+**Peringatan biaya dan kuota:**
+
+- Pasang **batas pengeluaran** (spending limit) di Laravel Cloud dan di
+  penyedia AI (Gemini, Anthropic, Langflow). Aplikasi membatasi 50 pesan
+  Ngobrol per pengguna per hari, tetapi tidak ada batas global; banyak pengguna
+  berarti banyak panggilan API.
+- `php artisan translate:meanings` menghabiskan kuota AI; jangan masukkan ke
+  perintah deploy.
+- Pekerja antrean yang terus menyala dan basis data terkelola ditagih walaupun
+  tidak ada pengguna. Matikan lingkungan staging bila tidak dipakai.
+
+**Daftar uji setelah deploy:**
+
+1. `GET /up` mengembalikan 200.
+2. Halaman login terbuka lewat `https://`, dan tautan "Lupa kata sandi?" juga
+   `https://`.
+3. Kamus: cari "makan" dan "eat"; hasil Inggris menampilkan arti Indonesia
+   tanpa tanda kutip.
+4. Selesaikan satu sesi Ngobrol Mandarin; analisis muncul setelah pekerja
+   antrean memprosesnya.
+5. Jalankan ulang `php artisan app:seed-content`; jumlah baris tidak berubah.
+
 ## Partner percakapan (Ngobrol)
 
 - **Suara**: input suara (mic) memakai Web Speech API bawaan browser, jadi hanya
