@@ -33,31 +33,71 @@
                 <span class="font-display font-600 text-lg">Study Companion</span>
             </div>
 
-            <nav class="flex flex-col gap-1" aria-label="Navigasi utama">
-                @php
-                    $navItems = [
+            @php
+                // Single source for the sidebar groups, the mobile bottom bar and its "Lainnya" panel.
+                $navGroups = [
+                    'belajar' => ['judul' => 'Belajar', 'items' => [
                         ['route' => 'dashboard', 'label' => 'Hari Ini', 'icon' => '🏠'],
-                        ['route' => 'cards.index', 'label' => 'Kartu', 'icon' => '🗂️'],
-                        ['route' => 'kamus', 'label' => 'Kamus', 'icon' => '🔎'],
-                        ['route' => 'ujian', 'label' => 'Ujian', 'icon' => '📝'],
-                        ['route' => 'latihan-isian', 'label' => 'Isian', 'icon' => '🧠'],
-                        ['route' => 'game', 'aktif' => 'game*', 'label' => 'Game', 'icon' => '🎯'],
                         ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => '💬'],
                         ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => '🎤'],
                         ['route' => 'kata-bicara', 'label' => 'Kata bicara', 'icon' => '🗣️'],
                         ...(config('scan.enabled') ? [['route' => 'scan.object', 'label' => 'Raba lalu dengar', 'icon' => '📷']] : []),
+                    ]],
+                    'latihan' => ['judul' => 'Latihan', 'items' => [
+                        ['route' => 'cards.index', 'label' => 'Kartu', 'icon' => '🗂️'],
+                        ['route' => 'game', 'aktif' => 'game*', 'label' => 'Game', 'icon' => '🎯'],
+                        ['route' => 'latihan-isian', 'label' => 'Isian', 'icon' => '🧠'],
+                        ['route' => 'ujian', 'label' => 'Ujian', 'icon' => '📝'],
+                    ]],
+                    'lainnya' => ['judul' => 'Lainnya', 'items' => [
                         ['route' => 'progress', 'label' => 'Progress', 'icon' => '📈'],
+                        ['route' => 'kamus', 'label' => 'Kamus', 'icon' => '🔎'],
                         ['route' => 'bantuan', 'label' => 'Bantuan', 'icon' => '❓'],
-                    ];
-                @endphp
-                @foreach ($navItems as $item)
-                    <a href="{{ route($item['route']) }}"
-                       @if (request()->routeIs($item['aktif'] ?? $item['route'].'*')) aria-current="page" @endif
-                       class="flex items-center gap-3 px-3 py-2.5 rounded-xl font-600 text-sm transition
-                              {{ request()->routeIs($item['aktif'] ?? $item['route'].'*') ? 'bg-navy-soft text-white' : 'text-white/80 hover:bg-navy-soft/60 hover:text-white' }}">
-                        <span aria-hidden="true">{{ $item['icon'] }}</span>
-                        <span>{{ $item['label'] }}</span>
-                    </a>
+                    ]],
+                ];
+                $navAktif = fn (array $item) => request()->routeIs($item['aktif'] ?? $item['route'].'*');
+                $navItems = collect($navGroups)->pluck('items')->flatten(1)->all();
+            @endphp
+            <nav aria-label="Navigasi utama" class="flex flex-col gap-5">
+                @foreach ($navGroups as $key => $group)
+                    @php $groupAktif = collect($group['items'])->contains($navAktif); @endphp
+                    @if ($key === 'belajar')
+                        {{-- Always open: a plain heading + list. --}}
+                        <div>
+                            <h2 id="nav-{{ $key }}" class="px-3 mb-2 text-xs font-700 uppercase tracking-wide text-white/80">{{ $group['judul'] }}</h2>
+                            <ul aria-labelledby="nav-{{ $key }}" class="flex flex-col gap-1.5">
+                                @foreach ($group['items'] as $item)
+                                    <li>
+                                        <a href="{{ route($item['route']) }}"
+                                           @if ($navAktif($item)) aria-current="page" @endif
+                                           class="flex items-center gap-3 px-3 py-2.5 rounded-xl font-600 text-sm transition
+                                                  {{ $navAktif($item) ? 'bg-navy-soft text-white' : 'text-white/80 hover:bg-navy-soft/60 hover:text-white' }}">
+                                            <span aria-hidden="true">{{ $item['icon'] }}</span>
+                                            <span>{{ $item['label'] }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @else
+                        {{-- Native disclosure: collapsed by default, open when the current page is inside. --}}
+                        <details @if ($groupAktif) open @endif>
+                            <summary id="nav-{{ $key }}" class="flex items-center min-h-[44px] px-3 rounded-xl cursor-pointer text-xs font-700 uppercase tracking-wide text-white/80 hover:text-white">{{ $group['judul'] }}</summary>
+                            <ul aria-labelledby="nav-{{ $key }}" class="flex flex-col gap-1.5 mt-1">
+                                @foreach ($group['items'] as $item)
+                                    <li>
+                                        <a href="{{ route($item['route']) }}"
+                                           @if ($navAktif($item)) aria-current="page" @endif
+                                           class="flex items-center gap-3 px-3 py-2.5 rounded-xl font-600 text-sm transition
+                                                  {{ $navAktif($item) ? 'bg-navy-soft text-white' : 'text-white/80 hover:bg-navy-soft/60 hover:text-white' }}">
+                                            <span aria-hidden="true">{{ $item['icon'] }}</span>
+                                            <span>{{ $item['label'] }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </details>
+                    @endif
                 @endforeach
             </nav>
 
@@ -130,10 +170,10 @@
     {{--
         Mobile bottom tab bar: 8 items don't fit a bottom tab bar (it was
         designed for 4-5), so only 4 main ones show directly; the rest live
-        behind a "Lainnya" sheet. Both slices are derived from the same
-        $navItems the desktop sidebar uses above — never a separately
-        maintained list — so icons/labels/routes can't drift between the two.
-        Desktop sidebar itself is untouched.
+        behind a "Lainnya" sheet, grouped under the same headings as the
+        sidebar. Both are derived from the same $navGroups the desktop
+        sidebar uses above — never a separately maintained list — so
+        icons/labels/routes can't drift between the two.
     --}}
     @php
         $mobileMainRoutes = ['dashboard', 'cards.index', 'kamus', 'conversation'];
@@ -172,14 +212,27 @@
                         <h2 id="judul-lainnya" class="font-display font-600 text-base text-ink">Lainnya</h2>
                         <button type="button" x-on:click="moreOpen = false" aria-label="Tutup" data-autofocus class="text-ink-soft text-xl leading-none"><span aria-hidden="true">✕</span></button>
                     </div>
-                    <div class="grid grid-cols-4 gap-2">
-                        @foreach ($mobileMoreItems as $item)
-                            <a href="{{ route($item['route']) }}"
-                               class="flex flex-col items-center justify-center gap-1 px-2 py-3 min-h-[44px] rounded-xl text-xs font-600
-                                      {{ request()->routeIs($item['aktif'] ?? $item['route'].'*') ? 'bg-mandarin-soft text-mandarin' : 'text-ink-soft hover:bg-card-alt' }}">
-                                <span class="text-xl leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
-                                <span>{{ $item['label'] }}</span>
-                            </a>
+                    <div class="space-y-4 max-h-[70vh] overflow-y-auto">
+                        @foreach ($navGroups as $key => $group)
+                            @php $groupMore = collect($group['items'])->reject(fn ($item) => in_array($item['route'], $mobileMainRoutes, true)); @endphp
+                            @if ($groupMore->isNotEmpty())
+                                <div>
+                                    <h3 id="lainnya-{{ $key }}" class="mb-2 text-xs font-700 uppercase tracking-wide text-ink-soft">{{ $group['judul'] }}</h3>
+                                    <ul aria-labelledby="lainnya-{{ $key }}" class="grid grid-cols-3 gap-2">
+                                        @foreach ($groupMore as $item)
+                                            <li>
+                                                <a href="{{ route($item['route']) }}"
+                                                   @if ($navAktif($item)) aria-current="page" @endif
+                                                   class="flex flex-col items-center justify-center gap-1 px-2 py-3 min-h-[44px] rounded-xl text-xs font-600 text-center
+                                                          {{ $navAktif($item) ? 'bg-mandarin-soft text-mandarin' : 'text-ink-soft hover:bg-card-alt' }}">
+                                                    <span class="text-xl leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
+                                                    <span>{{ $item['label'] }}</span>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>
