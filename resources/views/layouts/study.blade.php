@@ -14,6 +14,7 @@
             if (tampilan.ukuran === 'sangat-besar') kelas.add('teks-sangat-besar');
             if (tampilan.kontras) kelas.add('kontras-tinggi');
             if (tampilan.pembacaLayar) kelas.add('mode-pembaca-layar');
+            if (tampilan.lega) kelas.add('teks-lega');
         } catch (e) {}
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -98,6 +99,10 @@
                             <label class="flex items-center gap-2 text-sm min-h-[44px]">
                                 <input type="checkbox" x-model="kontras" x-on:change="simpan()">
                                 Mode kontras tinggi
+                            </label>
+                            <label class="flex items-center gap-2 text-sm min-h-[44px]">
+                                <input type="checkbox" x-model="lega" x-on:change="simpan()">
+                                Jarak baris dan huruf lebih lega
                             </label>
                             <div>
                                 <label class="flex items-center gap-2 text-sm min-h-[44px]">

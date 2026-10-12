@@ -59,6 +59,9 @@ class ErrorHunter extends Component
     #[Locked]
     public bool $finished = false;
 
+    /** The radio the learner has selected (not yet submitted); checked by answer(). */
+    public ?string $pilihanKategori = null;
+
     public function mount(): void
     {
         $this->startRound();
@@ -96,6 +99,7 @@ class ErrorHunter extends Component
         $this->bestStreak = 0;
         $this->missed = [];
         $this->finished = false;
+        $this->pilihanKategori = null;
         unset($this->current);
     }
 
@@ -136,11 +140,26 @@ class ErrorHunter extends Component
         }
     }
 
+    /** Form submit for the radio group: same validation as answer(). */
+    public function jawabPilihan(): void
+    {
+        if (! is_string($this->pilihanKategori) || $this->pilihanKategori === '') {
+            $this->addError('pilihanKategori', 'Pilih salah satu jenis kesalahan dulu, lalu tekan Jawab.');
+
+            return;
+        }
+
+        $this->answer($this->pilihanKategori);
+    }
+
     public function next(): void
     {
         if ($this->chosen === null) {
             return;
         }
+
+        $this->pilihanKategori = null;
+        $this->resetErrorBag();
 
         if ($this->index + 1 >= count($this->questions)) {
             $this->finished = true;

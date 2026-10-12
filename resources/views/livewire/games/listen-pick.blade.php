@@ -61,7 +61,7 @@
                             $isChosen = $chosen === $i;
                         @endphp
                         <label for="pilihan-{{ $index }}-{{ $i }}"
-                               class="flex items-center gap-3 min-h-[3.5rem] w-full px-4 py-3 rounded-xl border-2 text-lg text-ink bg-card
+                               class="flex flex-wrap items-center gap-3 min-h-[3.5rem] w-full px-4 py-3 rounded-xl border-2 text-lg text-ink bg-card
                                       {{ $chosen !== null && $isAnswer ? 'border-english' : ($isChosen ? 'border-red-700' : 'border-line-card') }}">
                             <input type="radio" id="pilihan-{{ $index }}-{{ $i }}" name="pilihan-{{ $index }}" value="{{ $i }}" wire:model="pilihan" class="w-6 h-6">
                             <span>{{ $option }}</span>
@@ -96,7 +96,7 @@
 
         @if ($chosen !== null)
             <div class="flex flex-col gap-3">
-                <button type="button" x-on:click="window.speak({{ \Illuminate\Support\Js::from($question['hanzi']) }}, 'zh-CN', null, window.gameSpeechRate().nilai())"
+                <button type="button" x-data x-on:click="window.speak({{ \Illuminate\Support\Js::from($question['hanzi']) }}, 'zh-CN', null, window.gameSpeechRate().nilai())"
                         class="w-full min-h-[3.5rem] px-5 rounded-xl border-2 border-navy text-navy font-700"><span aria-hidden="true">🔊</span> Dengarkan jawaban</button>
                 <button type="button" wire:click="next" x-data x-init="$el.focus()"
                         class="w-full min-h-[3.5rem] px-5 rounded-xl bg-navy text-white font-700 text-lg">{{ $index + 1 >= count($questions) ? 'Lihat hasil' : 'Soal berikutnya' }}</button>

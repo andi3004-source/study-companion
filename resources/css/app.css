@@ -82,6 +82,26 @@ html.kontras-tinggi main a {
     text-decoration: underline;
 }
 
+/* Coloured status text reaches 7:1 in high contrast mode; feedback also has ✓/✗ and words, so no meaning is lost. */
+html.kontras-tinggi .text-english,
+html.kontras-tinggi .text-mandarin,
+html.kontras-tinggi .text-red-700 {
+    color: #000000 !important;
+}
+
+/* "Jarak baris dan huruf lebih lega": WCAG 1.4.12 text spacing values. */
+html.teks-lega body {
+    line-height: 1.8;
+    letter-spacing: 0.12em;
+    word-spacing: 0.16em;
+}
+
+html.teks-lega p,
+html.teks-lega li,
+html.teks-lega label {
+    margin-bottom: 0.25em;
+}
+
 /* Translucent white text on navy becomes solid white. */
 html.kontras-tinggi [class*='text-white/'] {
     color: #ffffff !important;

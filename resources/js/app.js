@@ -346,6 +346,7 @@ window.displaySettings = function () {
         ukuran: saved.ukuran || 'normal',
         kontras: !!saved.kontras,
         pembacaLayar: !!saved.pembacaLayar,
+        lega: !!saved.lega,
 
         simpan() {
             const kelas = document.documentElement.classList;
@@ -353,12 +354,20 @@ window.displaySettings = function () {
             kelas.toggle('teks-sangat-besar', this.ukuran === 'sangat-besar');
             kelas.toggle('kontras-tinggi', this.kontras);
             kelas.toggle('mode-pembaca-layar', this.pembacaLayar);
+            kelas.toggle('teks-lega', this.lega);
             if (this.pembacaLayar && 'speechSynthesis' in window) window.speechSynthesis.cancel();
             try {
+                // Merge into what is already stored so other keys in 'tampilan' survive.
+                let current = {};
+                try {
+                    current = JSON.parse(localStorage.getItem('tampilan') || '{}') || {};
+                } catch (e) {}
                 localStorage.setItem('tampilan', JSON.stringify({
+                    ...current,
                     ukuran: this.ukuran,
                     kontras: this.kontras,
                     pembacaLayar: this.pembacaLayar,
+                    lega: this.lega,
                 }));
             } catch (e) {}
         },

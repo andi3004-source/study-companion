@@ -10,90 +10,119 @@
         </div>
     @elseif ($finished)
         {{-- End screen --}}
-        <div class="bg-card rounded-2xl p-6 text-center">
-            <p class="text-ink-soft text-sm">Skor kamu</p>
-            <p class="font-display font-600 text-4xl text-ink my-1">{{ $score }}/{{ count($questions) }}</p>
-            <p class="text-ink-soft text-sm">Streak terbaik: {{ $bestStreak }} berturut-turut</p>
+        <section aria-labelledby="judul-hasil" class="bg-card rounded-2xl p-6 text-center">
+            <h2 id="judul-hasil" tabindex="-1" x-data x-init="$el.focus()" class="font-display font-600 text-xl text-ink">Hasil</h2>
+            <div role="status">
+                <p class="text-ink-soft">Skor kamu</p>
+                <p class="font-display font-600 text-4xl text-ink my-1">{{ $score }}/{{ count($questions) }}</p>
+                <p class="text-ink-soft">Streak terbaik: {{ $bestStreak }} berturut-turut</p>
+            </div>
 
             @if ($this->weakest)
                 <div class="mt-5 pt-5 border-t border-line-card text-left">
-                    <p class="text-xs font-700 text-ink-soft mb-1">Paling sering salah</p>
+                    <p class="text-sm font-700 text-ink-soft mb-1">Paling sering salah</p>
                     <p class="font-700 text-ink">{{ $this->weakest['label'] }} <span class="text-ink-soft font-400">({{ $this->weakest['jumlah'] }}×)</span></p>
-                    <p class="text-sm mt-1">
-                        <span class="line-through text-ink-faint">{{ $this->weakest['salah'] }}</span>
-                        → <span class="font-700 text-ink">{{ $this->weakest['benar'] }}</span>
+                    <p class="mt-1">
+                        <span class="sr-only">Salah:</span>
+                        <span lang="zh-Hans" class="line-through text-ink-soft">{{ $this->weakest['salah'] }}</span>
+                        <span aria-hidden="true">→</span>
+                        <span class="sr-only">Benar:</span>
+                        <span lang="zh-Hans" class="font-700 text-ink">{{ $this->weakest['benar'] }}</span>
                     </p>
                 </div>
             @else
-                <p class="mt-5 pt-5 border-t border-line-card text-sm text-ink">Semua jawaban benar. Mantap! 🎉</p>
+                <p class="mt-5 pt-5 border-t border-line-card text-ink">Semua jawaban benar. Mantap! <span aria-hidden="true">🎉</span></p>
             @endif
 
             <button type="button" wire:click="restart"
-                    class="w-full mt-6 py-3 rounded-xl bg-navy text-white font-700 text-sm hover:bg-navy-soft">Main lagi</button>
-        </div>
+                    class="w-full mt-6 min-h-[3.5rem] rounded-xl bg-navy text-white font-700 hover:bg-navy-soft">Main lagi</button>
+        </section>
     @else
         @php $item = $this->current; $question = $questions[$index]; @endphp
 
-        <div class="flex items-center justify-between text-xs text-ink-soft mb-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 text-sm text-ink-soft mb-3">
             <span>Soal {{ $index + 1 }}/{{ count($questions) }}</span>
-            <span>Skor: {{ $score }} · Streak: {{ $streak }} 🔥</span>
+            <span>Skor: {{ $score }} · Streak: {{ $streak }} <span aria-hidden="true">🔥</span></span>
         </div>
 
-        <div class="bg-card rounded-2xl p-6 text-center mb-4">
+        <section aria-labelledby="judul-soal" wire:key="soal-{{ $index }}" class="bg-card rounded-2xl p-6 text-center mb-4 space-y-2">
+            <h2 id="judul-soal" class="sr-only">Soal {{ $index + 1 }}</h2>
             @if (\App\Support\ErrorGameItems::isDraft($item))
-                <span class="inline-block mb-3 text-[10px] font-700 text-navy bg-orange/20 rounded-full px-2 py-0.5">Soal draf, sedang diverifikasi</span>
+                <span class="inline-block text-xs font-700 text-navy bg-orange/20 rounded-full px-2 py-0.5">Soal draf, sedang diverifikasi</span>
             @endif
-            <p class="font-display text-4xl text-ink mb-2">{{ $item['salah'] }}</p>
+            <p lang="zh-Hans" class="font-display text-[4rem] leading-tight text-ink">{{ $item['salah'] }}</p>
             @if ($item['arti_id'])
-                <p class="text-sm text-ink-soft">{{ $item['arti_id'] }}</p>
+                <p class="text-ink-soft">{{ $item['arti_id'] }}</p>
             @endif
-        </div>
+            <button type="button" x-data x-on:click="window.speak({{ \Illuminate\Support\Js::from($item['salah']) }}, 'zh-CN', null, window.gameSpeechRate().nilai())"
+                    class="min-h-[3.5rem] px-5 rounded-xl border-2 border-navy text-navy font-700"><span aria-hidden="true">🔊</span> Dengarkan kalimat</button>
+        </section>
 
-        <p class="text-sm font-700 text-ink mb-2">Kesalahannya termasuk jenis apa?</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-            @foreach ($question['options'] as $option)
-                @php
-                    $isCorrect = $option === $item['kategori'];
-                    $isChosen = $option === $chosen;
-                @endphp
-                <button type="button" wire:click="answer('{{ $option }}')" @disabled($chosen !== null)
-                        class="py-3 px-4 rounded-xl text-sm font-700 text-left border transition
-                               {{ $chosen === null ? 'bg-card border-line-card text-ink hover:bg-card-alt' : ($isCorrect ? 'bg-english-soft border-english text-english' : ($isChosen ? 'bg-red-50 border-red-400 text-red-700' : 'bg-card border-line-card text-ink-faint')) }}">
-                    {{-- Marks in text, not just color. --}}
-                    @if ($chosen !== null && $isCorrect)
-                        ✓
-                    @elseif ($isChosen)
-                        ✗
+        <form wire:submit="jawabPilihan" class="space-y-4 mb-4">
+            <fieldset @disabled($chosen !== null)>
+                <legend class="font-700 text-lg text-ink mb-3">Kesalahannya termasuk jenis apa?</legend>
+                <div class="flex flex-col gap-3">
+                    @foreach ($question['options'] as $i => $option)
+                        @php
+                            $isCorrect = $option === $item['kategori'];
+                            $isChosen = $option === $chosen;
+                        @endphp
+                        <label for="kategori-{{ $index }}-{{ $i }}"
+                               class="flex flex-wrap items-center gap-3 min-h-[3.5rem] w-full px-4 py-3 rounded-xl border-2 text-lg text-ink bg-card
+                                      {{ $chosen !== null && $isCorrect ? 'border-english' : ($isChosen ? 'border-red-700' : 'border-line-card') }}">
+                            <input type="radio" id="kategori-{{ $index }}-{{ $i }}" name="kategori-{{ $index }}" value="{{ $option }}" wire:model="pilihanKategori" class="w-6 h-6">
+                            <span>{{ \App\Enums\ErrorCategory::fromLoose($option)->label() }}</span>
+                            {{-- Marks in text, not just color. --}}
+                            @if ($chosen !== null && $isCorrect)
+                                <span class="ml-auto font-700 text-english"><span aria-hidden="true">✓</span> jawaban benar</span>
+                            @elseif ($isChosen)
+                                <span class="ml-auto font-700 text-red-700"><span aria-hidden="true">✗</span> pilihanmu</span>
+                            @endif
+                        </label>
+                    @endforeach
+                </div>
+            </fieldset>
+            @error('pilihanKategori')
+                <p role="alert" class="text-red-700 font-700">{{ $message }}</p>
+            @enderror
+            @if ($chosen === null)
+                <button type="submit" class="w-full min-h-[3.5rem] px-5 rounded-xl bg-navy text-white font-700 text-lg">Jawab</button>
+            @endif
+        </form>
+
+        {{-- Always rendered so the feedback is announced when it appears. --}}
+        <div role="status" class="mb-4">
+            @if ($chosen !== null)
+                <div class="bg-card rounded-2xl p-5 space-y-2">
+                    @if ($chosen === $item['kategori'])
+                        <p class="text-lg font-700 text-english">✓ Benar!</p>
+                    @else
+                        <p class="text-lg font-700 text-red-700">✗ Salah. Jawabannya: {{ \App\Enums\ErrorCategory::fromLoose($item['kategori'])->label() }}</p>
                     @endif
-                    {{ \App\Enums\ErrorCategory::fromLoose($option)->label() }}
-                </button>
-            @endforeach
+
+                    <p class="text-ink-soft">Kalimat yang benar:</p>
+                    <p lang="zh-Hans" class="font-display text-[2.5rem] leading-tight text-ink">{{ $item['benar'] }}</p>
+
+                    @if ($item['penjelasan'])
+                        <p class="text-ink">{{ $item['penjelasan'] }}</p>
+                    @endif
+
+                    @if ($item['hanzi_di_luar_hsk1'] !== [])
+                        <p class="text-sm text-ink-soft">Hanzi di luar HSK 1: {{ implode(', ', $item['hanzi_di_luar_hsk1']) }}</p>
+                    @endif
+                </div>
+            @endif
         </div>
 
         @if ($chosen !== null)
-            <div class="bg-card rounded-2xl p-5 mb-4" role="status">
-                @if ($chosen === $item['kategori'])
-                    <p class="font-700 text-english">✓ Benar!</p>
-                @else
-                    <p class="font-700 text-red-700">✗ Salah. Jawabannya: {{ \App\Enums\ErrorCategory::fromLoose($item['kategori'])->label() }}</p>
-                @endif
-
-                <p class="text-xs text-ink-soft mt-3">Kalimat yang benar:</p>
-                <p class="font-display text-2xl text-ink">{{ $item['benar'] }}</p>
-
-                @if ($item['penjelasan'])
-                    <p class="text-sm text-ink mt-2">{{ $item['penjelasan'] }}</p>
-                @endif
-
-                @if ($item['hanzi_di_luar_hsk1'] !== [])
-                    <p class="text-xs text-ink-faint mt-2">Hanzi di luar HSK 1: {{ implode(', ', $item['hanzi_di_luar_hsk1']) }}</p>
-                @endif
+            <div class="flex flex-col gap-3">
+                <button type="button" x-data x-on:click="window.speak({{ \Illuminate\Support\Js::from($item['benar']) }}, 'zh-CN', null, window.gameSpeechRate().nilai())"
+                        class="w-full min-h-[3.5rem] px-5 rounded-xl border-2 border-navy text-navy font-700"><span aria-hidden="true">🔊</span> Dengarkan kalimat yang benar</button>
+                <button type="button" wire:click="next" x-data x-init="$el.focus()"
+                        class="w-full min-h-[3.5rem] px-5 rounded-xl bg-navy text-white font-700 text-lg">
+                    {{ $index + 1 >= count($questions) ? 'Lihat hasil' : 'Berikutnya →' }}
+                </button>
             </div>
-
-            <button type="button" wire:click="next"
-                    class="w-full py-3 rounded-xl bg-navy text-white font-700 text-sm hover:bg-navy-soft">
-                {{ $index + 1 >= count($questions) ? 'Lihat hasil' : 'Berikutnya →' }}
-            </button>
         @endif
     @endif
 </div>
