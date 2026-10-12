@@ -166,7 +166,8 @@ window.modalDialog = function () {
 
 /**
  * Shrinks a photo in the browser (longest side at most `max` px, JPEG) and
- * returns it as a data URL. Uses an object URL + canvas only; nothing is saved.
+ * returns the smaller version as a Blob. Uses an object URL + canvas only;
+ * nothing is saved.
  */
 async function compressPhoto(file, max = 1024) {
     const url = URL.createObjectURL(file);
@@ -182,10 +183,22 @@ async function compressPhoto(file, max = 1024) {
         canvas.width = Math.round(img.naturalWidth * scale);
         canvas.height = Math.round(img.naturalHeight * scale);
         canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-        return canvas.toDataURL('image/jpeg', 0.8);
+        return await new Promise((resolve, reject) =>
+            canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('Foto tidak bisa dibaca.'))), 'image/jpeg', 0.8),
+        );
     } finally {
         URL.revokeObjectURL(url);
     }
+}
+
+/** Reads a Blob as a data URL, in memory, for the JSON request body. */
+function blobToDataUrl(blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(blob);
+    });
 }
 
 /**
@@ -196,11 +209,19 @@ async function compressPhoto(file, max = 1024) {
  * heading (or the error). Speech only starts on its own when "Putar suara
  * otomatis" is ticked (off by default), for a certain result, outside
  * screen reader mode.
+ *
+ * Preview: the same ~1024 px Blob that is sent is shown through an object
+ * URL, only while "Tampilkan foto di layar" is ticked. The photo itself is
+ * never written to localStorage, sessionStorage, IndexedDB or Livewire
+ * state; the object URL is revoked on "Foto lagi", a new photo, an error,
+ * leaving the page (pagehide / wire:navigate), and when the preview is
+ * switched off.
  */
 window.scanBenda = function (endpoint) {
     const suara = { id: 'id-ID', en: 'en-US', zh: 'zh-CN' };
 
     // Own localStorage key: displaySettings() rewrites the whole 'tampilan' object.
+    // Only the two checkbox settings live here, never the photo.
     let saved = {};
     try {
         saved = JSON.parse(localStorage.getItem('scanBenda') || '{}');
@@ -208,16 +229,45 @@ window.scanBenda = function (endpoint) {
 
     return {
         putarOtomatis: !!saved.putarOtomatis,
+        tampilkanFoto: saved.tampilkanFoto !== false,
+        fotoUrl: null,
         setuju: false,
         memproses: false,
         status: '',
         galat: null,
         hasil: null,
 
-        simpanPutarOtomatis() {
+        init() {
+            this.lepasSaatPergi = () => this.lepasFoto();
+            window.addEventListener('pagehide', this.lepasSaatPergi);
+            document.addEventListener('livewire:navigating', this.lepasSaatPergi);
+        },
+
+        destroy() {
+            this.lepasFoto();
+            window.removeEventListener('pagehide', this.lepasSaatPergi);
+            document.removeEventListener('livewire:navigating', this.lepasSaatPergi);
+        },
+
+        simpanPengaturan() {
             try {
-                localStorage.setItem('scanBenda', JSON.stringify({ putarOtomatis: this.putarOtomatis }));
+                localStorage.setItem('scanBenda', JSON.stringify({ putarOtomatis: this.putarOtomatis, tampilkanFoto: this.tampilkanFoto }));
             } catch (e) {}
+        },
+
+        simpanPutarOtomatis() {
+            this.simpanPengaturan();
+        },
+
+        ubahTampilkanFoto() {
+            this.simpanPengaturan();
+            if (!this.tampilkanFoto) this.lepasFoto();
+        },
+
+        /** Revokes the preview's object URL so the browser frees the image. */
+        lepasFoto() {
+            if (this.fotoUrl) URL.revokeObjectURL(this.fotoUrl);
+            this.fotoUrl = null;
         },
 
         ambil() {
@@ -234,14 +284,18 @@ window.scanBenda = function (endpoint) {
             const file = event.target.files && event.target.files[0];
             if (!file) return;
 
+            // A new photo replaces the old preview.
+            this.lepasFoto();
             this.memproses = true;
             this.galat = null;
             this.hasil = null;
             this.status = 'Memproses foto';
 
             try {
-                const image = await compressPhoto(file);
+                const foto = await compressPhoto(file);
                 event.target.value = '';
+                if (this.tampilkanFoto) this.fotoUrl = URL.createObjectURL(foto);
+                const image = await blobToDataUrl(foto);
                 const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
@@ -270,6 +324,7 @@ window.scanBenda = function (endpoint) {
                     if (this.putarOtomatis && data.jenis === 'pasti' && !window.screenReaderMode()) this.dengarSemua();
                 });
             } catch (e) {
+                this.lepasFoto();
                 this.galat = (e && e.message) || 'Foto gagal diproses. Coba lagi.';
                 this.status = this.galat;
                 this.$nextTick(() => this.$refs.galat && this.$refs.galat.focus());
@@ -295,6 +350,7 @@ window.scanBenda = function (endpoint) {
 
         fotoLagi() {
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            this.lepasFoto();
             this.hasil = null;
             this.galat = null;
             this.ambil();

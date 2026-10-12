@@ -28,6 +28,11 @@
             <span>Putar suara otomatis</span>
         </label>
 
+        <label for="scan-tampilkan-foto" class="flex items-start gap-3 text-ink min-h-[44px]">
+            <input type="checkbox" id="scan-tampilkan-foto" x-model="tampilkanFoto" x-on:change="ubahTampilkanFoto()" class="mt-1 rounded text-navy focus:ring-navy">
+            <span>Tampilkan foto di layar</span>
+        </label>
+
         <input type="file" accept="image/*" capture="environment" x-ref="kamera" x-on:change="kirim($event)"
                class="sr-only" tabindex="-1" aria-hidden="true">
     </div>
@@ -38,6 +43,17 @@
         <span aria-hidden="true">⚠</span> <span x-text="galat"></span>
     </p>
 
+    {{-- Photo first, then the result; side by side from the sm breakpoint. One column on narrow screens. --}}
+    <div class="grid gap-4 sm:items-start" x-bind:class="fotoUrl && tampilkanFoto ? 'sm:grid-cols-[minmax(0,320px)_minmax(0,1fr)]' : ''">
+    {{-- Preview only: an object URL of the same ~1024 px photo that was sent. Never stored; see scanBenda() in app.js. --}}
+    <template x-if="fotoUrl && tampilkanFoto">
+        <figure class="bg-card rounded-2xl p-3 max-w-[320px] w-full">
+            <img x-bind:src="fotoUrl" alt="Foto benda yang kamu ambil" class="block max-w-full max-h-[320px] w-auto h-auto mx-auto rounded-xl">
+            <figcaption class="mt-2 text-sm text-ink-soft">Foto yang diambil. Hanya tampil di layar ini; tidak disimpan.</figcaption>
+        </figure>
+    </template>
+
+    <div class="space-y-4 min-w-0">
     <template x-if="hasil && hasil.benda">
         <section class="bg-card rounded-2xl p-5 space-y-4" aria-labelledby="scan-judul-hasil">
             <h2 id="scan-judul-hasil" x-ref="judulHasil" tabindex="-1" class="font-display font-600 text-xl text-ink"
@@ -90,4 +106,6 @@
             <button type="button" x-on:click="fotoLagi()" class="px-4 rounded-xl border-2 border-navy text-navy font-700 text-sm">Foto lagi</button>
         </section>
     </template>
+    </div>
+    </div>
 </div>
