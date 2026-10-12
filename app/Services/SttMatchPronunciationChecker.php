@@ -52,7 +52,8 @@ class SttMatchPronunciationChecker implements PronunciationChecker
 
     private function checkEnglish(string $heard, string $target): array
     {
-        similar_text($this->normalize($heard), $this->normalize($target), $percent);
+        // Spaces are ignored too, so "ice cream", "ice-cream" and "icecream" compare equal.
+        similar_text(str_replace(' ', '', $this->normalize($heard)), str_replace(' ', '', $this->normalize($target)), $percent);
 
         $isCorrect = $percent >= self::CORRECT_THRESHOLD;
 
@@ -66,9 +67,10 @@ class SttMatchPronunciationChecker implements PronunciationChecker
     private function checkMandarin(string $heard, string $target, ?string $targetPinyin): array
     {
         // Chrome's zh-CN engine almost always ends with "。"; compare (and number
-        // character positions) on the text without punctuation or spaces.
-        $targetChars = mb_str_split($this->stripPunctuationAndSpaces($target));
-        $heardChars = mb_str_split($this->stripPunctuationAndSpaces($heard));
+        // character positions) on the text without punctuation or spaces, and
+        // case-insensitively for Latin letters inside words like "T恤" or "卡拉OK".
+        $targetChars = mb_str_split(mb_strtolower($this->stripPunctuationAndSpaces($target)));
+        $heardChars = mb_str_split(mb_strtolower($this->stripPunctuationAndSpaces($heard)));
 
         if ($heardChars === $targetChars) {
             return ['isCorrect' => true, 'feedback' => "Bagus! Pengucapan \"{$target}\" terdengar sudah tepat."];

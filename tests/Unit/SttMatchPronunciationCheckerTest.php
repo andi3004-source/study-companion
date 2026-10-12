@@ -165,6 +165,32 @@ class SttMatchPronunciationCheckerTest extends TestCase
         $this->assertStringContainsString('Tidak ada suara yang terdeteksi', $empty['feedback']);
     }
 
+    public function test_mandarin_ignores_case_of_latin_letters(): void
+    {
+        foreach ([['T恤', 't恤。'], ['卡拉OK', '卡拉ok'], ['卡拉ok', '卡拉 O K！']] as [$target, $heard]) {
+            $result = $this->checker->check('/tmp/audio.wav', $target, 'mandarin', $heard);
+
+            $this->assertTrue($result['isCorrect'], "{$target} / {$heard}: {$result['feedback']}");
+        }
+    }
+
+    public function test_english_ignores_punctuation_spaces_and_case_in_phrases(): void
+    {
+        foreach (['Thank you!', 'THANK YOU', 'thank-you', 'thankyou', '  Thank,  you. '] as $heard) {
+            $result = $this->checker->check('/tmp/audio.wav', 'thank you', 'english', $heard);
+
+            $this->assertTrue($result['isCorrect'], "{$heard}: {$result['feedback']}");
+            $this->assertStringContainsString('Bagus!', $result['feedback']);
+        }
+    }
+
+    public function test_english_different_word_still_fails_after_normalization(): void
+    {
+        $result = $this->checker->check('/tmp/audio.wav', 'mother', 'english', 'Weather.');
+
+        $this->assertFalse($result['isCorrect']);
+    }
+
     public function test_english_single_word_with_capital_and_full_stop_matches(): void
     {
         foreach (['Mother.', 'Mother,', 'mother.'] as $heard) {
