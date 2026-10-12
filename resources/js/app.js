@@ -164,6 +164,128 @@ window.modalDialog = function () {
     };
 };
 
+/**
+ * Shrinks a photo in the browser (longest side at most `max` px, JPEG) and
+ * returns it as a data URL. Uses an object URL + canvas only; nothing is saved.
+ */
+async function compressPhoto(file, max = 1024) {
+    const url = URL.createObjectURL(file);
+    try {
+        const img = await new Promise((resolve, reject) => {
+            const image = new Image();
+            image.onload = () => resolve(image);
+            image.onerror = reject;
+            image.src = url;
+        });
+        const scale = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.naturalWidth * scale);
+        canvas.height = Math.round(img.naturalHeight * scale);
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        return canvas.toDataURL('image/jpeg', 0.8);
+    } finally {
+        URL.revokeObjectURL(url);
+    }
+}
+
+/**
+ * Alpine component: "Raba lalu dengar". The device camera is opened through
+ * <input type="file" capture="environment">; the compressed photo is posted
+ * as JSON to the recognize endpoint and dropped afterwards. Results are
+ * announced through the role="status" region and focus moves to the result
+ * heading (or the error). Speech never starts on its own in screen reader mode.
+ */
+window.scanBenda = function (endpoint) {
+    const suara = { id: 'id-ID', en: 'en-US', zh: 'zh-CN' };
+
+    return {
+        setuju: false,
+        memproses: false,
+        status: '',
+        galat: null,
+        hasil: null,
+
+        ambil() {
+            if (!this.setuju) {
+                this.status = 'Centang persetujuan dulu untuk mengaktifkan tombol Ambil foto.';
+                return;
+            }
+            if (this.memproses) return;
+            this.$refs.kamera.value = '';
+            this.$refs.kamera.click();
+        },
+
+        async kirim(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            this.memproses = true;
+            this.galat = null;
+            this.hasil = null;
+            this.status = 'Memproses foto';
+
+            try {
+                const image = await compressPhoto(file);
+                event.target.value = '';
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    },
+                    body: JSON.stringify({ consent: true, image }),
+                });
+                const data = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.pesan ||
+                            (response.status === 429
+                                ? 'Terlalu banyak foto dalam semenit. Tunggu sebentar lalu coba lagi.'
+                                : 'Foto gagal diproses. Coba lagi.'),
+                    );
+                }
+
+                this.hasil = data;
+                this.status = data.pesan || '';
+                this.$nextTick(() => {
+                    if (this.$refs.judulHasil) this.$refs.judulHasil.focus();
+                    if (data.jenis === 'pasti' && !window.screenReaderMode()) this.dengarSemua();
+                });
+            } catch (e) {
+                this.galat = (e && e.message) || 'Foto gagal diproses. Coba lagi.';
+                this.status = this.galat;
+                this.$nextTick(() => this.$refs.galat && this.$refs.galat.focus());
+            } finally {
+                this.memproses = false;
+            }
+        },
+
+        teks(bahasa) {
+            if (!this.hasil || !this.hasil.benda) return '';
+            return { id: this.hasil.benda.indonesia, en: this.hasil.benda.inggris, zh: this.hasil.benda.hanzi }[bahasa];
+        },
+
+        dengar(bahasa) {
+            window.speak(this.teks(bahasa), suara[bahasa]);
+        },
+
+        dengarSemua() {
+            window.speak(this.teks('id'), suara.id, () =>
+                window.speak(this.teks('en'), suara.en, () => window.speak(this.teks('zh'), suara.zh)),
+            );
+        },
+
+        fotoLagi() {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            this.hasil = null;
+            this.galat = null;
+            this.ambil();
+        },
+    };
+};
+
 /** True when the "Mode pembaca layar" display setting is on (class set on <html>). */
 window.screenReaderMode = function () {
     return document.documentElement.classList.contains('mode-pembaca-layar');

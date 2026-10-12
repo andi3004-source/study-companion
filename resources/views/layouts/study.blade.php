@@ -44,6 +44,7 @@
                         ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => '💬'],
                         ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => '🎤'],
                         ['route' => 'kata-bicara', 'label' => 'Kata bicara', 'icon' => '🗣️'],
+                        ...(config('scan.enabled') ? [['route' => 'scan.object', 'label' => 'Raba lalu dengar', 'icon' => '📷']] : []),
                         ['route' => 'progress', 'label' => 'Progress', 'icon' => '📈'],
                         ['route' => 'bantuan', 'label' => 'Bantuan', 'icon' => '❓'],
                     ];

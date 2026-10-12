@@ -14,6 +14,7 @@ use App\Livewire\LatihanIsian;
 use App\Livewire\Onboarding;
 use App\Livewire\ProgressOverview;
 use App\Livewire\PronunciationCheck;
+use App\Livewire\ScanBenda;
 use App\Livewire\Ujian\Picker;
 use App\Livewire\Ujian\Runner;
 use Illuminate\Http\Request;
@@ -64,6 +65,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/pronunciation-check', PronunciationCheck::class)->name('pronunciation-check');
 
         Route::get('/kata-bicara', KataBicara::class)->name('kata-bicara');
+
+        // 404 while SCAN_BENDA_ENABLED is off (checked in ScanBenda::mount()).
+        Route::get('/scan-benda', ScanBenda::class)->name('scan.object');
 
         Route::get('/bantuan', Bantuan::class)->name('bantuan');
     });
