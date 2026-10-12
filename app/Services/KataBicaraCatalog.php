@@ -74,6 +74,32 @@ class KataBicaraCatalog
         ], true))->values();
     }
 
+    /** The entry with this id, or null when it isn't in the closed list. */
+    public function find(?string $id): ?array
+    {
+        if ($id === null || $id === '' || ! $this->available()) {
+            return null;
+        }
+
+        return $this->entries()->first(fn (array $entry) => (string) $entry['id'] === $id);
+    }
+
+    /**
+     * The closed list for a vision prompt, one "id: nama (inggris)" per line.
+     * Built from the same ikut_prompt = true entries as entries().
+     */
+    public function promptList(): string
+    {
+        if (! $this->available()) {
+            return '';
+        }
+
+        return $this->entries()
+            ->filter(fn (array $entry) => (string) $entry['id'] !== '')
+            ->map(fn (array $entry) => $entry['id'].': '.$entry['indonesia'].($entry['inggris'] !== '' ? ' ('.$entry['inggris'].')' : ''))
+            ->implode("\n");
+    }
+
     /** A few Indonesian names to suggest when nothing matched. */
     public function examples(int $count): array
     {
