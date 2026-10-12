@@ -7,10 +7,12 @@ use App\Models\UserNote;
 use App\Services\ConversationService;
 use App\Services\ProgressStats;
 use App\Services\Scheduler;
+use App\Support\AiErrorMessage;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Throwable;
 
 #[Layout('layouts.study')]
 class Dashboard extends Component
@@ -22,6 +24,9 @@ class Dashboard extends Component
     public bool $showDayPicker = false;
 
     public array $noteDrafts = [];
+
+    /** Friendly AI error shown in the item modal when starting a conversation fails. */
+    public ?string $conversationError = null;
 
     public function mount(?int $day = null): void
     {
@@ -101,6 +106,7 @@ class Dashboard extends Component
     public function closeItem(): void
     {
         $this->activeItemId = null;
+        $this->conversationError = null;
     }
 
     /**
@@ -121,11 +127,21 @@ class Dashboard extends Component
             return null;
         }
 
-        $session = app(ConversationService::class)->startSessionForTopic(
-            Auth::user(),
-            $item['lang'],
-            $item['payload']['topic'] ?? null,
-        );
+        $this->conversationError = null;
+
+        try {
+            $session = app(ConversationService::class)->startSessionForTopic(
+                Auth::user(),
+                $item['lang'],
+                $item['payload']['topic'] ?? null,
+            );
+        } catch (Throwable $e) {
+            // The modal stays open with a message; startRandomSession() already removed the empty session.
+            report($e);
+            $this->conversationError = AiErrorMessage::for($e);
+
+            return null;
+        }
 
         $this->closeItem();
 

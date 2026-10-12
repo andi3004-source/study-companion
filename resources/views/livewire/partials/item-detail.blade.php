@@ -144,10 +144,17 @@
                     @include('livewire.partials.note-box', ['item' => $item])
 
                     {{-- Two internal ways to actually practice speaking it: a live AI chat, or the pronunciation checker with today's topic prefilled. --}}
+                    <div role="status">
+                        <span wire:loading wire:target="startConversationFromItem" class="sr-only">Menyiapkan obrolan…</span>
+                        @if ($conversationError)
+                            <p class="rounded-xl border border-red-700 bg-red-50 px-4 py-3 text-sm text-red-700"><span aria-hidden="true">⚠</span> {{ $conversationError }}</p>
+                        @endif
+                    </div>
                     <div class="grid grid-cols-1 sidebar:grid-cols-2 gap-2">
                         <button type="button" wire:click="startConversationFromItem('{{ $item['id'] }}')"
-                                class="rounded-xl bg-navy text-white font-700 py-3">
-                            💬 Latihan Ngobrol
+                                wire:loading.attr="disabled" wire:target="startConversationFromItem"
+                                class="rounded-xl bg-navy text-white font-700 py-3 disabled:opacity-60">
+                            <span aria-hidden="true">💬</span> Latihan Ngobrol
                         </button>
                         <a href="{{ route('pronunciation-check', ['lang' => 'english', 'word' => $item['payload']['topic'] ?? '']) }}"
                            class="block text-center rounded-xl bg-card-alt text-ink border border-line-card font-700 py-3 no-underline">
