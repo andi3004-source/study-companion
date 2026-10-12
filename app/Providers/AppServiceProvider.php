@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\AiClient;
+use App\Contracts\ObjectRecognizer;
 use App\Contracts\PronunciationChecker;
 use App\Contracts\SessionAnalyzer;
 use App\Services\FallbackSessionAnalyzer;
@@ -10,7 +11,12 @@ use App\Services\GeminiClient;
 use App\Services\GeminiSessionAnalyzer;
 use App\Services\LangflowSessionAnalyzer;
 use App\Services\MlPronunciationChecker;
+use App\Services\Scan\GeminiObjectRecognizer;
+use App\Services\Scan\NullObjectRecognizer;
 use App\Services\SttMatchPronunciationChecker;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -48,6 +54,14 @@ class AppServiceProvider extends ServiceProvider
                 default => $app->make(MlPronunciationChecker::class),
             };
         });
+
+        // "Raba lalu dengar": Gemini vision when a key is set, otherwise a
+        // recognizer that always answers tidak_yakin instead of guessing.
+        $this->app->bind(ObjectRecognizer::class, function ($app) {
+            return filled(config('services.gemini.key'))
+                ? $app->make(GeminiObjectRecognizer::class)
+                : $app->make(NullObjectRecognizer::class);
+        });
     }
 
     /**
@@ -55,6 +69,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        RateLimiter::for('scan-benda', function (Request $request) {
+            return Limit::perMinute(max(1, (int) config('scan.rate_limit_per_minute', 6)))
+                ->by($request->user()?->id ?: $request->ip());
+        });
     }
 }
