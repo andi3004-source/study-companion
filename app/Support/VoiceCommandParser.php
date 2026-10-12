@@ -142,6 +142,23 @@ class VoiceCommandParser
         return trim(preg_replace('/\s+/u', ' ', $text));
     }
 
+    /** A short phrase for a result, to offer in a spoken choice ("ujian", "nomor 3", "kembali"). */
+    public static function label(array $result): string
+    {
+        if ($result['type'] === 'choose_number') {
+            return 'nomor '.($result['index'] + 1);
+        }
+
+        $wanted = ['type' => $result['type'], 'target' => $result['target'], 'index' => $result['index']];
+        foreach (self::phrases() as $phrase) {
+            if (self::exact($phrase) === [$wanted]) {
+                return $phrase;
+            }
+        }
+
+        return $result['type'];
+    }
+
     /** @return list<array> every interpretation of the text, with no tolerance for mishearing */
     private static function exact(string $text): array
     {

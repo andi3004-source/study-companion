@@ -124,8 +124,8 @@ class VoiceModeTest extends TestCase
         $this->assertStringContainsString('const SILENCE_MS = 8000;', $engine);
         $this->assertStringContainsString('const MAX_REMINDERS = 2;', $engine);
         $this->assertStringContainsString('Keyboard tetap bisa dipakai.', $engine);
-        // Confirmation below 0.6 or when candidates differ.
-        $this->assertStringContainsString('const MIN_CONFIDENCE = 0.6;', $engine);
+        // Confirmation only below 0.5 on an irreversible action (or when only another alternative is known).
+        $this->assertStringContainsString('const MIN_CONFIDENCE = 0.5;', $engine);
         $this->assertStringContainsString('Saya dengar: ${heard}. Benar? Katakan ya atau tidak', $engine);
         // zh-CN voice warning, language per segment.
         $this->assertStringContainsString("u.lang = segment.lang || 'id-ID';", $engine);
@@ -170,10 +170,12 @@ class VoiceModeTest extends TestCase
             }
         }
 
-        // The only request carries the transcript text, nothing else.
+        // The only request carries the transcript text (and its alternatives), nothing else.
         $engine = $this->js('voice/engine.js');
         $this->assertSame(1, substr_count($engine, 'fetch('));
-        $this->assertStringContainsString('body: JSON.stringify({ transcript: String(raw).slice(0, 200) }),', $engine);
+        $this->assertStringContainsString('const body = { transcript: String(raw).slice(0, 200) };', $engine);
+        $this->assertStringContainsString('if (alternatives) body.alternatives = alternatives;', $engine);
+        $this->assertStringContainsString('body: JSON.stringify(body),', $engine);
     }
 
     public function test_no_global_single_key_shortcuts(): void

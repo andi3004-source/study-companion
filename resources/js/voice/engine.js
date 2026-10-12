@@ -17,7 +17,7 @@ const CONSENT_KEY = 'modeSuaraSetuju';
 const SESSION_KEY = 'modeSuara';
 const SILENCE_MS = 8000;
 const MAX_REMINDERS = 2;
-const MIN_CONFIDENCE = 0.6;
+const MIN_CONFIDENCE = 0.5;
 const GROUP_SIZE = 6;
 const DANGEROUS = /hapus|reset|selesai dan analisis|keluar/i;
 
@@ -393,30 +393,59 @@ const VoiceMode = {
         this.listen();
     },
 
-    /** Low confidence or two different candidates: ask before acting. */
+    /**
+     * Every alternative is parsed by the server (one request); raw texts are
+     * never compared. Known and consistent: act. Two different known commands:
+     * numbered choice. Only the top one unknown but another known: "Saya dengar:
+     * <that one>. Benar?". Low confidence on an irreversible action: confirm.
+     */
     async onUtterance(alternatives) {
         const best = alternatives[0] || { transcript: '', confidence: 0 };
         const heard = best.transcript.trim();
         this.debug({ alternatives, parsed: null });
-        const second = alternatives[1] ? normalize(alternatives[1].transcript) : null;
-        const unsure =
-            !this.dictating &&
-            !this.pending &&
-            ((typeof best.confidence === 'number' && best.confidence > 0 && best.confidence < MIN_CONFIDENCE) ||
-                (second && second !== normalize(heard)));
+        const texts = alternatives.map((a) => String(a.transcript || '').trim().slice(0, 200)).filter(Boolean).slice(0, 3);
 
-        if (unsure && heard) {
-            this.pending = {
-                onYes: () => this.handle(heard),
-                onNo: () => this.tell('Baik, silakan ulangi.'),
-            };
-            await this.tell(`Saya dengar: ${heard}. Benar? Katakan ya atau tidak`);
+        // Dictation, a pending yes/no and a numbered choice take the top alternative as is.
+        if (this.dictating || this.pending || this.clarifying || !texts.length) {
+            await this.handle(heard);
             this.listen();
             return;
         }
 
-        await this.handle(heard);
+        await this.decide(texts, typeof best.confidence === 'number' && best.confidence > 0 && best.confidence < MIN_CONFIDENCE);
         this.listen();
+    },
+
+    async decide(texts, lowConfidence) {
+        const heard = texts[0];
+        this.lastHeard = heard;
+        const adapter = this.adapter();
+        if (adapter?.handleTranscript && (await adapter.handleTranscript(normalize(heard), heard, this))) return;
+
+        const { decision, heard_index: heardIndex, ...cmd } = await this.parse(heard, texts);
+        this.debug({ parsed: { decision, ...cmd } });
+
+        if (decision === 'choose') return this.clarify(cmd.candidates || []);
+        if (decision === 'confirm' && texts[heardIndex]) return this.confirmHeard(texts[heardIndex], cmd, adapter);
+        if (decision === 'accept' && lowConfidence && this.irreversible(cmd)) return this.confirmHeard(heard, cmd, adapter);
+
+        return this.handleParsed(cmd, heard, adapter);
+    },
+
+    /** "Saya dengar: X. Benar?"; "ya" runs the command (an irreversible one still asks "Yakin?" by name). */
+    confirmHeard(heard, cmd, adapter) {
+        this.pending = {
+            onYes: () => this.handleParsed(cmd, heard, adapter),
+            onNo: () => this.tell('Baik, silakan ulangi.'),
+        };
+        return this.tell(`Saya dengar: ${heard}. Benar? Katakan ya atau tidak`);
+    },
+
+    /** A numbered choice that would press Hapus, Reset, Selesai dan analisis or Keluar. */
+    irreversible(cmd) {
+        if (cmd.type !== 'choose_number') return false;
+        const actions = this.actions.length ? this.actions : this.collectActions();
+        return DANGEROUS.test(actions[cmd.index]?.name || '');
     },
 
     async handle(raw) {
@@ -471,7 +500,9 @@ const VoiceMode = {
         await this.run(cmd);
     },
 
-    async parse(raw) {
+    async parse(raw, alternatives = null) {
+        const body = { transcript: String(raw).slice(0, 200) };
+        if (alternatives) body.alternatives = alternatives;
         try {
             const response = await fetch(this.endpoint, {
                 method: 'POST',
@@ -480,7 +511,7 @@ const VoiceMode = {
                     Accept: 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
                 },
-                body: JSON.stringify({ transcript: String(raw).slice(0, 200) }),
+                body: JSON.stringify(body),
             });
             if (!response.ok) return { type: 'unknown', target: null, index: null };
             return await response.json();

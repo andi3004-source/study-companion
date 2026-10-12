@@ -326,9 +326,17 @@ pembaca layar tetap jalur utama dan tidak diubah. Mati secara bawaan.
   meniadakan.
 - **Alur:** aplikasi berbicara (antrean dengan bahasa per segmen: id-ID, en-US,
   zh-CN), lalu bunyi pendek, lalu mikrofon dibuka (id-ID, 3 alternatif).
-  Mikrofon tidak pernah terbuka saat aplikasi berbicara. Bila keyakinan di
-  bawah 0,6 atau dua kandidat berbeda, aplikasi bertanya "Saya dengar: …
-  Benar?". Diam 8 detik diingatkan sampai dua kali, lalu mode berhenti.
+  Mikrofon tidak pernah terbuka saat aplikasi berbicara. Ketiga alternatif
+  dikirim dalam satu `POST /voice/command` dan masing-masing diurai
+  (`App\Support\VoiceAlternatives`); teks mentahnya tidak dibandingkan.
+  Alternatif teratas dikenal dan tidak ada alternatif lain yang dikenal
+  sebagai perintah berbeda: langsung dijalankan (juga untuk jawaban game).
+  Dua alternatif dikenal sebagai perintah berbeda: aplikasi bertanya "satu,
+  ujian, atau dua, isian?". Hanya alternatif lain yang dikenal: "Saya dengar:
+  … Benar?". Keyakinan di bawah 0,5 hanya memicu "Saya dengar: … Benar?" bila
+  nomor yang dipilih menekan tindakan yang tidak bisa dibatalkan, dan
+  tindakan itu tetap ditanya "Yakin?". Diam 8 detik diingatkan sampai dua
+  kali, lalu mode berhenti.
 - **Perintah** dikenali oleh `App\Support\VoiceCommandParser` lewat
   `POST /voice/command`, yang hanya mengembalikan `{type, target, index}`
   (ditambah dua kandidat untuk `clarify`): buka (nama halaman), mulai,
