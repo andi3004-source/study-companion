@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 /**
  * POST /voice/command: parses one transcript and returns only
- * {type, target, index}. The transcript is not stored, logged or echoed back.
+ * {type, target, index} (plus candidate commands for 'clarify'). The
+ * transcript is not stored, logged or echoed back.
  */
 class VoiceCommandController extends Controller
 {

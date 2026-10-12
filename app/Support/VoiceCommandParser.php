@@ -8,14 +8,18 @@ namespace App\Support;
  * is never stored or logged.
  *
  * Matching is on the whole utterance after normalising (lowercase, no
- * punctuation, filler words like "buka" or "tolong" removed), so a sentence
- * that mixes two commands, or two different numbers, is 'unknown' rather
- * than a guess.
+ * punctuation, filler words like "buka", "masuk ke" or "dong" removed), so a
+ * sentence that mixes two commands, or two different numbers, is 'unknown'
+ * rather than a guess. When nothing matches exactly, one misheard word is
+ * tolerated (Levenshtein distance 1, words of 5 letters or more); if that
+ * fits two different commands equally well the answer is 'clarify'.
  *
  * Result: ['type' => string, 'target' => ?string, 'index' => ?int]
  *   navigate        target = route name
  *   not_available   target = route name or null (feature off or not built)
+ *   start           target = game route name or null ("mulai", "main pemburu kesalahan")
  *   choose_number   index  = 0-based (1-12, or a-d)
+ *   clarify         plus 'candidates' => two results, each with a 'label' (the phrase to offer)
  *   back, repeat, read_page, list_actions, more, confirm_yes, confirm_no,
  *   stop, help, dictate_start, dictate_stop, unknown
  */
@@ -23,36 +27,65 @@ class VoiceCommandParser
 {
     public const MAX_NUMBER = 12;
 
-    /** Words that may precede a page name or a command without changing it. */
-    private const FILLERS = ['tolong', 'coba', 'buka', 'pergi', 'ke', 'halaman', 'menu', 'saya', 'mau', 'ingin'];
+    /** Words that may surround a page name or a command without changing it ("masuk ke game dong"). */
+    private const FILLERS = [
+        'tolong', 'coba', 'buka', 'bukakan', 'masuk', 'pergi', 'ke', 'halaman', 'menu', 'fitur',
+        'saya', 'aku', 'mau', 'ingin', 'pengen', 'ayo', 'yuk', 'dong', 'deh', 'tes', 'dulu', 'nih', 'sih',
+    ];
+
+    /** Fillers that may also surround a number ("saya pilih dua dong"). */
+    private const NUMBER_FILLERS = ['tolong', 'coba', 'saya', 'aku', 'mau', 'ingin', 'ayo', 'yuk', 'dong', 'deh'];
 
     /** phrase => route name */
     private const PAGES = [
         'hari ini' => 'dashboard',
         'dashboard' => 'dashboard',
         'kartu' => 'cards.index',
+        'flashcard' => 'cards.index',
         'kamus' => 'kamus',
         'ujian' => 'ujian',
+        'kuis' => 'ujian',
         'isian' => 'latihan-isian',
         'game' => 'game',
+        'gim' => 'game',
+        'permainan' => 'game',
+        // How id-ID recognition often hears the English word "game".
+        'gem' => 'game',
+        'geim' => 'game',
+        'gaim' => 'game',
+        'gam' => 'game',
         'pemburu kesalahan' => 'game.error-hunter',
         'dengar dan pilih' => 'game.listen-pick',
         'ngobrol' => 'conversation',
         'obrolan' => 'conversation',
         'percakapan' => 'conversation',
+        'chat' => 'conversation',
+        'ngomong' => 'conversation',
         'ucapan' => 'pronunciation-check',
+        'pengucapan' => 'pronunciation-check',
         'cek pengucapan' => 'pronunciation-check',
         'kata bicara' => 'kata-bicara',
+        'kamus bicara' => 'kata-bicara',
         'raba lalu dengar' => 'scan.object',
         'kamera' => 'scan.object',
         'potret' => 'scan.object',
         'progress' => 'progress',
         'kemajuan' => 'progress',
         'bantuan' => 'bantuan',
+        'bantu' => 'bantuan',
     ];
 
     /** Pages that are mentioned in the command list but don't exist (yet). */
     private const NOT_BUILT = ['pilih yang benar'];
+
+    /** Games that "mulai <nama>" / "main <nama>" can start. */
+    private const GAMES = [
+        'pemburu kesalahan' => 'game.error-hunter',
+        'dengar dan pilih' => 'game.listen-pick',
+    ];
+
+    /** Words after "mulai"/"main" that still mean a plain start ("mulai main", "main lagi"). */
+    private const START_SUFFIXES = ['main', 'lagi', 'game', 'gim', 'permainan', 'sekarang'];
 
     /** type => phrases (whole utterance) */
     private const COMMANDS = [
@@ -74,8 +107,11 @@ class VoiceCommandParser
         'enam' => 6, 'lima' => 5, 'empat' => 4, 'tiga' => 3, 'dua' => 2, 'satu' => 1,
     ];
 
-    /** Words allowed around a number in a choice ("nomor tiga", "pilihan dua", "yang kedua"). */
-    private const NUMBER_WORDS = ['nomor', 'pilihan', 'pilih', 'yang', 'jawaban', 'opsi', 'huruf', 'angka'];
+    /** Words allowed around a number in a choice ("nomor tiga", "pilihan dua", "jawab tiga", "yang kedua"). */
+    private const NUMBER_WORDS = ['nomor', 'pilihan', 'pilih', 'yang', 'jawaban', 'jawab', 'opsi', 'huruf', 'angka'];
+
+    /** Fuzzy matching only for words at least this long (shorter words must match exactly). */
+    private const FUZZY_MIN_LENGTH = 5;
 
     public static function parse(string $transcript): array
     {
@@ -85,14 +121,17 @@ class VoiceCommandParser
             return self::result('unknown');
         }
 
-        $matches = array_values(array_filter([
-            self::page($text),
-            self::command($text),
-            self::number($text),
-        ]));
+        $matches = self::exact($text);
 
-        // Exactly one interpretation, or nothing: never guess between two.
-        return count($matches) === 1 ? $matches[0] : self::result('unknown');
+        // Exactly one interpretation: done. Two or more: never guess between them.
+        if (count($matches) === 1) {
+            return $matches[0];
+        }
+        if (count($matches) > 1) {
+            return self::result('unknown');
+        }
+
+        return self::fuzzy(self::withoutFillers($text));
     }
 
     public static function normalize(string $transcript): string
@@ -103,9 +142,25 @@ class VoiceCommandParser
         return trim(preg_replace('/\s+/u', ' ', $text));
     }
 
+    /** @return list<array> every interpretation of the text, with no tolerance for mishearing */
+    private static function exact(string $text): array
+    {
+        return array_values(array_filter([
+            self::page($text),
+            self::command($text),
+            self::number($text),
+            self::start($text),
+        ]));
+    }
+
     private static function page(string $text): ?array
     {
         $phrase = self::withoutFillers($text);
+
+        // "main game", "mau main gim": "main" in front of the game hub only.
+        if (str_starts_with($phrase, 'main ') && (self::PAGES[substr($phrase, 5)] ?? null) === 'game') {
+            $phrase = substr($phrase, 5);
+        }
 
         if (in_array($phrase, self::NOT_BUILT, true)) {
             return self::result('not_available');
@@ -136,6 +191,23 @@ class VoiceCommandParser
         return count($found) === 1 ? self::result($found[0]) : null;
     }
 
+    /** "mulai", "main", "ayo mulai", "mulai main", "mulai pemburu kesalahan", "main dengar dan pilih". */
+    private static function start(string $text): ?array
+    {
+        if (! preg_match('/^(mulai|main)(?: (.+))?$/u', self::withoutFillers($text), $m)) {
+            return null;
+        }
+
+        $rest = $m[2] ?? '';
+
+        if ($rest === '' || in_array($rest, self::START_SUFFIXES, true)) {
+            // "main game" is the game hub (see page()), not a start.
+            return $m[1] === 'main' && (self::PAGES[$rest] ?? null) === 'game' ? null : self::result('start');
+        }
+
+        return isset(self::GAMES[$rest]) ? self::result('start', self::GAMES[$rest]) : null;
+    }
+
     private static function number(string $text): ?array
     {
         $words = explode(' ', $text);
@@ -154,7 +226,7 @@ class VoiceCommandParser
 
         $tokens = array_values(array_filter(explode(' ', $text), fn ($t) => $t !== ''));
         $numbers = array_values(array_unique(array_filter($tokens, fn ($t) => ctype_digit($t))));
-        $rest = array_diff($tokens, $numbers, self::NUMBER_WORDS, ['ke']);
+        $rest = array_diff($tokens, $numbers, self::NUMBER_WORDS, self::NUMBER_FILLERS, ['ke']);
 
         if (count($numbers) !== 1 || $rest !== []) {
             return null;
@@ -165,14 +237,94 @@ class VoiceCommandParser
         return $n >= 1 && $n <= self::MAX_NUMBER ? self::result('choose_number', null, $n - 1) : null;
     }
 
-    private static function withoutFillers(string $text): string
+    /**
+     * One misheard word ("kamuss", "progres", "lanjud"): the known phrase with the
+     * same number of words and the smallest total distance wins. Two different
+     * commands at the same distance give 'clarify' with both, never a guess.
+     */
+    private static function fuzzy(string $text): array
     {
         $words = explode(' ', $text);
-        while ($words !== [] && in_array($words[0], self::FILLERS, true) && count($words) > 1) {
-            array_shift($words);
+        $best = null;
+        $candidates = [];
+
+        foreach (self::phrases() as $phrase) {
+            $distance = self::distance($words, explode(' ', $phrase));
+            if ($distance === null || $distance === 0 || ($best !== null && $distance > $best)) {
+                continue;
+            }
+
+            $matches = self::exact($phrase);
+            if (count($matches) !== 1) {
+                continue;
+            }
+
+            if ($best === null || $distance < $best) {
+                $best = $distance;
+                $candidates = [];
+            }
+            $key = $matches[0]['type'].'|'.$matches[0]['target'].'|'.$matches[0]['index'];
+            $candidates[$key] ??= $matches[0] + ['label' => $phrase];
         }
 
-        return implode(' ', $words);
+        $candidates = array_values($candidates);
+
+        if (count($candidates) === 1) {
+            unset($candidates[0]['label']);
+
+            return $candidates[0];
+        }
+
+        if (count($candidates) > 1) {
+            return self::result('clarify') + ['candidates' => array_slice($candidates, 0, 2)];
+        }
+
+        return self::result('unknown');
+    }
+
+    /** Sum of per-word distances, or null when a word is too far (or too short to be fuzzy). */
+    private static function distance(array $heard, array $known): ?int
+    {
+        if (count($heard) !== count($known)) {
+            return null;
+        }
+
+        $total = 0;
+        foreach ($heard as $i => $word) {
+            if ($word === $known[$i]) {
+                continue;
+            }
+            if (min(mb_strlen($word), mb_strlen($known[$i])) < self::FUZZY_MIN_LENGTH || levenshtein($word, $known[$i]) > 1) {
+                return null;
+            }
+            $total++;
+        }
+
+        return $total;
+    }
+
+    /** @return list<string> every known phrase (pages, commands, starts) */
+    private static function phrases(): array
+    {
+        $starts = ['mulai'];
+        foreach (array_keys(self::GAMES) as $game) {
+            $starts[] = 'mulai '.$game;
+            $starts[] = 'main '.$game;
+        }
+
+        return array_values(array_unique([
+            ...array_keys(self::PAGES),
+            ...self::NOT_BUILT,
+            ...array_merge(...array_values(self::COMMANDS)),
+            ...$starts,
+        ]));
+    }
+
+    private static function withoutFillers(string $text): string
+    {
+        $words = array_values(array_filter(explode(' ', $text), fn ($w) => ! in_array($w, self::FILLERS, true)));
+
+        return $words === [] ? $text : implode(' ', $words);
     }
 
     private static function result(string $type, ?string $target = null, ?int $index = null): array
