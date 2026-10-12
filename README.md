@@ -211,7 +211,7 @@ Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dike
 | Kontras teks ≥ 4,5:1 | Sebagian | Warna `ink-soft`, `ink-faint`, `mandarin`, `english` digelapkan (≥ 5:1 di latar cream/putih). Halaman lain belum diaudit satu per satu. |
 | Informasi tidak hanya lewat warna | Sebagian | Halaman aktif di navigasi diberi garis bawah + `aria-current`. Halaman lain belum diaudit. |
 | Halaman Bantuan (`/bantuan`) dan pernyataan aksesibilitas (draf) | Selesai | |
-| Kata bicara (`/kata-bicara`) | Selesai | Katalog `storage/app/seed-data/daftar_benda_tertutup.json` belum ada di repo, jadi halaman menampilkan "Katalog belum tersedia". Skema yang diharapkan ada di `config/katabicara.php`. |
+| Kata bicara (`/kata-bicara`) | Selesai | Katalog `storage/app/seed-data/daftar_benda_tertutup.json` sudah ada di repo (di-commit). Jika berkas itu hilang atau rusak, halaman menampilkan "Katalog belum tersedia". Skema yang diharapkan ada di `config/katabicara.php`. |
 | Halaman lain (Kartu, Kamus, Ujian, Isian, Game, Ucapan, Progress) | Belum diaudit | Hanya mendapat perubahan layout dan warna global. |
 | Uji manual oleh tim dengan pembaca layar Narator | Sedang berlangsung | Belum selesai untuk butir mana pun di atas. |
 | Uji dengan pengguna tunanetra | Belum dilakukan | |
