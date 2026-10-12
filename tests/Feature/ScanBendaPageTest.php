@@ -82,6 +82,21 @@ class ScanBendaPageTest extends TestCase
             ->assertSee('Foto lagi');
     }
 
+    public function test_autoplay_is_an_opt_in_checkbox_off_by_default(): void
+    {
+        Livewire::actingAs($this->user())->test(ScanBenda::class)
+            ->assertSeeHtml('<label for="scan-putar-otomatis"')
+            ->assertSeeHtml('id="scan-putar-otomatis" x-model="putarOtomatis" x-on:change="simpanPutarOtomatis()"')
+            ->assertSee('Putar suara otomatis')
+            ->assertDontSeeHtml('id="scan-putar-otomatis" checked');
+
+        $js = file_get_contents(resource_path('js/app.js'));
+        $this->assertStringContainsString('putarOtomatis: !!saved.putarOtomatis', $js);
+        $this->assertStringContainsString("localStorage.setItem('scanBenda'", $js);
+        // Autoplay needs the opt-in, a certain result, and screen reader mode off.
+        $this->assertStringContainsString("if (this.putarOtomatis && data.jenis === 'pasti' && !window.screenReaderMode()) this.dengarSemua();", $js);
+    }
+
     public function test_nav_link_shows_only_when_enabled(): void
     {
         $user = $this->user();

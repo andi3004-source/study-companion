@@ -23,6 +23,11 @@
         </button>
         <p id="scan-alasan" class="text-sm text-ink-soft" x-show="!setuju">Tombol Ambil foto aktif setelah kotak persetujuan dicentang.</p>
 
+        <label for="scan-putar-otomatis" class="flex items-start gap-3 text-ink min-h-[44px]">
+            <input type="checkbox" id="scan-putar-otomatis" x-model="putarOtomatis" x-on:change="simpanPutarOtomatis()" class="mt-1 rounded text-navy focus:ring-navy">
+            <span>Putar suara otomatis</span>
+        </label>
+
         <input type="file" accept="image/*" capture="environment" x-ref="kamera" x-on:change="kirim($event)"
                class="sr-only" tabindex="-1" aria-hidden="true">
     </div>

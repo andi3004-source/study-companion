@@ -193,17 +193,32 @@ async function compressPhoto(file, max = 1024) {
  * <input type="file" capture="environment">; the compressed photo is posted
  * as JSON to the recognize endpoint and dropped afterwards. Results are
  * announced through the role="status" region and focus moves to the result
- * heading (or the error). Speech never starts on its own in screen reader mode.
+ * heading (or the error). Speech only starts on its own when "Putar suara
+ * otomatis" is ticked (off by default), for a certain result, outside
+ * screen reader mode.
  */
 window.scanBenda = function (endpoint) {
     const suara = { id: 'id-ID', en: 'en-US', zh: 'zh-CN' };
 
+    // Own localStorage key: displaySettings() rewrites the whole 'tampilan' object.
+    let saved = {};
+    try {
+        saved = JSON.parse(localStorage.getItem('scanBenda') || '{}');
+    } catch (e) {}
+
     return {
+        putarOtomatis: !!saved.putarOtomatis,
         setuju: false,
         memproses: false,
         status: '',
         galat: null,
         hasil: null,
+
+        simpanPutarOtomatis() {
+            try {
+                localStorage.setItem('scanBenda', JSON.stringify({ putarOtomatis: this.putarOtomatis }));
+            } catch (e) {}
+        },
 
         ambil() {
             if (!this.setuju) {
@@ -251,7 +266,8 @@ window.scanBenda = function (endpoint) {
                 this.status = data.pesan || '';
                 this.$nextTick(() => {
                     if (this.$refs.judulHasil) this.$refs.judulHasil.focus();
-                    if (data.jenis === 'pasti' && !window.screenReaderMode()) this.dengarSemua();
+                    // Opt-in only, never for a 'mungkin' result, never in screen reader mode.
+                    if (this.putarOtomatis && data.jenis === 'pasti' && !window.screenReaderMode()) this.dengarSemua();
                 });
             } catch (e) {
                 this.galat = (e && e.message) || 'Foto gagal diproses. Coba lagi.';
