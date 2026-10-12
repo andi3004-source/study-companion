@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('hanzi');
             $table->string('traditional')->nullable();
             $table->string('pinyin');
-            $table->string('meaning_en');
+            $table->text('meaning_en'); // up to ~470 characters in the source data; VARCHAR(255) would reject them on MySQL
             $table->string('meaning_id')->nullable(); // filled by the translation job later
             $table->json('pos')->nullable();
             $table->string('radical')->nullable();

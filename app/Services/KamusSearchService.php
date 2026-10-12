@@ -126,10 +126,10 @@ class KamusSearchService
                 'ev.word as headword',
                 DB::raw("COALESCE(ev.pos, '') as sub"),
                 'ev.definition as meaning_en',
-                DB::raw("json_extract(ev.translations, '\$.id') as meaning_id"),
+                DB::raw(self::jsonText('ev.translations', '$.id').' as meaning_id'),
                 'ev.cefr_level as raw_level',
                 DB::raw("'en-US' as lang_code"),
-                DB::raw("json_extract(ev.examples, '\$[0].en') as example_en"),
+                DB::raw(self::jsonText('ev.examples', '$[0].en').' as example_en'),
                 'iv.past_form as verb_past',
                 'iv.past_participle as verb_past_participle',
                 DB::raw('NULL as data_status'),
@@ -143,7 +143,7 @@ class KamusSearchService
             $q->where(function (Builder $w) use ($rawSearch) {
                 $w->where('ev.word', 'like', "%{$rawSearch}%");
                 $this->orWholeWordLike($w, 'ev.definition', $rawSearch);
-                $this->orWholeWordLike($w, "json_extract(ev.translations, '\$.id')", $rawSearch);
+                $this->orWholeWordLike($w, self::jsonText('ev.translations', '$.id'), $rawSearch);
             });
         }
 
@@ -208,9 +208,27 @@ class KamusSearchService
      */
     private function orWholeWordLike(Builder $w, string $column, string $term): void
     {
-        $paddedColumn = "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(LOWER({$column}), ',', ' '), '/', ' '), ';', ' '), '.', ' ') || ' ')";
+        $cleaned = "REPLACE(REPLACE(REPLACE(REPLACE(LOWER({$column}), ',', ' '), '/', ' '), ';', ' '), '.', ' ')";
+        // MySQL treats || as OR, not string concatenation.
+        $paddedColumn = self::isMysql() ? "CONCAT(' ', {$cleaned}, ' ')" : "(' ' || {$cleaned} || ' ')";
 
         $w->orWhereRaw("{$paddedColumn} LIKE ?", ['% '.mb_strtolower(trim($term)).' %']);
+    }
+
+    /**
+     * A JSON value as plain text. SQLite's json_extract already returns text;
+     * MySQL's returns a quoted JSON string, so it needs JSON_UNQUOTE.
+     */
+    private static function jsonText(string $column, string $path): string
+    {
+        return self::isMysql()
+            ? "JSON_UNQUOTE(JSON_EXTRACT({$column}, '{$path}'))"
+            : "json_extract({$column}, '{$path}')";
+    }
+
+    private static function isMysql(): bool
+    {
+        return in_array(DB::getDriverName(), ['mysql', 'mariadb'], true);
     }
 
     /**

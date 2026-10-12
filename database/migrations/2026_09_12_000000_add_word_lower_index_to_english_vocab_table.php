@@ -15,11 +15,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('CREATE INDEX english_vocab_word_lower_idx ON english_vocab (LOWER(word))');
+        // MySQL 8.0.13+ needs the expression in its own parentheses (a functional key part).
+        DB::statement($this->isMysql()
+            ? 'CREATE INDEX english_vocab_word_lower_idx ON english_vocab ((LOWER(word)))'
+            : 'CREATE INDEX english_vocab_word_lower_idx ON english_vocab (LOWER(word))');
     }
 
     public function down(): void
     {
-        DB::statement('DROP INDEX IF EXISTS english_vocab_word_lower_idx');
+        DB::statement($this->isMysql()
+            ? 'DROP INDEX english_vocab_word_lower_idx ON english_vocab'
+            : 'DROP INDEX IF EXISTS english_vocab_word_lower_idx');
+    }
+
+    private function isMysql(): bool
+    {
+        return in_array(DB::getDriverName(), ['mysql', 'mariadb'], true);
     }
 };
