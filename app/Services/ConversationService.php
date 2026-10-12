@@ -224,19 +224,26 @@ class ConversationService
      */
     public function sendMessage(ConversationSession $session, string $content, string $inputMode = 'text'): ConversationTurn
     {
-        ConversationTurn::create([
+        $userTurn = ConversationTurn::create([
             'session_id' => $session->id,
             'role' => 'user',
             'content' => $content,
             'input_mode' => $inputMode,
         ]);
 
-        $result = $this->client->sendMessage(
-            model: config('services.active_ai_model'),
-            system: $this->systemPromptFor($session),
-            messages: $this->recentMessages($session),
-            maxTokens: $this->maxTokensFor($session),
-        );
+        try {
+            $result = $this->client->sendMessage(
+                model: config('services.active_ai_model'),
+                system: $this->systemPromptFor($session),
+                messages: $this->recentMessages($session),
+                maxTokens: $this->maxTokensFor($session),
+            );
+        } catch (Throwable $e) {
+            // A failed call must not leave an unanswered turn or use up daily quota.
+            $userTurn->delete();
+
+            throw $e;
+        }
 
         $parsed = $this->parseAssistantReply($session, $result['text']);
 

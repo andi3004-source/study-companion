@@ -310,7 +310,7 @@ class ConversationTest extends TestCase
         });
     }
 
-    public function test_missing_gemini_key_shows_a_graceful_error_not_a_crash(): void
+    public function test_missing_gemini_key_shows_a_graceful_error_and_does_not_store_the_turn(): void
     {
         config(['services.gemini.key' => null]);
         $user = $this->onboardedUser();
@@ -324,8 +324,9 @@ class ConversationTest extends TestCase
             ->assertOk()
             ->assertSet('errorMessage', 'AI sedang tidak tersedia. Coba lagi nanti.');
 
-        // The user's own message is still saved even though the AI call failed.
-        $this->assertDatabaseHas('conversation_turns', [
+        // The typed text stays in the UI because Chat keeps it in newMessage;
+        // the turn is not stored, so the daily quota is not used up.
+        $this->assertDatabaseMissing('conversation_turns', [
             'session_id' => $session->id, 'role' => 'user', 'content' => 'Hello?',
         ]);
     }
