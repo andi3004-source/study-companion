@@ -1,6 +1,6 @@
 <div class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
     <div class="flex items-center justify-between mb-4">
-        <h1 class="font-display font-600 text-2xl text-ink capitalize">Ujian {{ $mode }}</h1>
+        <h1 class="font-display font-600 text-2xl text-ink">{{ ['today' => 'Tes Hari Ini', 'mandarin' => 'Ujian Mandarin', 'english' => 'Ujian English'][$mode] ?? 'Ujian' }}</h1>
         <a href="{{ route('ujian') }}" class="text-sm text-ink-soft">← Kembali</a>
     </div>
 

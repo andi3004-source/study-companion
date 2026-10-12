@@ -179,7 +179,11 @@
             <form wire:submit="sendMessage" class="flex flex-col gap-2" x-ref="form">
                 <label for="kolom-tulis" class="text-sm font-700 text-ink">Pesanmu</label>
                 <p id="petunjuk-kolom-tulis" class="text-xs text-ink-soft">
-                    Tulis jawabanmu dalam bahasa Mandarin atau pinyin dengan angka nada, misalnya wo3 bu4 you3 qian2. Tekan Enter untuk kirim, Shift+Enter untuk baris baru.
+                    @if ($session->lang === 'mandarin')
+                        Tulis jawabanmu dalam bahasa Mandarin atau pinyin dengan angka nada, misalnya wo3 bu4 you3 qian2. Tekan Enter untuk kirim, Shift+Enter untuk baris baru.
+                    @else
+                        Tulis jawabanmu dalam bahasa Inggris. Tekan Enter untuk kirim, Shift+Enter untuk baris baru.
+                    @endif
                 </p>
                 <div class="flex gap-2 items-end">
                     {{-- Enter submits; Shift+Enter is a newline; Enter while an IME is composing (isComposing / keyCode 229) is left alone. --}}

@@ -1,6 +1,14 @@
 <div class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
-    <h1 class="font-display font-600 text-2xl text-ink mb-1">AI Conversation Partner</h1>
+    <h1 class="font-display font-600 text-2xl text-ink mb-1">Teman Ngobrol AI</h1>
     <p class="text-ink-soft text-sm mb-6">Latihan ngobrol bebas sesuai skenario. AI akan tetap dalam karakter dan menyisipkan koreksi kalau ada kesalahan.</p>
+
+    {{-- Always in the DOM so screen readers announce the message when it appears. --}}
+    <div role="status" class="mb-4">
+        <span wire:loading wire:target="startRandom" class="sr-only">Menyiapkan obrolan…</span>
+        @if ($errorMessage)
+            <p class="rounded-xl border border-red-700 bg-red-50 px-4 py-3 text-sm text-red-700"><span aria-hidden="true">⚠</span> {{ $errorMessage }}</p>
+        @endif
+    </div>
 
     <div class="flex gap-2 mb-5">
         <button type="button" wire:click="$set('lang', 'mandarin')"

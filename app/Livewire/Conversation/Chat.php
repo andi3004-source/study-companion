@@ -4,11 +4,12 @@ namespace App\Livewire\Conversation;
 
 use App\Models\ConversationSession;
 use App\Services\ConversationService;
+use App\Support\AiErrorMessage;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use RuntimeException;
+use Throwable;
 
 #[Layout('layouts.study')]
 class Chat extends Component
@@ -108,9 +109,10 @@ class Chat extends Component
 
         try {
             $assistantTurn = $service->sendMessage($this->session, $content, $voiceText !== null ? 'voice' : 'text');
-        } catch (RuntimeException $e) {
+        } catch (Throwable $e) {
+            // $newMessage is left untouched so the typed text is not lost.
             report($e);
-            $this->errorMessage = 'AI sedang tidak tersedia. Coba lagi nanti.';
+            $this->errorMessage = AiErrorMessage::for($e);
 
             return;
         }

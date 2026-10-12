@@ -102,12 +102,19 @@ class ConversationService
             'last_message_at' => now(),
         ]);
 
-        $result = $this->client->sendMessage(
-            model: config('services.active_ai_model'),
-            system: $this->systemPromptFor($session),
-            messages: [['role' => 'user', 'content' => 'Mulai obrolan santai duluan dengan 1 pertanyaan pembuka singkat terkait topik ini.']],
-            maxTokens: $this->maxTokensFor($session),
-        );
+        try {
+            $result = $this->client->sendMessage(
+                model: config('services.active_ai_model'),
+                system: $this->systemPromptFor($session),
+                messages: [['role' => 'user', 'content' => 'Mulai obrolan santai duluan dengan 1 pertanyaan pembuka singkat terkait topik ini.']],
+                maxTokens: $this->maxTokensFor($session),
+            );
+        } catch (Throwable $e) {
+            // Don't leave an empty session behind when the opener fails.
+            $session->delete();
+
+            throw $e;
+        }
 
         $parsed = $this->parseAssistantReply($session, $result['text']);
 
