@@ -330,13 +330,47 @@ pembaca layar tetap jalur utama dan tidak diubah. Mati secara bawaan.
   bawah 0,6 atau dua kandidat berbeda, aplikasi bertanya "Saya dengar: …
   Benar?". Diam 8 detik diingatkan sampai dua kali, lalu mode berhenti.
 - **Perintah** dikenali oleh `App\Support\VoiceCommandParser` lewat
-  `POST /voice/command`, yang hanya mengembalikan `{type, target, index}`:
-  buka (nama halaman), kembali, ulangi, baca halaman, daftar tindakan, nomor
-  1–12 atau a–d, lanjut, ya/tidak, berhenti, perintah, isi/selesai isi. Ucapan
-  yang memuat dua perintah atau dua angka berbeda dianggap tidak dikenali.
-  Tindakan yang tidak bisa dibatalkan (Hapus, Reset, Selesai dan analisis,
-  Keluar) selalu dikonfirmasi.
-- **Adapter halaman** (`data-voice-page`): Kata bicara ("cari …",
+  `POST /voice/command`, yang hanya mengembalikan `{type, target, index}`
+  (ditambah dua kandidat untuk `clarify`): buka (nama halaman), mulai,
+  kembali, ulangi, baca halaman, daftar tindakan, nomor 1–12 atau a–d, lanjut,
+  ya/tidak, berhenti, perintah, isi/selesai isi. Pengurainya toleran terhadap
+  ucapan alami:
+  - kata pengisi di mana saja dibuang ("buka", "bukakan", "masuk ke",
+    "pergi ke", "tolong", "mau", "ingin", "aku", "saya", "halaman", "menu",
+    "fitur", "coba", "ayo", "yuk", "dong", "deh", "tes", …), jadi "masuk ke
+    game" dan "tes obrolan" dikenali;
+  - alias halaman: game/gim/permainan/main game, ngobrol/obrolan/percakapan/
+    chat/ngomong, ucapan/pengucapan/cek pengucapan, kata bicara/kamus bicara,
+    kartu/flashcard, ujian/kuis, progress/kemajuan, bantuan/bantu, dan raba
+    lalu dengar/kamera/potret (hanya bila fiturnya aktif, selain itu "belum
+    tersedia");
+  - salah dengar umum pengenalan id-ID untuk "game": gem, geim, gaim, gam;
+  - satu huruf salah (jarak Levenshtein 1) untuk kata 5 huruf atau lebih; bila
+    dua perintah berbeda sama dekat ("usian": ujian atau isian), hasilnya
+    `clarify` dan aplikasi bertanya "satu atau dua", tidak menebak;
+  - `start`: "mulai", "main", "ayo mulai", "mulai main", "mulai pemburu
+    kesalahan", "main dengar dan pilih". "Main" saja berarti mulai; "main game"
+    membuka halaman Game;
+  - jawaban: "pilih satu", "jawaban dua", "jawab tiga", "opsi empat", "nomor
+    tiga", "yang pertama".
+
+  Ucapan yang memuat dua perintah, dua angka berbeda, atau perintah yang
+  bertabrakan tetap dianggap tidak dikenali. Saat tidak dikenali, aplikasi
+  membacakan dan menampilkan (lewat `role="status"`) "Saya dengar: …" serta
+  perintah yang bisa dipakai di halaman itu; "perintah" membacakan daftar yang
+  disesuaikan dengan halaman aktif. Tindakan yang tidak bisa dibatalkan (Hapus,
+  Reset, Selesai dan analisis, Keluar) selalu dikonfirmasi.
+- **Mulai:** di hub Game dan pemilihan skenario Ngobrol, "mulai" menekan
+  kontrol bertanda `data-voice-start`; bila ada lebih dari satu, pilihannya
+  dibacakan bernomor. Di dalam game, "mulai" membacakan soal atau menekan "Main
+  lagi".
+- **Mode debug** (mati secara bawaan): tambahkan `?voicedebug=1` pada alamat
+  untuk melihat panel kecil berisi teks terdengar, alternatif, confidence, dan
+  hasil parse terakhir. Isinya hanya di memori dan tidak disimpan.
+- **Adapter halaman** (`data-voice-page`, dicari ulang dari DOM pada setiap
+  ucapan; satu MutationObserver pada `<main>` dan event `livewire:navigated`
+  memanggil `onActivate` saat halaman berganti, tanpa pendengar ganda): hub
+  Game, pemilihan skenario Ngobrol, Kata bicara ("cari …",
   "dengarkan inggris"), Dengar & Pilih dan Pemburu Kesalahan (soal dan pilihan
   bernomor; jawaban lewat radio dan tombol Jawab yang sudah ada), Ngobrol
   (balasan dibacakan, ucapan dikirim lewat formulir yang sudah ada, "selesai"
@@ -347,7 +381,9 @@ pembaca layar tetap jalur utama dan tidak diubah. Mati secara bawaan.
 - **Data:** tidak ada audio, gambar, atau transkrip yang disimpan. localStorage
   hanya menyimpan tanda persetujuan sekali pakai; sessionStorage hanya
   menyimpan bahwa mode aktif supaya bisa dilanjutkan setelah pindah halaman.
-  Endpoint tidak menulis transkrip ke log atau basis data.
+  Endpoint tidak menulis transkrip ke log atau basis data. Teks terakhir yang
+  terdengar hanya ada di memori halaman (untuk "Saya dengar" dan panel debug)
+  dan dihapus saat mode berhenti.
 
 **Batas (jujur):**
 

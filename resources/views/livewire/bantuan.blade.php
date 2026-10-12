@@ -45,11 +45,13 @@
         <p class="text-ink">Mode suara adalah pelengkap untuk memakai aplikasi dengan perintah lisan. Pembaca layar dan keyboard tetap jalur utama. Mode ini mati secara bawaan; nyalakan dengan tombol <strong>Mode suara</strong> di bagian paling atas halaman, dan matikan dengan tombol <strong>Berhenti</strong> atau perintah "berhenti". Mode suara dan Mode pembaca layar tidak bisa aktif bersamaan.</p>
         <h3 class="font-700 text-ink">Perintah</h3>
         <ul class="list-disc pl-6 text-ink space-y-1">
-            <li>"Buka" lalu nama halaman: hari ini, kartu, kamus, ujian, isian, game, pemburu kesalahan, dengar dan pilih, ngobrol, ucapan, kata bicara, progress, bantuan (dan raba lalu dengar bila fitur itu aktif).</li>
-            <li>"Baca halaman", "daftar tindakan", lalu "nomor satu" sampai "nomor dua belas" (atau "pilihan a" sampai "d"); "lanjut" untuk daftar berikutnya.</li>
-            <li>"Kembali", "ulangi", "perintah", "berhenti"; "ya" atau "tidak" untuk konfirmasi.</li>
+            <li>Nama halaman, boleh dengan kata seperti "buka", "masuk ke", "mau", "tolong", atau "dong": hari ini, kartu (flashcard), kamus, ujian (kuis), isian, game (gim, permainan, main game), pemburu kesalahan, dengar dan pilih, ngobrol (obrolan, percakapan, chat), ucapan (pengucapan), kata bicara (kamus bicara), progress (kemajuan), bantuan (dan raba lalu dengar, kamera, potret bila fitur itu aktif). Contoh: "masuk ke game", "tes obrolan".</li>
+            <li>"Mulai" (atau "main", "ayo mulai"): di halaman Game membuka satu-satunya game, atau membacakan pilihan bernomor; "mulai pemburu kesalahan" atau "main dengar dan pilih" langsung membuka game itu. Di pemilihan skenario Ngobrol, skenario dibacakan bernomor. Di dalam game, membacakan soal atau menekan "Main lagi".</li>
+            <li>"Baca halaman", "daftar tindakan", lalu "nomor satu" sampai "nomor dua belas" (juga "pilih satu", "jawab tiga", "opsi empat", "yang pertama", atau "pilihan a" sampai "d"); "lanjut" untuk daftar berikutnya.</li>
+            <li>"Kembali", "ulangi", "perintah" (daftar perintah untuk halaman ini), "berhenti"; "ya" atau "tidak" untuk konfirmasi.</li>
             <li>Di kolom isian: "isi" untuk mulai mendikte dan "selesai isi" untuk berhenti. Teks tidak dikirim otomatis.</li>
             <li>Kata bicara: "cari" lalu kata, "dengarkan inggris". Game: "satu" sampai "empat", "ulangi", "lanjut", "penjelasan". Kartu: "balik", "berikutnya", "dengarkan". Ngobrol: ucapkan pesanmu; "selesai" untuk menyelesaikan sesi.</li>
+            <li>Bila perintah tidak dikenali, aplikasi mengatakan apa yang terdengar ("Saya dengar: …") dan perintah yang bisa dipakai di halaman itu. Satu huruf yang salah dengar masih dikenali; bila ada dua kemungkinan, aplikasi bertanya "satu atau dua".</li>
         </ul>
         <h3 class="font-700 text-ink">Batas</h3>
         <ul class="list-disc pl-6 text-ink space-y-1">
