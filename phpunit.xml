@@ -43,6 +43,8 @@
         <env name="DEMO_ACCOUNT_ENABLED" value="false" force="true"/>
         <env name="DEMO_ACCOUNT_EMAIL" value="demo@studycompanion.test" force="true"/>
         <env name="DEMO_ACCOUNT_PASSWORD" value="" force="true"/>
+        <env name="REGISTRATION_ENABLED" value="true" force="true"/>
+        <env name="REGISTRATION_INVITE_CODE" value="" force="true"/>
         <env name="GAME_ITEMS_PATH" value="" force="true"/>
         <env name="KATABICARA_PATH" value="storage/app/seed-data/daftar_benda_tertutup.json" force="true"/>
         <env name="SCAN_BENDA_ENABLED" value="false" force="true"/>

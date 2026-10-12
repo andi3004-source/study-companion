@@ -34,7 +34,9 @@
             </a>
             <nav aria-label="Akun" class="flex flex-wrap items-center gap-2">
                 <a href="{{ route('login') }}" class="inline-flex items-center min-h-[44px] px-4 rounded-xl font-bold text-sm text-white underline underline-offset-4">Masuk</a>
-                <a href="{{ route('register') }}" class="inline-flex items-center min-h-[44px] px-4 rounded-xl bg-orange text-navy font-bold text-sm">Daftar</a>
+                @if (config('registration.enabled'))
+                    <a href="{{ route('register') }}" class="inline-flex items-center min-h-[44px] px-4 rounded-xl bg-orange text-navy font-bold text-sm">Daftar</a>
+                @endif
             </nav>
         </div>
     </header>

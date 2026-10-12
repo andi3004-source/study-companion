@@ -97,7 +97,11 @@ new #[Layout('layouts.guest')] class extends Component
     </form>
 
     <div class="mt-5 pt-5 border-t border-line-card text-center text-sm text-ink-soft">
+        @if (config('registration.enabled'))
         Belum punya akun?
         <a href="{{ route('register') }}" wire:navigate class="text-mandarin font-700 hover:underline ml-1">Daftar sekarang</a>
+        @else
+        {{ config('registration.closed_message') }}.
+        @endif
     </div>
 </div>
