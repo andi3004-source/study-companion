@@ -40,6 +40,27 @@
         <p class="text-ink">Setiap balasan punya tombol <strong>Dengarkan</strong> untuk memutar suaranya.</p>
     </section>
 
+    <section aria-labelledby="bantuan-mode-suara" class="bg-card rounded-2xl p-5 space-y-3">
+        <h2 id="bantuan-mode-suara" class="font-display font-600 text-lg text-ink">Mode suara</h2>
+        <p class="text-ink">Mode suara adalah pelengkap untuk memakai aplikasi dengan perintah lisan. Pembaca layar dan keyboard tetap jalur utama. Mode ini mati secara bawaan; nyalakan dengan tombol <strong>Mode suara</strong> di bagian paling atas halaman, dan matikan dengan tombol <strong>Berhenti</strong> atau perintah "berhenti". Mode suara dan Mode pembaca layar tidak bisa aktif bersamaan.</p>
+        <h3 class="font-700 text-ink">Perintah</h3>
+        <ul class="list-disc pl-6 text-ink space-y-1">
+            <li>"Buka" lalu nama halaman: hari ini, kartu, kamus, ujian, isian, game, pemburu kesalahan, dengar dan pilih, ngobrol, ucapan, kata bicara, progress, bantuan (dan raba lalu dengar bila fitur itu aktif).</li>
+            <li>"Baca halaman", "daftar tindakan", lalu "nomor satu" sampai "nomor dua belas" (atau "pilihan a" sampai "d"); "lanjut" untuk daftar berikutnya.</li>
+            <li>"Kembali", "ulangi", "perintah", "berhenti"; "ya" atau "tidak" untuk konfirmasi.</li>
+            <li>Di kolom isian: "isi" untuk mulai mendikte dan "selesai isi" untuk berhenti. Teks tidak dikirim otomatis.</li>
+            <li>Kata bicara: "cari" lalu kata, "dengarkan inggris". Game: "satu" sampai "empat", "ulangi", "lanjut", "penjelasan". Kartu: "balik", "berikutnya", "dengarkan". Ngobrol: ucapkan pesanmu; "selesai" untuk menyelesaikan sesi.</li>
+        </ul>
+        <h3 class="font-700 text-ink">Batas</h3>
+        <ul class="list-disc pl-6 text-ink space-y-1">
+            <li>Hanya berjalan di Chrome atau Edge dan butuh internet.</li>
+            <li>Suaramu diproses oleh penyedia pengenalan suara browser. Aplikasi ini hanya menerima teksnya untuk dikenali sebagai perintah dan tidak menyimpan suara maupun teks itu.</li>
+            <li>Akurasi pengenalan bervariasi. Suara Mandarin harus terpasang di perangkat agar teks Mandarin terbaca benar.</li>
+            <li>Setelah pindah halaman, mikrofon perlu satu ketukan atau Enter pada tombol Mode suara untuk aktif lagi.</li>
+            <li>Belum diuji dengan pengguna tunanetra.</li>
+        </ul>
+    </section>
+
     <section aria-labelledby="bantuan-tampilan" class="bg-card rounded-2xl p-5 space-y-3">
         <h2 id="bantuan-tampilan" class="font-display font-600 text-lg text-ink">Mengatur tampilan</h2>
         <p class="text-ink">Buka tombol <strong>Tampilan</strong> di header. Pilihan tersimpan di browser ini:</p>

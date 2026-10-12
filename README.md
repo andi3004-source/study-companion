@@ -240,9 +240,9 @@ halaman ini. Semua game tanpa panggilan AI.
 - **Pemburu Kesalahan** (`/game/pemburu-kesalahan`): alur dan penyimpanan
   jawaban tidak berubah; pilihan kini berupa radio dalam fieldset dan ada
   tombol "Dengarkan kalimat". Soalnya dibaca dari
-  `storage/app/seed-data/kesalahan_game.json` (`GAME_ITEMS_PATH`); berkas itu
-  belum ada di repo, jadi tanpa berkas tersebut halaman hanya menampilkan
-  pesan bahwa soal belum tersedia.
+  `storage/app/seed-data/kesalahan_game.json` (`GAME_ITEMS_PATH`; soal masih
+  draf). Bila berkas itu tidak ada, halaman hanya menampilkan pesan bahwa soal
+  belum tersedia.
 
 **Dirancang agar dapat dimainkan dengan keyboard, suara, dan tampilan
 diperbesar:** pilihan berupa radio berlabel dalam fieldset (panah untuk
@@ -312,6 +312,53 @@ dan Mandarin (`/scan-benda`).
 - **Status uji:** baru diuji dengan tes otomatis memakai pengenal palsu dan
   `Http::fake`. **Belum** diuji dengan foto sungguhan maupun dengan model visi
   yang benar-benar terhubung, dan **belum diuji dengan pengguna tunanetra**.
+
+## Mode suara
+
+Lapisan suara bersama untuk seluruh aplikasi (`resources/js/voice/engine.js`
+dan `resources/js/voice/adapters.js`), memakai Web Speech API bawaan browser
+tanpa biaya. **Pelengkap, bukan pengganti:** markup semantik, keyboard, dan
+pembaca layar tetap jalur utama dan tidak diubah. Mati secara bawaan.
+
+- **Kontrol:** tombol "Mode suara" (`aria-pressed`) adalah kontrol pertama
+  setelah tautan lewati; tombol "Berhenti" tampil selama mode aktif. Tidak ada
+  pintasan tombol tunggal. Mode suara dan Mode pembaca layar saling
+  meniadakan.
+- **Alur:** aplikasi berbicara (antrean dengan bahasa per segmen: id-ID, en-US,
+  zh-CN), lalu bunyi pendek, lalu mikrofon dibuka (id-ID, 3 alternatif).
+  Mikrofon tidak pernah terbuka saat aplikasi berbicara. Bila keyakinan di
+  bawah 0,6 atau dua kandidat berbeda, aplikasi bertanya "Saya dengar: …
+  Benar?". Diam 8 detik diingatkan sampai dua kali, lalu mode berhenti.
+- **Perintah** dikenali oleh `App\Support\VoiceCommandParser` lewat
+  `POST /voice/command`, yang hanya mengembalikan `{type, target, index}`:
+  buka (nama halaman), kembali, ulangi, baca halaman, daftar tindakan, nomor
+  1–12 atau a–d, lanjut, ya/tidak, berhenti, perintah, isi/selesai isi. Ucapan
+  yang memuat dua perintah atau dua angka berbeda dianggap tidak dikenali.
+  Tindakan yang tidak bisa dibatalkan (Hapus, Reset, Selesai dan analisis,
+  Keluar) selalu dikonfirmasi.
+- **Adapter halaman** (`data-voice-page`): Kata bicara ("cari …",
+  "dengarkan inggris"), Dengar & Pilih dan Pemburu Kesalahan (soal dan pilihan
+  bernomor; jawaban lewat radio dan tombol Jawab yang sudah ada), Ngobrol
+  (balasan dibacakan, ucapan dikirim lewat formulir yang sudah ada, "selesai"
+  dengan konfirmasi), Kartu ("balik", "berikutnya", "dengarkan"), Hari Ini,
+  Progress, dan Raba lalu dengar ("ambil foto" hanya memfokuskan tombol, karena
+  browser tidak mengizinkan kamera dibuka lewat suara). Game "Pilih yang
+  Benar" belum ada, jadi perintah itu dijawab "belum tersedia".
+- **Data:** tidak ada audio, gambar, atau transkrip yang disimpan. localStorage
+  hanya menyimpan tanda persetujuan sekali pakai; sessionStorage hanya
+  menyimpan bahwa mode aktif supaya bisa dilanjutkan setelah pindah halaman.
+  Endpoint tidak menulis transkrip ke log atau basis data.
+
+**Batas (jujur):**
+
+- Hanya Chrome atau Edge, dan butuh internet: audio diproses oleh penyedia
+  pengenalan suara browser, bukan oleh aplikasi ini.
+- Akurasi bervariasi; suara Mandarin harus terpasang di perangkat.
+- Setiap pindah halaman adalah muat ulang penuh, jadi mikrofon perlu satu
+  ketukan atau Enter pada tombol Mode suara untuk aktif lagi.
+- Tes otomatis hanya memeriksa pengurai, endpoint, markup, dan teks kode JS;
+  JS-nya belum diuji otomatis di browser. **Belum diuji dengan pengguna
+  tunanetra.** Pembaca layar tetap jalur utama.
 
 ## Akun demo
 
