@@ -4,7 +4,7 @@ import './bootstrap';
  * Web Speech API text-to-speech. lang: 'zh-CN' for Mandarin, 'en-US' for English.
  * Browser-only API — no backend round-trip (spec section 8/10).
  */
-window.speak = function (text, lang = 'en-US', onEnd = null) {
+window.speak = function (text, lang = 'en-US', onEnd = null, rate = null) {
     if (!('speechSynthesis' in window) || !text) {
         if (onEnd) onEnd();
         return;
@@ -12,7 +12,7 @@ window.speak = function (text, lang = 'en-US', onEnd = null) {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang;
-    utterance.rate = lang.startsWith('zh') ? 0.85 : 1;
+    utterance.rate = rate ?? (lang.startsWith('zh') ? 0.85 : 1);
     if (onEnd) {
         utterance.onend = onEnd;
         utterance.onerror = onEnd;
@@ -298,6 +298,30 @@ window.scanBenda = function (endpoint) {
             this.hasil = null;
             this.galat = null;
             this.ambil();
+        },
+    };
+};
+
+/**
+ * Game speech speed ("Normal" / "Lambat"), saved under its own localStorage
+ * key so it never touches the 'tampilan' object. nilai() is the
+ * SpeechSynthesis rate to pass to speak(); null keeps speak()'s default.
+ */
+window.gameSpeechRate = function () {
+    let saved = {};
+    try {
+        saved = JSON.parse(localStorage.getItem('gameSuara') || '{}');
+    } catch (e) {}
+
+    return {
+        kecepatan: saved.kecepatan === 'lambat' ? 'lambat' : 'normal',
+        simpan() {
+            try {
+                localStorage.setItem('gameSuara', JSON.stringify({ kecepatan: this.kecepatan }));
+            } catch (e) {}
+        },
+        nilai() {
+            return this.kecepatan === 'lambat' ? 0.6 : null;
         },
     };
 };

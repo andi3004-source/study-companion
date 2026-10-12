@@ -3,6 +3,7 @@
 namespace App\Livewire\Games;
 
 use App\Support\ErrorGameItems;
+use App\Support\ListenPickWords;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -18,6 +19,16 @@ class Hub extends Component
     public function games(): array
     {
         return [
+            [
+                'judul' => 'Dengar & Pilih',
+                'penjelasan' => 'Dengarkan satu kata Mandarin, baca hanzi dan pinyinnya, lalu pilih artinya dalam bahasa Indonesia.',
+                'status' => 'Draf',
+                'cara' => 'Cara bermain: keyboard dan suara, tanpa batas waktu.',
+                'route' => 'game.listen-pick',
+                'tautan' => 'Mulai Dengar & Pilih',
+                'available' => ListenPickWords::enough(),
+                'kosong' => 'Belum ada cukup kosakata HSK 1 yang punya arti bahasa Indonesia untuk membuat soal. Isi data kosakata dulu, lalu buka halaman ini lagi.',
+            ],
             [
                 'judul' => 'Pemburu Kesalahan',
                 'penjelasan' => 'Baca kalimat Mandarin yang keliru, lalu tentukan jenis kesalahannya.',
