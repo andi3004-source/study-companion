@@ -260,8 +260,8 @@ kolom, serta opsi "Jarak baris dan huruf lebih lega" di panel Tampilan.
   Mandarin terdengar benar.
 - Panel Tampilan masih punya tiga tingkat ukuran teks (Normal, Besar, Sangat
   besar). Tingkat keempat belum ditambahkan.
-- Tahap "Apakah kalimat ini benar atau salah?" pada Pemburu Kesalahan belum
-  dibuat.
+- Rencana: tahap benar atau salah sebelum memilih kategori, untuk mengurangi
+  beban metabahasa; belum dibangun.
 
 ## Raba lalu dengar
 
