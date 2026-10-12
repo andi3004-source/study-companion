@@ -41,7 +41,7 @@
                         ['route' => 'kamus', 'label' => 'Kamus', 'icon' => '🔎'],
                         ['route' => 'ujian', 'label' => 'Ujian', 'icon' => '📝'],
                         ['route' => 'latihan-isian', 'label' => 'Isian', 'icon' => '🧠'],
-                        ['route' => 'game.error-hunter', 'aktif' => 'game*', 'label' => 'Game', 'icon' => '🎯'],
+                        ['route' => 'game', 'aktif' => 'game*', 'label' => 'Game', 'icon' => '🎯'],
                         ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => '💬'],
                         ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => '🎤'],
                         ['route' => 'kata-bicara', 'label' => 'Kata bicara', 'icon' => '🗣️'],

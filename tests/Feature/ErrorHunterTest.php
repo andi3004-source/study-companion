@@ -247,7 +247,7 @@ class ErrorHunterTest extends TestCase
             ->assertSee('Pemburu Kesalahan');
 
         $this->actingAs($user)->get('/dashboard')
-            ->assertSee(route('game.error-hunter'), false)
+            ->assertSee('href="'.route('game').'"', false)
             ->assertSee('Game');
 
         Livewire::actingAs($user)->test(ProgressOverview::class)
