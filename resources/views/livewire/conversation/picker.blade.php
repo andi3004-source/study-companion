@@ -1,4 +1,4 @@
-<div class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
+<div data-voice-page="chat-picker" class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
     <h1 class="font-display font-600 text-2xl text-ink mb-1">Teman Ngobrol AI</h1>
     <p class="text-ink-soft text-sm mb-6">Latihan ngobrol bebas sesuai skenario. AI akan tetap dalam karakter dan menyisipkan koreksi kalau ada kesalahan.</p>
 
@@ -23,14 +23,14 @@
 
     <div class="space-y-3">
         @foreach ($this->scenarios as $key => $scenario)
-            <button type="button" wire:click="selectScenario('{{ $key }}')"
+            <button type="button" wire:click="selectScenario('{{ $key }}')" data-voice-start="{{ $scenario['label'] }}"
                     class="w-full text-left block rounded-2xl bg-card px-5 py-4 hover:bg-card-alt transition border border-line-card">
                 <span class="font-display font-600 text-ink">{{ $scenario['label'] }}</span>
                 <span class="block text-xs text-ink-soft mt-0.5">Mulai sesi percakapan baru</span>
             </button>
         @endforeach
 
-        <button type="button" wire:click="startRandom" wire:loading.attr="disabled" wire:target="startRandom"
+        <button type="button" wire:click="startRandom" data-voice-start="Ngobrol Bebas" wire:loading.attr="disabled" wire:target="startRandom"
                 class="w-full text-left block rounded-2xl bg-orange/10 px-5 py-4 hover:bg-orange/20 transition border border-dashed border-orange disabled:opacity-60">
             <span class="font-display font-600 text-navy" wire:loading.remove wire:target="startRandom"><span aria-hidden="true">🎲</span> Ngobrol Bebas</span>
             <span class="font-display font-600 text-navy" wire:loading wire:target="startRandom">Menyiapkan obrolan...</span>

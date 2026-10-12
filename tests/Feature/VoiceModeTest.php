@@ -201,7 +201,7 @@ class VoiceModeTest extends TestCase
         $adapters = $this->js('voice/adapters.js');
         preg_match_all("/VoiceMode\.register\(\s*'([a-z-]+)'/", $adapters, $m);
 
-        $this->assertEqualsCanonicalizing(['kata-bicara', 'game-listen-pick', 'game-error-hunter', 'chat', 'cards', 'dashboard', 'progress', 'scan'], $m[1]);
+        $this->assertEqualsCanonicalizing(['kata-bicara', 'game-listen-pick', 'game-error-hunter', 'chat', 'cards', 'dashboard', 'progress', 'scan', 'game-hub', 'chat-picker'], $m[1]);
 
         $views = collect(glob(resource_path('views/livewire/{,*/}*.blade.php'), GLOB_BRACE))->map(fn ($p) => file_get_contents($p))->implode("\n");
         foreach ($m[1] as $name) {

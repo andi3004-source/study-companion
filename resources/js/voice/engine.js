@@ -9,6 +9,8 @@
  * localStorage, sessionStorage or on the server. localStorage holds only the
  * one-time consent flag; sessionStorage holds only "aktif" so the mode
  * resumes after a page load. There are no global single-key shortcuts.
+ * The last heard text lives only in memory (for "Saya dengar" and the
+ * ?voicedebug=1 panel) and is dropped when the mode stops.
  */
 
 const CONSENT_KEY = 'modeSuaraSetuju';
@@ -36,7 +38,19 @@ export const MESSAGES = {
         'audio-capture': 'Mikrofon tidak ditemukan. Periksa mikrofon perangkat.',
     },
     help: 'Perintah: baca halaman. Daftar tindakan. Nomor satu sampai dua belas. Lanjut. Kembali. Ulangi. Buka, lalu nama halaman, misalnya buka kartu. Isi, untuk mengetik di kolom yang dipilih, dan selesai isi. Berhenti.',
+    // Said anywhere; each page adapter's "hint" comes first.
+    general: 'Di mana saja: baca halaman, daftar tindakan, nomor, buka lalu nama halaman, kembali, ulangi, berhenti. Isi, untuk mengetik di kolom yang dipilih, dan selesai isi.',
+    defaultHint: 'baca halaman, daftar tindakan, satu sampai dua belas, lanjut, kembali, ulangi, berhenti',
+    unknown: 'Maaf, perintah tidak dikenali.',
 };
+
+/** "Di halaman ini Anda bisa berkata: ..." for the page's adapter (or the generic list). */
+export function pageHint(adapter) {
+    return `Di halaman ini Anda bisa berkata: ${adapter?.hint || MESSAGES.defaultHint}. Katakan perintah untuk daftar lengkap`;
+}
+
+/** Off unless the address has ?voicedebug=1: a small panel with what was heard and parsed, in memory only. */
+const DEBUG = new URLSearchParams(window.location.search).get('voicedebug') === '1';
 
 const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -98,6 +112,11 @@ const VoiceMode = {
     warnedZh: false,
     endpoint: null,
     routes: {},
+    lastHeard: '', // memory only, cleared on stop
+    clarifying: null, // the two candidates after a 'clarify'
+    currentPage: null,
+    observer: null,
+    debugState: null,
 
     supported() {
         return !!Recognition && 'speechSynthesis' in window;
@@ -108,9 +127,35 @@ const VoiceMode = {
         this.adapters[name] = adapter;
     },
 
+    pageName() {
+        return document.querySelector('[data-voice-page]')?.getAttribute('data-voice-page') || null;
+    },
+
     adapter() {
-        const page = document.querySelector('[data-voice-page]')?.getAttribute('data-voice-page');
+        const page = this.pageName();
         return (page && this.adapters[page]) || null;
+    },
+
+    /**
+     * Calls the adapter's onActivate whenever the page under <main> changes
+     * (page load, Livewire update or wire:navigate). Adapters themselves are
+     * looked up from the DOM on every utterance, so they never go stale.
+     */
+    syncAdapter(force = false) {
+        const page = this.pageName();
+        if (!force && page === this.currentPage) return;
+        this.currentPage = page;
+        this.actions = [];
+        if (this.active) this.adapter()?.onActivate?.();
+    },
+
+    /** One MutationObserver on <main>, created once, disconnected on stop and pagehide. */
+    watch() {
+        const main = document.querySelector('main');
+        if (!main || !('MutationObserver' in window)) return;
+        this.observer = this.observer || new MutationObserver(() => this.syncAdapter());
+        this.observer.disconnect();
+        this.observer.observe(main, { childList: true, subtree: true });
     },
 
     announce(text) {
@@ -172,7 +217,8 @@ const VoiceMode = {
         const intro = (srOff ? 'Mode pembaca layar dimatikan karena Mode suara aktif. ' : '') + 'Mode suara aktif. Katakan perintah untuk daftar perintah.';
         this.announce(intro);
         await this.say([{ text: intro, lang: 'id-ID' }]);
-        this.adapter()?.onActivate?.();
+        this.watch();
+        this.syncAdapter(true);
         this.listen();
     },
 
@@ -181,6 +227,9 @@ const VoiceMode = {
         this.active = false;
         this.dictating = null;
         this.pending = null;
+        this.clarifying = null;
+        this.lastHeard = '';
+        this.debugState = null;
         this.remember(false);
         this.cleanup();
         window.dispatchEvent(new CustomEvent('mode-suara', { detail: { aktif: false } }));
@@ -190,6 +239,8 @@ const VoiceMode = {
     cleanup() {
         clearTimeout(this.silenceTimer);
         this.silenceTimer = null;
+        this.observer?.disconnect();
+        this.currentPage = null;
         if (this.recognition) {
             this.recognition.onresult = this.recognition.onerror = this.recognition.onend = null;
             try {
@@ -346,6 +397,7 @@ const VoiceMode = {
     async onUtterance(alternatives) {
         const best = alternatives[0] || { transcript: '', confidence: 0 };
         const heard = best.transcript.trim();
+        this.debug({ alternatives, parsed: null });
         const second = alternatives[1] ? normalize(alternatives[1].transcript) : null;
         const unsure =
             !this.dictating &&
@@ -369,6 +421,7 @@ const VoiceMode = {
 
     async handle(raw) {
         const text = normalize(raw);
+        this.lastHeard = String(raw || '').trim();
 
         if (this.dictating) {
             if (['selesai isi', 'berhenti isi', 'selesai ketik', 'berhenti ketik'].includes(text)) {
@@ -388,7 +441,22 @@ const VoiceMode = {
         if (adapter?.handleTranscript && (await adapter.handleTranscript(text, raw, this))) return;
 
         const cmd = await this.parse(raw);
+        this.debug({ parsed: cmd });
 
+        // After "Maksud Anda satu, A, atau dua, B?": "satu" or "dua" picks one.
+        if (this.clarifying) {
+            const options = this.clarifying;
+            this.clarifying = null;
+            if (cmd.type === 'choose_number' && options[cmd.index]) {
+                const { label, ...chosen } = options[cmd.index];
+                return this.handleParsed(chosen, raw, adapter);
+            }
+        }
+
+        return this.handleParsed(cmd, raw, adapter);
+    },
+
+    async handleParsed(cmd, raw, adapter) {
         if (this.pending && (cmd.type === 'confirm_yes' || cmd.type === 'confirm_no')) {
             const pending = this.pending;
             this.pending = null;
@@ -398,7 +466,7 @@ const VoiceMode = {
         this.pending = null;
 
         if (adapter?.handleCommand && (await adapter.handleCommand(cmd, this))) return;
-        if (cmd.type === 'unknown' && adapter?.handleUnknown && (await adapter.handleUnknown(raw, this))) return;
+        if ((cmd.type === 'unknown' || cmd.type === 'clarify') && adapter?.handleUnknown && (await adapter.handleUnknown(raw, this))) return;
 
         await this.run(cmd);
     },
@@ -456,14 +524,81 @@ const VoiceMode = {
                 this.stop('Mode suara mati. Keyboard tetap bisa dipakai.');
                 return;
             case 'help':
-                return this.tell(MESSAGES.help);
+                return this.tell(`${pageHint(this.adapter())}. ${MESSAGES.general}`);
+            case 'start':
+                return this.startMain(cmd.target);
+            case 'clarify':
+                return this.clarify(cmd.candidates || []);
             case 'dictate_start':
                 return this.startDictation();
             case 'dictate_stop':
                 return this.tell('Tidak sedang mengisi kolom.');
             default:
-                return this.tell('Maaf, perintah tidak dikenali. Katakan perintah untuk daftar perintah.');
+                return this.notUnderstood();
         }
+    },
+
+    /** "Saya dengar: <teks>" plus what can be said on this page, read aloud and shown in role="status". */
+    notUnderstood(prefix = MESSAGES.unknown) {
+        const heard = this.lastHeard ? ` Saya dengar: ${this.lastHeard}.` : '';
+        return this.tell(`${prefix}${heard} ${pageHint(this.adapter())}`);
+    },
+
+    clarify(candidates) {
+        if (candidates.length < 2) return this.notUnderstood();
+        this.clarifying = candidates.slice(0, 2);
+        const heard = this.lastHeard ? `Saya dengar: ${this.lastHeard}. ` : '';
+        return this.tell(`${heard}Maksud Anda satu, ${candidates[0].label}, atau dua, ${candidates[1].label}? Katakan satu atau dua.`);
+    },
+
+    /**
+     * "mulai": with a game named, open that game. Otherwise press the page's
+     * start control ([data-voice-start] = its short spoken name, else a
+     * "Mulai"/"Main lagi" button); with several, read them as a numbered list.
+     */
+    async startMain(target) {
+        if (target && this.routes[target]) {
+            await this.tell('Membuka game.');
+            window.location.href = this.routes[target];
+            return;
+        }
+        const marked = Array.from(this.main().querySelectorAll('[data-voice-start]'))
+            .filter(isUsable)
+            .map((el) => ({ el, name: el.getAttribute('data-voice-start') || accessibleName(el) }));
+        const starts = marked.length ? marked : this.collectActions().filter((a) => /^(mulai|main lagi)\b/i.test(a.name));
+        if (starts.length === 1) return this.activate(starts[0].el, starts[0].name);
+        if (starts.length > 1) return this.offer(starts, 'pilihan');
+        const status = this.statusTexts().join('. ');
+        return this.notUnderstood(`Tidak ada yang bisa dimulai di halaman ini.${status ? ` ${status}` : ''}`);
+    },
+
+    /** Reads a numbered list and makes "nomor N" pick from it. */
+    offer(actions, noun) {
+        this.actions = actions;
+        this.actionPage = 0;
+        const lines = actions.map((a, i) => `${i + 1}. ${a.name}`);
+        return this.tell(`Ada ${actions.length} ${noun}: ${lines.join('. ')}. Katakan nomornya.`);
+    },
+
+    /** ?voicedebug=1 only: last heard text, alternatives, confidence and parse. Nothing is stored. */
+    debug(update) {
+        if (!DEBUG) return;
+        this.debugState = { ...(this.debugState || {}), ...update };
+        let panel = document.getElementById('mode-suara-debug');
+        if (!panel) {
+            panel = document.createElement('pre');
+            panel.id = 'mode-suara-debug';
+            panel.setAttribute('aria-hidden', 'true');
+            panel.style.cssText =
+                'position:fixed;bottom:0.5rem;right:0.5rem;z-index:60;max-width:22rem;max-height:40vh;overflow:auto;margin:0;padding:0.5rem;font:12px/1.4 monospace;white-space:pre-wrap;background:#111;color:#eee;border-radius:0.5rem;opacity:0.9';
+            document.body.appendChild(panel);
+        }
+        const { alternatives = [], parsed = null } = this.debugState;
+        panel.textContent = [
+            'voicedebug (hanya di memori)',
+            ...alternatives.map((a, i) => `${i ? 'alternatif' : 'terdengar'}: "${a.transcript}", confidence ${typeof a.confidence === 'number' ? a.confidence.toFixed(2) : '-'}`),
+            `parse: ${parsed ? JSON.stringify(parsed) : '-'}`,
+        ].join('\n');
     },
 
     main() {
@@ -582,6 +717,13 @@ window.VoiceMode = VoiceMode;
 
 // Stop the microphone and speech whenever the page goes away.
 window.addEventListener('pagehide', () => VoiceMode.cleanup());
+
+// wire:navigate swaps <main> without a page load: watch the new one.
+document.addEventListener('livewire:navigated', () => {
+    if (!VoiceMode.active) return;
+    VoiceMode.watch();
+    VoiceMode.syncAdapter();
+});
 
 // Mutually exclusive with Mode pembaca layar: switching that on stops this.
 window.addEventListener('mode-pembaca-layar-aktif', () => {

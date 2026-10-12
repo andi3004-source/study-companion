@@ -15,7 +15,7 @@ const buttonNamed = (pattern) =>
     Array.from(root()?.querySelectorAll('button, a[href]') || []).find((b) => isUsable(b) && pattern.test(accessibleName(b)));
 
 /** Shared by the three games: read the question and its numbered options, answer through the existing radios + Jawab button. */
-function gameAdapter({ question }) {
+function gameAdapter({ route, question }) {
     const options = () => Array.from(root().querySelectorAll('fieldset input[type="radio"]'));
 
     const readQuestion = (engine) => {
@@ -34,6 +34,7 @@ function gameAdapter({ question }) {
     };
 
     return {
+        hint: 'mulai, ulangi, satu sampai empat, penjelasan, lanjut, kembali, berhenti',
         readPage: readQuestion,
         onActivate: () => readQuestion(VoiceMode),
         async handleTranscript(t, raw, engine) {
@@ -44,6 +45,16 @@ function gameAdapter({ question }) {
             return false;
         },
         async handleCommand(cmd, engine) {
+            // The game starts on load: "mulai" reads the question, or presses "Main lagi" on the results.
+            if (cmd.type === 'start' && (!cmd.target || cmd.target === route)) {
+                const again = buttonNamed(/^main lagi$/i);
+                if (again) {
+                    again.click();
+                    await wait(900);
+                }
+                await readQuestion(engine);
+                return true;
+            }
             if (cmd.type === 'repeat' || cmd.type === 'read_page') {
                 await readQuestion(engine);
                 return true;
@@ -75,7 +86,17 @@ function gameAdapter({ question }) {
     };
 }
 
+// Game hub and Ngobrol scenario picker: "mulai" is handled by the engine through their [data-voice-start] controls.
+VoiceMode.register('game-hub', {
+    hint: 'mulai, mulai dengar dan pilih, mulai pemburu kesalahan, satu atau dua, daftar tindakan, kembali, berhenti',
+});
+
+VoiceMode.register('chat-picker', {
+    hint: 'mulai, lalu nomor skenario, daftar tindakan, kembali, berhenti',
+});
+
 VoiceMode.register('kata-bicara', {
+    hint: 'cari, lalu katanya, dengarkan indonesia, dengarkan inggris, dengarkan mandarin, baca halaman, kembali, berhenti',
     async handleTranscript(t, raw, engine) {
         const cari = t.match(/^cari (.+)$/);
         if (cari) {
@@ -110,11 +131,12 @@ VoiceMode.register('kata-bicara', {
 
 VoiceMode.register(
     'game-listen-pick',
-    gameAdapter({ question: () => ({ hanzi: text(root().querySelector('#judul-soal ~ p[lang="zh-Hans"]')) }) }),
+    gameAdapter({ route: 'game.listen-pick', question: () => ({ hanzi: text(root().querySelector('#judul-soal ~ p[lang="zh-Hans"]')) }) }),
 );
 VoiceMode.register(
     'game-error-hunter',
     gameAdapter({
+        route: 'game.error-hunter',
         question: () => ({
             hanzi: text(root().querySelector('#judul-soal ~ p[lang="zh-Hans"]')),
             arti: text(root().querySelector('#judul-soal ~ p[lang="zh-Hans"] + p')),
@@ -123,6 +145,7 @@ VoiceMode.register(
 );
 
 VoiceMode.register('chat', {
+    hint: 'selesai, ulangi, baca halaman, kembali, berhenti. Ucapan lain dikirim sebagai pesan',
     onActivate() {
         // Read every new AI reply, then the engine reopens the microphone.
         if (this.terpasang) return;
@@ -179,6 +202,7 @@ VoiceMode.register('chat', {
 });
 
 VoiceMode.register('cards', {
+    hint: 'balik, berikutnya, sebelumnya, dengarkan, baca halaman, daftar tindakan, kembali, berhenti',
     async handleTranscript(t, raw, engine) {
         if (t === 'balik') {
             root().querySelector('.flip-card-inner[role="button"]')?.click();
@@ -202,6 +226,7 @@ VoiceMode.register('cards', {
 });
 
 VoiceMode.register('dashboard', {
+    hint: 'baca halaman, daftar tindakan, satu sampai dua belas, lanjut, kembali, berhenti',
     readPage(engine) {
         const h1 = text(root().querySelector('h1'));
         const tasks = Array.from(root().querySelectorAll('[aria-label^="Tandai selesai:"]')).map((b, i) => {
@@ -213,6 +238,7 @@ VoiceMode.register('dashboard', {
 });
 
 VoiceMode.register('progress', {
+    hint: 'baca halaman, daftar tindakan, satu sampai dua belas, kembali, berhenti',
     readPage(engine) {
         const intro = text(root().querySelector('h1 + p'));
         const heading = Array.from(root().querySelectorAll('h2')).find((h) => /kesalahan terbanyak/i.test(h.textContent));
@@ -224,6 +250,7 @@ VoiceMode.register('progress', {
 });
 
 VoiceMode.register('scan', {
+    hint: 'ambil foto, baca halaman, daftar tindakan, kembali, berhenti',
     async handleTranscript(t, raw, engine) {
         if (t === 'ambil foto' || t === 'foto') {
             // Browsers don't let a voice command open the file picker or camera; a key press must.
