@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('traditional')->nullable();
             $table->string('pinyin');
             $table->text('meaning_en'); // up to ~470 characters in the source data; VARCHAR(255) would reject them on MySQL
-            $table->string('meaning_id')->nullable(); // filled by the translation job later
+            $table->text('meaning_id')->nullable(); // filled by the translation job later; translations of long meaning_en exceed VARCHAR(255) on MySQL
             $table->json('pos')->nullable();
             $table->string('radical')->nullable();
             $table->unsignedInteger('frequency')->nullable();

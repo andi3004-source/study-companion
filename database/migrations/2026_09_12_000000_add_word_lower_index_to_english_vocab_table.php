@@ -15,21 +15,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // MySQL 8.0.13+ needs the expression in its own parentheses (a functional key part).
-        DB::statement($this->isMysql()
-            ? 'CREATE INDEX english_vocab_word_lower_idx ON english_vocab ((LOWER(word)))'
-            : 'CREATE INDEX english_vocab_word_lower_idx ON english_vocab (LOWER(word))');
+        DB::statement(match (DB::getDriverName()) {
+            // MySQL 8.0.13+: the expression needs its own parentheses (a functional key part).
+            'mysql' => 'CREATE INDEX english_vocab_word_lower_idx ON english_vocab ((LOWER(word)))',
+            // MariaDB has no functional indexes. Its default collation is case-insensitive,
+            // so a plain index on word is the closest equivalent.
+            'mariadb' => 'CREATE INDEX english_vocab_word_lower_idx ON english_vocab (word)',
+            default => 'CREATE INDEX english_vocab_word_lower_idx ON english_vocab (LOWER(word))',
+        });
     }
 
     public function down(): void
     {
-        DB::statement($this->isMysql()
+        DB::statement(in_array(DB::getDriverName(), ['mysql', 'mariadb'], true)
             ? 'DROP INDEX english_vocab_word_lower_idx ON english_vocab'
             : 'DROP INDEX IF EXISTS english_vocab_word_lower_idx');
-    }
-
-    private function isMysql(): bool
-    {
-        return in_array(DB::getDriverName(), ['mysql', 'mariadb'], true);
     }
 };

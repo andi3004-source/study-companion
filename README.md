@@ -128,9 +128,10 @@ Analisis kesalahan memakai Langflow lalu Gemini sebagai cadangan.
 **Catatan:**
 
 - **Basis data:** migrasi sudah disesuaikan untuk MySQL 8.0.13+ (indeks
-  fungsional `LOWER(word)`, `meaning_en` HSK bertipe `text`). Pencarian Kamus
-  memakai `JSON_UNQUOTE`/`CONCAT` di MySQL dan sintaks SQLite di lokal/tes.
-  Tes otomatis hanya berjalan di SQLite.
+  fungsional `LOWER(word)`, `meaning_en` dan `meaning_id` HSK bertipe `text`).
+  Pencarian Kamus memakai `JSON_UNQUOTE`/`CONCAT` di MySQL dan sintaks SQLite
+  di lokal/tes. Tes otomatis hanya berjalan di SQLite. Perbedaan yang tersisa
+  ada di "Keterbatasan data".
 - **Disk lokal** di server bersifat sementara. Aplikasi tidak menyimpan unggahan
   pengguna; foto Raba lalu dengar tidak disimpan. `php artisan langflow:ping`
   menulis `storage/app/langflow-last-response.json` (diagnostik saja).
@@ -435,6 +436,39 @@ Untuk sebagian kata, dataset ini memilih homograf yang keliru, misalnya 都
 - Data terkoreksi masih berstatus **draf** dan belum ditinjau ulang.
 - **HSK4-6 belum dikoreksi**, jadi masih bisa memuat homograf atau glos yang keliru.
 - Arti Indonesia hasil `translate:meanings` adalah terjemahan mesin dari glos Inggris.
+
+## Keterbatasan data
+
+Tes otomatis berjalan di SQLite. Di MySQL (Laravel Cloud) perilakunya sama,
+kecuali hal-hal berikut. Semuanya diperiksa lewat audit kode dan data, belum
+lewat MySQL sungguhan.
+
+**Kunci unik `(hanzi, pinyin)` di `mandarin_hsk_words`.** Collation MySQL
+`utf8mb4_unicode_ci` tidak membedakan nada maupun huruf besar-kecil, jadi bagi
+MySQL `hǎo` sama dengan `hào`, dan `Dū` sama dengan `dū`.
+
+- Data sekarang aman: ke-4.991 kunci di `mandarin_hsk1to6_complete.json` tetap
+  unik walaupun nada dan huruf besar-kecil diabaikan.
+- Ke-63 koreksi yang hanya mengubah nada atau huruf besar-kecil (misalnya 个
+  gě → gè) diterapkan pada baris yang sama, tidak menambah baris baru.
+- Kelak, bila data memuat dua bacaan untuk hanzi yang sama yang hanya berbeda
+  nada (misalnya 好 hǎo dan hào), upsert seeder akan **menimpa salah satunya
+  tanpa pesan galat**. Sebelum itu terjadi, kolom `pinyin` perlu memakai
+  collation `utf8mb4_bin` di MySQL. Ini belum dikerjakan.
+
+**Perbedaan kecil SQLite dan MySQL:**
+
+- **Urutan Kamus:** hasil diurutkan menurut `headword`. SQLite mengurutkan per
+  kode karakter, MySQL memakai aturan collation Unicode, sehingga urutan hanzi
+  dan huruf besar-kecil bisa berbeda. Isi hasilnya sama.
+- **Aksen di pencarian:** `LIKE` di MySQL mengabaikan aksen ("cafe" juga cocok
+  dengan "café"), jadi pencarian arti bisa memberi sedikit lebih banyak hasil.
+- **Hanzi di luar BMP:** `utf8mb4_unicode_ci` menganggap semua karakter di luar
+  Basic Multilingual Plane (misalnya CJK Extension B) sama. Kosakata HSK
+  seluruhnya ada di BMP, jadi saat ini tidak berpengaruh.
+- **Indeks `LOWER(word)`** pada `english_vocab`: indeks fungsional di MySQL
+  8.0.13 ke atas; MariaDB tidak mendukungnya, jadi di sana dipakai indeks biasa
+  pada `word` (collation-nya sudah tidak membedakan huruf besar-kecil).
 
 ## Aksesibilitas
 
