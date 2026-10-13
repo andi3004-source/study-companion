@@ -24,7 +24,11 @@ use Throwable;
  */
 class ConversationService
 {
+    /** Default daily limit; DAILY_MESSAGE_LIMIT in .env overrides it (see dailyMessageLimit()). */
     public const DAILY_MESSAGE_LIMIT = 50;
+
+    /** Highest accepted DAILY_MESSAGE_LIMIT; anything above falls back to the default. */
+    public const MAX_DAILY_MESSAGE_LIMIT = 1000;
 
     private const HISTORY_WINDOW = 10;
 
@@ -212,7 +216,28 @@ class ConversationService
 
     public function remainingMessagesToday(User $user): int
     {
-        return max(0, self::DAILY_MESSAGE_LIMIT - $this->messagesSentToday($user));
+        return max(0, self::dailyMessageLimit() - $this->messagesSentToday($user));
+    }
+
+    /**
+     * config('conversation.daily_message_limit') when it is a whole number from
+     * 1 to MAX_DAILY_MESSAGE_LIMIT; otherwise (empty, 0, negative, text, too
+     * large) the default DAILY_MESSAGE_LIMIT, so a typo never removes the cap.
+     */
+    public static function dailyMessageLimit(): int
+    {
+        $value = config('conversation.daily_message_limit');
+
+        // env() turns "true"/"false" into booleans, and filter_var would read true as 1.
+        if (is_bool($value)) {
+            return self::DAILY_MESSAGE_LIMIT;
+        }
+
+        $limit = filter_var($value, FILTER_VALIDATE_INT, [
+            'options' => ['min_range' => 1, 'max_range' => self::MAX_DAILY_MESSAGE_LIMIT],
+        ]);
+
+        return $limit === false ? self::DAILY_MESSAGE_LIMIT : $limit;
     }
 
     /**

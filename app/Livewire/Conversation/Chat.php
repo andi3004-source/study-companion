@@ -168,7 +168,7 @@ class Chat extends Component
     public function render()
     {
         return view('livewire.conversation.chat', [
-            'dailyLimit' => ConversationService::DAILY_MESSAGE_LIMIT,
+            'dailyLimit' => ConversationService::dailyMessageLimit(),
         ]);
     }
 }

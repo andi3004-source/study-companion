@@ -52,6 +52,7 @@ Lihat `.env.example` untuk keterangan dan nilai bawaan. Variabel utama:
 | `SESSION_DRIVER`, `QUEUE_CONNECTION`, `CACHE_STORE` | Driver sesi, antrean, dan cache |
 | `MAIL_*` | Pengiriman email (verifikasi, reset password) |
 | `GEMINI_API_KEY`, `GEMINI_MODEL` | Provider AI aktif: percakapan dan `translate:meanings` |
+| `DAILY_MESSAGE_LIMIT` | Pesan Ngobrol per pengguna per hari (bawaan 50; bilangan bulat 1-1000, nilai lain kembali ke 50) |
 | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` | Provider AI alternatif (tidak aktif) |
 | `PRONUNCIATION_SERVICE_URL`, `PRONUNCIATION_CHECKER_DRIVER` | Layanan cek pelafalan (`ml` atau `stt_match`) |
 | `HSK_CORRECTIONS_PATH` | Opsional: path file koreksi HSK2-3 |
@@ -113,7 +114,7 @@ di-commit):
 - AI dan layanan: `GEMINI_API_KEY`, `GEMINI_MODEL`, `ANTHROPIC_API_KEY`,
   `ANTHROPIC_MODEL`, `LANGFLOW_URL`, `LANGFLOW_FLOW_ID`, `LANGFLOW_API_KEY`,
   `LANGFLOW_TIMEOUT`, `PRONUNCIATION_SERVICE_URL`,
-  `PRONUNCIATION_CHECKER_DRIVER`
+  `PRONUNCIATION_CHECKER_DRIVER`, `DAILY_MESSAGE_LIMIT`
 - Fitur: `HSK_LEVEL_LOCK`, `HSK_CORRECTIONS_PATH`, `GAME_ITEMS_PATH`,
   `KATABICARA_PATH`, `SCAN_BENDA_ENABLED`, `SCAN_BENDA_MAX_IMAGE_BYTES`,
   `SCAN_BENDA_RATE_LIMIT_PER_MINUTE`, `SCAN_BENDA_TIMEOUT`
@@ -145,8 +146,8 @@ Analisis kesalahan memakai Langflow lalu Gemini sebagai cadangan.
 
 - Pasang **batas pengeluaran** (spending limit) di Laravel Cloud dan di
   penyedia AI (Gemini, Anthropic, Langflow). Aplikasi membatasi 50 pesan
-  Ngobrol per pengguna per hari, tetapi tidak ada batas global; banyak pengguna
-  berarti banyak panggilan API.
+  Ngobrol per pengguna per hari (bisa diubah lewat `DAILY_MESSAGE_LIMIT`),
+  tetapi tidak ada batas global; banyak pengguna berarti banyak panggilan API.
 - `php artisan translate:meanings` menghabiskan kuota AI; jangan masukkan ke
   perintah deploy.
 - Pekerja antrean yang terus menyala dan basis data terkelola ditagih walaupun
@@ -249,7 +250,8 @@ salin berkas cadangan ke `/data/database/database.sqlite`, lalu nyalakan lagi.
 - Email: `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`,
   `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME`
 - AI: `GEMINI_API_KEY`, `GEMINI_MODEL`, `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`,
-  `LANGFLOW_URL`, `LANGFLOW_FLOW_ID`, `LANGFLOW_API_KEY`, `LANGFLOW_TIMEOUT`
+  `LANGFLOW_URL`, `LANGFLOW_FLOW_ID`, `LANGFLOW_API_KEY`, `LANGFLOW_TIMEOUT`,
+  `DAILY_MESSAGE_LIMIT`
 - Fitur: `PRONUNCIATION_CHECKER_DRIVER`, `HSK_LEVEL_LOCK`, `SCAN_BENDA_ENABLED`
 - Akses: `REGISTRATION_ENABLED`, `REGISTRATION_INVITE_CODE`,
   `DEMO_ACCOUNT_ENABLED`, `DEMO_ACCOUNT_EMAIL`, `DEMO_ACCOUNT_PASSWORD`
@@ -261,7 +263,8 @@ memakai `PRONUNCIATION_CHECKER_DRIVER=stt_match`.
 
 - **Batas pengeluaran API:** pasang batas pengeluaran (spending limit) di
   Gemini, Anthropic, dan Langflow sebelum mengisi kuncinya. Aplikasi membatasi
-  50 pesan Ngobrol per pengguna per hari, tetapi tidak ada batas global.
+  50 pesan Ngobrol per pengguna per hari (`DAILY_MESSAGE_LIMIT`), tetapi tidak
+  ada batas global.
 - **Pendaftaran:** server yang bisa diakses publik sebaiknya memakai
   `REGISTRATION_ENABLED` bernilai false atau `REGISTRATION_INVITE_CODE`
   (contoh `.env` menutup pendaftaran). Tanpa itu siapa pun bisa membuat akun
