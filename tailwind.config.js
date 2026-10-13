@@ -17,6 +17,13 @@ export default {
                 display: ['Fredoka', 'sans-serif'],
                 sans: ['Nunito', 'sans-serif'],
                 hand: ['Caveat', 'cursive'],
+                jakarta: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            },
+            borderRadius: {
+                card: '1rem',
+            },
+            boxShadow: {
+                card: '0 1px 2px rgba(20, 41, 77, 0.04), 0 4px 16px rgba(20, 41, 77, 0.05)',
             },
             colors: {
                 navy: '#1B3A5C',
@@ -36,6 +43,17 @@ export default {
                 english: '#3D6B52',
                 'english-soft': '#E4F1E8',
                 good: '#3D6B52',
+                // Public home page (welcome.blade.php, components/landing).
+                brand: {
+                    navy: '#14294D',
+                    yellow: '#F9B934',
+                    'yellow-soft': '#FDEBC0',
+                    paper: '#FBF8F3',
+                    sky: '#EEF4FB',
+                    'sky-icon': '#E3ECF8',
+                    mint: '#F2F9F4',
+                    line: '#ECE7DD',
+                },
             },
         },
     },

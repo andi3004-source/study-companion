@@ -326,6 +326,8 @@ Untuk sebagian kata, dataset ini memilih homograf yang keliru, misalnya 都
 
 Status per butir di cabang `fitur-aksesibilitas`. **Selesai** berarti sudah dikerjakan dan markup HTML-nya dites otomatis (`AccessibilityChatTest`, `DisplaySettingsTest`, `BantuanPageTest`, `KataBicaraTest`). Itu belum berarti sudah diverifikasi dengan pembaca layar: pengujian manual oleh tim dengan Narator sedang berlangsung.
 
+Pedoman menulis teks untuk pengguna pembaca layar (judul yang menyebut bagiannya, simbol yang dibacakan sebagai kata, penandaan bahasa, teks alt, dan lainnya) ada di [`docs/pedoman-teks-pembaca-layar.md`](docs/pedoman-teks-pembaca-layar.md). Halaman awal sudah mengikutinya.
+
 | Butir | Status | Catatan |
 |---|---|---|
 | `lang="id"`, tautan "Lewati ke konten" / "Lewati ke kolom tulis" | Selesai | Tautan tampil saat mendapat fokus. |

@@ -18,11 +18,13 @@ class WelcomePageTest extends TestCase
     {
         $this->get('/')->assertOk()->assertSeeInOrder([
             'Lewati ke konten',
-            'Latihan Mandarin dan Inggris lewat ngobrol',
-            'Masalahnya', '0 dari 4.991', 'Sekitar 16%',
-            'Cara kerja', 'Ngobrol', 'Analisis kesalahan', 'Latihan',
-            'Fitur dan statusnya',
-            'Aksesibilitas', 'belum', 'diuji dengan pengguna tunanetra',
+            'Belajar bahasa dengan keyboard dan suara.',
+            'Banyak kesalahan kecil, dampak besar.', '0 / 4.991', '~16%',
+            'Mudah, terstruktur, efektif.', 'Dengarkan / Ketik', 'Analisis', 'Belajar',
+            'Lebih dari sekadar koreksi.',
+            'Rasakan pengalamannya sekarang.',
+            'Untuk semua orang.', 'belum', 'diuji dengan pengguna tunanetra',
+            'Transparan, bukan janji kosong.', 'Berjalan', 'Draf', 'Eksperimen', 'Rencana',
             'Penggunaan AI dalam pengerjaan', 'Claude Code', 'Claude', 'Gemini', 'IBM Langflow dan Astra DB', 'IBM Bob', 'Peran tim',
             'Pertanyaan umum', 'Data apa yang disimpan?', 'Foto tidak disimpan.', 'Chrome atau Edge',
             'Bantuan',
@@ -47,8 +49,9 @@ class WelcomePageTest extends TestCase
     {
         $html = $this->html();
 
+        // The pill shows the word; screen readers also hear "Status:" in front of it.
         foreach (['Berjalan', 'Draf', 'Eksperimen'] as $status) {
-            $this->assertStringContainsString("Status: {$status}", $html);
+            $this->assertStringContainsString("<span class=\"sr-only\">Status: </span>{$status}</span>", $html);
         }
     }
 
@@ -64,7 +67,7 @@ class WelcomePageTest extends TestCase
             'Game Pemburu Kesalahan' => 'Draf',
             'Kata bicara' => 'Draf',
         ] as $fitur => $status) {
-            $this->assertMatchesRegularExpression('#<h3[^>]*>'.preg_quote($fitur, '#').'</h3>\s*<p[^>]*><span[^>]*>Status: '.$status.'</span>#', $html, $fitur);
+            $this->assertMatchesRegularExpression('#<h3[^>]*>'.preg_quote($fitur, '#').'</h3>\s*<span[^>]*data-pil><span class="sr-only">Status: </span>'.$status.'</span>#', $html, $fitur);
         }
     }
 
@@ -82,7 +85,8 @@ class WelcomePageTest extends TestCase
     {
         $html = $this->html();
 
-        $this->assertMatchesRegularExpression('#<a href="'.preg_quote(route('login'), '#').'"[^>]*>Masuk atau daftar</a>#', $html);
+        // The hero button ends with a decorative arrow icon (aria-hidden SVG).
+        $this->assertMatchesRegularExpression('#<a href="'.preg_quote(route('login'), '#').'"[^>]*>Masuk atau daftar<svg[^>]*aria-hidden="true"#', $html);
         $this->assertMatchesRegularExpression('#<a href="'.preg_quote(route('register'), '#').'"[^>]*>Daftar</a>#', $html);
         $this->assertMatchesRegularExpression('#<a href="'.preg_quote(route('login'), '#').'"[^>]*>Masuk</a>#', $html);
         $this->assertStringContainsString('href="#cara-kerja"', $html);
