@@ -93,7 +93,7 @@ php artisan queue:work --tries=3
 ```
 php artisan app:seed-content
 # hanya di staging, bila akun demo dipakai:
-php artisan db:seed --class=DemoUserSeeder
+php artisan db:seed --class=DemoUserSeeder --force
 ```
 
 `app:seed-content` membutuhkan tiga berkas besar yang tidak di-commit (lihat
@@ -104,7 +104,7 @@ keluar dengan status gagal. `DemoUserSeeder` selalu menolak bila `APP_ENV` berni
 di-commit):
 
 - Aplikasi: `APP_NAME`, `APP_ENV`, `APP_KEY`, `APP_DEBUG`, `APP_URL`,
-  `APP_LOCALE`, `APP_FALLBACK_LOCALE`
+  `APP_LOCALE`, `APP_FALLBACK_LOCALE`, `TRUSTED_PROXIES`, `APP_FORCE_HTTPS`
 - Basis data (biasanya diisi otomatis oleh Laravel Cloud): `DB_CONNECTION`,
   `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
 - Antrean, cache, sesi, log: `QUEUE_CONNECTION`, `CACHE_STORE`,
@@ -136,9 +136,9 @@ Analisis kesalahan memakai Langflow lalu Gemini sebagai cadangan.
 - **Disk lokal** di server bersifat sementara. Aplikasi tidak menyimpan unggahan
   pengguna; foto Raba lalu dengar tidak disimpan. `php artisan langflow:ping`
   menulis `storage/app/langflow-last-response.json` (diagnostik saja).
-- **HTTPS di belakang proxy:** pastikan tautan yang dibuat aplikasi memakai
-  `https://` (lihat daftar uji). Bila tidak, proxy belum dipercaya dan
-  `trustProxies` perlu diatur di `bootstrap/app.php`.
+- **HTTPS di belakang proxy:** isi `TRUSTED_PROXIES` dengan `*` dan aktifkan
+  `APP_FORCE_HTTPS` supaya aplikasi memercayai header `X-Forwarded-*` dari
+  proxy Laravel Cloud dan selalu membuat tautan `https://` (lihat daftar uji).
 - **Pendaftaran:** untuk demo publik, pertimbangkan mematikan `REGISTRATION_ENABLED`
   atau `REGISTRATION_INVITE_CODE`.
 

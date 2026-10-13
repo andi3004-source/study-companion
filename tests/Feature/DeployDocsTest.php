@@ -62,4 +62,16 @@ class DeployDocsTest extends TestCase
     {
         $this->get('/up')->assertOk();
     }
+
+    public function test_lists_proxy_settings_daily_limit_and_one_off_seeding(): void
+    {
+        $section = $this->section();
+
+        foreach (['`TRUSTED_PROXIES`', '`APP_FORCE_HTTPS`', '`DAILY_MESSAGE_LIMIT`'] as $name) {
+            $this->assertStringContainsString($name, $section, $name);
+        }
+        $this->assertStringContainsString("php artisan app:seed-content\n# hanya di staging, bila akun demo dipakai:\nphp artisan db:seed --class=DemoUserSeeder --force", $section);
+        // The old manual instruction is gone now that the proxy is configured from .env.
+        $this->assertStringNotContainsString('bootstrap/app.php', $section);
+    }
 }
