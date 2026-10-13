@@ -1,0 +1,7 @@
+# Public HTTPS proxy ("proxy" service). Caddy gets and renews a Let's Encrypt
+# certificate for $DOMAIN automatically (ports 80 and 443 must be reachable)
+# and forwards to the app container, adding X-Forwarded-For/-Proto/-Host.
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy app:80
+}

@@ -1,0 +1,13 @@
+# Web server inside the "app" container: plain HTTP on :80, PHP via FrankenPHP.
+# HTTPS and certificates are handled by the "proxy" service (docker/Caddyfile).
+{
+	frankenphp
+	auto_https off
+	admin off
+}
+
+:80 {
+	root * /var/www/html/public
+	encode zstd gzip
+	php_server
+}

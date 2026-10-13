@@ -15,8 +15,10 @@ use App\Services\Scan\GeminiObjectRecognizer;
 use App\Services\Scan\NullObjectRecognizer;
 use App\Services\SttMatchPronunciationChecker;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Middleware\TrustProxies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -69,6 +71,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Behind a TLS-terminating proxy (Caddy in docker-compose.yml): trust its
+        // X-Forwarded-* headers so request()->secure() and client IPs are right,
+        // and always generate https:// URLs. Both off unless set in .env.
+        if (filled(config('app.trusted_proxies'))) {
+            $proxies = config('app.trusted_proxies');
+            TrustProxies::at($proxies === '*' ? '*' : array_map('trim', explode(',', $proxies)));
+        }
+        if (config('app.force_https')) {
+            URL::forceScheme('https');
+        }
+
         RateLimiter::for('voice-command', fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip()));
 
         RateLimiter::for('scan-benda', function (Request $request) {
