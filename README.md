@@ -297,6 +297,20 @@ memakai `PRONUNCIATION_CHECKER_DRIVER=stt_match`.
   - **Keterbatasan**: kunci ini bekerja lewat instruksi di prompt. Sifatnya imbauan
     kuat, **bukan jaminan**; model tetap bisa sesekali memakai kata di luar HSK 1.
 
+### Melihat model Gemini yang tersedia (`gemini:models`)
+
+```bash
+php artisan gemini:models
+```
+
+Mencetak nama model yang bisa dipakai kunci `GEMINI_API_KEY` untuk
+`generateContent`, satu per baris, untuk mengisi `GEMINI_MODEL` atau
+`GEMINI_FALLBACK_MODELS` tanpa menebak. Kunci dikirim lewat header
+`x-goog-api-key`. Yang dicetak hanya nama model, tanpa kunci dan tanpa isi
+respons lainnya. Perintah ini tidak memakai kuota pembuatan teks. Bila kunci
+kosong atau ditolak, kuota habis, layanan sedang bermasalah, atau koneksi
+gagal, yang muncul pesan singkat dalam bahasa Indonesia.
+
 ## Analisis kesalahan ("Kesalahan terbanyakmu")
 
 Saat sesi percakapan **Mandarin** diselesaikan, transkripnya dianalisis AI di
