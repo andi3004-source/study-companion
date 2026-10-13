@@ -20,4 +20,9 @@ return [
     // Hard ceiling for the whole call in seconds: every attempt, every wait and
     // every fallback model together. Each attempt's timeout is cut to what remains.
     'retry_budget_seconds' => (float) env('GEMINI_RETRY_BUDGET_SECONDS', 12),
+
+    // Models tried in order when the main model still answers 503 after its
+    // retries, under the same rules and the same budget. Empty by default: list
+    // only models your key can use (php artisan gemini:models shows them).
+    'fallback_models' => $list((string) env('GEMINI_FALLBACK_MODELS', '')),
 ];

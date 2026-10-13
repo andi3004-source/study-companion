@@ -14,7 +14,9 @@ use Illuminate\Support\Sleep;
  * The one place that retries Gemini HTTP calls (GeminiClient, so chat and the
  * Gemini error analyzer, and GeminiObjectRecognizer). Only a 503 or a
  * connection error/timeout is retried; 400, 403, 404 and 429 fail at once.
- * Everything, waits included, stays inside gemini.retry_budget_seconds.
+ * When the model still answers 503 after its retries, the next model in
+ * gemini.fallback_models (empty by default) gets the same rules. Everything,
+ * waits and fallbacks included, stays inside gemini.retry_budget_seconds.
  *
  * The caller's closure holds the request body (for a scan, the photo), so a
  * retry resends it from memory: nothing is written to disk here. The log gets
@@ -32,8 +34,26 @@ class GeminiRetry
     public static function send(string $model, float $timeout, Closure $send): Response
     {
         $budget = (float) config('gemini.retry_budget_seconds', 12);
-        $maxRetries = max(0, (int) config('gemini.retry_max', 2));
         $start = Carbon::now();
+        $models = array_values(array_unique([$model, ...(array) config('gemini.fallback_models', [])]));
+
+        foreach ($models as $i => $current) {
+            try {
+                return self::attempts($current, $timeout, $send, $start, $budget);
+            } catch (RequestException $e) {
+                $next = $i + 1 < count($models);
+
+                if (! $next || $e->response->status() !== 503 || $budget - self::elapsed($start) < self::MIN_ATTEMPT_SECONDS) {
+                    throw $e;
+                }
+            }
+        }
+    }
+
+    /** The first attempt plus up to gemini.retry_max retries on one model. */
+    private static function attempts(string $model, float $timeout, Closure $send, Carbon $start, float $budget): Response
+    {
+        $maxRetries = max(0, (int) config('gemini.retry_max', 2));
         $attempt = 0;
 
         while (true) {
