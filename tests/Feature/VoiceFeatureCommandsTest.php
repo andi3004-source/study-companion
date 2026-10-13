@@ -158,6 +158,50 @@ class VoiceFeatureCommandsTest extends TestCase
         }
     }
 
+    public function test_bantuan_reads_sections_by_number(): void
+    {
+        $html = $this->page('/bantuan');
+        $bantuan = $this->adapter('bantuan');
+
+        $this->assertStringContainsString('data-voice-page="bantuan"', $html);
+        $this->assertStringContainsString("root().querySelectorAll('section')", $bantuan);
+        $this->assertStringContainsString('Katakan nomor bagian untuk mendengarnya.', $bantuan);
+        // Bantuan lists the new feature commands.
+        foreach (['"isi hanzi"', '"kumpulkan" (selalu ditanya dulu)', '"rekam" (setelah bunyi', '"bahasa mandarin"', '"jalur mandarin"'] as $phrase) {
+            $this->assertStringContainsString($phrase, $html, $phrase);
+        }
+    }
+
+    public function test_onboarding_fields_are_labelled_and_voice_fills_them(): void
+    {
+        $user = User::factory()->create(['onboarded' => false]);
+        $html = $this->actingAs($user)->get('/onboarding')->assertOk()->getContent();
+        $onboarding = $this->adapter('onboarding');
+
+        $this->assertStringContainsString('data-voice-page="onboarding"', $html);
+        // Label tied to the date field, radio group named by a legend, decorative glyph hidden.
+        $this->assertStringContainsString('<label for="onboarding-tanggal"', $html);
+        $this->assertStringContainsString('id="onboarding-tanggal"', $html);
+        $this->assertMatchesRegularExpression('#<fieldset>\s*<legend[^>]*>Pilih jalur belajar</legend>#', $html);
+        $this->assertStringContainsString('<div aria-hidden="true" class="w-14 h-14', $html);
+
+        $this->assertStringContainsString('fill(dateField(), isoDate(day));', $onboarding);
+        $this->assertStringContainsString('radio?.click();', $onboarding);
+        $this->assertStringContainsString('buttonNamed(/^mulai belajar$/i)?.click();', $onboarding);
+    }
+
+    public function test_every_page_after_login_has_a_voice_adapter(): void
+    {
+        $views = collect(glob(resource_path('views/livewire/{,*/}*.blade.php'), GLOB_BRACE))
+            ->reject(fn ($p) => str_contains($p, '/layout/') || str_contains($p, '/pages/') || str_contains($p, '/partials/') || str_contains($p, '/profile/') || str_contains($p, '/welcome/'));
+
+        foreach ($views as $view) {
+            preg_match('/data-voice-page="([a-z-]+)"/', file_get_contents($view), $m);
+            $this->assertNotEmpty($m, basename($view).' has no data-voice-page');
+            $this->assertMatchesRegularExpression("/VoiceMode\\.register\\(\\s*'".preg_quote($m[1], '/')."'/", $this->js(), $m[1]);
+        }
+    }
+
     public function test_latihan_isian_fills_the_existing_fields_and_hears_hanzi_in_mandarin(): void
     {
         $html = $this->page('/latihan-isian');

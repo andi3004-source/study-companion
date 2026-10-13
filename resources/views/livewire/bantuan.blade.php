@@ -1,4 +1,4 @@
-<div class="max-w-3xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 space-y-6">
+<div data-voice-page="bantuan" class="max-w-3xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8 space-y-6">
     <h1 class="font-display font-600 text-2xl text-ink">Bantuan</h1>
     <p class="text-ink">Belajar bahasa dengan keyboard dan suara. Dirancang agar mudah diakses.</p>
 
@@ -51,6 +51,11 @@
             <li>"Kembali", "ulangi", "perintah" (daftar perintah untuk halaman ini), "berhenti"; "ya" atau "tidak" untuk konfirmasi.</li>
             <li>Di kolom isian: "isi" untuk mulai mendikte dan "selesai isi" untuk berhenti. Teks tidak dikirim otomatis.</li>
             <li>Kata bicara: "cari" lalu kata, "dengarkan inggris". Game: "satu" sampai "empat", "ulangi", "lanjut", "penjelasan". Kartu: "balik", "berikutnya", "dengarkan". Ngobrol: ucapkan pesanmu; "selesai" untuk menyelesaikan sesi.</li>
+            <li>Kamus: "cari" lalu kata; hasil dibacakan tiga-tiga, "lanjut" untuk berikutnya, "nomor dua" untuk mendengar satu hasil; "bahasa mandarin", "bahasa inggris", "level HSK satu".</li>
+            <li>Ujian: sebut "mandarin", "inggris", atau "tes hari ini" untuk mulai. Saat mengerjakan: "satu" sampai "empat" untuk menjawab, "lanjut", "sebelumnya", "soal lima", "belum dijawab", lalu "kumpulkan" (selalu ditanya dulu). Jawaban tidak bisa diubah setelah dikumpulkan; "coba lagi" untuk ujian baru.</li>
+            <li>Latihan Isian: "isi" lalu pinyinnya (misalnya "isi ni hao"), atau "isi hanzi" lalu ucapkan jawabannya dalam bahasa Mandarin; "lanjut", "soal tiga", "analisis", "reset" (ditanya dulu), "mode hanzi", "jumlah sepuluh", "urutan acak".</li>
+            <li>Cek Ucapan: "cari" lalu kata, "nomor satu" untuk memilih, "dengarkan" untuk contoh, "rekam" (setelah bunyi, ucapkan katanya; sekitar tiga detik), "coba lagi", "ganti kata".</li>
+            <li>Bantuan: "baca halaman" untuk daftar bagian, "nomor tiga" untuk satu bagian. Halaman awal setelah daftar: "tanggal hari ini", "jalur mandarin", "mulai belajar".</li>
             <li>Bila perintah tidak dikenali, aplikasi mengatakan apa yang terdengar ("Saya dengar: …") dan perintah yang bisa dipakai di halaman itu. Satu huruf yang salah dengar masih dikenali; bila ada dua kemungkinan, aplikasi bertanya "satu atau dua".</li>
         </ul>
         <h3 class="font-700 text-ink">Batas</h3>

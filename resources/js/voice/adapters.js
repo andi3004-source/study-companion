@@ -691,6 +691,98 @@ VoiceMode.register(
     })(),
 );
 
+/** Bantuan: the section titles as a numbered list; "nomor N" or "lanjut" reads a whole section. */
+VoiceMode.register(
+    'bantuan',
+    (() => {
+        let current = -1;
+        const sections = () => Array.from(root().querySelectorAll('section'));
+
+        const readSection = (engine, index) => {
+            const all = sections();
+            if (index >= all.length) return engine.tell('Itu bagian terakhir. Katakan baca halaman untuk daftar bagian.');
+            current = Math.max(0, index);
+            return engine.tell(`Bagian ${current + 1} dari ${all.length}. ${spoken(all[current])}. Katakan lanjut untuk bagian berikutnya.`);
+        };
+
+        return {
+            hint: 'baca halaman untuk daftar bagian, nomor bagian, lanjut, ulangi, kembali, berhenti',
+            readPage(engine) {
+                current = -1;
+                const titles = sections().map((s, i) => `${i + 1}. ${text(s.querySelector('h2'))}`);
+                return engine.tell(`Bantuan. Ada ${titles.length} bagian: ${titles.join('. ')}. Katakan nomor bagian untuk mendengarnya.`);
+            },
+            async handleCommand(cmd, engine) {
+                if (cmd.type === 'choose_number') {
+                    await readSection(engine, cmd.index);
+                    return true;
+                }
+                if (cmd.type === 'more') {
+                    await readSection(engine, current + 1);
+                    return true;
+                }
+                if (cmd.type === 'repeat' && current >= 0) {
+                    await readSection(engine, current);
+                    return true;
+                }
+                return false;
+            },
+        };
+    })(),
+);
+
+/** Onboarding: start date and learning track through the existing fields, then "mulai belajar" submits the form. */
+VoiceMode.register(
+    'onboarding',
+    (() => {
+        const TRACKS = { keduanya: 'both', 'mandarin dan inggris': 'both', mandarin: 'mandarin', inggris: 'english', english: 'english' };
+        const isoDate = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        const dateField = () => document.getElementById('onboarding-tanggal');
+        const radios = () => Array.from(root().querySelectorAll('input[type="radio"]'));
+
+        const readForm = (engine) => {
+            const date = dateField()?.value;
+            const track = radios().find((r) => r.checked);
+            return engine.tell(
+                `Selamat datang. Atur jadwal belajarmu. Tanggal mulai: ${date || 'belum diisi'}. Jalur: ${track ? accessibleName(track) : 'belum dipilih'}. ` +
+                    'Katakan tanggal hari ini, jalur mandarin, jalur inggris, atau jalur keduanya, lalu mulai belajar.',
+            );
+        };
+
+        return {
+            hint: 'tanggal hari ini, tanggal besok, jalur mandarin, jalur inggris, jalur keduanya, mulai belajar, baca halaman, berhenti',
+            onActivate: () => readForm(VoiceMode),
+            readPage: (engine) => readForm(engine),
+            async handleTranscript(t, raw, engine) {
+                const tanggal = t.match(/^(?:tanggal|mulai) (hari ini|besok)$/);
+                if (tanggal) {
+                    const day = new Date();
+                    if (tanggal[1] === 'besok') day.setDate(day.getDate() + 1);
+                    fill(dateField(), isoDate(day));
+                    await engine.tell(`Tanggal mulai: ${tanggal[1]}, ${isoDate(day)}.`);
+                    return true;
+                }
+                const jalur = t.match(/^jalur (.+)$/);
+                if (jalur && TRACKS[jalur[1]]) {
+                    const radio = radios().find((r) => r.value === TRACKS[jalur[1]]);
+                    radio?.click();
+                    await wait(400);
+                    await engine.tell(`Jalur: ${radio ? accessibleName(radio) : jalur[1]}.`);
+                    return true;
+                }
+                if (t === 'mulai belajar' || t === 'simpan') {
+                    buttonNamed(/^mulai belajar$/i)?.click();
+                    await wait(1500);
+                    const error = text(root().querySelector('[role="alert"]'));
+                    if (error) await engine.tell(error);
+                    return true;
+                }
+                return false;
+            },
+        };
+    })(),
+);
+
 // Game hub and Ngobrol scenario picker: "mulai" is handled by the engine through their [data-voice-start] controls.
 VoiceMode.register('game-hub', {
     hint: 'mulai, mulai dengar dan pilih, mulai pemburu kesalahan, satu atau dua, daftar tindakan, kembali, berhenti',
