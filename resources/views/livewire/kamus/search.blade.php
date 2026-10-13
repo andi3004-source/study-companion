@@ -1,4 +1,4 @@
-<div class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8" x-data="{ practiceChar: null }">
+<div data-voice-page="kamus" class="max-w-2xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8" x-data="{ practiceChar: null }">
     <h1 class="font-display font-600 text-2xl text-ink mb-4">Kamus</h1>
 
     <div class="mb-3">
@@ -40,10 +40,10 @@
 
     <div class="space-y-2">
         @forelse ($this->results as $entry)
-            <div class="bg-card rounded-xl px-4 py-3 flex items-center justify-between gap-3">
+            <div data-hasil data-lang-code="{{ $entry->lang_code }}" class="bg-card rounded-xl px-4 py-3 flex items-center justify-between gap-3">
                 <div class="min-w-0">
                     <div class="flex items-center gap-2">
-                        <p class="{{ $entry->lang === 'mandarin' ? 'font-display text-lg' : 'font-700 text-sm' }}">{{ $entry->headword }}</p>
+                        <p data-kata class="{{ $entry->lang === 'mandarin' ? 'font-display text-lg' : 'font-700 text-sm' }}">{{ $entry->headword }}</p>
                         @if ($entry->raw_level)
                             <span class="text-[10px] font-700 text-ink-faint bg-card-alt rounded-full px-1.5 py-0.5">
                                 {{ $entry->lang === 'mandarin' ? 'HSK'.$entry->raw_level : $entry->raw_level }}
@@ -56,7 +56,7 @@
                         @endif
                     </div>
                     @if ($entry->sub)
-                        <p class="text-xs text-ink-soft">{{ $entry->sub }}</p>
+                        <p data-bacaan class="text-xs text-ink-soft">{{ $entry->sub }}</p>
                     @endif
                     @php
                         $primaryMeaning = \App\Support\MeaningDisplay::primary($entry->meaning_id, $entry->meaning_en);
@@ -97,7 +97,7 @@
                 </div>
             </div>
         @empty
-            <div class="text-center text-ink-soft text-sm py-10">Kata tidak ditemukan. Coba ejaan lain, pinyin tanpa nada, atau ubah filter bahasa.</div>
+            <div data-kosong class="text-center text-ink-soft text-sm py-10">Kata tidak ditemukan. Coba ejaan lain, pinyin tanpa nada, atau ubah filter bahasa.</div>
         @endforelse
     </div>
 

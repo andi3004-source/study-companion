@@ -114,6 +114,7 @@ const VoiceMode = {
     routes: {},
     lastHeard: '', // memory only, cleared on stop
     clarifying: null, // the two candidates after a 'clarify'
+    capture: null, // { lang, onText } for the next utterance only (see captureNext)
     currentPage: null,
     observer: null,
     debugState: null,
@@ -228,6 +229,7 @@ const VoiceMode = {
         this.dictating = null;
         this.pending = null;
         this.clarifying = null;
+        this.capture = null;
         this.lastHeard = '';
         this.debugState = null;
         this.remember(false);
@@ -337,6 +339,8 @@ const VoiceMode = {
 
         const rec = new Recognition();
         rec.lang = 'id-ID';
+        // A feature can ask for one answer in another language, e.g. hanzi in Latihan Isian.
+        if (this.capture?.lang) rec.lang = this.capture.lang;
         rec.maxAlternatives = 3;
         rec.interimResults = false;
         rec.continuous = false;
@@ -404,6 +408,16 @@ const VoiceMode = {
         const heard = best.transcript.trim();
         this.debug({ alternatives, parsed: null });
         const texts = alternatives.map((a) => String(a.transcript || '').trim().slice(0, 200)).filter(Boolean).slice(0, 3);
+
+        // An answer the page asked for (captureNext): hand it over as text, not as a command.
+        if (this.capture) {
+            const { onText } = this.capture;
+            this.capture = null;
+            this.lastHeard = heard;
+            await onText(heard, this);
+            this.listen();
+            return;
+        }
 
         // Dictation, a pending yes/no and a numbered choice take the top alternative as is.
         if (this.dictating || this.pending || this.clarifying || !texts.length) {
@@ -732,6 +746,21 @@ const VoiceMode = {
         this.actions = [];
         const status = this.statusTexts().join('. ');
         return this.tell([prefix, status].filter(Boolean).join(' '));
+    },
+
+    /**
+     * The next utterance is an answer, not a command: it is recognised in `lang`
+     * (e.g. 'zh-CN' for hanzi) and passed to onText(text, engine). Saying "batal"
+     * (in Indonesian) cancels instead. Only for the one utterance that follows.
+     */
+    captureNext(lang, onText) {
+        this.capture = {
+            lang,
+            onText: async (text, engine) => {
+                if (normalize(text) === 'batal') return engine.tell('Dibatalkan.');
+                return onText(text, engine);
+            },
+        };
     },
 
     startDictation() {

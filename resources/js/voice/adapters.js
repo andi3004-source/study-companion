@@ -14,6 +14,70 @@ const root = () => document.querySelector('[data-voice-page]');
 const buttonNamed = (pattern) =>
     Array.from(root()?.querySelectorAll('button, a[href]') || []).find((b) => isUsable(b) && pattern.test(accessibleName(b)));
 
+/** Text a screen reader would hear: aria-hidden parts (emoji, arrows) left out. */
+const spoken = (el) => {
+    if (!el) return '';
+    const clone = el.cloneNode(true);
+    clone.querySelectorAll('[aria-hidden="true"]').forEach((n) => n.remove());
+    return clone.textContent.replace(/\s+/g, ' ').trim();
+};
+
+/** Hanzi read by a Mandarin voice, everything else in Indonesian ("Arti dari 你好?"). */
+export function mixedSegments(value) {
+    return String(value || '')
+        .split(/([\p{Script=Han}，。？！、]+)/u)
+        .filter((part) => part.trim())
+        .map((part) => ({ text: part, lang: /\p{Script=Han}/u.test(part) ? 'zh-CN' : 'id-ID' }));
+}
+
+const ANGKA = { nol: 0, satu: 1, dua: 2, tiga: 3, empat: 4, lima: 5, enam: 6, tujuh: 7, delapan: 8, sembilan: 9, sepuluh: 10, sebelas: 11, seratus: 100 };
+
+/** "12", "dua belas", "dua puluh tiga", "ketiga" → number; anything else → null. */
+export function toNumber(value) {
+    const t = normalize(value).replace(/^(nomor|soal|ke)\s*/, '').replace(/^ke/, '');
+    if (/^\d+$/.test(t)) return Number(t);
+    let total = 0;
+    let current = 0;
+    for (const word of t.split(' ')) {
+        if (word in ANGKA) {
+            const v = ANGKA[word];
+            if (v >= 10) {
+                total += current + v;
+                current = 0;
+            } else {
+                current += v;
+            }
+        } else if (word === 'belas') {
+            total += current + 10;
+            current = 0;
+        } else if (word === 'puluh') {
+            total += current * 10;
+            current = 0;
+        } else if (word === 'ratus') {
+            total += current * 100;
+            current = 0;
+        } else {
+            return null;
+        }
+    }
+    return total + current || null;
+}
+
+/** Sets a field the way typing does, so Livewire (wire:model) and Alpine pick it up. */
+function fill(field, value) {
+    field.value = value;
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    field.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+/** Picks an <option> whose text matches, then fires change (wire:model.live on <select>). */
+function choose(select, pattern) {
+    const option = Array.from(select?.options || []).find((o) => pattern.test(o.textContent));
+    if (!option) return null;
+    fill(select, option.value);
+    return option.textContent.trim();
+}
+
 /** Shared by the three games: read the question and its numbered options, answer through the existing radios + Jawab button. */
 function gameAdapter({ route, question }) {
     const options = () => Array.from(root().querySelectorAll('fieldset input[type="radio"]'));
@@ -85,6 +149,117 @@ function gameAdapter({ route, question }) {
         },
     };
 }
+
+/**
+ * Kamus: "cari <kata>" types into the search box, results are read three at a
+ * time ("lanjut" for more, pressing "Tampilkan lebih" when needed), "nomor N"
+ * reads one result and plays it. Filters press the existing buttons.
+ */
+VoiceMode.register(
+    'kamus',
+    (() => {
+        const PER_READ = 3;
+        let shown = 0;
+        const entries = () => Array.from(root().querySelectorAll('[data-hasil]'));
+        const count = () => spoken(root().querySelector('[role="status"]'));
+
+        const entrySegments = (el, n) => {
+            const kata = text(el.querySelector('[data-kata]'));
+            const lang = el.getAttribute('data-lang-code') || 'id-ID';
+            return [
+                { text: `${n}.`, lang: 'id-ID' },
+                { text: kata, lang },
+                { text: text(el.querySelector('[data-bacaan]')), lang: 'id-ID' },
+                // The meaning line starts with a 🇮🇩/🇬🇧 flag: say the meaning, not "bendera".
+                { text: spoken(el.querySelector('p.text-sm:not([data-kata])')).replace(/[\u{1F1E6}-\u{1F1FF}]/gu, '').trim(), lang: 'id-ID' },
+            ];
+        };
+
+        const readFrom = async (engine, start) => {
+            const all = entries();
+            if (!all.length) {
+                return engine.tell(spoken(root().querySelector('[data-kosong]')) || 'Ketik atau ucapkan cari, lalu katanya.');
+            }
+            if (start >= all.length) {
+                const more = buttonNamed(/^tampilkan lebih$/i);
+                if (!more) return engine.tell('Itu semua hasil. Katakan cari untuk kata lain.');
+                more.click();
+                await wait(1200);
+                return readFrom(engine, start);
+            }
+            const group = all.slice(start, start + PER_READ);
+            shown = start + group.length;
+            const segments = [{ text: start === 0 ? `${count()}.` : '', lang: 'id-ID' }];
+            group.forEach((el, i) => segments.push(...entrySegments(el, start + i + 1)));
+            segments.push({ text: 'Katakan lanjut untuk hasil berikutnya, atau nomor hasil untuk mendengarnya.', lang: 'id-ID' });
+            engine.announce(segments.map((s) => s.text).filter(Boolean).join(' '));
+            return engine.say(segments);
+        };
+
+        const pressFilter = async (engine, label, pattern) => {
+            const button = Array.from(root().querySelectorAll('[role="group"] button')).find((b) => pattern.test(text(b)));
+            if (!button) return engine.tell(`Filter ${label} tidak ada di sini. Pilih bahasa Mandarin atau Inggris dulu untuk filter level.`);
+            button.click();
+            await wait(1200);
+            shown = 0;
+            return engine.tell(`Filter ${label}. ${count()}.`);
+        };
+
+        return {
+            hint: 'cari lalu katanya, lanjut, ulangi, nomor hasil, bahasa mandarin, bahasa inggris, semua bahasa, level HSK satu sampai enam, kembali, berhenti',
+            readPage: (engine) => readFrom(engine, 0),
+            async handleTranscript(t, raw, engine) {
+                const cari = raw.trim().match(/^cari\s+(.+)$/i);
+                if (cari) {
+                    fill(document.getElementById('cari-kamus'), cari[1].replace(/[.?!。？！]+$/u, ''));
+                    await wait(1500);
+                    shown = 0;
+                    await readFrom(engine, 0);
+                    return true;
+                }
+                const bahasa = t.match(/^(?:bahasa )?(mandarin|inggris|english|semua bahasa|semua)$/);
+                if (bahasa) {
+                    const label = { mandarin: 'Mandarin', inggris: 'English', english: 'English' }[bahasa[1]] || 'Semua';
+                    await pressFilter(engine, `bahasa ${label}`, new RegExp(`^${label}$`, 'i'));
+                    return true;
+                }
+                const hsk = t.match(/^(?:level )?hsk (.+)$/);
+                if (hsk && toNumber(hsk[1])) {
+                    await pressFilter(engine, `HSK ${toNumber(hsk[1])}`, new RegExp(`^HSK${toNumber(hsk[1])}$`, 'i'));
+                    return true;
+                }
+                const cefr = t.match(/^level ([abc]) ?([12]|satu|dua)$/);
+                if (cefr) {
+                    const level = `${cefr[1]}${toNumber(cefr[2])}`.toUpperCase();
+                    await pressFilter(engine, `level ${level}`, new RegExp(`^${level}$`, 'i'));
+                    return true;
+                }
+                return false;
+            },
+            async handleCommand(cmd, engine) {
+                if (cmd.type === 'more') {
+                    await readFrom(engine, shown);
+                    return true;
+                }
+                if (cmd.type === 'repeat' || cmd.type === 'read_page') {
+                    await readFrom(engine, Math.max(0, shown - PER_READ));
+                    return true;
+                }
+                if (cmd.type === 'choose_number') {
+                    const el = entries()[cmd.index];
+                    if (!el) {
+                        await engine.tell('Nomor itu tidak ada di hasil.');
+                        return true;
+                    }
+                    await engine.say(entrySegments(el, cmd.index + 1));
+                    el.querySelector('button[aria-label^="Dengarkan"]')?.click();
+                    return true;
+                }
+                return false;
+            },
+        };
+    })(),
+);
 
 // Game hub and Ngobrol scenario picker: "mulai" is handled by the engine through their [data-voice-start] controls.
 VoiceMode.register('game-hub', {
