@@ -101,4 +101,38 @@ class VoiceFeatureCommandsTest extends TestCase
         // The meaning line starts with a flag emoji; the adapter says the meaning, not "bendera".
         $this->assertStringContainsString(".replace(/[\\u{1F1E6}-\\u{1F1FF}]/gu, '')", $kamus);
     }
+
+    public function test_ujian_picker_opens_modes_by_name(): void
+    {
+        $html = $this->page('/ujian');
+        $picker = $this->adapter('ujian-picker');
+
+        $this->assertStringContainsString('data-voice-page="ujian-picker"', $html);
+        $this->assertStringContainsString('data-voice-start="Ujian Mandarin"', $html);
+        $this->assertStringContainsString('data-voice-start="Ujian English"', $html);
+        $this->assertStringContainsString('link.click();', $picker);
+        $this->assertStringContainsString("hint: 'mulai, tes hari ini, mandarin, inggris, riwayat, kembali, berhenti'", $picker);
+    }
+
+    public function test_ujian_runner_answers_through_the_options_and_confirms_before_submitting(): void
+    {
+        $html = $this->page('/ujian/mandarin');
+        $run = $this->adapter('ujian-run');
+
+        $this->assertStringContainsString('data-voice-page="ujian-run"', $html);
+        $this->assertMatchesRegularExpression('#<div data-soal class="[^"]*">\s*<p[^>]*>1\. <span data-pertanyaan>#', $html);
+        $this->assertStringContainsString('aria-pressed="false"', $html);
+
+        // Answers press the existing option buttons; hanzi in a question is read in Mandarin.
+        $this->assertStringContainsString("q?.querySelectorAll('button[aria-pressed]')", $run);
+        $this->assertStringContainsString('option.click();', $run);
+        $this->assertStringContainsString("mixedSegments(text(q.querySelector('[data-pertanyaan]')))", $run);
+        // Feature rules: no changes after submitting, and submitting always asks first.
+        $this->assertStringContainsString("if (submitted()) return engine.tell('Ujian sudah dikumpulkan, jawaban tidak bisa diubah.", $run);
+        $this->assertMatchesRegularExpression('/const collect = \(engine\) => \{.*?engine\.pending = \{\s*onYes: async \(\) => \{\s*submit\.click\(\);/s', $run);
+        $this->assertStringContainsString('soal belum dijawab. ', $run);
+        $this->assertStringContainsString('buttonNamed(/^kumpulkan jawaban$/i)', $run);
+        // "Ulangi" stays "read again"; a new exam is "coba lagi", only after submitting.
+        $this->assertStringContainsString('const retry = submitted() ? buttonNamed(/^ulangi$/i) : null;', $run);
+    }
 }

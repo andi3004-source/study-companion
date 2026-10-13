@@ -261,6 +261,157 @@ VoiceMode.register(
     })(),
 );
 
+/** Ujian, choosing a mode: "mulai" lists the modes ([data-voice-start]); a mode name opens it. */
+VoiceMode.register(
+    'ujian-picker',
+    (() => {
+        const MODES = { 'tes hari ini': /^tes hari ini$/i, 'hari ini': /^tes hari ini$/i, mandarin: /mandarin$/i, inggris: /english$/i, english: /english$/i };
+        return {
+            hint: 'mulai, tes hari ini, mandarin, inggris, riwayat, kembali, berhenti',
+            async handleTranscript(t, raw, engine) {
+                const mode = Object.keys(MODES).find((m) => t === m || t === `ujian ${m}`);
+                if (mode) {
+                    const link = Array.from(root().querySelectorAll('[data-voice-start]')).find((a) => MODES[mode].test(a.getAttribute('data-voice-start')));
+                    if (!link) {
+                        await engine.tell('Mode itu tidak tersedia hari ini.');
+                        return true;
+                    }
+                    await engine.tell(`Membuka ${link.getAttribute('data-voice-start')}.`);
+                    link.click();
+                    return true;
+                }
+                if (t === 'riwayat') {
+                    const rows = Array.from(root().querySelectorAll('[data-riwayat] > div')).map(spoken);
+                    await engine.tell(rows.length ? `Riwayat terakhir: ${rows.join('. ')}.` : 'Belum ada riwayat ujian.');
+                    return true;
+                }
+                return false;
+            },
+        };
+    })(),
+);
+
+/**
+ * Ujian, answering: one question at a time ("soal N", "lanjut", "sebelumnya"),
+ * "satu" to "empat" presses that option, then the next unanswered question is
+ * read. Same rules as the mouse: answers can change until "kumpulkan", which
+ * always asks first; after that the options are only read, with the right answer.
+ */
+VoiceMode.register(
+    'ujian-run',
+    (() => {
+        let current = 0;
+        const questions = () => Array.from(root().querySelectorAll('[data-soal]'));
+        const optionsOf = (q) => Array.from(q?.querySelectorAll('button[aria-pressed]') || []);
+        const answered = (q) => optionsOf(q).some((o) => o.getAttribute('aria-pressed') === 'true');
+        const submitted = () => !!root().querySelector('[data-skor]');
+        const firstUnanswered = (from = 0) => {
+            const all = questions();
+            const i = all.findIndex((q, n) => n >= from && !answered(q));
+            return i === -1 ? all.findIndex((q) => !answered(q)) : i;
+        };
+
+        const readQuestion = (engine, index) => {
+            const all = questions();
+            if (!all.length) return engine.tell(text(root().querySelector('h1')) + '. Tidak ada soal.');
+            current = Math.max(0, Math.min(index, all.length - 1));
+            const q = all[current];
+            const segments = [{ text: `Soal ${current + 1} dari ${all.length}.`, lang: 'id-ID' }, ...mixedSegments(text(q.querySelector('[data-pertanyaan]')))];
+            optionsOf(q).forEach((o, i) => {
+                const pressed = o.getAttribute('aria-pressed') === 'true' ? ', terpilih' : '';
+                segments.push({ text: `${i + 1}.`, lang: 'id-ID' }, ...mixedSegments(accessibleName(o) + pressed));
+            });
+            if (!submitted()) segments.push({ text: 'Katakan nomor jawaban.', lang: 'id-ID' });
+            engine.announce(segments.map((s) => s.text).join(' '));
+            return engine.say(segments);
+        };
+
+        const answer = async (engine, index) => {
+            if (submitted()) return engine.tell('Ujian sudah dikumpulkan, jawaban tidak bisa diubah. Katakan coba lagi untuk ujian baru.');
+            const option = optionsOf(questions()[current])[index];
+            if (!option) return engine.tell('Pilihan itu tidak ada.');
+            option.click();
+            await wait(700);
+            const next = firstUnanswered(current + 1);
+            if (next === -1) return engine.tell(`Jawaban ${index + 1} dipilih. Semua soal sudah dijawab. Katakan kumpulkan untuk mengumpulkan jawaban.`);
+            await engine.tell(`Jawaban ${index + 1} dipilih.`);
+            return readQuestion(engine, next);
+        };
+
+        const collect = (engine) => {
+            const submit = buttonNamed(/^kumpulkan jawaban$/i);
+            if (!submit) return engine.tell('Ujian sudah dikumpulkan.');
+            const open = questions().filter((q) => !answered(q)).length;
+            engine.pending = {
+                onYes: async () => {
+                    submit.click();
+                    await wait(1200);
+                    current = 0;
+                    await engine.tell(`${spoken(root().querySelector('[data-skor]'))}. Katakan soal satu untuk memeriksa jawaban, atau coba lagi.`);
+                },
+                onNo: () => engine.tell('Belum dikumpulkan.'),
+            };
+            return engine.tell(`${open ? `${open} soal belum dijawab. ` : ''}Kumpulkan jawaban sekarang? Katakan ya atau tidak`);
+        };
+
+        return {
+            hint: 'satu sampai empat untuk menjawab, lanjut, sebelumnya, soal lalu nomornya, belum dijawab, ulangi, kumpulkan, coba lagi, kembali, berhenti',
+            onActivate: () => {
+                const first = firstUnanswered();
+                return readQuestion(VoiceMode, first === -1 ? 0 : first);
+            },
+            readPage: (engine) => readQuestion(engine, current),
+            async handleTranscript(t, raw, engine) {
+                const soal = t.match(/^soal (.+)$/);
+                if (soal && toNumber(soal[1])) {
+                    await readQuestion(engine, toNumber(soal[1]) - 1);
+                    return true;
+                }
+                if (t === 'sebelumnya' || t === 'soal sebelumnya') {
+                    await readQuestion(engine, current - 1);
+                    return true;
+                }
+                if (t === 'kumpulkan' || t === 'kumpulkan jawaban') {
+                    await collect(engine);
+                    return true;
+                }
+                if (t === 'belum dijawab') {
+                    const open = questions().map((q, i) => (answered(q) ? null : i + 1)).filter(Boolean);
+                    await engine.tell(open.length ? `Belum dijawab: soal ${open.join(', ')}.` : 'Semua soal sudah dijawab.');
+                    return true;
+                }
+                if (t === 'coba lagi') {
+                    const retry = submitted() ? buttonNamed(/^ulangi$/i) : null;
+                    if (!retry) {
+                        await engine.tell('Coba lagi tersedia setelah jawaban dikumpulkan.');
+                        return true;
+                    }
+                    retry.click();
+                    await wait(1200);
+                    await readQuestion(engine, 0);
+                    return true;
+                }
+                return false;
+            },
+            async handleCommand(cmd, engine) {
+                if (cmd.type === 'choose_number') {
+                    await answer(engine, cmd.index);
+                    return true;
+                }
+                if (cmd.type === 'more') {
+                    await readQuestion(engine, current + 1);
+                    return true;
+                }
+                if (cmd.type === 'repeat' || cmd.type === 'read_page' || cmd.type === 'start') {
+                    await readQuestion(engine, current);
+                    return true;
+                }
+                return false;
+            },
+        };
+    })(),
+);
+
 // Game hub and Ngobrol scenario picker: "mulai" is handled by the engine through their [data-voice-start] controls.
 VoiceMode.register('game-hub', {
     hint: 'mulai, mulai dengar dan pilih, mulai pemburu kesalahan, satu atau dua, daftar tindakan, kembali, berhenti',

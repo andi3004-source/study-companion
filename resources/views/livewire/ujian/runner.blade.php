@@ -1,4 +1,4 @@
-<div class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
+<div data-voice-page="ujian-run" class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
     <div class="flex items-center justify-between mb-4">
         <h1 class="font-display font-600 text-2xl text-ink">{{ ['today' => 'Tes Hari Ini', 'mandarin' => 'Ujian Mandarin', 'english' => 'Ujian English'][$mode] ?? 'Ujian' }}</h1>
         <a href="{{ route('ujian') }}" class="text-sm text-ink-soft"><span aria-hidden="true">←</span> Kembali</a>
@@ -17,7 +17,7 @@
     @else
         <div role="status">
         @if ($submitted)
-            <div class="bg-navy text-white rounded-2xl p-6 text-center mb-6">
+            <div data-skor class="bg-navy text-white rounded-2xl p-6 text-center mb-6">
                 <h2 class="sr-only">Skor</h2>
                 <p class="font-display text-3xl font-600">{{ $correctCount }} / {{ count($questions) }}</p>
                 <p class="text-white/80 text-sm mt-1">{{ round($correctCount / max(1, count($questions)) * 100) }}% benar</p>
@@ -32,8 +32,8 @@
                     $selected = $userAnswers[$qi] ?? null;
                     $correctIndex = $this->answerKey[$qi] ?? null;
                 @endphp
-                <div class="bg-card rounded-2xl p-4">
-                    <p class="font-700 text-sm text-ink mb-3">{{ $qi + 1 }}. {{ $question['prompt'] }}</p>
+                <div data-soal class="bg-card rounded-2xl p-4">
+                    <p class="font-700 text-sm text-ink mb-3">{{ $qi + 1 }}. <span data-pertanyaan>{{ $question['prompt'] }}</span></p>
                     <div class="space-y-2">
                         @foreach ($question['options'] as $oi => $option)
                             @php
