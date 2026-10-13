@@ -1,4 +1,4 @@
-<div class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8" x-data="{ practiceChar: null }">
+<div data-voice-page="ucapan" class="max-w-xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8" x-data="{ practiceChar: null }">
     <h1 class="font-display font-600 text-xl text-ink mb-1">Cek Pengucapan</h1>
     <p class="text-xs text-ink-soft mb-6">Pilih kata target dari kamus, rekam suaramu, dan lihat hasilnya.</p>
 
@@ -13,7 +13,7 @@
 
         @if ($selectedWord)
             {{-- Always visible once a word is picked, before AND after recording. --}}
-            <div class="rounded-xl bg-card-alt p-4">
+            <div data-kata-terpilih class="rounded-xl bg-card-alt p-4">
                 <div class="flex items-start justify-between gap-2">
                     <div class="min-w-0">
                         <p class="{{ $lang === 'mandarin' ? 'font-display text-2xl' : 'font-700 text-lg' }}">{{ $selectedWord['headword'] }}</p>
@@ -45,7 +45,7 @@
                     <div class="mt-2 rounded-xl border border-line-card divide-y divide-line-card overflow-hidden">
                         @forelse ($this->suggestions as $entry)
                             <button type="button"
-                                    wire:click="selectWord(@js($entry->headword), @js($entry->sub), @js($entry->meaning_id), @js($entry->meaning_en), @js($entry->lang_code))"
+                                    wire:click="selectWord(@js($entry->headword), @js($entry->sub), @js($entry->meaning_id), @js($entry->meaning_en), @js($entry->lang_code))" data-saran data-lang-code="{{ $entry->lang_code }}"
                                     class="w-full text-left px-3 py-2 hover:bg-card-alt transition">
                                 <span class="{{ $entry->lang === 'mandarin' ? 'font-display' : 'font-700' }} text-sm">{{ $entry->headword }}</span>
                                 @if ($entry->sub)

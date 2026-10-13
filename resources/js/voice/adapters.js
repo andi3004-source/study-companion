@@ -559,6 +559,138 @@ VoiceMode.register(
     })(),
 );
 
+/**
+ * Cek Ucapan: "cari <kata>" lists suggestions, "nomor N" picks one, "rekam"
+ * presses the existing "Rekam suara" button, records for a few seconds, presses
+ * it again ("Berhenti merekam") and reads the result. Mode suara's own
+ * microphone stays closed meanwhile, so it never competes with the recorder.
+ * The server still judges the pronunciation.
+ */
+VoiceMode.register(
+    'ucapan',
+    (() => {
+        const RECORD_MS = 3500;
+        const suggestions = () => Array.from(root().querySelectorAll('[data-saran]'));
+        const selected = () => root().querySelector('[data-kata-terpilih]');
+        const resultText = () => spoken(root().querySelector('div[role="status"]'));
+
+        const readSelected = (engine) => {
+            const box = selected();
+            if (!box) return engine.tell('Belum ada kata dipilih. Katakan cari, lalu katanya.');
+            const word = text(box.querySelector('p'));
+            const lang = /[\p{Script=Han}]/u.test(word) ? 'zh-CN' : 'en-US';
+            const details = Array.from(box.querySelectorAll('p')).slice(1).map(spoken).filter(Boolean);
+            return engine.say([
+                { text: 'Kata target:', lang: 'id-ID' },
+                { text: word, lang },
+                { text: `${details.join('. ')}. Katakan rekam untuk mulai, atau dengarkan untuk contoh.`, lang: 'id-ID' },
+            ]);
+        };
+
+        const record = async (engine) => {
+            const button = buttonNamed(/rekam suara/i);
+            if (!button) {
+                return engine.tell(selected() ? 'Hasil sudah ada. Katakan coba lagi untuk merekam ulang.' : 'Pilih kata dulu. Katakan cari, lalu katanya.');
+            }
+            await engine.tell('Setelah bunyi, ucapkan katanya. Rekaman sekitar tiga detik.');
+            await engine.beep();
+            button.click();
+            await wait(RECORD_MS);
+            buttonNamed(/berhenti merekam/i)?.click();
+            for (let waited = 0; waited < 20000 && !resultText(); waited += 500) await wait(500);
+            const error = text(root().querySelector('[role="alert"]'));
+            return engine.tell(`${resultText() || error || 'Hasil belum keluar. Coba lagi.'} Katakan coba lagi, dengarkan, atau ganti kata.`);
+        };
+
+        return {
+            hint: 'cari lalu katanya, nomor saran, rekam, dengarkan, coba lagi, ganti kata, bahasa mandarin, bahasa inggris, kembali, berhenti',
+            readPage: (engine) => readSelected(engine),
+            async handleTranscript(t, raw, engine) {
+                const cari = raw.trim().match(/^cari\s+(.+)$/i);
+                if (cari) {
+                    if (!document.getElementById('ucapan-cari')) buttonNamed(/ganti kata|cari kata lain/i)?.click();
+                    await wait(600);
+                    const field = document.getElementById('ucapan-cari');
+                    if (!field) return false;
+                    fill(field, cari[1].replace(/[.?!。？！]+$/u, ''));
+                    await wait(1500);
+                    const list = suggestions();
+                    if (!list.length) {
+                        await engine.tell('Kata tidak ditemukan. Coba kata lain.');
+                        return true;
+                    }
+                    const segments = [{ text: `Ada ${list.length} saran.`, lang: 'id-ID' }];
+                    list.slice(0, 5).forEach((b, i) => {
+                        segments.push({ text: `${i + 1}.`, lang: 'id-ID' }, ...mixedSegments(spoken(b)));
+                    });
+                    segments.push({ text: 'Katakan nomor kata yang mau dilatih.', lang: 'id-ID' });
+                    await engine.say(segments);
+                    return true;
+                }
+                const bahasa = t.match(/^bahasa (mandarin|inggris|english)$/);
+                if (bahasa) {
+                    const chosen = choose(document.getElementById('ucapan-bahasa'), bahasa[1] === 'mandarin' ? /^mandarin$/i : /^english$/i);
+                    await wait(1000);
+                    await engine.tell(chosen ? `Bahasa ${chosen}. Katakan cari, lalu katanya.` : 'Pilihan bahasa tidak ada.');
+                    return true;
+                }
+                if (t === 'rekam' || t === 'mulai rekam') {
+                    await record(engine);
+                    return true;
+                }
+                if (t === 'dengarkan' || t === 'contoh' || t === 'dengarkan contoh') {
+                    const speak = root().querySelector('button[aria-label^="Dengarkan cara ucap"], button[aria-label^="Dengarkan target"]');
+                    if (!speak) {
+                        await engine.tell('Pilih kata dulu.');
+                        return true;
+                    }
+                    engine.stopListening();
+                    speak.click();
+                    await wait(1500);
+                    return true;
+                }
+                if (t === 'coba lagi') {
+                    const again = buttonNamed(/coba lagi/i);
+                    if (!again) return false;
+                    again.click();
+                    await wait(1000);
+                    await engine.tell('Siap merekam ulang. Katakan rekam.');
+                    return true;
+                }
+                if (t === 'ganti kata' || t === 'cari kata lain') {
+                    buttonNamed(/ganti kata|cari kata lain/i)?.click();
+                    await wait(1000);
+                    await engine.tell('Katakan cari, lalu katanya.');
+                    return true;
+                }
+                return false;
+            },
+            async handleCommand(cmd, engine) {
+                if (cmd.type === 'choose_number' && suggestions().length) {
+                    const pick = suggestions()[cmd.index];
+                    if (!pick) {
+                        await engine.tell('Nomor itu tidak ada di saran.');
+                        return true;
+                    }
+                    pick.click();
+                    await wait(1200);
+                    await readSelected(engine);
+                    return true;
+                }
+                if (cmd.type === 'repeat' || cmd.type === 'read_page') {
+                    await readSelected(engine);
+                    return true;
+                }
+                if (cmd.type === 'start') {
+                    await record(engine);
+                    return true;
+                }
+                return false;
+            },
+        };
+    })(),
+);
+
 // Game hub and Ngobrol scenario picker: "mulai" is handled by the engine through their [data-voice-start] controls.
 VoiceMode.register('game-hub', {
     hint: 'mulai, mulai dengar dan pilih, mulai pemburu kesalahan, satu atau dua, daftar tindakan, kembali, berhenti',

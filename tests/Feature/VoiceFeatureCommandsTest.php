@@ -136,6 +136,28 @@ class VoiceFeatureCommandsTest extends TestCase
         $this->assertStringContainsString('const retry = submitted() ? buttonNamed(/^ulangi$/i) : null;', $run);
     }
 
+    public function test_ucapan_records_through_the_existing_button_and_reads_the_result(): void
+    {
+        $html = $this->page('/pronunciation-check');
+        $ucapan = $this->adapter('ucapan');
+
+        $this->assertStringContainsString('data-voice-page="ucapan"', $html);
+        $view = file_get_contents(resource_path('views/livewire/pronunciation-check.blade.php'));
+        $this->assertStringContainsString('data-saran data-lang-code="{{ $entry->lang_code }}"', $view);
+        $this->assertStringContainsString('<div data-kata-terpilih', $view);
+
+        // Recording presses "Rekam suara", then "Berhenti merekam"; the server judges the result.
+        $this->assertMatchesRegularExpression('/const button = buttonNamed\(\/rekam suara\/i\);.*?button\.click\(\);\s*await wait\(RECORD_MS\);\s*buttonNamed\(\/berhenti merekam\/i\)\?\.click\(\);/s', $ucapan);
+        $this->assertStringContainsString("await engine.tell('Setelah bunyi, ucapkan katanya.", $ucapan);
+        $this->assertStringContainsString('await engine.beep();', $ucapan);
+        // The adapter never opens the microphone itself.
+        $this->assertStringNotContainsString('getUserMedia', $ucapan);
+        $this->assertStringNotContainsString('MediaRecorder', $ucapan);
+        foreach (['fill(field, cari[1]', "choose(document.getElementById('ucapan-bahasa')", 'buttonNamed(/coba lagi/i)', 'buttonNamed(/ganti kata|cari kata lain/i)'] as $part) {
+            $this->assertStringContainsString($part, $ucapan, $part);
+        }
+    }
+
     public function test_latihan_isian_fills_the_existing_fields_and_hears_hanzi_in_mandarin(): void
     {
         $html = $this->page('/latihan-isian');
