@@ -135,4 +135,28 @@ class VoiceFeatureCommandsTest extends TestCase
         // "Ulangi" stays "read again"; a new exam is "coba lagi", only after submitting.
         $this->assertStringContainsString('const retry = submitted() ? buttonNamed(/^ulangi$/i) : null;', $run);
     }
+
+    public function test_latihan_isian_fills_the_existing_fields_and_hears_hanzi_in_mandarin(): void
+    {
+        $html = $this->page('/latihan-isian');
+        $isian = $this->adapter('latihan-isian');
+
+        $this->assertStringContainsString('data-voice-page="latihan-isian"', $html);
+        $this->assertMatchesRegularExpression('#<tr data-soal [^>]*>\s*<td[^>]*>1</td>\s*<td data-petunjuk#', $html);
+        $this->assertMatchesRegularExpression('#wire:model="answers\.0\.hanzi" data-isian="hanzi"#', $html);
+        $this->assertStringContainsString('<td data-hasil-soal', $html);
+
+        // Hanzi answers are recognised in Mandarin, pinyin in Indonesian; both go into the existing inputs.
+        $this->assertStringContainsString("hanzi: { label: 'Hanzi', lang: 'zh-CN' }, pinyin: { label: 'Pinyin', lang: 'id-ID' }", $isian);
+        $this->assertStringContainsString('engine.captureNext(FIELD[name].lang, (heard) => fillField(engine, field, heard));', $isian);
+        $this->assertStringContainsString('fill(field, clean(value));', $isian);
+        // Grading stays on the server (the existing button); reset asks first like the button does.
+        $this->assertStringContainsString('buttonNamed(/analisis jawaban/i)?.click();', $isian);
+        $this->assertStringContainsString('if (reset) await engine.activate(reset);', $isian);
+        $this->assertMatchesRegularExpression('/const DANGEROUS = \/hapus\|reset\|/', $this->js('voice/engine.js'));
+        // Settings change the existing selects.
+        foreach (["'isian-mode'", "'isian-jumlah'", "'isian-urutan'"] as $select) {
+            $this->assertStringContainsString($select, $isian, $select);
+        }
+    }
 }

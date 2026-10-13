@@ -412,6 +412,153 @@ VoiceMode.register(
     })(),
 );
 
+/**
+ * Latihan Isian: one question at a time. "isi <pinyin>" fills the pinyin field
+ * with the spoken text; "isi hanzi" listens to the next answer in Mandarin
+ * (zh-CN), so recognition writes hanzi. Answers are still graded by the server
+ * ("analisis"); "reset" asks first, like the button.
+ */
+VoiceMode.register(
+    'latihan-isian',
+    (() => {
+        let current = 0;
+        const FIELD = { hanzi: { label: 'Hanzi', lang: 'zh-CN' }, pinyin: { label: 'Pinyin', lang: 'id-ID' } };
+        const rows = () => Array.from(root().querySelectorAll('[data-soal]'));
+        const fieldsOf = (row) => Array.from(row?.querySelectorAll('[data-isian]') || []);
+        const promptLabel = () => text(root().querySelectorAll('thead th')[1]) || 'Petunjuk';
+        const clean = (value) => String(value).replace(/[.,!?。，！？]+/gu, ' ').replace(/\s+/g, ' ').trim();
+
+        const readQuestion = (engine, index) => {
+            const all = rows();
+            if (!all.length) return engine.tell('Tidak ada kata untuk dilatih.');
+            current = Math.max(0, Math.min(index, all.length - 1));
+            const row = all[current];
+            const segments = [
+                { text: `Soal ${current + 1} dari ${all.length}. ${promptLabel()}:`, lang: 'id-ID' },
+                ...mixedSegments(text(row.querySelector('[data-petunjuk]'))),
+            ];
+            fieldsOf(row).forEach((field) => {
+                const label = FIELD[field.getAttribute('data-isian')]?.label || 'Jawaban';
+                segments.push({ text: `${label}:`, lang: 'id-ID' }, ...(field.value ? mixedSegments(field.value) : [{ text: 'kosong', lang: 'id-ID' }]));
+            });
+            const result = spoken(row.querySelector('[data-hasil-soal]'));
+            if (result && result !== '—') segments.push({ text: `Hasil: ${result}`, lang: 'id-ID' });
+            engine.announce(segments.map((s) => s.text).join(' '));
+            return engine.say(segments);
+        };
+
+        const fieldNamed = (name) => fieldsOf(rows()[current]).find((f) => f.getAttribute('data-isian') === name);
+
+        const fillField = (engine, field, value) => {
+            const name = field.getAttribute('data-isian');
+            fill(field, clean(value));
+            return engine.say([
+                { text: `${FIELD[name].label} soal ${current + 1}:`, lang: 'id-ID' },
+                ...mixedSegments(field.value),
+                { text: 'Katakan lanjut untuk soal berikutnya.', lang: 'id-ID' },
+            ]);
+        };
+
+        const askFor = (engine, field) => {
+            const name = field.getAttribute('data-isian');
+            engine.captureNext(FIELD[name].lang, (heard) => fillField(engine, field, heard));
+            return engine.tell(name === 'hanzi' ? 'Ucapkan jawabannya dalam bahasa Mandarin.' : 'Ucapkan pinyinnya.');
+        };
+
+        const setting = async (engine, id, pattern, label) => {
+            const chosen = choose(document.getElementById(id), pattern);
+            if (!chosen) return engine.tell(`Pilihan ${label} itu tidak ada.`);
+            await wait(1500);
+            current = 0;
+            await engine.tell(`${label}: ${chosen}.`);
+            return readQuestion(engine, 0);
+        };
+
+        return {
+            hint: 'isi lalu pinyinnya, isi hanzi, lanjut, sebelumnya, soal lalu nomornya, ulangi, analisis, reset, mode hanzi, mode pinyin, mode arti, jumlah, urutan acak, kembali, berhenti',
+            onActivate: () => readQuestion(VoiceMode, current),
+            readPage: (engine) => readQuestion(engine, current),
+            async handleTranscript(t, raw, engine) {
+                const soal = t.match(/^soal (.+)$/);
+                if (soal && toNumber(soal[1])) {
+                    await readQuestion(engine, toNumber(soal[1]) - 1);
+                    return true;
+                }
+                if (t === 'sebelumnya' || t === 'soal sebelumnya') {
+                    await readQuestion(engine, current - 1);
+                    return true;
+                }
+
+                const isi = raw.trim().match(/^(?:isi|jawab)(?:\s+(hanzi|pinyin))?(?:\s+(.+))?$/i);
+                if (isi) {
+                    const fields = fieldsOf(rows()[current]);
+                    const named = isi[1] ? fieldNamed(isi[1].toLowerCase()) : fields.length === 1 ? fields[0] : null;
+                    if (isi[1] && !named) {
+                        await engine.tell(`Soal ini tidak meminta ${isi[1].toLowerCase()}.`);
+                    } else if (!named) {
+                        await engine.tell('Soal ini meminta hanzi dan pinyin. Katakan isi hanzi atau isi pinyin.');
+                    } else if (isi[2] && named.getAttribute('data-isian') === 'pinyin') {
+                        await fillField(engine, named, isi[2]);
+                    } else {
+                        await askFor(engine, named);
+                    }
+                    return true;
+                }
+
+                if (t === 'analisis' || t === 'periksa' || t === 'analisis jawaban') {
+                    buttonNamed(/analisis jawaban/i)?.click();
+                    await wait(1500);
+                    current = 0;
+                    await engine.tell(`${text(root().querySelector('p[role="status"]')) || 'Jawaban dianalisis.'} Katakan soal satu untuk mendengar hasil per soal.`);
+                    return true;
+                }
+                if (t === 'reset' || t === 'reset isian') {
+                    const reset = buttonNamed(/^reset isian$/i);
+                    if (reset) await engine.activate(reset);
+                    return true;
+                }
+
+                const mode = t.match(/^mode (hanzi|pinyin|arti)$/);
+                if (mode) {
+                    await setting(engine, 'isian-mode', { hanzi: /^tebak hanzi \(/i, pinyin: /^tebak pinyin/i, arti: /petunjuk: arti/i }[mode[1]], 'Mode soal');
+                    return true;
+                }
+                const jumlah = t.match(/^jumlah (.+)$/);
+                if (jumlah) {
+                    const n = jumlah[1] === 'semua' ? null : toNumber(jumlah[1]);
+                    await setting(engine, 'isian-jumlah', n ? new RegExp(`^${n}$`) : /^semua/i, 'Jumlah soal');
+                    return true;
+                }
+                const urutan = t.match(/^urutan (acak|berurutan)$/);
+                if (urutan) {
+                    await setting(engine, 'isian-urutan', urutan[1] === 'acak' ? /^acak$/i : /^berurutan/i, 'Urutan');
+                    return true;
+                }
+                if (t === 'pengaturan') {
+                    const values = ['isian-mode', 'isian-jumlah', 'isian-urutan'].map((id) => {
+                        const select = document.getElementById(id);
+                        return `${accessibleName(select)}: ${select?.selectedOptions[0]?.textContent.trim() || '-'}`;
+                    });
+                    await engine.tell(`${values.join('. ')}.`);
+                    return true;
+                }
+                return false;
+            },
+            async handleCommand(cmd, engine) {
+                if (cmd.type === 'more') {
+                    await readQuestion(engine, current + 1);
+                    return true;
+                }
+                if (cmd.type === 'repeat' || cmd.type === 'read_page' || cmd.type === 'start') {
+                    await readQuestion(engine, current);
+                    return true;
+                }
+                return false;
+            },
+        };
+    })(),
+);
+
 // Game hub and Ngobrol scenario picker: "mulai" is handled by the engine through their [data-voice-start] controls.
 VoiceMode.register('game-hub', {
     hint: 'mulai, mulai dengar dan pilih, mulai pemburu kesalahan, satu atau dua, daftar tindakan, kembali, berhenti',

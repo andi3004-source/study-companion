@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
+<div data-voice-page="latihan-isian" class="max-w-4xl mx-auto px-4 sidebar:px-8 py-6 sidebar:py-8">
     <h1 class="font-display font-600 text-2xl text-ink mb-1">Latihan Isian</h1>
     <p class="text-ink-soft text-sm mb-6">Ketik jawabanmu sendiri — melatih recall, bukan cuma pilih dari opsi.</p>
 
@@ -66,21 +66,21 @@
             </thead>
             <tbody>
                 @forelse ($questions as $i => $question)
-                    <tr class="border-b border-line-card last:border-0 align-top">
+                    <tr data-soal class="border-b border-line-card last:border-0 align-top">
                         <td class="px-3 py-2.5 text-ink-faint">{{ $i + 1 }}</td>
-                        <td class="px-3 py-2.5 {{ $this->promptLabel() === 'Pinyin' || $this->promptLabel() === 'Hanzi' ? 'font-display text-base' : '' }}">
+                        <td data-petunjuk class="px-3 py-2.5 {{ $this->promptLabel() === 'Pinyin' || $this->promptLabel() === 'Hanzi' ? 'font-display text-base' : '' }}">
                             {{ $question['prompt'] }}
                         </td>
                         @foreach ($fields as $field)
                             <td class="px-3 py-2.5">
                                 <input type="text"
-                                       wire:model="answers.{{ $i }}.{{ $field }}"
+                                       wire:model="answers.{{ $i }}.{{ $field }}" data-isian="{{ $field }}"
                                        aria-label="{{ $fieldLabels[$field] }} untuk soal {{ $i + 1 }}"
                                        placeholder="{{ $fieldLabels[$field] }}"
                                        class="w-full rounded-lg border-line-card text-sm py-1.5 px-2 focus:border-mandarin focus:ring-mandarin {{ $field === 'hanzi' ? 'font-display' : '' }}">
                             </td>
                         @endforeach
-                        <td class="px-3 py-2.5">
+                        <td data-hasil-soal class="px-3 py-2.5">
                             @php $result = $results[$i] ?? null; @endphp
                             @if (! $result)
                                 <span class="text-ink-faint text-xs">—</span>
