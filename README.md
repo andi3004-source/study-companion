@@ -162,6 +162,120 @@ Analisis kesalahan memakai Langflow lalu Gemini sebagai cadangan.
    antrean memprosesnya.
 5. Jalankan ulang `php artisan app:seed-content`; jumlah baris tidak berubah.
 
+## Deploy ke satu server
+
+`docker-compose.yml` menjalankan tiga layanan di satu server: `app` (FrankenPHP,
+web), `worker` (`php artisan queue:work --tries=3 --sleep=3`, image yang sama),
+dan `proxy` (Caddy, HTTPS otomatis untuk `DOMAIN`). SQLite dan `storage`
+disimpan di satu volume Docker (`data`, di `/data`) yang dipasang `app` dan
+`worker`. Belum pernah dijalankan sungguhan; ikuti daftar uji di bawah.
+Pengembangan lokal memakai `docker-compose.dev.yml`.
+
+Saat `app` mulai, entrypoint (`docker/entrypoint.sh`) membuat berkas SQLite
+bila belum ada, menjalankan `php artisan migrate --force`, menjalankan
+`php artisan app:seed-content` hanya bila tabel konten masih kosong, lalu
+`config:cache`, `route:cache`, dan `view:cache`. `worker` menunggu sampai `app`
+selesai migrasi, supaya hanya satu container yang memigrasi berkas SQLite.
+
+**Prasyarat:**
+
+- Server Linux dengan Docker dan plugin Docker Compose.
+- Nama domain yang record DNS-nya (A/AAAA) menunjuk ke server ini.
+- Port 80 dan 443 terbuka (Caddy memakainya untuk sertifikat Let's Encrypt).
+
+**Pemasangan pertama:**
+
+```
+git clone <url-repo> study-companion
+cd study-companion
+cp .env.production.example .env
+nano .env                # isi DOMAIN, APP_URL, APP_KEY, kunci AI, dll.
+echo "base64:$(openssl rand -base64 32)"   # nilai untuk APP_KEY
+docker compose up -d --build
+docker compose logs -f app   # tunggu "mulai: frankenphp run"
+```
+
+Tiga berkas data besar tidak ada di git (lihat "Mengisi konten"). Salin ke
+`storage/app/seed-data/` **sebelum** `docker compose up -d --build` supaya ikut
+masuk image. Bila tertinggal, salin lalu jalankan seeding sekali jalan:
+
+```
+docker compose cp mandarin_hsk1to6_complete.json app:/data/storage/app/seed-data/
+docker compose cp irregular_verbs_183_complete.json app:/data/storage/app/seed-data/
+docker compose cp english_vocab_cefr_10674.json app:/data/storage/app/seed-data/
+docker compose exec app php artisan app:seed-content
+```
+
+Akun demo (hanya bila `APP_ENV=staging`; isi `DEMO_ACCOUNT_ENABLED` dan
+`DEMO_ACCOUNT_PASSWORD` di `.env`, lalu `docker compose up -d` supaya terbaca):
+
+```
+docker compose exec app php artisan db:seed --class=DemoUserSeeder --force
+```
+
+**Pembaruan:**
+
+```
+git pull
+docker compose up -d --build
+```
+
+Migrasi baru dijalankan otomatis oleh entrypoint. Data di volume `data` tetap.
+
+**Pencadangan SQLite** (aman saat aplikasi berjalan; `VACUUM INTO` membuat
+salinan utuh, termasuk isi berkas WAL):
+
+```
+docker compose exec app php -r '(new PDO("sqlite:/data/database/database.sqlite"))->exec("VACUUM INTO \"/data/database/backup.sqlite\"");'
+docker compose cp app:/data/database/backup.sqlite ./backup-$(date +%Y%m%d).sqlite
+docker compose exec app rm /data/database/backup.sqlite
+```
+
+Simpan salinan di luar server. Untuk memulihkan: hentikan `app` dan `worker`,
+salin berkas cadangan ke `/data/database/database.sqlite`, lalu nyalakan lagi.
+
+**Variabel lingkungan** (nama saja; isi di `.env` di server, contoh di
+`.env.production.example`):
+
+- Proxy dan domain: `DOMAIN`, `TRUSTED_PROXIES`, `APP_FORCE_HTTPS`
+- Aplikasi: `APP_NAME`, `APP_ENV`, `APP_KEY`, `APP_DEBUG`, `APP_URL`,
+  `APP_LOCALE`, `APP_FALLBACK_LOCALE`
+- Basis data: `DB_JOURNAL_MODE`, `DB_BUSY_TIMEOUT` (`DB_CONNECTION` dan
+  `DB_DATABASE` ditetapkan oleh `docker-compose.yml`)
+- Log, sesi, antrean, cache: `LOG_CHANNEL`, `LOG_LEVEL`, `SESSION_DRIVER`,
+  `SESSION_LIFETIME`, `SESSION_SECURE_COOKIE`, `QUEUE_CONNECTION`,
+  `CACHE_STORE`, `FILESYSTEM_DISK`
+- Email: `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`,
+  `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME`
+- AI: `GEMINI_API_KEY`, `GEMINI_MODEL`, `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`,
+  `LANGFLOW_URL`, `LANGFLOW_FLOW_ID`, `LANGFLOW_API_KEY`, `LANGFLOW_TIMEOUT`
+- Fitur: `PRONUNCIATION_CHECKER_DRIVER`, `HSK_LEVEL_LOCK`, `SCAN_BENDA_ENABLED`
+- Akses: `REGISTRATION_ENABLED`, `REGISTRATION_INVITE_CODE`,
+  `DEMO_ACCOUNT_ENABLED`, `DEMO_ACCOUNT_EMAIL`, `DEMO_ACCOUNT_PASSWORD`
+
+Layanan cek pelafalan ML (`pronunciation-service`) tidak ikut; contoh `.env`
+memakai `PRONUNCIATION_CHECKER_DRIVER=stt_match`.
+
+**Peringatan:**
+
+- **Batas pengeluaran API:** pasang batas pengeluaran (spending limit) di
+  Gemini, Anthropic, dan Langflow sebelum mengisi kuncinya. Aplikasi membatasi
+  50 pesan Ngobrol per pengguna per hari, tetapi tidak ada batas global.
+- **Pendaftaran:** server yang bisa diakses publik sebaiknya memakai
+  `REGISTRATION_ENABLED` bernilai false atau `REGISTRATION_INVITE_CODE`
+  (contoh `.env` menutup pendaftaran). Tanpa itu siapa pun bisa membuat akun
+  dan memakai kuota AI.
+- `.env` berisi rahasia: jangan di-commit dan jangan disalin ke image
+  (`.dockerignore` sudah mengecualikannya).
+
+**Daftar uji setelah deploy:**
+
+1. `docker compose ps`: `app` berstatus healthy, `worker` dan `proxy` running.
+2. `https://<DOMAIN>/up` mengembalikan 200 dengan sertifikat yang sah.
+3. Tautan di halaman login memakai `https://`.
+4. Selesaikan satu sesi Ngobrol; analisis muncul (berarti `worker` jalan).
+5. `docker compose restart`: data dan akun tetap ada.
+
 ## Partner percakapan (Ngobrol)
 
 - **Suara**: input suara (mic) memakai Web Speech API bawaan browser, jadi hanya
