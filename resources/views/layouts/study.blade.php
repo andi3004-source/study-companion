@@ -65,7 +65,7 @@
         {{-- Desktop sidebar --}}
         <aside class="hidden sidebar:flex sidebar:flex-col w-[252px] shrink-0 bg-navy text-white px-5 py-6">
             <div class="flex items-center gap-2 mb-8 px-2">
-                <div class="w-9 h-9 rounded-xl bg-orange flex items-center justify-center font-display font-600 text-navy">好</div>
+                <img src="{{ asset('images/landing/logo-buku-putih.png') }}" alt="" width="48" height="40" class="w-9 h-auto">
                 <span class="font-display font-600 text-lg">Study Companion</span>
             </div>
 
@@ -73,22 +73,22 @@
                 // Single source for the sidebar groups, the mobile bottom bar and its "Lainnya" panel.
                 $navGroups = [
                     'belajar' => ['judul' => 'Belajar', 'items' => [
-                        ['route' => 'dashboard', 'label' => 'Hari Ini', 'icon' => '🏠'],
-                        ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => '💬'],
-                        ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => '🎤'],
-                        ['route' => 'kata-bicara', 'label' => 'Kata bicara', 'icon' => '🗣️'],
-                        ...(config('scan.enabled') ? [['route' => 'scan.object', 'label' => 'Raba lalu dengar', 'icon' => '📷']] : []),
+                        ['route' => 'dashboard', 'label' => 'Hari Ini', 'icon' => 'home'],
+                        ['route' => 'conversation', 'label' => 'Ngobrol', 'icon' => 'chat'],
+                        ['route' => 'pronunciation-check', 'label' => 'Ucapan', 'icon' => 'mic'],
+                        ['route' => 'kata-bicara', 'label' => 'Kata bicara', 'icon' => 'translate'],
+                        ...(config('scan.enabled') ? [['route' => 'scan.object', 'label' => 'Raba lalu dengar', 'icon' => 'camera']] : []),
                     ]],
                     'latihan' => ['judul' => 'Latihan', 'items' => [
-                        ['route' => 'cards.index', 'label' => 'Kartu', 'icon' => '🗂️'],
-                        ['route' => 'game', 'aktif' => 'game*', 'label' => 'Game', 'icon' => '🎯'],
-                        ['route' => 'latihan-isian', 'label' => 'Isian', 'icon' => '🧠'],
-                        ['route' => 'ujian', 'label' => 'Ujian', 'icon' => '📝'],
+                        ['route' => 'cards.index', 'label' => 'Kartu', 'icon' => 'cards'],
+                        ['route' => 'game', 'aktif' => 'game*', 'label' => 'Game', 'icon' => 'target'],
+                        ['route' => 'latihan-isian', 'label' => 'Isian', 'icon' => 'keyboard'],
+                        ['route' => 'ujian', 'label' => 'Ujian', 'icon' => 'document'],
                     ]],
                     'lainnya' => ['judul' => 'Lainnya', 'items' => [
-                        ['route' => 'progress', 'label' => 'Progress', 'icon' => '📈'],
-                        ['route' => 'kamus', 'label' => 'Kamus', 'icon' => '🔎'],
-                        ['route' => 'bantuan', 'label' => 'Bantuan', 'icon' => '❓'],
+                        ['route' => 'progress', 'label' => 'Progress', 'icon' => 'chart'],
+                        ['route' => 'kamus', 'label' => 'Kamus', 'icon' => 'search'],
+                        ['route' => 'bantuan', 'label' => 'Bantuan', 'icon' => 'help'],
                     ]],
                 ];
                 $navAktif = fn (array $item) => request()->routeIs($item['aktif'] ?? $item['route'].'*');
@@ -107,8 +107,8 @@
                                         <a href="{{ route($item['route']) }}"
                                            @if ($navAktif($item)) aria-current="page" @endif
                                            class="flex items-center gap-3 px-3 py-2.5 rounded-xl font-600 text-sm transition
-                                                  {{ $navAktif($item) ? 'bg-navy-soft text-white' : 'text-white/80 hover:bg-navy-soft/60 hover:text-white' }}">
-                                            <span aria-hidden="true">{{ $item['icon'] }}</span>
+                                                  {{ $navAktif($item) ? 'bg-white/10 text-white shadow-[inset_3px_0_0_#F9B934]' : 'text-white/80 hover:bg-white/5 hover:text-white' }}">
+                                            <span aria-hidden="true"><x-landing.icon :name="$item['icon']" class="w-5 h-5" /></span>
                                             <span>{{ $item['label'] }}</span>
                                         </a>
                                     </li>
@@ -125,8 +125,8 @@
                                         <a href="{{ route($item['route']) }}"
                                            @if ($navAktif($item)) aria-current="page" @endif
                                            class="flex items-center gap-3 px-3 py-2.5 rounded-xl font-600 text-sm transition
-                                                  {{ $navAktif($item) ? 'bg-navy-soft text-white' : 'text-white/80 hover:bg-navy-soft/60 hover:text-white' }}">
-                                            <span aria-hidden="true">{{ $item['icon'] }}</span>
+                                                  {{ $navAktif($item) ? 'bg-white/10 text-white shadow-[inset_3px_0_0_#F9B934]' : 'text-white/80 hover:bg-white/5 hover:text-white' }}">
+                                            <span aria-hidden="true"><x-landing.icon :name="$item['icon']" class="w-5 h-5" /></span>
                                             <span>{{ $item['label'] }}</span>
                                         </a>
                                     </li>
@@ -228,7 +228,7 @@
                @if (request()->routeIs($item['aktif'] ?? $item['route'].'*')) aria-current="page" @endif
                class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 min-h-[44px] min-w-[44px] text-xs font-600
                       {{ request()->routeIs($item['aktif'] ?? $item['route'].'*') ? 'text-mandarin' : 'text-ink-faint' }}">
-                <span class="text-lg leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
+                <span class="leading-none" aria-hidden="true"><x-landing.icon :name="$item['icon']" class="w-6 h-6" /></span>
                 <span>{{ $item['label'] }}</span>
             </a>
         @endforeach
@@ -236,7 +236,7 @@
         <button type="button" x-on:click="moreOpen = true"
                 class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 min-h-[44px] min-w-[44px] text-xs font-600
                        {{ $mobileMoreActive ? 'text-mandarin' : 'text-ink-faint' }}">
-            <span class="text-lg leading-none" aria-hidden="true">⋯</span>
+            <span class="leading-none" aria-hidden="true"><x-landing.icon name="more" class="w-6 h-6" /></span>
             <span>Lainnya</span>
         </button>
 
@@ -261,7 +261,7 @@
                                                    @if ($navAktif($item)) aria-current="page" @endif
                                                    class="flex flex-col items-center justify-center gap-1 px-2 py-3 min-h-[44px] rounded-xl text-xs font-600 text-center
                                                           {{ $navAktif($item) ? 'bg-mandarin-soft text-mandarin' : 'text-ink-soft hover:bg-card-alt' }}">
-                                                    <span class="text-xl leading-none" aria-hidden="true">{{ $item['icon'] }}</span>
+                                                    <span class="leading-none" aria-hidden="true"><x-landing.icon :name="$item['icon']" class="w-6 h-6" /></span>
                                                     <span>{{ $item['label'] }}</span>
                                                 </a>
                                             </li>

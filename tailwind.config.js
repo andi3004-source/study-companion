@@ -13,11 +13,22 @@ export default {
             screens: {
                 sidebar: '861px',
             },
+            // One look for the whole app (same as the public home page): Plus Jakarta Sans,
+            // self-hosted via @fontsource (resources/js/app.js, resources/js/welcome.js).
             fontFamily: {
-                display: ['Fredoka', 'sans-serif'],
-                sans: ['Nunito', 'sans-serif'],
+                display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
                 hand: ['Caveat', 'cursive'],
                 jakarta: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            },
+            // The views use numeric weights (font-600, font-700); without these keys
+            // Tailwind generated nothing for them.
+            fontWeight: {
+                400: '400',
+                500: '500',
+                600: '600',
+                700: '700',
+                800: '800',
             },
             borderRadius: {
                 card: '1rem',
@@ -26,18 +37,19 @@ export default {
                 card: '0 1px 2px rgba(20, 41, 77, 0.04), 0 4px 16px rgba(20, 41, 77, 0.05)',
             },
             colors: {
-                navy: '#1B3A5C',
-                'navy-deep': '#132C46',
-                'navy-soft': '#2C4F73',
-                cream: '#F6EFE0',
+                // App palette, aligned with brand.* below (home page).
+                navy: '#14294D',
+                'navy-deep': '#0E1F3B',
+                'navy-soft': '#24416E',
+                cream: '#FBF8F3',
                 card: '#FFFFFF',
-                'card-alt': '#FBF8EF',
+                'card-alt': '#F7F3EC',
                 ink: '#2B3648',
                 'ink-soft': '#4F5968',
                 'ink-faint': '#5A6472',
-                line: '#E7E0CC',
-                'line-card': '#ECEEF2',
-                orange: '#F2A93B',
+                line: '#ECE7DD',
+                'line-card': '#ECE7DD',
+                orange: '#F9B934',
                 mandarin: '#35619E',
                 'mandarin-soft': '#E3EDF9',
                 english: '#3D6B52',

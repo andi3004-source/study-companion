@@ -15,7 +15,7 @@
             {{-- Logo & brand --}}
             <div class="flex items-center gap-2 mb-2">
                 <a href="/" class="flex items-center gap-2">
-                    <div class="w-12 h-12 rounded-2xl bg-navy flex items-center justify-center font-display font-600 text-2xl text-orange shadow-md">好</div>
+                    <img src="{{ asset('images/landing/logo-buku.png') }}" alt="" width="44" height="38" class="w-11 h-auto">
                     <span class="font-display font-600 text-xl text-navy">Study Companion</span>
                 </a>
             </div>
