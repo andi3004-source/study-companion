@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\AiClient;
+use App\Support\GeminiRetry;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
@@ -23,6 +24,9 @@ use RuntimeException;
 class GeminiClient implements AiClient
 {
     private const BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
+
+    /** Per-attempt timeout, the HTTP client's own default; GeminiRetry cuts it to the budget left. */
+    private const TIMEOUT_SECONDS = 30;
 
     private ?string $apiKey;
 
@@ -51,9 +55,7 @@ class GeminiClient implements AiClient
             'parts' => [['text' => $m['content']]],
         ], $messages);
 
-        $endpoint = self::BASE_URL.'/'.$model.':generateContent?key='.urlencode($this->apiKey);
-
-        $response = Http::post($endpoint, [
+        $body = [
             'contents' => $contents,
             'systemInstruction' => ['parts' => [['text' => $system]]],
             'generationConfig' => [
@@ -66,7 +68,15 @@ class GeminiClient implements AiClient
                 // thinkingBudget: 0). Confirmed against a live API call 2026-09-10.
                 'thinkingConfig' => ['thinkingLevel' => 'minimal'],
             ],
-        ])->throw();
+        ];
+
+        $response = GeminiRetry::send(
+            $model,
+            self::TIMEOUT_SECONDS,
+            fn (string $model, float $timeout) => Http::timeout($timeout)
+                ->post(self::BASE_URL.'/'.$model.':generateContent?key='.urlencode($this->apiKey), $body)
+                ->throw(),
+        );
 
         $data = $response->json();
 

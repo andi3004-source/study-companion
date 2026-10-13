@@ -31,6 +31,10 @@
              (force="true" also overrides variables already set in the process; .env loading never overrides them). -->
         <env name="GEMINI_API_KEY" value="" force="true"/>
         <env name="GEMINI_MODEL" value="gemini-3.6-flash" force="true"/>
+        <env name="GEMINI_RETRY_MAX" value="2" force="true"/>
+        <env name="GEMINI_RETRY_DELAYS" value="1,3" force="true"/>
+        <env name="GEMINI_RETRY_JITTER_MS" value="250" force="true"/>
+        <env name="GEMINI_RETRY_BUDGET_SECONDS" value="12" force="true"/>
         <env name="ANTHROPIC_API_KEY" value="" force="true"/>
         <env name="ANTHROPIC_MODEL" value="claude-haiku-4-5-20251001" force="true"/>
         <env name="LANGFLOW_URL" value="" force="true"/>

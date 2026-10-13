@@ -4,6 +4,7 @@ namespace App\Services\Scan;
 
 use App\Contracts\ObjectRecognizer;
 use App\Services\KataBicaraCatalog;
+use App\Support\GeminiRetry;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -25,24 +26,32 @@ class GeminiObjectRecognizer implements ObjectRecognizer
 
     public function recognize(string $imageBytes, string $mime): array
     {
-        $response = Http::timeout((int) config('scan.timeout', 30))
-            ->withHeaders(['x-goog-api-key' => (string) config('services.gemini.key')])
-            ->post(self::BASE_URL.'/'.config('services.gemini.model').':generateContent', [
-                'systemInstruction' => ['parts' => [['text' => $this->systemPrompt()]]],
-                'contents' => [[
-                    'role' => 'user',
-                    'parts' => [
-                        ['inline_data' => ['mime_type' => $mime, 'data' => base64_encode($imageBytes)]],
-                        ['text' => 'Benda apa yang dipegang di foto ini? Jawab hanya dengan JSON sesuai format.'],
-                    ],
-                ]],
-                'generationConfig' => [
-                    'maxOutputTokens' => 400,
-                    'responseMimeType' => 'application/json',
-                    // Same reason as GeminiClient: 3.x models think by default and eat the budget.
-                    'thinkingConfig' => ['thinkingLevel' => 'minimal'],
+        // A retry resends this same in-memory body; the photo never touches disk.
+        $body = [
+            'systemInstruction' => ['parts' => [['text' => $this->systemPrompt()]]],
+            'contents' => [[
+                'role' => 'user',
+                'parts' => [
+                    ['inline_data' => ['mime_type' => $mime, 'data' => base64_encode($imageBytes)]],
+                    ['text' => 'Benda apa yang dipegang di foto ini? Jawab hanya dengan JSON sesuai format.'],
                 ],
-            ])->throw();
+            ]],
+            'generationConfig' => [
+                'maxOutputTokens' => 400,
+                'responseMimeType' => 'application/json',
+                // Same reason as GeminiClient: 3.x models think by default and eat the budget.
+                'thinkingConfig' => ['thinkingLevel' => 'minimal'],
+            ],
+        ];
+
+        $response = GeminiRetry::send(
+            (string) config('services.gemini.model'),
+            (float) config('scan.timeout', 30),
+            fn (string $model, float $timeout) => Http::timeout($timeout)
+                ->withHeaders(['x-goog-api-key' => (string) config('services.gemini.key')])
+                ->post(self::BASE_URL.'/'.$model.':generateContent', $body)
+                ->throw(),
+        );
 
         return $this->normalizer->normalize((string) ($response->json('candidates.0.content.parts.0.text') ?? ''));
     }
