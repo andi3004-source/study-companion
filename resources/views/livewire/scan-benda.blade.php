@@ -42,6 +42,7 @@
     <p x-show="galat" x-cloak x-ref="galat" tabindex="-1" class="rounded-xl border border-red-700 bg-red-50 px-4 py-3 text-sm text-red-700">
         <span aria-hidden="true">⚠</span> <span x-text="galat"></span>
     </p>
+    <button type="button" x-show="galat && galatSibuk" x-cloak x-on:click="fotoLagi()" class="px-4 rounded-xl border-2 border-navy text-navy font-700 text-sm">Foto lagi</button>
 
     {{-- Photo first, then the result; side by side from the sm breakpoint. One column on narrow screens. --}}
     <div class="grid gap-4 sm:items-start" x-bind:class="fotoUrl && tampilkanFoto ? 'sm:grid-cols-[minmax(0,320px)_minmax(0,1fr)]' : ''">

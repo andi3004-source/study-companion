@@ -52,6 +52,7 @@ Lihat `.env.example` untuk keterangan dan nilai bawaan. Variabel utama:
 | `SESSION_DRIVER`, `QUEUE_CONNECTION`, `CACHE_STORE` | Driver sesi, antrean, dan cache |
 | `MAIL_*` | Pengiriman email (verifikasi, reset password) |
 | `GEMINI_API_KEY`, `GEMINI_MODEL` | Provider AI aktif: percakapan dan `translate:meanings` |
+| `GEMINI_RETRY_MAX`, `GEMINI_RETRY_DELAYS`, `GEMINI_RETRY_JITTER_MS`, `GEMINI_RETRY_BUDGET_SECONDS`, `GEMINI_FALLBACK_MODELS` | Coba ulang saat Gemini penuh, lihat [Ketahanan terhadap beban Gemini](#ketahanan-terhadap-beban-gemini) |
 | `DAILY_MESSAGE_LIMIT` | Pesan Ngobrol per pengguna per hari (bawaan 50; bilangan bulat 1-1000, nilai lain kembali ke 50) |
 | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` | Provider AI alternatif (tidak aktif) |
 | `PRONUNCIATION_SERVICE_URL`, `PRONUNCIATION_CHECKER_DRIVER` | Layanan cek pelafalan (`ml` atau `stt_match`) |
@@ -111,7 +112,9 @@ di-commit):
   `SESSION_DRIVER`, `SESSION_SECURE_COOKIE`, `LOG_CHANNEL`, `LOG_LEVEL`
 - Email: `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`,
   `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME`
-- AI dan layanan: `GEMINI_API_KEY`, `GEMINI_MODEL`, `ANTHROPIC_API_KEY`,
+- AI dan layanan: `GEMINI_API_KEY`, `GEMINI_MODEL`, `GEMINI_RETRY_MAX`,
+  `GEMINI_RETRY_DELAYS`, `GEMINI_RETRY_JITTER_MS`, `GEMINI_RETRY_BUDGET_SECONDS`,
+  `GEMINI_FALLBACK_MODELS`, `ANTHROPIC_API_KEY`,
   `ANTHROPIC_MODEL`, `LANGFLOW_URL`, `LANGFLOW_FLOW_ID`, `LANGFLOW_API_KEY`,
   `LANGFLOW_TIMEOUT`, `PRONUNCIATION_SERVICE_URL`,
   `PRONUNCIATION_CHECKER_DRIVER`, `DAILY_MESSAGE_LIMIT`
@@ -249,7 +252,9 @@ salin berkas cadangan ke `/data/database/database.sqlite`, lalu nyalakan lagi.
   `CACHE_STORE`, `FILESYSTEM_DISK`
 - Email: `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`,
   `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME`
-- AI: `GEMINI_API_KEY`, `GEMINI_MODEL`, `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`,
+- AI: `GEMINI_API_KEY`, `GEMINI_MODEL`, `GEMINI_RETRY_MAX`, `GEMINI_RETRY_DELAYS`,
+  `GEMINI_RETRY_JITTER_MS`, `GEMINI_RETRY_BUDGET_SECONDS`, `GEMINI_FALLBACK_MODELS`,
+  `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`,
   `LANGFLOW_URL`, `LANGFLOW_FLOW_ID`, `LANGFLOW_API_KEY`, `LANGFLOW_TIMEOUT`,
   `DAILY_MESSAGE_LIMIT`
 - Fitur: `PRONUNCIATION_CHECKER_DRIVER`, `HSK_LEVEL_LOCK`, `SCAN_BENDA_ENABLED`
@@ -310,6 +315,60 @@ Mencetak nama model yang bisa dipakai kunci `GEMINI_API_KEY` untuk
 respons lainnya. Perintah ini tidak memakai kuota pembuatan teks. Bila kunci
 kosong atau ditolak, kuota habis, layanan sedang bermasalah, atau koneksi
 gagal, yang muncul pesan singkat dalam bahasa Indonesia.
+
+## Ketahanan terhadap beban Gemini
+
+Saat Google sedang kebanjiran permintaan, Gemini menjawab HTTP 503 ("This
+model is currently experiencing high demand"). Sering kali permintaan yang sama
+berhasil beberapa detik kemudian, jadi aplikasi mengulangnya sendiri. Semua
+aturannya ada di satu kelas, `App\Support\GeminiRetry`, yang dipakai oleh semua
+panggilan HTTP ke Gemini: klien chat (`GeminiClient`, yang juga dipakai analisis
+kesalahan versi Gemini) dan pengenal benda Raba lalu dengar
+(`GeminiObjectRecognizer`). Langflow punya mekanisme coba ulang sendiri dan
+tidak ikut diubah.
+
+**Aturan:**
+
+- Yang diulang **hanya** HTTP 503 dan galat koneksi atau timeout. Respons 400,
+  403, 404, 429, dan galat lain langsung gagal dengan satu panggilan saja.
+- Maksimal `GEMINI_RETRY_MAX` kali coba ulang (bawaan 2, jadi 3 percobaan
+  total). Jedanya `GEMINI_RETRY_DELAYS` (bawaan 1 detik lalu 3 detik), masing-masing
+  ditambah acak kecil 0 sampai `GEMINI_RETRY_JITTER_MS` milidetik (bawaan 250).
+- **Anggaran waktu** `GEMINI_RETRY_BUDGET_SECONDS` (bawaan 12 detik) adalah batas
+  keras untuk seluruh proses: semua percobaan, semua jeda, dan model cadangan.
+  Timeout tiap percobaan dipotong menjadi sisa anggaran. Percobaan berikutnya
+  tidak dimulai bila jeda ditambah minimal 1 detik waktu panggilan tidak muat
+  lagi. Akibatnya, satu jawaban yang memang butuh lebih dari 12 detik juga
+  terpotong. Naikkan nilai ini bila itu terjadi.
+- **Model cadangan** `GEMINI_FALLBACK_MODELS` (daftar dipisah koma, **bawaan
+  kosong**). Model cadangan hanya dicoba bila model utama tetap 503 setelah
+  semua percobaan ulangnya, berurutan sesuai daftar, dengan aturan yang sama
+  dan anggaran waktu yang sama. Galat koneksi atau timeout tidak memicu model
+  cadangan. Isi daftar ini hanya dengan nama dari `php artisan gemini:models`.
+  Aplikasi tidak menebak nama model.
+- **Log**: tiap percobaan yang gagal dicatat sebagai `gemini: percobaan gagal`
+  dengan empat isian saja: nama kelas galat, kode status HTTP (kosong untuk galat
+  koneksi), nomor percobaan, dan model. Teks pesan, isi permintaan, gambar, dan
+  kunci tidak pernah dicatat.
+- **Kuota dan privasi**: percobaan ulang terjadi di dalam klien, di bawah
+  `ConversationService`. Satu pesan tetap satu giliran pengguna dan satu jatah
+  kuota harian, berapa pun percobaannya. Bila semua percobaan gagal, giliran
+  pengguna dihapus seperti sebelumnya dan kuota tidak berkurang. Untuk Raba lalu
+  dengar, byte foto hanya ada di memori selama percobaan: tidak ada berkas dan
+  tidak ada log.
+- **Tampilan**: bila semua percobaan habis, pengguna melihat pesan yang sudah
+  ada ("Layanan AI sedang penuh, coba lagi sebentar."). Di Raba lalu dengar,
+  pesan itu disertai tombol **Foto lagi**.
+- `translate:meanings` juga memakai `GeminiClient`, jadi ikut mendapat aturan
+  ini. Di atasnya, perintah itu tetap punya coba ulang lambatnya sendiri (429
+  dan 5xx, jeda 15/30/60 detik) karena berupa pekerjaan massal.
+
+**Batas jujurnya:** coba ulang hanya menolong lonjakan beban yang singkat. Bila
+Gemini penuh lebih lama dari anggaran waktunya, permintaan tetap gagal. Coba
+ulang juga tidak menjamin layanan tersedia. Model cadangan hanya membantu bila
+model itu memang tersedia untuk akun atau kunci yang dipakai. Model lain bisa
+saja sedang penuh juga. Pengguna juga menunggu lebih lama sebelum melihat pesan
+galat, paling lama sebesar anggaran waktunya.
 
 ## Analisis kesalahan ("Kesalahan terbanyakmu")
 

@@ -242,6 +242,8 @@ window.scanBenda = function (endpoint) {
         memproses: false,
         status: '',
         galat: null,
+        // True only when the server answered 503 (AI busy after every retry): the error then offers "Foto lagi".
+        galatSibuk: false,
         hasil: null,
 
         init() {
@@ -295,6 +297,7 @@ window.scanBenda = function (endpoint) {
             this.lepasFoto();
             this.memproses = true;
             this.galat = null;
+            this.galatSibuk = false;
             this.hasil = null;
             this.status = 'Memproses foto';
 
@@ -315,6 +318,7 @@ window.scanBenda = function (endpoint) {
                 const data = await response.json().catch(() => ({}));
 
                 if (!response.ok) {
+                    this.galatSibuk = response.status === 503;
                     throw new Error(
                         data.pesan ||
                             (response.status === 429
@@ -360,6 +364,7 @@ window.scanBenda = function (endpoint) {
             this.lepasFoto();
             this.hasil = null;
             this.galat = null;
+            this.galatSibuk = false;
             this.ambil();
         },
     };
